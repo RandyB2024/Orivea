@@ -35,7 +35,7 @@
 
     <nav class="site-nav" id="siteNav" aria-label="Hoofdnavigatie">
       <a href="#collectie">Collectie</a>
-      <a href="#bestellen">Bestellen</a>
+      <a href="#checkout">Checkout <span class="cart-count" id="cartCount">0</span></a>
       <a href="#contact">Contact</a>
       <a href="#beleid">Beleid</a>
     </nav>
@@ -53,7 +53,7 @@
         <p class="hero-text">Zorgvuldig geselecteerde geuren voor wie een rustige, luxe indruk wil achterlaten. Ontdek luxe alternatieven geïnspireerd op populaire geurprofielen, zonder overbodige ruis.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#collectie">Ontdek de collectie</a>
-          <a class="button button-secondary" href="#bestellen">Plaats een bestelling</a>
+          <a class="button button-secondary" href="#checkout">Naar checkout</a>
         </div>
       </div>
     </section>
@@ -65,7 +65,7 @@
           <h2>Rustige luxe, zorgvuldig gekozen.</h2>
         </div>
         <div class="copy-block">
-          <p>ORIVÈA brengt premium geurbeleving naar een helder en persoonlijk bestelproces. Iedere geur is geselecteerd op draagbaarheid, karakter en elegantie.</p>
+          <p>ORIVÈA brengt premium geurbeleving naar een heldere online checkout. Iedere geur is geselecteerd op draagbaarheid, karakter en elegantie.</p>
           <p>Onze collectie bestaat uit luxe alternatieven geïnspireerd op populaire geurprofielen. We doen geen claims dat onze geuren originele designerparfums zijn; ORIVÈA staat voor een eigen, toegankelijke geurervaring.</p>
         </div>
       </div>
@@ -75,42 +75,52 @@
       <div class="section-inner">
         <div class="section-heading">
           <p class="eyebrow">Collectie</p>
-          <h2>Zorgvuldig geselecteerde geuren</h2>
-          <p>Premium productkaarten voor dames en heren. Kies een geur en het bestelformulier wordt automatisch ingevuld.</p>
+          <h2>Shop zorgvuldig geselecteerde geuren</h2>
+          <p>Kies jouw ORIVÈA geur en voeg deze direct toe aan de winkelmand. De productafbeeldingen zijn eigen ORIVÈA visuals en gebruiken geen afbeeldingen uit de parfumlijst.</p>
         </div>
 
         <div class="collection-group">
           <h3>Dames</h3>
           <div class="product-grid">
-            <article class="product-card">
+            <article class="product-card" data-accent="rose">
+              <div class="product-art" aria-hidden="true"><span>545</span></div>
               <p class="product-number">ORIVÈA No. 545</p>
               <h4>Fris & Elegant</h4>
               <p>Een heldere, verfijnde geur met een zachte luxe uitstraling voor iedere dag.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 545 — Fris & Elegant">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 545 — Fris & Elegant" data-category="Dames" data-profile="Fris & Elegant">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="cream">
+              <div class="product-art" aria-hidden="true"><span>578</span></div>
               <p class="product-number">ORIVÈA No. 578</p>
               <h4>Elegant & Modern</h4>
               <p>Een moderne compositie met een verzorgde, stijlvolle en zelfverzekerde indruk.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 578 — Elegant & Modern">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 578 — Elegant & Modern" data-category="Dames" data-profile="Elegant & Modern">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="blush">
+              <div class="product-art" aria-hidden="true"><span>559</span></div>
               <p class="product-number">ORIVÈA No. 559</p>
               <h4>Zoet & Verleidelijk</h4>
               <p>Een warme zoete geur met een uitnodigend karakter en een elegante finish.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 559 — Zoet & Verleidelijk">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 559 — Zoet & Verleidelijk" data-category="Dames" data-profile="Zoet & Verleidelijk">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="amber">
+              <div class="product-art" aria-hidden="true"><span>570</span></div>
               <p class="product-number">ORIVÈA No. 570</p>
               <h4>Warm & Sensueel</h4>
               <p>Een rijke geurbeleving met diepte, zachtheid en een rustige avondallure.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 570 — Warm & Sensueel">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 570 — Warm & Sensueel" data-category="Dames" data-profile="Warm & Sensueel">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="gold">
+              <div class="product-art" aria-hidden="true"><span>607</span></div>
               <p class="product-number">ORIVÈA No. 607</p>
               <h4>Luxe & Uniek</h4>
               <p>Een onderscheidende geur voor liefhebbers van bijzondere, premium accenten.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 607 — Luxe & Uniek">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 607 — Luxe & Uniek" data-category="Dames" data-profile="Luxe & Uniek">In winkelmand</button>
             </article>
           </div>
         </div>
@@ -118,68 +128,129 @@
         <div class="collection-group">
           <h3>Heren</h3>
           <div class="product-grid">
-            <article class="product-card">
+            <article class="product-card" data-accent="steel">
+              <div class="product-art product-art-tall" aria-hidden="true"><span>771</span></div>
               <p class="product-number">ORIVÈA No. 771</p>
               <h4>Krachtig & Populair</h4>
               <p>Een zelfverzekerde geur met frisse kracht en een herkenbaar modern karakter.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 771 — Krachtig & Populair">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 771 — Krachtig & Populair" data-category="Heren" data-profile="Krachtig & Populair">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="noir">
+              <div class="product-art product-art-tall" aria-hidden="true"><span>791</span></div>
               <p class="product-number">ORIVÈA No. 791</p>
               <h4>Intens & Modern</h4>
               <p>Een volle, hedendaagse geur met diepte en een verzorgde premium uitstraling.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 791 — Intens & Modern">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 791 — Intens & Modern" data-category="Heren" data-profile="Intens & Modern">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="copper">
+              <div class="product-art product-art-tall" aria-hidden="true"><span>759</span></div>
               <p class="product-number">ORIVÈA No. 759</p>
               <h4>Luxe & Opvallend</h4>
               <p>Een uitgesproken geurprofiel met elegante warmte en een blijvende indruk.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 759 — Luxe & Opvallend">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 759 — Luxe & Opvallend" data-category="Heren" data-profile="Luxe & Opvallend">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="smoke">
+              <div class="product-art product-art-tall" aria-hidden="true"><span>777</span></div>
               <p class="product-number">ORIVÈA No. 777</p>
               <h4>Warm & Verleidelijk</h4>
               <p>Een zachte, diepe geur met karakter, ideaal voor avond en bijzondere momenten.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 777 — Warm & Verleidelijk">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 777 — Warm & Verleidelijk" data-category="Heren" data-profile="Warm & Verleidelijk">In winkelmand</button>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-accent="blue">
+              <div class="product-art product-art-tall" aria-hidden="true"><span>788</span></div>
               <p class="product-number">ORIVÈA No. 788</p>
               <h4>Exclusief & Mysterieus</h4>
               <p>Een mysterieuze geur met verfijnde intensiteit en een exclusieve sfeer.</p>
-              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 788 — Exclusief & Mysterieus">Bestel deze geur</button>
+              <p class="product-meta">50 ml · Prijs volgt later</p>
+              <button class="button button-card add-to-cart" type="button" data-product="ORIVÈA No. 788 — Exclusief & Mysterieus" data-category="Heren" data-profile="Exclusief & Mysterieus">In winkelmand</button>
             </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="order section-light" id="bestellen">
-      <div class="section-inner two-column form-layout">
-        <div>
-          <p class="eyebrow">Bestellen</p>
-          <h2>Reserveer jouw ORIVÈA geur</h2>
-          <p>Vul het formulier in en wij nemen zo snel mogelijk contact met je op via <a href="mailto:shop@orivea.nl">shop@orivea.nl</a>. Online betaling wordt later toegevoegd.</p>
-          <div class="payment-note">
-            <strong>Betaalmethode</strong>
-            <span>PayPal en andere betaalopties worden later gekoppeld. Dit formulier verwerkt nog geen betaling.</span>
-          </div>
+    <section class="checkout section-light" id="checkout">
+      <div class="section-inner checkout-layout">
+        <div class="checkout-main">
+          <p class="eyebrow">Checkout</p>
+          <h2>Rond je ORIVÈA bestelling af</h2>
+          <p>Deze checkout verzamelt jouw winkelmand en verzendgegevens. PayPal wordt later gekoppeld; er wordt nu nog geen betaling verwerkt.</p>
+
+          <form class="checkout-form" id="checkoutForm">
+            <input type="hidden" name="cart_items" id="cartItemsInput" />
+            <input type="hidden" name="cart_total" id="cartTotalInput" value="Prijs volgt later" />
+
+            <fieldset>
+              <legend>Contactgegevens</legend>
+              <div class="form-grid">
+                <label>Naam<input type="text" name="name" autocomplete="name" required /></label>
+                <label>E-mailadres<input type="email" name="email" autocomplete="email" required /></label>
+                <label>Telefoonnummer<input type="tel" name="phone" autocomplete="tel" required /></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Verzendadres</legend>
+              <div class="form-grid">
+                <label class="wide">Adres<input type="text" name="address" autocomplete="street-address" required /></label>
+                <label>Postcode<input type="text" name="postal_code" autocomplete="postal-code" required /></label>
+                <label>Plaats<input type="text" name="city" autocomplete="address-level2" required /></label>
+                <label class="wide">Opmerking<textarea name="message" rows="4" placeholder="Bijvoorbeeld geuradvies, bezorgvoorkeur of extra vraag"></textarea></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Betaalmethode</legend>
+              <div class="payment-box">
+                <div>
+                  <strong>PayPal</strong>
+                  <span>Wordt later gekoppeld zodra de PayPal-gegevens beschikbaar zijn.</span>
+                </div>
+                <button class="paypal-placeholder" type="button" disabled>PayPal later beschikbaar</button>
+              </div>
+            </fieldset>
+
+            <button class="button button-primary form-submit" type="submit">Checkout afronden</button>
+            <p class="form-status" id="checkoutStatus" role="status" aria-live="polite"></p>
+          </form>
         </div>
 
-        <form class="premium-form" id="orderForm">
-          <div class="form-grid">
-            <label>Naam<input type="text" name="name" autocomplete="name" required /></label>
-            <label>E-mailadres<input type="email" name="email" autocomplete="email" required /></label>
-            <label>Telefoonnummer<input type="tel" name="phone" autocomplete="tel" required /></label>
-            <label>Product/geur<input type="text" name="product" id="orderProduct" required /></label>
-            <label>Aantal<input type="number" name="quantity" min="1" value="1" required /></label>
-            <label>Postcode<input type="text" name="postal_code" autocomplete="postal-code" required /></label>
-            <label class="wide">Adres<input type="text" name="address" autocomplete="street-address" required /></label>
-            <label>Plaats<input type="text" name="city" autocomplete="address-level2" required /></label>
-            <label class="wide">Opmerking<textarea name="message" rows="4"></textarea></label>
+        <aside class="cart-panel" aria-label="Winkelmand">
+          <div class="cart-head">
+            <h3>Winkelmand</h3>
+            <button class="text-button" type="button" id="clearCart">Leegmaken</button>
           </div>
-          <button class="button button-primary form-submit" type="submit">Bestelling verzenden</button>
-          <p class="form-status" id="orderStatus" role="status" aria-live="polite"></p>
-        </form>
+          <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Je winkelmand is nog leeg.</p>
+          </div>
+          <div class="cart-summary">
+            <span>Aantal</span>
+            <strong id="cartTotalQty">0 geur(en)</strong>
+          </div>
+          <div class="cart-summary">
+            <span>Totaal</span>
+            <strong>Prijs volgt later</strong>
+          </div>
+          <p class="cart-note">ORIVÈA neemt na je checkout contact op via <a href="mailto:shop@orivea.nl">shop@orivea.nl</a> om beschikbaarheid, prijs en betaalwijze te bevestigen.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="visual-proof section-dark">
+      <div class="section-inner visual-grid">
+        <div>
+          <p class="eyebrow">Eigen productbeelden</p>
+          <h2>Originele ORIVÈA visuals</h2>
+          <p>De website gebruikt eigen ORIVÈA productvisuals en gestileerde flacons. De afbeeldingen uit de aangeleverde parfumlijst zijn bewust niet gebruikt.</p>
+        </div>
+        <div class="visual-duo">
+          <img src="assets/products/orivea-women.png" alt="ORIVÈA dames productvisual" loading="lazy" />
+          <img src="assets/products/orivea-men.png" alt="ORIVÈA heren productvisual" loading="lazy" />
+        </div>
       </div>
     </section>
 
@@ -210,7 +281,7 @@
         <div class="policy-grid">
           <article id="privacybeleid">
             <h3>Privacybeleid</h3>
-            <p>Placeholder: ORIVÈA gaat zorgvuldig om met persoonsgegevens die via het bestel- en contactformulier worden gedeeld. Deze tekst kan later worden uitgebreid met het volledige privacybeleid.</p>
+            <p>Placeholder: ORIVÈA gaat zorgvuldig om met persoonsgegevens die via checkout en contactformulier worden gedeeld. Deze tekst kan later worden uitgebreid met het volledige privacybeleid.</p>
           </article>
           <article id="retourbeleid">
             <h3>Retourbeleid</h3>
