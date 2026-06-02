@@ -181,12 +181,110 @@ h3 { font-size: 22px; }
 .card-bottom a { color: var(--gold-soft); font-weight: 800; }
 .cream .card-bottom a { color: #6f4e1b; }
 
-.product-art { position: relative; min-height: 168px; display: grid; place-items: end center; overflow: hidden; background: radial-gradient(circle at 50% 78%, rgba(234,215,163,.24), transparent 46%); }
-.product-art::before { content: ""; width: 86px; height: 134px; border: 1px solid rgba(255,250,240,.35); border-radius: 18px 18px 9px 9px; background: linear-gradient(180deg, rgba(255,255,255,.24), transparent 26%), linear-gradient(145deg, rgba(255,255,255,.16), rgba(0,0,0,.58)), linear-gradient(160deg, #25130f, #9c6c3f); box-shadow: inset 0 0 26px rgba(255,255,255,.12), 0 24px 44px rgba(0,0,0,.34); }
-.product-art::after { content: ""; position: absolute; bottom: 132px; width: 48px; height: 34px; border-radius: 8px 8px 2px 2px; background: linear-gradient(145deg, #f2dfae, #9d7432); }
-.product-art span { position: absolute; bottom: 32px; display: grid; place-items: center; width: 62px; height: 42px; border: 1px solid rgba(165,122,50,.55); background: rgba(255,250,240,.9); color: var(--ink); font-family: Georgia, serif; font-weight: 800; }
-.product-art-tall::before { width: 78px; height: 146px; border-radius: 9px; }
-.product-art-tall::after { bottom: 144px; width: 42px; height: 38px; border-radius: 4px; }
+.product-art {
+  --liquid: linear-gradient(160deg, #25130f, #9c6c3f);
+  position: relative;
+  min-height: 198px;
+  display: grid;
+  place-items: end center;
+  margin: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 82%, rgba(234,215,163,.26), transparent 46%),
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+}
+.product-art[data-tone="fresh"] { --liquid: linear-gradient(160deg, #0a2d32, #79d0c7); }
+.product-art[data-tone="floral"] { --liquid: linear-gradient(160deg, #2d101f, #cc7f9a); }
+.product-art[data-tone="sweet"] { --liquid: linear-gradient(160deg, #34141b, #b66a83); }
+.product-art[data-tone="wood"] { --liquid: linear-gradient(160deg, #1b1108, #9c6333); }
+.product-art[data-tone="spice"] { --liquid: linear-gradient(160deg, #1e0d08, #a5482d); }
+.product-art[data-tone="night"] { --liquid: linear-gradient(160deg, #07070b, #31304f); }
+.product-art[data-tone="luxury"] { --liquid: linear-gradient(160deg, #20170d, #c19a4b); }
+.bottle-cap {
+  position: absolute;
+  bottom: 150px;
+  width: 56px;
+  height: 36px;
+  border-radius: 10px 10px 4px 4px;
+  background: linear-gradient(145deg, #f3dfaa, #9a7132 54%, #e2bd68);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 10px 24px rgba(0,0,0,.32);
+}
+.bottle-neck {
+  position: absolute;
+  bottom: 136px;
+  width: 32px;
+  height: 22px;
+  border: 1px solid rgba(255,250,240,.3);
+  background: linear-gradient(90deg, rgba(255,255,255,.28), rgba(0,0,0,.18)), var(--liquid);
+}
+.bottle-body {
+  position: absolute;
+  bottom: 18px;
+  width: 104px;
+  height: 136px;
+  border: 1px solid rgba(255,250,240,.42);
+  border-radius: 20px 20px 10px 10px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.2), transparent 18%, rgba(0,0,0,.28) 70%, rgba(255,255,255,.12)),
+    linear-gradient(180deg, rgba(255,255,255,.24), transparent 28%),
+    var(--liquid);
+  box-shadow: inset 0 0 28px rgba(255,255,255,.14), inset 0 -18px 28px rgba(0,0,0,.32), 0 26px 48px rgba(0,0,0,.36);
+}
+.bottle-shine {
+  position: absolute;
+  inset: 12px auto auto 14px;
+  width: 13px;
+  height: 92px;
+  border-radius: 99px;
+  background: linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,0));
+  opacity: .72;
+}
+.bottle-label {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 30px;
+  display: grid;
+  gap: 3px;
+  place-items: center;
+  min-height: 52px;
+  border: 1px solid rgba(165,122,50,.58);
+  background: rgba(255,250,240,.9);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  text-align: center;
+}
+.bottle-label small {
+  font-size: 10px;
+  letter-spacing: .16em;
+}
+.bottle-label strong {
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+.bottle-reflection {
+  position: absolute;
+  bottom: 0;
+  width: 122px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(234,215,163,.32), transparent 68%);
+  filter: blur(1px);
+}
+.product-art-tall .bottle-body {
+  width: 92px;
+  height: 150px;
+  border-radius: 10px;
+}
+.product-art-tall .bottle-cap {
+  bottom: 164px;
+  width: 48px;
+  height: 40px;
+  border-radius: 5px;
+}
+.product-art-tall .bottle-neck {
+  bottom: 150px;
+}
 
 .why-grid, .split-collections, .advice, .gift, .contact-news, .checkout-shell, .detail-grid, .visual-showcase { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 5vw, 64px); align-items: start; }
 .why-grid { grid-template-columns: repeat(3, 1fr); }
@@ -244,9 +342,10 @@ label.wide { grid-column: 1 / -1; }
 .product-detail { padding-top: 136px; }
 .detail-grid { align-items: center; }
 .detail-art .product-art { min-height: 420px; border: 1px solid var(--line-dark); background: radial-gradient(circle at 50% 76%, rgba(234,215,163,.24), transparent 42%), rgba(255,250,240,.04); }
-.detail-art .product-art::before { transform: scale(1.75); }
-.detail-art .product-art::after { transform: scale(1.75); transform-origin: center bottom; }
-.detail-art .product-art span { transform: scale(1.45); }
+.detail-art .bottle-body { transform: scale(1.72); transform-origin: center bottom; }
+.detail-art .bottle-cap,
+.detail-art .bottle-neck { transform: scale(1.72); transform-origin: center bottom; }
+.detail-art .bottle-reflection { transform: scale(1.7); }
 dl { display: grid; grid-template-columns: 150px 1fr; gap: 10px 18px; margin: 28px 0; }
 dt { color: var(--gold); font-weight: 800; }
 dd { margin: 0; color: var(--muted); }

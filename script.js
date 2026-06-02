@@ -31,7 +31,27 @@ const shipping = () => (!cart.length || subtotal() >= FREE_SHIPPING_FROM ? 0 : S
 const grandTotal = () => subtotal() + shipping();
 const totalQty = () => cart.reduce((sum, item) => sum + item.quantity, 0);
 
-const productArt = (product) => `<div class="product-art ${product.gender === "Heren" ? "product-art-tall" : ""}" data-tone="${product.categories[1] || "luxe"}"><span>${product.number.split(" ").pop()}</span></div>`;
+const productTone = (product) => {
+  const categories = product.categories.join(" ");
+  if (categories.includes("fris")) return "fresh";
+  if (categories.includes("bloemig") || categories.includes("romantisch")) return "floral";
+  if (categories.includes("zoet")) return "sweet";
+  if (categories.includes("houtachtig")) return "wood";
+  if (categories.includes("kruidig")) return "spice";
+  if (categories.includes("avond")) return "night";
+  return "luxury";
+};
+
+const productArt = (product) => `
+  <figure class="product-art ${product.gender === "Heren" ? "product-art-tall" : ""}" data-tone="${productTone(product)}" aria-label="${product.number} flesje">
+    <span class="bottle-cap"></span>
+    <span class="bottle-neck"></span>
+    <span class="bottle-body">
+      <span class="bottle-shine"></span>
+      <span class="bottle-label"><small>ORIVÈA</small><strong>No. ${product.number.split(" ").pop()}</strong></span>
+    </span>
+    <span class="bottle-reflection"></span>
+  </figure>`;
 
 const productCard = (product) => `
   <article class="product-card">
