@@ -3,90 +3,246 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORIVÈA | More Than Perfume</title>
-  <meta name="description" content="ORIVÈA - luxe geïnspireerde parfums met een premium uitstraling." />
+  <title>ORIVÈA | Premium online parfumerie</title>
+  <meta name="description" content="Ontdek ORIVÈA, een premium online parfumerie met zorgvuldig geselecteerde geuren en luxe alternatieven geïnspireerd op populaire geurprofielen." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://orivea.nl/" />
+  <meta property="og:title" content="ORIVÈA | More Than Perfume" />
+  <meta property="og:description" content="Premium geurbeleving met zorgvuldig geselecteerde geuren voor dames en heren." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://orivea.nl/" />
+  <meta property="og:image" content="https://orivea.nl/IMG_3727.png" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta name="theme-color" content="#090806" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="IMG_3727.png" as="image" />
   <link rel="stylesheet" href="style.css" />
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="4e848d4d-6736-4e09-83c8-399f452be7a7" data-blockingmode="auto" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
+  <header class="site-header" id="top">
+    <a class="brand" href="#home" aria-label="ORIVÈA home">
+      <span class="brand-mark">O</span>
+      <span class="brand-name">ORIVÈA</span>
+    </a>
 
-  <header class="header">
-    <img src="logo.png" alt="ORIVÈA logo" class="logo" />
-t
-    <nav class="nav" id="nav">
+    <button class="menu-toggle" id="menuBtn" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="siteNav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav" id="siteNav" aria-label="Hoofdnavigatie">
       <a href="#collectie">Collectie</a>
-      <a href="#over">Over</a>
+      <a href="#bestellen">Bestellen</a>
       <a href="#contact">Contact</a>
+      <a href="#beleid">Beleid</a>
     </nav>
-
-    <button class="menu-btn" id="menuBtn">☰</button>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <p class="label">Luxury Fragrance House</p>
-      <h1>ORIVÈA</h1>
-      <p class="subtitle">More Than Perfume.</p>
-      <p class="text">
-        Een geur is meer dan parfum. Het is een herinnering, een gevoel
-        en een blijvende indruk.
-      </p>
-      <a href="#collectie" class="btn">Ontdek de collectie</a>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-media" aria-hidden="true">
+        <img src="IMG_3727.png" alt="" />
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow">Premium online parfumerie</p>
+        <h1>ORIVÈA</h1>
+        <p class="hero-subtitle">More Than Perfume</p>
+        <p class="hero-text">Zorgvuldig geselecteerde geuren voor wie een rustige, luxe indruk wil achterlaten. Ontdek luxe alternatieven geïnspireerd op populaire geurprofielen, zonder overbodige ruis.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#collectie">Ontdek de collectie</a>
+          <a class="button button-secondary" href="#bestellen">Plaats een bestelling</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro section-light" id="over">
+      <div class="section-inner two-column">
+        <div>
+          <p class="eyebrow">De signatuur</p>
+          <h2>Rustige luxe, zorgvuldig gekozen.</h2>
+        </div>
+        <div class="copy-block">
+          <p>ORIVÈA brengt premium geurbeleving naar een helder en persoonlijk bestelproces. Iedere geur is geselecteerd op draagbaarheid, karakter en elegantie.</p>
+          <p>Onze collectie bestaat uit luxe alternatieven geïnspireerd op populaire geurprofielen. We doen geen claims dat onze geuren originele designerparfums zijn; ORIVÈA staat voor een eigen, toegankelijke geurervaring.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="collection section-dark" id="collectie">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Collectie</p>
+          <h2>Zorgvuldig geselecteerde geuren</h2>
+          <p>Premium productkaarten voor dames en heren. Kies een geur en het bestelformulier wordt automatisch ingevuld.</p>
+        </div>
+
+        <div class="collection-group">
+          <h3>Dames</h3>
+          <div class="product-grid">
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 545</p>
+              <h4>Fris & Elegant</h4>
+              <p>Een heldere, verfijnde geur met een zachte luxe uitstraling voor iedere dag.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 545 — Fris & Elegant">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 578</p>
+              <h4>Elegant & Modern</h4>
+              <p>Een moderne compositie met een verzorgde, stijlvolle en zelfverzekerde indruk.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 578 — Elegant & Modern">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 559</p>
+              <h4>Zoet & Verleidelijk</h4>
+              <p>Een warme zoete geur met een uitnodigend karakter en een elegante finish.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 559 — Zoet & Verleidelijk">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 570</p>
+              <h4>Warm & Sensueel</h4>
+              <p>Een rijke geurbeleving met diepte, zachtheid en een rustige avondallure.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 570 — Warm & Sensueel">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 607</p>
+              <h4>Luxe & Uniek</h4>
+              <p>Een onderscheidende geur voor liefhebbers van bijzondere, premium accenten.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 607 — Luxe & Uniek">Bestel deze geur</button>
+            </article>
+          </div>
+        </div>
+
+        <div class="collection-group">
+          <h3>Heren</h3>
+          <div class="product-grid">
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 771</p>
+              <h4>Krachtig & Populair</h4>
+              <p>Een zelfverzekerde geur met frisse kracht en een herkenbaar modern karakter.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 771 — Krachtig & Populair">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 791</p>
+              <h4>Intens & Modern</h4>
+              <p>Een volle, hedendaagse geur met diepte en een verzorgde premium uitstraling.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 791 — Intens & Modern">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 759</p>
+              <h4>Luxe & Opvallend</h4>
+              <p>Een uitgesproken geurprofiel met elegante warmte en een blijvende indruk.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 759 — Luxe & Opvallend">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 777</p>
+              <h4>Warm & Verleidelijk</h4>
+              <p>Een zachte, diepe geur met karakter, ideaal voor avond en bijzondere momenten.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 777 — Warm & Verleidelijk">Bestel deze geur</button>
+            </article>
+            <article class="product-card">
+              <p class="product-number">ORIVÈA No. 788</p>
+              <h4>Exclusief & Mysterieus</h4>
+              <p>Een mysterieuze geur met verfijnde intensiteit en een exclusieve sfeer.</p>
+              <button class="button button-card order-product" type="button" data-product="ORIVÈA No. 788 — Exclusief & Mysterieus">Bestel deze geur</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="order section-light" id="bestellen">
+      <div class="section-inner two-column form-layout">
+        <div>
+          <p class="eyebrow">Bestellen</p>
+          <h2>Reserveer jouw ORIVÈA geur</h2>
+          <p>Vul het formulier in en wij nemen zo snel mogelijk contact met je op via <a href="mailto:shop@orivea.nl">shop@orivea.nl</a>. Online betaling wordt later toegevoegd.</p>
+          <div class="payment-note">
+            <strong>Betaalmethode</strong>
+            <span>PayPal en andere betaalopties worden later gekoppeld. Dit formulier verwerkt nog geen betaling.</span>
+          </div>
+        </div>
+
+        <form class="premium-form" id="orderForm">
+          <div class="form-grid">
+            <label>Naam<input type="text" name="name" autocomplete="name" required /></label>
+            <label>E-mailadres<input type="email" name="email" autocomplete="email" required /></label>
+            <label>Telefoonnummer<input type="tel" name="phone" autocomplete="tel" required /></label>
+            <label>Product/geur<input type="text" name="product" id="orderProduct" required /></label>
+            <label>Aantal<input type="number" name="quantity" min="1" value="1" required /></label>
+            <label>Postcode<input type="text" name="postal_code" autocomplete="postal-code" required /></label>
+            <label class="wide">Adres<input type="text" name="address" autocomplete="street-address" required /></label>
+            <label>Plaats<input type="text" name="city" autocomplete="address-level2" required /></label>
+            <label class="wide">Opmerking<textarea name="message" rows="4"></textarea></label>
+          </div>
+          <button class="button button-primary form-submit" type="submit">Bestelling verzenden</button>
+          <p class="form-status" id="orderStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="contact section-dark" id="contact">
+      <div class="section-inner two-column form-layout">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Persoonlijk geuradvies of een vraag?</h2>
+          <p>Stuur ons een bericht via het contactformulier of mail direct naar <a href="mailto:shop@orivea.nl">shop@orivea.nl</a>.</p>
+        </div>
+
+        <form class="premium-form dark-form" id="contactForm">
+          <label>Naam<input type="text" name="name" autocomplete="name" required /></label>
+          <label>E-mailadres<input type="email" name="email" autocomplete="email" required /></label>
+          <label>Bericht<textarea name="message" rows="5" required></textarea></label>
+          <button class="button button-primary form-submit" type="submit">Bericht verzenden</button>
+          <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="policies section-light" id="beleid">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Informatie</p>
+          <h2>Beleid en voorwaarden</h2>
+        </div>
+        <div class="policy-grid">
+          <article id="privacybeleid">
+            <h3>Privacybeleid</h3>
+            <p>Placeholder: ORIVÈA gaat zorgvuldig om met persoonsgegevens die via het bestel- en contactformulier worden gedeeld. Deze tekst kan later worden uitgebreid met het volledige privacybeleid.</p>
+          </article>
+          <article id="retourbeleid">
+            <h3>Retourbeleid</h3>
+            <p>Placeholder: Retouraanvragen worden persoonlijk beoordeeld volgens de geldende voorwaarden. Deze sectie kan later worden aangevuld met termijnen, uitzonderingen en instructies.</p>
+          </article>
+          <article id="algemene-voorwaarden">
+            <h3>Algemene voorwaarden</h3>
+            <p>Placeholder: Op bestellingen en communicatie met ORIVÈA zijn algemene voorwaarden van toepassing. De definitieve juridische tekst kan hier later worden geplaatst.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">ORIVÈA — More Than Perfume</p>
+        <a href="mailto:shop@orivea.nl">shop@orivea.nl</a>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigatie">
+        <a href="#privacybeleid">Privacybeleid</a>
+        <a href="#retourbeleid">Retourbeleid</a>
+        <a href="#algemene-voorwaarden">Algemene voorwaarden</a>
+      </nav>
+      <p class="footer-credit">Website design & hosting door BarterWeb.nl</p>
     </div>
-  </section>
-
-  <section class="section" id="over">
-    <h2>De kunst van een blijvende indruk</h2>
-    <p>
-      ORIVÈA staat voor luxe geurbeleving. Zorgvuldig geselecteerde parfums
-      met een premium uitstraling, gemaakt voor mensen die niet zomaar een geur
-      dragen, maar een indruk willen achterlaten.
-    </p>
-  </section>
-
-  <section class="section dark" id="collectie">
-    <h2>Collectie</h2>
-
-    <div class="products">
-      <div class="card">
-        <span>No. 01</span>
-        <h3>Fris & Elegant</h3>
-        <p>Een verfijnde geur voor dagelijks gebruik.</p>
-        <button>Bekijk geur</button>
-      </div>
-
-      <div class="card">
-        <span>No. 02</span>
-        <h3>Warm & Verleidelijk</h3>
-        <p>Voor avonden, uitstraling en karakter.</p>
-        <button>Bekijk geur</button>
-      </div>
-
-      <div class="card">
-        <span>No. 03</span>
-        <h3>Krachtig & Mysterieus</h3>
-        <p>Een geur die blijft hangen.</p>
-        <button>Bekijk geur</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="contact">
-    <h2>Contact</h2>
-    <p>Voor geuradvies of vragen kun je contact opnemen.</p>
-
-    <form>
-      <input type="text" placeholder="Naam" />
-      <input type="email" placeholder="E-mailadres" />
-      <textarea placeholder="Bericht"></textarea>
-      <button type="submit" class="btn">Versturen</button>
-    </form>
-  </section>
-
-  <footer>
-    <img src="logo.png" alt="ORIVÈA logo" class="footer-logo" />
-    <p>© 2026 ORIVÈA — More Than Perfume.</p>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="rwxOnBjtqqPRdWVOdm1nt";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
 </body>
 </html>
