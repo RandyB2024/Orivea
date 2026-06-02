@@ -1,252 +1,54 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORIVÈA | Premium online parfumerie</title>
-  <meta name="description" content="Shop ORIVÈA: een premium online parfumerie met 150 zorgvuldig geselecteerde geuren, luxe alternatieven en persoonlijke geuradvies-checkout." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://orivea.nl/" />
-  <meta property="og:title" content="ORIVÈA | More Than Perfume" />
-  <meta property="og:description" content="Premium online parfumerie voor dames, heren en unisex geuren." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://orivea.nl/" />
-  <meta property="og:image" content="https://orivea.nl/IMG_3727.png" />
-  <meta name="theme-color" content="#090806" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORIVÈA | Premium Glantier parfums online</title>
+  <meta name="description" content="Vind snel jouw Glantier geur via ORIVÈA Signature Match en bestel luxe Glantier parfums, premium geuren en cadeauproducten.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="Glantier parfum, Glantier nummer zoeken, Glantier One Million, Glantier Sauvage, Glantier dames, Glantier heren, Glantier premium, Glantier webshop">
+  <link rel="canonical" href="https://orivea.nl/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="ORIVÈA | Premium Glantier parfums online">
+  <meta property="og:description" content="Vind snel jouw Glantier geur via ORIVÈA Signature Match en bestel luxe Glantier parfums, premium geuren en cadeauproducten.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://orivea.nl/">
+  <meta property="og:image" content="https://orivea.nl/assets/images/glantier-dames-fris.jpg">
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="4e848d4d-6736-4e09-83c8-399f452be7a7" data-blockingmode="auto" type="text/javascript"></script>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body data-page="home">
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="ORIVÈA home"><span>O</span><strong>ORIVÈA</strong></a>
-    <button class="menu-toggle" id="menuBtn" type="button" aria-label="Menu openen" aria-expanded="false"><span></span><span></span><span></span></button>
-    <nav class="site-nav" id="siteNav" aria-label="Hoofdnavigatie">
-      <a href="#bestsellers">Bestsellers</a>
-      <a href="#catalogus">Catalogus</a>
-      <a href="#advies">Geuradvies</a>
-      <a href="#checkout">Checkout <span class="cart-count" id="cartCount">0</span></a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header class="site-header">
+  <a class="brand" href="index.html"><span>ORIVÈA</span><small>Glantier webshop</small></a>
+  <button class="menu-toggle" type="button" aria-label="Menu openen">Menu</button>
+  <nav class="main-nav"><a href="index.html" class="active">Home</a><a href="index.html#signature-match" class="">Signature Match</a><a href="catalogus.html" class="">Collectie</a><a href="catalogus.html?filter=Dames" class="">Dames</a><a href="catalogus.html?filter=Heren" class="">Heren</a><a href="catalogus.html?filter=Premium" class="">Premium</a><a href="contact.html" class="">Contact</a></nav>
+  <button class="cart-button" type="button" data-cart-open>Winkelwagen <span data-cart-count>0</span></button>
+</header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-bg"><img src="IMG_3727.png" alt="" /></div>
-      <div class="hero-copy">
-        <p class="eyebrow">Technology-driven fragrance platform</p>
-        <h1>ORIVÈA</h1>
-        <p class="hero-subtitle">More Than Perfume</p>
-        <p>Vind binnen enkele seconden jouw ORIVÈA alternatief. Zoek op de parfum die je nu gebruikt en ontdek direct het zorgvuldig geselecteerde geurprofiel dat daarbij past.</p>
-        <div class="hero-actions">
-          <a class="button gold" href="#finder">Start de finder</a>
-          <a class="button ghost" href="#bestsellers">Shop bestsellers</a>
-        </div>
-      </div>
-      <div class="trust-strip">
-        <span>150 geuren</span><span>Persoonlijk geuradvies</span><span>Veilige checkout</span><span>PayPal volgt later</span>
-      </div>
-    </section>
-
-    <section class="finder-section" id="finder">
-      <div class="finder-shell">
-        <div class="finder-copy">
-          <p class="eyebrow">AI Parfum Finder</p>
-          <h2>Vind jouw ORIVÈA alternatief</h2>
-          <p>Typ de parfum die je nu gebruikt. De finder zoekt direct in de ORIVÈA database en toont het beste alternatief met geurprofiel, prijs en bestelknop.</p>
-        </div>
-        <div class="finder-machine">
-          <label for="finderInput">Welke parfum gebruik je nu?</label>
-          <div class="finder-search">
-            <input id="finderInput" type="search" autocomplete="off" placeholder="Welke parfum gebruik je nu?" />
-            <button class="button gold" id="finderButton" type="button">Zoek alternatief</button>
-          </div>
-          <div class="finder-examples" aria-label="Voorbeelden">
-            <button type="button" data-query="One Million">One Million</button>
-            <button type="button" data-query="Dior Sauvage">Dior Sauvage</button>
-            <button type="button" data-query="Black Opium">Black Opium</button>
-            <button type="button" data-query="Coco Mademoiselle">Coco Mademoiselle</button>
-            <button type="button" data-query="Invictus">Invictus</button>
-            <button type="button" data-query="Eros">Eros</button>
-          </div>
-          <div class="finder-result" id="finderResult" role="status" aria-live="polite">
-            <p>Begin met typen om direct een ORIVÈA match te vinden.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark" id="bestsellers">
-      <div class="section-head">
-        <p class="eyebrow">Direct populair</p>
-        <h2>Bestsellers</h2>
-        <p>De meest toegankelijke ORIVÈA geuren voor een sterke eerste keuze.</p>
-      </div>
-      <div class="product-row" id="bestsellerGrid"></div>
-    </section>
-
-    <section class="section cream">
-      <div class="why-grid">
-        <article><strong>01</strong><h3>Zorgvuldig geselecteerd</h3><p>Elke geur krijgt een duidelijke doelgroep, categorie en gebruiksmoment.</p></article>
-        <article><strong>02</strong><h3>Premium zonder ruis</h3><p>Een luxe alternatief met heldere productinformatie en geen verwarrende claims.</p></article>
-        <article><strong>03</strong><h3>Van advies naar checkout</h3><p>Filters, zoekfunctie, productpagina’s en een winkelwagen begeleiden de klant logisch naar bestelling.</p></article>
-      </div>
-    </section>
-
-    <section class="section dark visual-showcase">
-      <div>
-        <p class="eyebrow">Eigen productbeleving</p>
-        <h2>Originele ORIVÈA visuals</h2>
-        <p>De productbeleving is opgebouwd met eigen ORIVÈA assets en gestileerde flacons. De afbeeldingen uit de aangeleverde parfumlijst worden niet gebruikt.</p>
-      </div>
-      <div class="visual-duo">
-        <img src="assets/products/orivea-women.png" alt="ORIVÈA dames productvisual" loading="lazy" />
-        <img src="assets/products/orivea-men.png" alt="ORIVÈA heren productvisual" loading="lazy" />
-      </div>
-    </section>
-
-    <section class="section dark advice" id="advies">
-      <div>
-        <p class="eyebrow">Geuradvies</p>
-        <h2>Vind sneller jouw profiel</h2>
-        <p>Kies op basis van moment, stemming of doelgroep. De Chatbase-assistent is als digitale geuradviseur geïntegreerd voor productadvies, cadeauadvies en geurkeuze.</p>
-      </div>
-      <div class="advice-cards">
-        <button type="button" class="quick-filter" data-filter="fris">Fris voor elke dag</button>
-        <button type="button" class="quick-filter" data-filter="zoet">Zoet & verleidelijk</button>
-        <button type="button" class="quick-filter" data-filter="houtachtig">Houtachtig & krachtig</button>
-        <button type="button" class="quick-filter" data-filter="avond">Avondgeuren</button>
-      </div>
-    </section>
-
-    <section class="section cream split-collections">
-      <div>
-        <p class="eyebrow">Dames collectie</p>
-        <h2>Elegant, bloemig, romantisch en luxe.</h2>
-        <p>Van fris en zacht tot warm en sensueel. Ontdek damesgeuren voor dagelijkse elegantie en avondmomenten.</p>
-        <a href="#catalogus" class="button dark-button quick-link" data-filter="dames">Shop dames</a>
-      </div>
-      <div>
-        <p class="eyebrow">Heren collectie</p>
-        <h2>Fris, sportief, kruidig en houtachtig.</h2>
-        <p>Een complete lijn met moderne, krachtige en verzorgde geurprofielen voor elk moment.</p>
-        <a href="#catalogus" class="button dark-button quick-link" data-filter="heren">Shop heren</a>
-      </div>
-    </section>
-
-    <section class="section dark">
-      <div class="section-head">
-        <p class="eyebrow">Premium collectie</p>
-        <h2>Meer diepte, meer signatuur</h2>
-        <p>Rijkere profielen met een luxere uitstraling, ideaal voor avond, cadeau of persoonlijke signatuur.</p>
-      </div>
-      <div class="product-row" id="premiumGrid"></div>
-    </section>
-
-    <section class="section cream gift">
-      <div>
-        <p class="eyebrow">Cadeau inspiratie</p>
-        <h2>Een geur cadeau geven voelt persoonlijk.</h2>
-        <p>Filter op fris, romantisch, luxe of avond en voeg meerdere opties toe aan de winkelwagen voor advies na checkout.</p>
-      </div>
-      <div class="gift-panel">
-        <strong>Tip</strong>
-        <p>Weet je niet zeker welke geur past? Voeg 2 of 3 opties toe en vermeld in de opmerking voor wie het cadeau is.</p>
-      </div>
-    </section>
-
-    <section class="section dark catalog" id="catalogus">
-      <div class="section-head">
-        <p class="eyebrow">Volledige catalogus</p>
-        <h2>Alle ORIVÈA geuren</h2>
-        <p>Zoek, filter en open echte productpagina’s met geurprofiel, moment, combinaties en gerelateerde producten.</p>
-      </div>
-      <div class="shop-tools">
-        <input id="searchInput" type="search" placeholder="Zoek op nummer, profiel of categorie" />
-        <div class="filters" id="filters">
-          <button class="active" data-filter="all" type="button">Alles</button>
-          <button data-filter="dames" type="button">Dames</button>
-          <button data-filter="heren" type="button">Heren</button>
-          <button data-filter="unisex" type="button">Unisex</button>
-          <button data-filter="fris" type="button">Fris</button>
-          <button data-filter="zoet" type="button">Zoet</button>
-          <button data-filter="houtachtig" type="button">Houtachtig</button>
-          <button data-filter="kruidig" type="button">Kruidig</button>
-          <button data-filter="bloemig" type="button">Bloemig</button>
-          <button data-filter="luxe" type="button">Luxe</button>
-          <button data-filter="avond" type="button">Avond</button>
-        </div>
-      </div>
-      <div class="catalog-count" id="catalogCount"></div>
-      <div class="product-grid" id="catalogGrid"></div>
-    </section>
-
-    <section class="section cream checkout-section" id="checkout">
-      <div class="checkout-shell">
-        <div class="checkout-main">
-          <p class="eyebrow">Professionele checkout</p>
-          <h2>Rond je bestelling af</h2>
-          <div class="steps" id="checkoutSteps">
-            <button class="active" data-step="1" type="button">1 Klant</button>
-            <button data-step="2" type="button">2 Verzend</button>
-            <button data-step="3" type="button">3 Overzicht</button>
-            <button data-step="4" type="button">4 Betaling</button>
-            <button data-step="5" type="button">5 Bevestiging</button>
-          </div>
-          <form id="checkoutForm" class="checkout-form">
-            <input type="hidden" name="order_number" id="orderNumberInput" />
-            <input type="hidden" name="cart_items" id="cartItemsInput" />
-            <input type="hidden" name="order_html" id="orderHtmlInput" />
-            <input type="hidden" name="cart_total" id="cartTotalInput" />
-            <section class="checkout-step active" data-step-panel="1">
-              <h3>Klantgegevens</h3>
-              <div class="form-grid"><label>Naam<input name="name" autocomplete="name" required /></label><label>E-mailadres<input type="email" name="email" autocomplete="email" required /></label><label>Telefoon<input name="phone" autocomplete="tel" required /></label></div>
-            </section>
-            <section class="checkout-step" data-step-panel="2">
-              <h3>Verzendgegevens</h3>
-              <div class="form-grid"><label class="wide">Adres<input name="address" autocomplete="street-address" required /></label><label>Postcode<input name="postal_code" autocomplete="postal-code" required /></label><label>Plaats<input name="city" autocomplete="address-level2" required /></label><label class="wide">Opmerking<textarea name="message" rows="4"></textarea></label></div>
-            </section>
-            <section class="checkout-step" data-step-panel="3"><h3>Besteloverzicht</h3><div id="checkoutReview"></div></section>
-            <section class="checkout-step" data-step-panel="4"><h3>Betaling</h3><div class="payment-box"><strong>PayPal</strong><span>PayPal wordt gekoppeld zodra de gegevens beschikbaar zijn. Er wordt nu nog geen betaling verwerkt.</span><button disabled type="button">PayPal later beschikbaar</button></div></section>
-            <section class="checkout-step" data-step-panel="5"><h3>Bevestiging</h3><p>Controleer je gegevens en verstuur de bestelling. Je ontvangt daarna persoonlijk contact via shop@orivea.nl.</p></section>
-            <div class="checkout-actions"><button class="button ghost-dark" id="prevStep" type="button">Vorige</button><button class="button dark-button" id="nextStep" type="button">Volgende</button><button class="button gold submit-order" type="submit">Bestelling plaatsen</button></div>
-            <p class="form-status" id="checkoutStatus" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-        <aside class="cart-panel"><div class="cart-head"><h3>Winkelwagen</h3><button id="clearCart" type="button">Leegmaken</button></div><div id="cartItems"></div><div class="cart-line"><span>Subtotaal</span><strong id="subtotal">€0,00</strong></div><div class="cart-line"><span>Verzendkosten</span><strong id="shipping">€0,00</strong></div><div class="cart-line total"><span>Totaal</span><strong id="grandTotal">€0,00</strong></div><small>Gratis verzending vanaf €60.</small></aside>
-      </div>
-    </section>
-
-    <section class="section dark faq">
-      <div class="section-head"><p class="eyebrow">Veelgestelde vragen</p><h2>Heldere antwoorden</h2></div>
-      <details open><summary>Welke ORIVÈA geur lijkt op One Million?</summary><p>De ORIVÈA finder koppelt One Million aan ORIVÈA No. 759: een krachtig, warm en verleidelijk geurprofiel.</p></details>
-      <details><summary>Welke ORIVÈA geur lijkt op Dior Sauvage?</summary><p>De ORIVÈA finder koppelt Dior Sauvage aan ORIVÈA No. 771: fris, krachtig en modern.</p></details>
-      <details><summary>Welke ORIVÈA geur lijkt op Black Opium?</summary><p>De ORIVÈA finder koppelt Black Opium aan ORIVÈA No. 607: zoet, donker en verleidelijk.</p></details>
-      <details open><summary>Zijn dit originele designerparfums?</summary><p>Nee. ORIVÈA biedt luxe alternatieven geïnspireerd op populaire geurprofielen en doet geen claims dat het originele designerparfums zijn.</p></details>
-      <details><summary>Wanneer wordt PayPal toegevoegd?</summary><p>Zodra de PayPal-gegevens beschikbaar zijn, wordt de betaalstap technisch gekoppeld.</p></details>
-      <details><summary>Kan ik geuradvies krijgen?</summary><p>Ja. Gebruik de Chatbase-geuradviseur of vermeld je voorkeuren in de checkout-opmerking.</p></details>
-    </section>
-
-    <section class="sr-only" id="chatbase-orivea-context" aria-hidden="true">
-      ORIVÈA geuradviseur kennisbasis: One Million is gekoppeld aan ORIVÈA No. 759. Dior Sauvage is gekoppeld aan ORIVÈA No. 771. Black Opium is gekoppeld aan ORIVÈA No. 607. Coco Mademoiselle is gekoppeld aan ORIVÈA No. 578. Invictus is gekoppeld aan ORIVÈA No. 788. Eros is gekoppeld aan ORIVÈA No. 791. Gebruik fragrance-map.json voor de volledige ORIVÈA alternatief database.
-    </section>
-
-    <section class="section cream contact-news" id="contact">
-      <div><p class="eyebrow">Contact</p><h2>Wij helpen je kiezen.</h2><p>Mail naar <a href="mailto:shop@orivea.nl">shop@orivea.nl</a> of stuur een bericht.</p>
-        <form id="contactForm" class="compact-form"><input name="name" placeholder="Naam" required /><input type="email" name="email" placeholder="E-mailadres" required /><textarea name="message" placeholder="Bericht" required></textarea><button class="button dark-button form-submit" type="submit">Verstuur</button><p id="contactStatus" class="form-status"></p></form>
-      </div>
-      <div class="newsletter"><p class="eyebrow">Nieuwsbrief</p><h2>Nieuwe collectie ontvangen?</h2><p>Laat je e-mailadres achter voor updates. Koppeling met mailingsoftware kan later worden toegevoegd.</p><form><input type="email" placeholder="E-mailadres" /><button class="button gold" type="button">Aanmelden</button></form></div>
-    </section>
-
-    <section class="section cream policy" id="beleid"><article id="privacybeleid"><h3>Privacybeleid</h3><p>Placeholder voor het volledige privacybeleid.</p></article><article id="retourbeleid"><h3>Retourbeleid</h3><p>Placeholder voor retourvoorwaarden.</p></article><article id="algemene-voorwaarden"><h3>Algemene voorwaarden</h3><p>Placeholder voor algemene voorwaarden.</p></article></section>
-  </main>
-
-  <footer class="site-footer"><strong>ORIVÈA — More Than Perfume</strong><a href="mailto:shop@orivea.nl">shop@orivea.nl</a><nav><a href="#privacybeleid">Privacybeleid</a><a href="#retourbeleid">Retourbeleid</a><a href="#algemene-voorwaarden">Algemene voorwaarden</a></nav><span>Website design & hosting door BarterWeb.nl</span></footer>
-
-  <script src="script.js"></script>
-  <script>
+<main>
+  <section class="hero"><div class="hero-copy"><p class="eyebrow">Premium Glantier webshop</p><h1>ORIVÈA</h1><p class="hero-subtitle">Glantier parfums. Slim gevonden. Luxe besteld.</p><div class="hero-actions"><a class="button primary" href="#signature-match">Vind jouw geur</a><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div></div><div class="hero-media"><img src="assets/images/glantier-dames-fris.jpg" alt="Glantier parfum in luxe setting" loading="eager"></div></section>
+  <section id="signature-match" class="match-section"><div class="section-heading compact"><p class="eyebrow">ORIVÈA Signature Match™</p><h2>Vind jouw Glantier alternatief</h2><p>Zoek op bekende geur, merk, Glantier nummer of geurgroep.</p></div><form class="match-search" data-match-form><input type="search" data-match-input placeholder="Welke parfum gebruik je nu?" autocomplete="off"><button class="button primary" type="submit">Zoeken</button></form><div class="chips" data-match-examples><button type="button">One Million</button><button type="button">Sauvage</button><button type="button">Black Opium</button><button type="button">Good Girl</button><button type="button">Coco Mademoiselle</button><button type="button">Eros</button></div><div class="match-result" data-match-result></div></section>
+  <section class="category-strip"><a href="catalogus.html?filter=Dames"><img src="assets/images/glantier-dames-lifestyle.jpg" alt="Glantier dames parfum" loading="lazy"><span>Parfum Dames</span></a><a href="catalogus.html?filter=Heren"><img src="assets/images/glantier-heren-houtachtig.jpg" alt="Glantier heren parfum" loading="lazy"><span>Parfum Heren</span></a><a href="catalogus.html?filter=Premium"><img src="assets/images/glantier-premium-heren.jpg" alt="Glantier premium parfum" loading="lazy"><span>Premium</span></a><a href="catalogus.html?filter=15 ml"><img src="assets/images/glantier-15ml-dames.png" alt="Glantier 15 ml parfum" loading="lazy"><span>15 ml</span></a><a href="catalogus.html?filter=Boxen"><img src="assets/images/glantier-box-dames.png" alt="Glantier parfum box" loading="lazy"><span>Boxen</span></a><a href="catalogus.html?filter=Geurhangers"><img src="assets/images/glantier-geurstokjes.png" alt="Glantier interieurgeur" loading="lazy"><span>Interieur</span></a></section>
+  <section class="product-showcase"><div class="section-heading"><p class="eyebrow">Populair gekozen</p><h2>Bestsellers</h2></div><div class="product-grid" data-products="bestsellers"></div></section>
+  <section class="split-band"><div><p class="eyebrow">Premium collectie</p><h2>Voor wie iets intensers zoekt.</h2><p>Ontdek zorgvuldig geselecteerde Glantier premium geuren met een rijker geurprofiel.</p><a class="button primary" href="catalogus.html?filter=Premium">Bekijk premium</a></div><img src="assets/images/glantier-premium-dames.jpg" alt="Glantier premium parfum" loading="lazy"></section>
+  <section class="product-showcase"><div class="section-heading"><p class="eyebrow">Cadeau inspiratie</p><h2>Compact, luxe en makkelijk te geven</h2></div><div class="product-grid" data-products="gifts"></div></section>
+  <section class="steps"><div><strong>1</strong><span>Zoek je huidige geur via Signature Match.</span></div><div><strong>2</strong><span>Kies Glantier nummer, formaat of cadeauproduct.</span></div><div><strong>3</strong><span>Rond je bestelling af; betaling stemmen we later af.</span></div></section>
+  <section class="faq"><div class="section-heading compact"><p class="eyebrow">FAQ</p><h2>Veelgestelde vragen</h2></div><details><summary>Verkoopt ORIVÈA Glantier-producten?</summary><p>Ja, ORIVÈA presenteert en verkoopt Glantier-producten in een premium online winkelervaring.</p></details><details><summary>Waarom staan bekende merknamen in de zoekfunctie?</summary><p>Alleen als vergelijkingsreferentie, zodat je sneller een passend Glantier geurprofiel vindt.</p></details><details><summary>Hoe werken verzendkosten?</summary><p>Bestellen kan vanaf €20,00. Verzending is €6,95 en gratis vanaf €99,00.</p></details></section>
+</main>
+<aside class="cart-drawer" aria-hidden="true" data-cart-drawer><div class="drawer-panel"><button class="drawer-close" type="button" data-cart-close>Sluiten</button><h2>Winkelwagen</h2><div data-mini-cart></div><a class="button primary full" href="checkout.html">Naar checkout</a></div></aside>
+<footer class="site-footer">
+  <div><strong>ORIVÈA</strong><p>Glantier parfums. Slim gevonden. Luxe besteld.</p><a href="mailto:shop@orivea.nl">shop@orivea.nl</a></div>
+  <div class="footer-links">
+    <a href="catalogus.html">Collectie</a><a href="index.html#signature-match">Signature Match</a><a href="contact.html">Contact</a><a href="glantier-partner-program.html">Glantier Partner Program</a>
+    <a href="algemene-voorwaarden.html">Algemene voorwaarden</a><a href="privacybeleid.html">Privacybeleid</a><a href="cookiebeleid.html">Cookiebeleid</a><a href="retourbeleid.html">Retourbeleid</a><a href="verzending-levering.html">Verzending & levering</a><a href="disclaimer.html">Disclaimer</a>
+  </div>
+  <p class="barter">Website design & hosting door BarterWeb.nl</p>
+</footer>
+<script src="products.js"></script>
+<script src="script.js"></script>
+<script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="rwxOnBjtqqPRdWVOdm1nt";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-  </script>
+</script>
 </body>
 </html>
