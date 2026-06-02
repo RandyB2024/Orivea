@@ -35,17 +35,45 @@
     <section class="hero" id="home">
       <div class="hero-bg"><img src="IMG_3727.png" alt="" /></div>
       <div class="hero-copy">
-        <p class="eyebrow">Premium online parfumerie</p>
+        <p class="eyebrow">Technology-driven fragrance platform</p>
         <h1>ORIVÈA</h1>
         <p class="hero-subtitle">More Than Perfume</p>
-        <p>Ontdek 150 zorgvuldig geselecteerde geuren voor dames, heren en unisex. Luxe alternatieven geïnspireerd op populaire geurprofielen, met een rustige en professionele winkelervaring.</p>
+        <p>Vind binnen enkele seconden jouw ORIVÈA alternatief. Zoek op de parfum die je nu gebruikt en ontdek direct het zorgvuldig geselecteerde geurprofiel dat daarbij past.</p>
         <div class="hero-actions">
-          <a class="button gold" href="#bestsellers">Shop bestsellers</a>
-          <a class="button ghost" href="#advies">Vind jouw geur</a>
+          <a class="button gold" href="#finder">Start de finder</a>
+          <a class="button ghost" href="#bestsellers">Shop bestsellers</a>
         </div>
       </div>
       <div class="trust-strip">
         <span>150 geuren</span><span>Persoonlijk geuradvies</span><span>Veilige checkout</span><span>PayPal volgt later</span>
+      </div>
+    </section>
+
+    <section class="finder-section" id="finder">
+      <div class="finder-shell">
+        <div class="finder-copy">
+          <p class="eyebrow">AI Parfum Finder</p>
+          <h2>Vind jouw ORIVÈA alternatief</h2>
+          <p>Typ de parfum die je nu gebruikt. De finder zoekt direct in de ORIVÈA database en toont het beste alternatief met geurprofiel, prijs en bestelknop.</p>
+        </div>
+        <div class="finder-machine">
+          <label for="finderInput">Welke parfum gebruik je nu?</label>
+          <div class="finder-search">
+            <input id="finderInput" type="search" autocomplete="off" placeholder="Welke parfum gebruik je nu?" />
+            <button class="button gold" id="finderButton" type="button">Zoek alternatief</button>
+          </div>
+          <div class="finder-examples" aria-label="Voorbeelden">
+            <button type="button" data-query="One Million">One Million</button>
+            <button type="button" data-query="Dior Sauvage">Dior Sauvage</button>
+            <button type="button" data-query="Black Opium">Black Opium</button>
+            <button type="button" data-query="Coco Mademoiselle">Coco Mademoiselle</button>
+            <button type="button" data-query="Invictus">Invictus</button>
+            <button type="button" data-query="Eros">Eros</button>
+          </div>
+          <div class="finder-result" id="finderResult" role="status" aria-live="polite">
+            <p>Begin met typen om direct een ORIVÈA match te vinden.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -192,9 +220,16 @@
 
     <section class="section dark faq">
       <div class="section-head"><p class="eyebrow">Veelgestelde vragen</p><h2>Heldere antwoorden</h2></div>
+      <details open><summary>Welke ORIVÈA geur lijkt op One Million?</summary><p>De ORIVÈA finder koppelt One Million aan ORIVÈA No. 759: een krachtig, warm en verleidelijk geurprofiel.</p></details>
+      <details><summary>Welke ORIVÈA geur lijkt op Dior Sauvage?</summary><p>De ORIVÈA finder koppelt Dior Sauvage aan ORIVÈA No. 771: fris, krachtig en modern.</p></details>
+      <details><summary>Welke ORIVÈA geur lijkt op Black Opium?</summary><p>De ORIVÈA finder koppelt Black Opium aan ORIVÈA No. 607: zoet, donker en verleidelijk.</p></details>
       <details open><summary>Zijn dit originele designerparfums?</summary><p>Nee. ORIVÈA biedt luxe alternatieven geïnspireerd op populaire geurprofielen en doet geen claims dat het originele designerparfums zijn.</p></details>
       <details><summary>Wanneer wordt PayPal toegevoegd?</summary><p>Zodra de PayPal-gegevens beschikbaar zijn, wordt de betaalstap technisch gekoppeld.</p></details>
       <details><summary>Kan ik geuradvies krijgen?</summary><p>Ja. Gebruik de Chatbase-geuradviseur of vermeld je voorkeuren in de checkout-opmerking.</p></details>
+    </section>
+
+    <section class="sr-only" id="chatbase-orivea-context" aria-hidden="true">
+      ORIVÈA geuradviseur kennisbasis: One Million is gekoppeld aan ORIVÈA No. 759. Dior Sauvage is gekoppeld aan ORIVÈA No. 771. Black Opium is gekoppeld aan ORIVÈA No. 607. Coco Mademoiselle is gekoppeld aan ORIVÈA No. 578. Invictus is gekoppeld aan ORIVÈA No. 788. Eros is gekoppeld aan ORIVÈA No. 791. Gebruik fragrance-map.json voor de volledige ORIVÈA alternatief database.
     </section>
 
     <section class="section cream contact-news" id="contact">

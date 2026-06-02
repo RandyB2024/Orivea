@@ -25,6 +25,7 @@ body {
 img { display: block; max-width: 100%; }
 a { color: inherit; }
 button, input, textarea { font: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 .site-header {
   position: fixed;
@@ -66,6 +67,92 @@ h3 { font-size: 22px; }
 .trust-strip { position: absolute; right: clamp(18px, 6vw, 86px); bottom: 24px; left: clamp(18px, 6vw, 86px); z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line-dark); background: rgba(18,16,12,.74); }
 .trust-strip span { padding: 14px; color: var(--gold-soft); text-align: center; border-right: 1px solid var(--line-dark); }
 .trust-strip span:last-child { border-right: 0; }
+
+.finder-section {
+  position: relative;
+  padding: clamp(42px, 7vw, 86px) clamp(18px, 6vw, 86px);
+  background:
+    radial-gradient(circle at 28% 10%, rgba(201,164,92,.24), transparent 34%),
+    linear-gradient(180deg, #050403, #11100d);
+}
+.finder-shell {
+  display: grid;
+  grid-template-columns: minmax(0, .74fr) minmax(0, 1.26fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 42px);
+  border: 1px solid var(--line-dark);
+  background: linear-gradient(145deg, rgba(255,250,240,.1), rgba(255,250,240,.035));
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+.finder-copy p { color: var(--muted); }
+.finder-machine label {
+  color: var(--gold-soft);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.finder-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  margin-top: 10px;
+}
+.finder-search input {
+  min-height: 64px;
+  border-color: rgba(234,215,163,.34);
+  background: rgba(255,250,240,.08);
+  color: var(--cream);
+  font-size: clamp(18px, 3vw, 26px);
+}
+.finder-search input::placeholder { color: rgba(244,239,228,.52); }
+.finder-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 18px;
+}
+.finder-examples button {
+  border: 1px solid rgba(234,215,163,.24);
+  background: rgba(255,250,240,.06);
+  color: var(--gold-soft);
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.finder-result {
+  min-height: 132px;
+  border: 1px solid rgba(234,215,163,.2);
+  background: rgba(0,0,0,.18);
+  padding: 18px;
+}
+.finder-match {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+.match-art .product-art { min-height: 190px; }
+.match-title { color: var(--gold-soft) !important; font-weight: 800; }
+.finder-match dl {
+  grid-template-columns: 110px 1fr;
+  margin: 14px 0;
+}
+.match-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.product-card {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(234,215,163,.5);
+  box-shadow: 0 30px 90px rgba(201,164,92,.16), var(--shadow);
+}
 
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 12px 20px; border: 1px solid transparent; border-radius: 2px; font-weight: 800; text-decoration: none; cursor: pointer; }
 .button:hover { transform: translateY(-1px); }
@@ -173,9 +260,10 @@ dd { margin: 0; color: var(--muted); }
   .menu-toggle { display: block; }
   .site-nav { position: absolute; top: calc(100% + 1px); right: 16px; left: 16px; display: none; padding: 18px; border: 1px solid var(--line-dark); background: rgba(8,7,5,.98); }
   .site-nav.active { display: grid; }
-  .trust-strip, .why-grid, .split-collections, .advice, .gift, .contact-news, .checkout-shell, .detail-grid, .visual-showcase, .policy { grid-template-columns: 1fr; }
+  .trust-strip, .finder-shell, .why-grid, .split-collections, .advice, .gift, .contact-news, .checkout-shell, .detail-grid, .visual-showcase, .policy { grid-template-columns: 1fr; }
   .trust-strip { position: relative; right: auto; bottom: auto; left: auto; margin-top: 34px; }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .finder-search, .finder-match { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .cart-panel { position: static; }
 }

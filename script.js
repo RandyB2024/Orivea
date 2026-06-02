@@ -7,6 +7,7 @@ const SHIPPING_COST = 4.95;
 const FREE_SHIPPING_FROM = 60;
 
 let products = [];
+let fragranceMap = [];
 let cart = [];
 let activeFilter = "all";
 let activeStep = 1;
@@ -30,7 +31,7 @@ const shipping = () => (!cart.length || subtotal() >= FREE_SHIPPING_FROM ? 0 : S
 const grandTotal = () => subtotal() + shipping();
 const totalQty = () => cart.reduce((sum, item) => sum + item.quantity, 0);
 
-const productArt = (product) => `<div class="product-art ${product.gender === "Heren" ? "product-art-tall" : ""}" data-tone="${product.categories[1] || "luxe"}"><span>${product.number.replace("ORIVÈA No. ", "")}</span></div>`;
+const productArt = (product) => `<div class="product-art ${product.gender === "Heren" ? "product-art-tall" : ""}" data-tone="${product.categories[1] || "luxe"}"><span>${product.number.split(" ").pop()}</span></div>`;
 
 const productCard = (product) => `
   <article class="product-card">
@@ -49,6 +50,97 @@ const renderRows = () => {
   const premium = products.filter((p) => p.collections.includes("premium")).slice(0, 8);
   if (byId("bestsellerGrid")) byId("bestsellerGrid").innerHTML = bestsellers.map(productCard).join("");
   if (byId("premiumGrid")) byId("premiumGrid").innerHTML = premium.map(productCard).join("");
+};
+
+const normalize = (value) => value
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replace(/[^a-z0-9]+/g, " ")
+  .trim();
+
+const distance = (a, b) => {
+  const matrix = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j += 1) matrix[0][j] = j;
+  for (let i = 1; i <= a.length; i += 1) {
+    for (let j = 1; j <= b.length; j += 1) {
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+      );
+    }
+  }
+  return matrix[a.length][b.length];
+};
+
+const finderScore = (query, entry) => {
+  const normalizedQuery = normalize(query);
+  const candidates = [entry.origineel, entry.categorie, entry.omschrijving, ...(entry.aliases || [])].map(normalize);
+  let best = 999;
+
+  candidates.forEach((candidate) => {
+    if (!candidate) return;
+    if (candidate === normalizedQuery) best = Math.min(best, 0);
+    if (candidate.startsWith(normalizedQuery)) best = Math.min(best, 1);
+    if (candidate.includes(normalizedQuery)) best = Math.min(best, 2);
+    if (normalizedQuery.includes(candidate)) best = Math.min(best, 3);
+    best = Math.min(best, distance(normalizedQuery, candidate));
+    candidate.split(" ").forEach((part) => {
+      if (part.startsWith(normalizedQuery) || normalizedQuery.startsWith(part)) best = Math.min(best, 2);
+      best = Math.min(best, distance(normalizedQuery, part) + 1);
+    });
+  });
+
+  return best;
+};
+
+const findAlternative = (query) => {
+  const clean = normalize(query);
+  if (!clean) return null;
+  return fragranceMap
+    .map((entry) => ({ entry, score: finderScore(clean, entry) }))
+    .sort((a, b) => a.score - b.score)[0];
+};
+
+const renderFinderResult = (query) => {
+  const holder = byId("finderResult");
+  if (!holder) return;
+  const match = findAlternative(query);
+
+  if (!match || match.score > Math.max(4, normalize(query).length * 0.45)) {
+    holder.innerHTML = `
+      <div class="finder-empty">
+        <strong>Geen directe match gevonden.</strong>
+        <p>Probeer een merknaam, geurnaam of één herkenbaar woord zoals “Sauvage”, “Dior”, “Opium” of “Million”.</p>
+      </div>`;
+    return;
+  }
+
+  const entry = match.entry;
+  const product = products.find((item) => item.id === entry.productId);
+
+  if (!product) return;
+
+  holder.innerHTML = `
+    <article class="finder-match">
+      <div class="match-art">${productArt(product)}</div>
+      <div>
+        <p class="eyebrow">Beste match voor ${entry.origineel}</p>
+        <h3>${product.number}</h3>
+        <p class="match-title">${product.name}</p>
+        <p>${entry.omschrijving}. ${product.description}</p>
+        <dl>
+          <dt>Geurprofiel</dt><dd>${product.profile}</dd>
+          <dt>Categorie</dt><dd>${entry.categorie}</dd>
+          <dt>Prijs</dt><dd>${money(product.price)}</dd>
+        </dl>
+        <div class="match-actions">
+          <button class="button gold add-to-cart" type="button" data-id="${product.id}">Bestel deze geur</button>
+          <a class="button ghost" href="product.html?id=${product.id}">Bekijk productpagina</a>
+        </div>
+      </div>
+    </article>`;
 };
 
 const renderCatalog = () => {
@@ -172,6 +264,12 @@ const bindCommon = () => {
 const bindHome = () => {
   renderRows();
   renderCatalog();
+  byId("finderInput")?.addEventListener("input", (event) => renderFinderResult(event.target.value));
+  byId("finderButton")?.addEventListener("click", () => renderFinderResult(byId("finderInput").value));
+  document.querySelectorAll("[data-query]").forEach((button) => button.addEventListener("click", () => {
+    byId("finderInput").value = button.dataset.query;
+    renderFinderResult(button.dataset.query);
+  }));
   byId("searchInput")?.addEventListener("input", renderCatalog);
   byId("filters")?.addEventListener("click", (event) => {
     const button = event.target.closest("button");
@@ -236,7 +334,11 @@ const bindProduct = () => {
 
 const init = async () => {
   loadCart();
-  products = await fetch("products.json").then((response) => response.json());
+  [products, fragranceMap] = await Promise.all([
+    fetch("products.json").then((response) => response.json()),
+    fetch("fragrance-map.json").then((response) => response.json()),
+  ]);
+  window.ORIVEA_FRAGRANCE_DATABASE = fragranceMap;
   bindCommon();
   if (page === "product") bindProduct();
   else bindHome();
