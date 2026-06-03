@@ -13,6 +13,25 @@
   const money = (value) => currency.format(Number(value || 0));
   const normalize = (value) => String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   const productById = (id) => PRODUCTS.find((product) => product.id === id);
+  const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
+  const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
+
+  function shippingFor(subtotal) {
+    if (!subtotal) return 0;
+    const rule = (CONFIG.shippingRules || []).find((item) => subtotal >= item.min && (item.max === null || subtotal <= item.max));
+    return Number(rule?.cost ?? 0);
+  }
+
+  function productVariant(product, variant = "signature") {
+    if (!product) return null;
+    if (variant === "discovery") {
+      return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: CONFIG.pricing?.discovery15 || 5.95 };
+    }
+    if (variant === "premium" && product.premiumBeschikbaar) {
+      return { ...product, naam: `${product.naam} Premium 50 ml`, type: "Premium", inhoud: "50 ml", prijs: product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95, image: product.premiumImage || product.image };
+    }
+    return { ...product, type: product.id === "vaderdag-premium-set" ? product.type : "Signature EDP", inhoud: product.inhoud || "50 ml", prijs: product.prijs };
+  }
 
   function cart() {
     try {
@@ -27,47 +46,61 @@
     renderCartState();
   }
 
-  function addToCart(id, qty = 1) {
+  function addToCart(id, qty = 1, variant = "signature") {
     const product = productById(id);
     if (!product) return;
+    if (variant === "premium" && !product.premiumBeschikbaar) return;
     const items = cart();
-    const line = items.find((item) => item.id === id);
+    const key = `${id}:${variant}`;
+    const line = items.find((item) => itemKey(item) === key);
     if (line) line.qty += qty;
-    else items.push({ id, qty });
+    else items.push({ id, variant, key, qty });
     saveCart(items);
     openCart();
   }
 
-  function updateQty(id, qty) {
+  function updateQty(key, qty) {
     if (qty < 1) {
-      removeFromCart(id);
+      removeFromCart(key);
       return;
     }
-    saveCart(cart().map((item) => item.id === id ? { ...item, qty } : item));
+    saveCart(cart().map((item) => itemKey(item) === key ? { ...item, qty } : item));
   }
 
-  function removeFromCart(id) {
-    saveCart(cart().filter((item) => item.id !== id));
+  function removeFromCart(key) {
+    saveCart(cart().filter((item) => itemKey(item) !== key));
   }
 
   function totals() {
-    const lines = cart().map((item) => ({ ...item, product: productById(item.id) })).filter((line) => line.product);
+    const lines = cart().map((item) => {
+      const base = productById(item.id);
+      return { ...item, key: itemKey(item), product: productVariant(base, item.variant || "signature") };
+    }).filter((line) => line.product);
     const subtotal = lines.reduce((sum, line) => sum + line.product.prijs * line.qty, 0);
-    const shipping = subtotal >= CONFIG.freeShippingFrom ? 0 : subtotal >= CONFIG.minimumOrderAmount ? CONFIG.shippingCost : 0;
+    const shipping = shippingFor(subtotal);
     return { lines, subtotal, shipping, total: subtotal + shipping };
   }
 
   function cartLineHtml(line) {
     return `<div class="cart-line">
       <img src="${line.product.image}" alt="${line.product.naam}" loading="lazy">
-      <div><strong>${line.product.naam}</strong><p>${line.product.type} · ${line.product.inhoud}</p><div class="qty-control"><button type="button" data-qty-minus="${line.id}">-</button><span>${line.qty}</span><button type="button" data-qty-plus="${line.id}">+</button><button type="button" class="remove-line" data-remove="${line.id}">Verwijder</button></div></div>
+      <div><strong>${line.product.naam}</strong><p>${line.product.type} · ${line.product.inhoud}</p><div class="qty-control"><button type="button" data-qty-minus="${line.key}">-</button><span>${line.qty}</span><button type="button" data-qty-plus="${line.key}">+</button><button type="button" class="remove-line" data-remove="${line.key}">Verwijder</button></div></div>
       <strong>${money(line.product.prijs * line.qty)}</strong>
     </div>`;
   }
 
   function totalsHtml(data) {
-    const notice = data.subtotal > 0 && data.subtotal < CONFIG.minimumOrderAmount ? `<p class="notice">Bestellen kan vanaf ${money(CONFIG.minimumOrderAmount)}.</p>` : "";
-    return `<div class="totals"><div><span>Subtotaal</span><strong>${money(data.subtotal)}</strong></div><div><span>Verzendkosten</span><strong>${data.subtotal >= CONFIG.freeShippingFrom ? "Gratis" : money(data.shipping)}</strong></div><div><span>Totaal</span><strong>${money(data.total)}</strong></div>${notice}</div>`;
+    const remaining = Math.max(0, freeShippingFrom - data.subtotal);
+    const progress = Math.min(100, Math.round((data.subtotal / freeShippingFrom) * 100));
+    const notice = data.subtotal > 0 && remaining > 0 ? `Nog ${money(remaining)} voor gratis verzending` : data.subtotal > 0 ? "Gratis verzending bereikt" : `Gratis verzending vanaf ${money(freeShippingFrom)}`;
+    return `<div class="totals">
+      <p class="shipping-note">🚚 Gratis verzending vanaf ${money(freeShippingFrom)}</p>
+      <div class="shipping-progress" aria-label="${notice}"><span style="width:${progress}%"></span></div>
+      <p class="notice">${notice}</p>
+      <div><span>Subtotaal</span><strong>${money(data.subtotal)}</strong></div>
+      <div><span>Verzendkosten</span><strong>${data.shipping === 0 && data.subtotal > 0 ? "Gratis" : money(data.shipping)}</strong></div>
+      <div><span>Totaal</span><strong>${money(data.total)}</strong></div>
+    </div>`;
   }
 
   function renderCartState() {
@@ -92,13 +125,22 @@
 
   function productCard(product) {
     const ref = product.parfumReferentie ? `<p>Referentie: ${product.parfumReferentie}</p>` : "";
-    return `<article class="product-card">
-      <img src="${product.image}" alt="${product.naam}" loading="lazy">
+    const premiumBadge = product.premiumBeschikbaar ? '<span class="premium-badge">⭐ Premium beschikbaar</span>' : "";
+    const premiumPrice = product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : "";
+    const benefits = product.premiumBeschikbaar && product.premiumVoordelen ? `<ul class="premium-benefits">${product.premiumVoordelen.slice(0, 4).map((item) => `<li>${item}</li>`).join("")}</ul>` : "";
+    const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
+    const actions = product.id === "vaderdag-premium-set"
+      ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Bestel Vaderdag Set</button>`
+      : !isFragrance
+        ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen</button>`
+      : `<button class="button ghost" type="button" data-add-to-cart="${product.id}" data-variant="discovery">15 ml ${money(CONFIG.pricing?.discovery15 || 5.95)}</button><button class="button primary" type="button" data-add-to-cart="${product.id}" data-variant="signature">50 ml ${money(product.prijs)}</button>${product.premiumBeschikbaar ? `<button class="button primary premium-action" type="button" data-add-to-cart="${product.id}" data-variant="premium">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95)}</button>` : ""}`;
+    return `<article class="product-card ${product.premiumBeschikbaar ? "premium-available" : ""}">
+      <img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy">
       <div class="product-body">
-        <span class="product-meta">${product.glantierNummer ? `Glantier ${product.glantierNummer}` : product.categorie}</span>
+        <span class="product-meta">${product.glantierNummer ? `Glantier ${product.glantierNummer}` : product.categorie}</span>${premiumBadge}
         <h3>${product.naam}</h3>
-        <p>${product.geurgroep}</p>${ref}
-        <div class="product-footer"><span class="price">${money(product.prijs)}</span><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen</button></div>
+        <p>${product.geurgroep}</p>${ref}${benefits}
+        <div class="product-footer product-actions"><span class="price">${money(product.prijs)}${premiumPrice}</span><div class="variant-actions">${actions}</div></div>
       </div>
     </article>`;
   }
@@ -161,7 +203,7 @@
       result.innerHTML = '<p class="notice">Geen directe match gevonden. Probeer een merknaam, geurgroep of Glantier nummer.</p>';
       return;
     }
-    result.innerHTML = matches.map((product) => `<div class="match-card"><img src="${product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>${product.naam}</h3><p>${product.geurgroep} · ${product.doelgroep} · ${product.inhoud}</p><p>${product.omschrijving}</p><p class="price">${money(product.prijs)}</p><div class="hero-actions"><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen aan winkelwagen</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`).join("");
+    result.innerHTML = matches.map((product) => `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>${product.naam}</h3>${product.premiumBeschikbaar ? '<span class="premium-badge">⭐ Premium beschikbaar</span>' : ""}<p>${product.geurgroep} · ${product.doelgroep} · ${product.inhoud}</p><p>${product.omschrijving}</p><p class="price">${money(product.prijs)}${product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : ""}</p><div class="hero-actions"><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen aan winkelwagen</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`).join("");
   }
 
   function initMatch() {
@@ -235,10 +277,6 @@
         status.textContent = "Je winkelwagen is nog leeg.";
         return;
       }
-      if (data.subtotal < CONFIG.minimumOrderAmount) {
-        status.textContent = `Bestellen kan vanaf ${money(CONFIG.minimumOrderAmount)}.`;
-        return;
-      }
       const formData = Object.fromEntries(new FormData(form).entries());
       const date = new Date();
       const orderNumber = `ORI-${date.toISOString().slice(0, 10).replaceAll("-", "")}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
@@ -299,17 +337,50 @@
     });
   }
 
+  function initShippingBanner() {
+    const header = $(".site-header");
+    if (!header || $(".shipping-banner")) return;
+    header.insertAdjacentHTML("afterend", `<div class="shipping-banner">🚚 Gratis verzending vanaf ${money(freeShippingFrom)}</div>`);
+  }
+
+  function initCampaigns() {
+    const campaign = $("[data-vaderdag-campaign]");
+    if (!campaign) return;
+    const product = productById("vaderdag-premium-set");
+    const start = new Date(product?.campaignStart || "2026-05-22T00:00:00+02:00");
+    const end = new Date(product?.campaignEnd || "2026-06-21T23:59:59+02:00");
+    const now = new Date();
+    if (now < start || now > end || !product) {
+      campaign.hidden = true;
+      return;
+    }
+    const timer = $("[data-vaderdag-countdown]", campaign);
+    const update = () => {
+      const diff = end - new Date();
+      if (diff <= 0) {
+        campaign.hidden = true;
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      if (timer) timer.textContent = `${days} dagen ${hours} uur ${minutes} min`;
+    };
+    update();
+    window.setInterval(update, 60000);
+  }
+
   document.addEventListener("click", (event) => {
     const add = event.target.closest("[data-add-to-cart]");
-    if (add) addToCart(add.dataset.addToCart);
+    if (add) addToCart(add.dataset.addToCart, 1, add.dataset.variant || "signature");
     const plus = event.target.closest("[data-qty-plus]");
     if (plus) {
-      const line = cart().find((item) => item.id === plus.dataset.qtyPlus);
+      const line = cart().find((item) => itemKey(item) === plus.dataset.qtyPlus);
       updateQty(plus.dataset.qtyPlus, (line?.qty || 1) + 1);
     }
     const minus = event.target.closest("[data-qty-minus]");
     if (minus) {
-      const line = cart().find((item) => item.id === minus.dataset.qtyMinus);
+      const line = cart().find((item) => itemKey(item) === minus.dataset.qtyMinus);
       updateQty(minus.dataset.qtyMinus, (line?.qty || 1) - 1);
     }
     const remove = event.target.closest("[data-remove]");
@@ -328,6 +399,8 @@
   window.addEventListener("scroll", updateHeaderState, { passive: true });
 
   renderCartState();
+  initShippingBanner();
+  initCampaigns();
   renderHomeProducts();
   initMatch();
   initCatalog();
