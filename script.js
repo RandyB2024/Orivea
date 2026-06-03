@@ -94,7 +94,7 @@
     const progress = Math.min(100, Math.round((data.subtotal / freeShippingFrom) * 100));
     const notice = data.subtotal > 0 && remaining > 0 ? `Nog ${money(remaining)} voor gratis verzending` : data.subtotal > 0 ? "Gratis verzending bereikt" : `Gratis verzending vanaf ${money(freeShippingFrom)}`;
     return `<div class="totals">
-      <p class="shipping-note">🚚 Gratis verzending vanaf ${money(freeShippingFrom)}</p>
+      <p class="shipping-note">Gratis verzending vanaf ${money(freeShippingFrom)}</p>
       <div class="shipping-progress" aria-label="${notice}"><span style="width:${progress}%"></span></div>
       <p class="notice">${notice}</p>
       <div><span>Subtotaal</span><strong>${money(data.subtotal)}</strong></div>
@@ -125,7 +125,7 @@
 
   function productCard(product) {
     const ref = product.parfumReferentie ? `<p>Referentie: ${product.parfumReferentie}</p>` : "";
-    const premiumBadge = product.premiumBeschikbaar ? '<span class="premium-badge">⭐ Premium beschikbaar</span>' : "";
+    const premiumBadge = product.premiumBeschikbaar ? '<span class="premium-badge">Premium beschikbaar</span>' : "";
     const premiumPrice = product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : "";
     const benefits = product.premiumBeschikbaar && product.premiumVoordelen ? `<ul class="premium-benefits">${product.premiumVoordelen.slice(0, 4).map((item) => `<li>${item}</li>`).join("")}</ul>` : "";
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
@@ -203,7 +203,7 @@
       result.innerHTML = '<p class="notice">Geen directe match gevonden. Probeer een merknaam, geurgroep of Glantier nummer.</p>';
       return;
     }
-    result.innerHTML = matches.map((product) => `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>${product.naam}</h3>${product.premiumBeschikbaar ? '<span class="premium-badge">⭐ Premium beschikbaar</span>' : ""}<p>${product.geurgroep} · ${product.doelgroep} · ${product.inhoud}</p><p>${product.omschrijving}</p><p class="price">${money(product.prijs)}${product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : ""}</p><div class="hero-actions"><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen aan winkelwagen</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`).join("");
+    result.innerHTML = matches.map((product) => `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>${product.naam}</h3>${product.premiumBeschikbaar ? '<span class="premium-badge">Premium beschikbaar</span>' : ""}<p>${product.geurgroep} · ${product.doelgroep} · ${product.inhoud}</p><p>${product.omschrijving}</p><p class="price">${money(product.prijs)}${product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : ""}</p><div class="hero-actions"><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen aan winkelwagen</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`).join("");
   }
 
   function initMatch() {
@@ -337,12 +337,6 @@
     });
   }
 
-  function initShippingBanner() {
-    const header = $(".site-header");
-    if (!header || $(".shipping-banner")) return;
-    header.insertAdjacentHTML("afterend", `<div class="shipping-banner">🚚 Gratis verzending vanaf ${money(freeShippingFrom)}</div>`);
-  }
-
   function initCampaigns() {
     const campaign = $("[data-vaderdag-campaign]");
     if (!campaign) return;
@@ -399,7 +393,6 @@
   window.addEventListener("scroll", updateHeaderState, { passive: true });
 
   renderCartState();
-  initShippingBanner();
   initCampaigns();
   renderHomeProducts();
   initMatch();
