@@ -276,6 +276,26 @@
     });
   }
 
+  function initNewsletter() {
+    const form = $("[data-newsletter-form]");
+    if (!form) return;
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = $("[data-newsletter-status]");
+      status.textContent = "Aanmelding wordt verzonden...";
+      const payload = Object.fromEntries(new FormData(form).entries());
+      payload.message = `Nieuwe nieuwsbriefaanmelding via orivea.nl\nNaam: ${payload.name}\nE-mail: ${payload.email}`;
+      try {
+        if (!window.emailjs) throw new Error("EmailJS niet geladen");
+        await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
+        form.reset();
+        status.textContent = "Bedankt voor je aanmelding. Je ontvangt binnenkort ORIVÈA updates.";
+      } catch {
+        status.textContent = "Aanmelden lukte niet direct. Mail ons via shop@orivea.nl.";
+      }
+    });
+  }
+
   document.addEventListener("click", (event) => {
     const add = event.target.closest("[data-add-to-cart]");
     if (add) addToCart(add.dataset.addToCart);
@@ -310,4 +330,5 @@
   initCatalog();
   initCheckout();
   initContact();
+  initNewsletter();
 })();
