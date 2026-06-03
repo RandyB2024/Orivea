@@ -2802,26 +2802,6 @@ window.ORIVEA_PRODUCTS = [
     ]
   },
   {
-    "id": "auto-hanger",
-    "glantierNummer": "",
-    "naam": "Glantier Auto Geurhanger",
-    "type": "Auto geurhanger",
-    "inhoud": "1 stuk",
-    "doelgroep": "Unisex",
-    "categorie": "Geurhangers",
-    "geurgroep": "Auto - Fris",
-    "merkReferentie": "",
-    "parfumReferentie": "",
-    "premiumBeschikbaar": false,
-    "prijs": 2.5,
-    "image": "assets/images/glantier-geurstokjes.png",
-    "omschrijving": "Een professioneel geselecteerd Glantier product voor luxe geurbeleving.",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "auto geurhanger"
-    ]
-  },
-  {
     "id": "kast-hanger",
     "glantierNummer": "",
     "naam": "Glantier Kledingkast Geurhanger",
