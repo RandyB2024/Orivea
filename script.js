@@ -299,6 +299,10 @@
     if (event.target.matches("[data-cart-drawer]")) closeCart();
   });
   $(".menu-toggle")?.addEventListener("click", () => $(".main-nav")?.classList.toggle("open"));
+  const header = $(".site-header");
+  const updateHeaderState = () => header?.classList.toggle("scrolled", window.scrollY > 8);
+  updateHeaderState();
+  window.addEventListener("scroll", updateHeaderState, { passive: true });
 
   renderCartState();
   renderHomeProducts();
