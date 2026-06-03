@@ -282,16 +282,19 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const status = $("[data-newsletter-status]");
-      status.textContent = "Aanmelding wordt verzonden...";
+      const action = event.submitter?.value === "unsubscribe" ? "unsubscribe" : "subscribe";
+      const isUnsubscribe = action === "unsubscribe";
+      status.textContent = isUnsubscribe ? "Afmelding wordt verzonden..." : "Aanmelding wordt verzonden...";
       const payload = Object.fromEntries(new FormData(form).entries());
-      payload.message = `Nieuwe nieuwsbriefaanmelding via orivea.nl\nNaam: ${payload.name}\nE-mail: ${payload.email}`;
+      payload.subject = isUnsubscribe ? "Nieuwsbrief afmelding ORIVEA" : "Nieuwsbrief aanmelding ORIVEA";
+      payload.message = `${isUnsubscribe ? "Nieuwe nieuwsbriefafmelding" : "Nieuwe nieuwsbriefaanmelding"} via orivea.nl\nNaam: ${payload.name}\nE-mail: ${payload.email}`;
       try {
         if (!window.emailjs) throw new Error("EmailJS niet geladen");
         await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
         form.reset();
-        status.textContent = "Bedankt voor je aanmelding. Je ontvangt binnenkort ORIVÈA updates.";
+        status.textContent = isUnsubscribe ? "Je afmelding is ontvangen. We verwerken deze zo snel mogelijk." : "Bedankt voor je aanmelding. Je ontvangt binnenkort ORIVÈA updates.";
       } catch {
-        status.textContent = "Aanmelden lukte niet direct. Mail ons via shop@orivea.nl.";
+        status.textContent = isUnsubscribe ? "Afmelden lukte niet direct. Mail ons via shop@orivea.nl." : "Aanmelden lukte niet direct. Mail ons via shop@orivea.nl.";
       }
     });
   }
