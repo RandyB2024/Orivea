@@ -15,6 +15,14 @@
   const productById = (id) => PRODUCTS.find((product) => product.id === id);
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
   const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
+  const vaderdagScents = {
+    "717": { inspiredBy: "Acqua di Gio", image: "assets/images/orivea-vaderdag-set-717.png" },
+    "724": { inspiredBy: "Invictus", image: "assets/images/orivea-vaderdag-set-724.png" },
+    "728": { inspiredBy: "Boss Bottled", image: "assets/images/orivea-vaderdag-set-728.png" },
+    "759": { inspiredBy: "One Million", image: "assets/images/orivea-vaderdag-set-759.png" },
+    "771": { inspiredBy: "Sauvage", image: "assets/images/orivea-vaderdag-set-771.png" },
+    "782": { inspiredBy: "Bad Boy", image: "assets/images/orivea-vaderdag-set-782.png" }
+  };
 
   function shippingFor(subtotal) {
     if (!subtotal) return 0;
@@ -24,6 +32,20 @@
 
   function productVariant(product, variant = "signature") {
     if (!product) return null;
+    if (product.id === "vaderdag-premium-set") {
+      const scent = String(variant || "").replace("vaderdag-", "");
+      const selected = vaderdagScents[scent] || vaderdagScents["717"];
+      const glantier = vaderdagScents[scent] ? scent : "717";
+      return {
+        ...product,
+        naam: `${product.naam} - Glantier ${glantier}`,
+        type: "Vaderdag Premium Set",
+        inhoud: "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
+        parfumReferentie: `Geïnspireerd door ${selected.inspiredBy}`,
+        image: selected.image,
+        prijs: product.prijs
+      };
+    }
     if (variant === "discovery") {
       return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: CONFIG.pricing?.discovery15 || 5.95 };
     }
@@ -348,6 +370,25 @@
       campaign.hidden = true;
       return;
     }
+    let selectedScent = "717";
+    const image = $("[data-vaderdag-image]", campaign);
+    const photoLabel = $("[data-vaderdag-photo-label]", campaign);
+    const setSelectedScent = (scent) => {
+      selectedScent = scent;
+      $$("[data-vaderdag-scent]", campaign).forEach((card) => {
+        const active = card.dataset.vaderdagScent === scent;
+        card.classList.toggle("selected", active);
+        card.setAttribute("aria-pressed", String(active));
+      });
+      const selected = vaderdagScents[scent] || vaderdagScents["717"];
+      if (image) {
+        image.src = selected.image;
+        image.alt = `Glantier Vaderdag Premium Set ${scent}`;
+      }
+      if (photoLabel) photoLabel.textContent = `Glantier ${scent}`;
+    };
+    $$("[data-vaderdag-scent]", campaign).forEach((card) => card.addEventListener("click", () => setSelectedScent(card.dataset.vaderdagScent)));
+    $("[data-vaderdag-add]", campaign)?.addEventListener("click", () => addToCart("vaderdag-premium-set", 1, `vaderdag-${selectedScent}`));
     const timer = $("[data-vaderdag-countdown]", campaign);
     const update = () => {
       const diff = end - new Date();
@@ -356,10 +397,9 @@
         return;
       }
       const days = Math.floor(diff / 86400000);
-      const hours = Math.floor((diff % 86400000) / 3600000);
-      const minutes = Math.floor((diff % 3600000) / 60000);
-      if (timer) timer.textContent = `${days} dagen ${hours} uur ${minutes} min`;
+      if (timer) timer.textContent = `Nog ${days} dagen beschikbaar`;
     };
+    setSelectedScent(selectedScent);
     update();
     window.setInterval(update, 60000);
   }

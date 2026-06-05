@@ -6219,26 +6219,44 @@ window.ORIVEA_PRODUCTS = [
     "glantierNummer": "",
     "naam": "Vaderdag Premium Set",
     "type": "Tijdelijke campagne",
-    "inhoud": "Premium parfum 50 ml + doucheolie 400 ml + grijze cadeautas",
+    "inhoud": "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
     "doelgroep": "Heren",
     "categorie": "Vaderdag",
     "geurgroep": "Cadeau - Premium",
     "merkReferentie": "Glantier",
-    "parfumReferentie": "717, 724, 728, 759, 771, 782",
+    "parfumReferentie": "Kies Glantier 717, 724, 728, 759, 771 of 782",
     "premiumBeschikbaar": true,
     "prijs": 22.95,
-    "image": "assets/images/glantier-premium-heren-box-transparent.png",
-    "omschrijving": "Een complete premium cadeauset met parfum, doucheolie en cadeautas.",
+    "image": "assets/images/orivea-vaderdag-set-759.png",
+    "omschrijving": "Een premium Glantier cadeauset met gekozen geur, doucheolie en luxe cadeautas.",
     "moment": "Vaderdag 2026",
     "campaignStart": "2026-05-22T00:00:00+02:00",
     "campaignEnd": "2026-06-21T23:59:59+02:00",
     "variants": [
-      "717 Acqua di Gio",
-      "724 Invictus",
-      "728 Boss Bottled",
-      "759 One Million",
-      "771 Sauvage",
-      "782 Bad Boy"
+      {
+        "glantier": "717",
+        "inspiredBy": "Acqua di Gio"
+      },
+      {
+        "glantier": "724",
+        "inspiredBy": "Invictus"
+      },
+      {
+        "glantier": "728",
+        "inspiredBy": "Boss Bottled"
+      },
+      {
+        "glantier": "759",
+        "inspiredBy": "One Million"
+      },
+      {
+        "glantier": "771",
+        "inspiredBy": "Sauvage"
+      },
+      {
+        "glantier": "782",
+        "inspiredBy": "Bad Boy"
+      }
     ],
     "zoektermen": [
       "vaderdag",
@@ -6258,6 +6276,6 @@ window.ORIVEA_PRODUCTS = [
       "Doucheolie 400 ml",
       "Grijze cadeautas"
     ],
-    "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
+    "premiumImage": "assets/images/orivea-vaderdag-set-759.png"
   }
 ];
