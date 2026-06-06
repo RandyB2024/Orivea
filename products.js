@@ -7,8 +7,8 @@ window.ORIVEA_CONFIG = {
   "emailJs": {
     "serviceId": "service_r55nwxz",
     "publicKey": "w3x9SY9OqatVgYJOw",
-    "orderTemplate": "template_u5h46h4",
-    "contactTemplate": "template_ehokbkn"
+    "orderTemplate": "template_ehokbkn",
+    "contactTemplate": "template_u5h46h4"
   },
   "shippingRules": [
     {
