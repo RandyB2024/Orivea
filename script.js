@@ -2,6 +2,8 @@
   const CONFIG = window.ORIVEA_CONFIG || {};
   const PRODUCTS = window.ORIVEA_PRODUCTS || [];
   const CART_KEY = "orivea_glantier_cart";
+  const ORDERS_KEY = "orivea_orders";
+  const LAST_ORDER_KEY = "orivea_last_order";
   const currency = new Intl.NumberFormat("nl-NL", { style: "currency", currency: CONFIG.currency || "EUR" });
 
   if (window.emailjs && CONFIG.emailJs?.publicKey) {
@@ -41,7 +43,7 @@
         naam: `${product.naam} - Glantier ${glantier}`,
         type: "Vaderdag Premium Set",
         inhoud: "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
-        parfumReferentie: `Geïnspireerd door ${selected.inspiredBy}`,
+        parfumReferentie: `Geïnspireerd door de geurbeleving van ${selected.inspiredBy}`,
         image: selected.image,
         prijs: product.prijs
       };
@@ -146,23 +148,33 @@
   }
 
   function productCard(product) {
-    const ref = product.parfumReferentie ? `<p>Referentie: ${product.parfumReferentie}</p>` : "";
-    const premiumBadge = product.premiumBeschikbaar ? '<span class="premium-badge">Premium beschikbaar</span>' : "";
-    const premiumPrice = product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : "";
-    const benefits = product.premiumBeschikbaar && product.premiumVoordelen ? `<ul class="premium-benefits">${product.premiumVoordelen.slice(0, 4).map((item) => `<li>${item}</li>`).join("")}</ul>` : "";
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
+    const reference = product.parfumReferentie ? `<p class="product-reference">Geïnspireerd door de geurbeleving van ${product.parfumReferentie}</p>` : "";
+    const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " • ") : "";
+    const title = product.glantierNummer ? `GLANTIER ${product.glantierNummer}` : product.naam;
+    const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : "";
+    const variantSelector = isFragrance ? `<div class="variant-selector" data-card-variants>
+          <button class="variant-option" type="button" data-card-variant="discovery">15 ml <span>${money(CONFIG.pricing?.discovery15 || 5.95)}</span></button>
+          <button class="variant-option selected" type="button" data-card-variant="signature">50 ml <span>${money(product.prijs)}</span></button>
+          ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95)}</span></button>` : ""}
+        </div>` : "";
     const actions = product.id === "vaderdag-premium-set"
       ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Bestel Vaderdag Set</button>`
-      : !isFragrance
-        ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen</button>`
-      : `<button class="button ghost" type="button" data-add-to-cart="${product.id}" data-variant="discovery">15 ml ${money(CONFIG.pricing?.discovery15 || 5.95)}</button><button class="button primary" type="button" data-add-to-cart="${product.id}" data-variant="signature">50 ml ${money(product.prijs)}</button>${product.premiumBeschikbaar ? `<button class="button primary premium-action" type="button" data-add-to-cart="${product.id}" data-variant="premium">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95)}</button>` : ""}`;
-    return `<article class="product-card ${product.premiumBeschikbaar ? "premium-available" : ""}">
+      : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary" type="button" data-card-add="${product.id}">Toevoegen aan winkelwagen</button></div>`;
+    return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
       <img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy">
       <div class="product-body">
-        <span class="product-meta">${product.glantierNummer ? `Glantier ${product.glantierNummer}` : product.categorie}</span>${premiumBadge}
-        <h3>${product.naam}</h3>
-        <p>${product.geurgroep}</p>${ref}${benefits}
-        <div class="product-footer product-actions"><span class="price">${money(product.prijs)}${premiumPrice}</span><div class="variant-actions">${actions}</div></div>
+        <span class="product-meta">${product.categorie}</span>
+        <h3>${title}</h3>
+        ${reference}
+        <p class="scent-group">${scentGroup}</p>
+        <p class="product-short">${product.omschrijving}</p>
+        <div class="product-purchase">
+          <span class="price">Vanaf ${isFragrance ? money(product.prijs) : money(product.prijs)}</span>
+          ${variantSelector}
+          ${premiumInfo}
+          ${actions}
+        </div>
       </div>
     </article>`;
   }
@@ -225,7 +237,11 @@
       result.innerHTML = '<p class="notice">Geen directe match gevonden. Probeer een merknaam, geurgroep of Glantier nummer.</p>';
       return;
     }
-    result.innerHTML = matches.map((product) => `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>${product.naam}</h3>${product.premiumBeschikbaar ? '<span class="premium-badge">Premium beschikbaar</span>' : ""}<p>${product.geurgroep} · ${product.doelgroep} · ${product.inhoud}</p><p>${product.omschrijving}</p><p class="price">${money(product.prijs)}${product.premiumBeschikbaar ? `<span class="premium-price">Premium ${money(product.premiumPrijs || CONFIG.pricing?.premium50 || product.prijs)}</span>` : ""}</p><div class="hero-actions"><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen aan winkelwagen</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`).join("");
+    result.innerHTML = matches.map((product) => {
+      const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " ? ") : "";
+      const reference = product.parfumReferentie ? `<p>Geïnspireerd door de geurbeleving van ${product.parfumReferentie}</p>` : "";
+      return `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>GLANTIER ${product.glantierNummer || product.id}</h3>${reference}<p>${scentGroup} • ${product.doelgroep}</p><p>${product.omschrijving}</p><p class="price">Vanaf ${money(product.prijs)}</p><div class="hero-actions"><button class="button primary" type="button" data-add-to-cart="${product.id}">Toevoegen aan winkelwagen</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`;
+    }).join("");
   }
 
   function initMatch() {
@@ -278,43 +294,183 @@
     render();
   }
 
+
+  function generateOrderNumber() {
+    const date = new Date();
+    return `ORI-${date.toISOString().slice(0, 10).replaceAll("-", "")}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
+  }
+
+  function formatOrderLines(data) {
+    return data.lines.map((line) => `${line.qty}x ${line.product.naam} (${line.product.type}, ${line.product.inhoud}) - ${money(line.product.prijs * line.qty)}`).join("\n");
+  }
+
+  function checkoutFormData(form) {
+    const formData = Object.fromEntries(new FormData(form).entries());
+    return {
+      ...formData,
+      customer_address: ((formData.street || "") + " " + (formData.house_number || "") + ", " + (formData.postal_code || "") + " " + (formData.city || "")).trim()
+    };
+  }
+
+  function buildOrderPayload(form, paypal) {
+    const data = totals();
+    const formData = checkoutFormData(form);
+    const orderNumber = generateOrderNumber();
+    return {
+      order_number: orderNumber,
+      customer_name: formData.customer_name || "",
+      customer_email: formData.customer_email || "",
+      customer_phone: formData.customer_phone || "",
+      customer_address: formData.customer_address,
+      order_date: new Date().toLocaleString("nl-NL"),
+      order_items: formatOrderLines(data),
+      subtotal: money(data.subtotal),
+      shipping_cost: data.shipping === 0 ? "Gratis" : money(data.shipping),
+      total: money(data.total),
+      paypal_transaction_id: paypal?.transactionId || "",
+      payment_status: paypal?.paymentStatus || "COMPLETED",
+      note: formData.note || ""
+    };
+  }
+
+  function storeOrder(payload) {
+    const stored = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
+    stored.push(payload);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(stored.slice(-50)));
+    localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(payload));
+  }
+
+  function loadPayPalSdk() {
+    if (window.paypal) return Promise.resolve(window.paypal);
+    const clientId = CONFIG.paypalClientId || "";
+    if (!clientId) return Promise.reject(new Error("PayPal Client ID ontbreekt"));
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector("script[data-paypal-sdk]");
+      if (existing) {
+        existing.addEventListener("load", () => resolve(window.paypal));
+        existing.addEventListener("error", reject);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
+      script.dataset.paypalSdk = "true";
+      script.onload = () => resolve(window.paypal);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  function sendOrderConfirmation(payload) {
+    if (!window.emailjs) return Promise.reject(new Error("EmailJS niet geladen"));
+    return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.orderTemplate, payload);
+  }
+
+  function openPremiumModal(product) {
+    if (!product) return;
+    document.querySelector("[data-premium-modal]")?.remove();
+    const modal = document.createElement("div");
+    modal.className = "premium-modal";
+    modal.dataset.premiumModal = "true";
+    modal.innerHTML = `<div class="premium-modal-panel" role="dialog" aria-modal="true" aria-label="Premium uitvoering"><button class="drawer-close" type="button" data-premium-close>Sluiten</button><div><p class="eyebrow">Premium</p><h2>Premium uitvoering</h2><ul><li>22% parfumolie</li><li>Luxe premium flacon</li><li>Luxe verpakking</li><li>Langere geurbeleving</li></ul></div><img src="${product.premiumImage || product.image}" alt="Glantier Premium ${product.glantierNummer || ""}"></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal || event.target.closest("[data-premium-close]")) modal.remove();
+    });
+  }
+
   function initCheckout() {
     const form = $("[data-checkout-form]");
     if (!form) return;
     let step = 1;
+    let paypalRendered = false;
+    const status = $("[data-paypal-status]");
+    const orderStatus = $("[data-order-status]");
+    const successPanel = $("[data-order-success]");
+
     const showStep = (next) => {
       step = Math.min(5, Math.max(1, next));
-      $$("[data-step]").forEach((el) => el.classList.toggle("active", Number(el.dataset.step) === step));
-      $$("[data-step-tab]").forEach((el) => el.classList.toggle("active", Number(el.dataset.stepTab) === step));
+      $$('[data-step]').forEach((el) => el.classList.toggle('active', Number(el.dataset.step) === step));
+      $$('[data-step-tab]').forEach((el) => el.classList.toggle('active', Number(el.dataset.stepTab) === step));
       renderCartState();
+      if (step === 4) renderPayPalButtons();
     };
-    $$("[data-next-step]").forEach((button) => button.addEventListener("click", () => showStep(step + 1)));
-    $$("[data-prev-step]").forEach((button) => button.addEventListener("click", () => showStep(step - 1)));
-    $$("[data-step-tab]").forEach((button) => button.addEventListener("click", () => showStep(Number(button.dataset.stepTab))));
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const status = $("[data-order-status]");
+
+    const validateVisibleStep = () => {
+      const current = $(`[data-step="${step}"]`, form);
+      const fields = current ? $$('input, textarea, select', current) : [];
+      for (const field of fields) {
+        if (!field.checkValidity()) {
+          field.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    };
+
+    const validateCheckout = () => {
       const data = totals();
       if (!data.lines.length) {
-        status.textContent = "Je winkelwagen is nog leeg.";
-        return;
+        if (status) status.textContent = 'Je winkelwagen is nog leeg.';
+        return false;
       }
-      const formData = Object.fromEntries(new FormData(form).entries());
-      const date = new Date();
-      const orderNumber = `ORI-${date.toISOString().slice(0, 10).replaceAll("-", "")}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
-      const orderLines = data.lines.map((line) => `${line.qty}x ${line.product.naam} (${line.product.type}, ${line.product.inhoud}) - ${money(line.product.prijs * line.qty)}`).join("\n");
-      const payload = { ...formData, order_number: orderNumber, customer_address: `${formData.street} ${formData.house_number}, ${formData.postal_code} ${formData.city}`, products: orderLines, subtotal: money(data.subtotal), shipping: money(data.shipping), total: money(data.total), order_date: date.toLocaleString("nl-NL"), contact_email: CONFIG.contactEmail };
-      status.textContent = "Bestelling wordt verzonden...";
+      if (!form.reportValidity()) return false;
+      return true;
+    };
+
+    const renderPayPalButtons = async () => {
+      const target = $('[data-paypal-buttons]');
+      if (!target || paypalRendered) return;
       try {
-        if (!window.emailjs) throw new Error("EmailJS niet geladen");
-        await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.orderTemplate, payload);
-        localStorage.removeItem(CART_KEY);
-        renderCartState();
-        status.textContent = `Bedankt voor je bestelling. Je ordernummer is ${orderNumber}. We nemen zo snel mogelijk contact met je op via ${CONFIG.contactEmail}.`;
+        const paypal = await loadPayPalSdk();
+        paypalRendered = true;
+        if (status) status.textContent = '';
+        paypal.Buttons({
+          style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+          createOrder: (_data, actions) => {
+            if (!validateCheckout()) return Promise.reject(new Error('Checkout niet compleet'));
+            const data = totals();
+            return actions.order.create({
+              purchase_units: [{
+                description: 'ORIVÈA Glantier bestelling',
+                amount: { currency_code: CONFIG.paypalCurrency || CONFIG.currency || 'EUR', value: data.total.toFixed(2) }
+              }]
+            });
+          },
+          onApprove: async (data, actions) => {
+            if (status) status.textContent = 'Betaling wordt bevestigd...';
+            const details = await actions.order.capture();
+            const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
+            const payload = buildOrderPayload(form, {
+              transactionId: capture?.id || data.orderID || details?.id || '',
+              paymentStatus: capture?.status || details?.status || 'COMPLETED'
+            });
+            storeOrder(payload);
+            try {
+              await sendOrderConfirmation(payload);
+              localStorage.removeItem(CART_KEY);
+              renderCartState();
+              if (successPanel) successPanel.hidden = false;
+              if (orderStatus) orderStatus.textContent = `Order ${payload.order_number} is bevestigd. Je ontvangt de orderbevestiging per e-mail.`;
+              showStep(5);
+            } catch {
+              if (status) status.textContent = 'Betaling ontvangen, maar de bevestigingsmail kon niet direct worden verzonden. Neem contact op via shop@orivea.nl met je PayPal transactienummer.';
+            }
+          },
+          onError: () => {
+            if (status) status.textContent = 'PayPal kon de betaling niet starten. Controleer je gegevens en probeer opnieuw.';
+          }
+        }).render(target);
       } catch {
-        status.textContent = "Verzenden lukte niet direct. Mail je bestelling naar shop@orivea.nl, dan helpen we je verder.";
+        if (status) status.textContent = 'PayPal kan nog niet laden. Controleer de PayPal Client ID in de configuratie.';
       }
-    });
+    };
+
+    $$('[data-next-step]').forEach((button) => button.addEventListener('click', () => {
+      if (validateVisibleStep()) showStep(step + 1);
+    }));
+    $$('[data-prev-step]').forEach((button) => button.addEventListener('click', () => showStep(step - 1)));
+    $$('[data-step-tab]').forEach((button) => button.addEventListener('click', () => showStep(Number(button.dataset.stepTab))));
+    form.addEventListener('submit', (event) => event.preventDefault());
   }
 
   function initContact() {
@@ -324,7 +480,16 @@
       event.preventDefault();
       const status = $("[data-contact-status]");
       status.textContent = "Bericht wordt verzonden...";
-      const payload = Object.fromEntries(new FormData(form).entries());
+      const raw = Object.fromEntries(new FormData(form).entries());
+      const payload = {
+        name: raw.name || "",
+        email: raw.email || "",
+        subject: "Contactaanvraag",
+        message: raw.message || "",
+        email_subject: "Bedankt voor je bericht | ORIVÈA",
+        message_type: "Contactaanvraag ontvangen",
+        message_body: "Bedankt voor je bericht. Ons team bekijkt je aanvraag zo snel mogelijk en neemt indien nodig contact met je op."
+      };
       try {
         if (!window.emailjs) throw new Error("EmailJS niet geladen");
         await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
@@ -345,14 +510,21 @@
       const action = event.submitter?.value === "unsubscribe" ? "unsubscribe" : "subscribe";
       const isUnsubscribe = action === "unsubscribe";
       status.textContent = isUnsubscribe ? "Afmelding wordt verzonden..." : "Aanmelding wordt verzonden...";
-      const payload = Object.fromEntries(new FormData(form).entries());
-      payload.subject = isUnsubscribe ? "Nieuwsbrief afmelding ORIVEA" : "Nieuwsbrief aanmelding ORIVEA";
-      payload.message = `${isUnsubscribe ? "Nieuwe nieuwsbriefafmelding" : "Nieuwe nieuwsbriefaanmelding"} via orivea.nl\nNaam: ${payload.name}\nE-mail: ${payload.email}`;
+      const raw = Object.fromEntries(new FormData(form).entries());
+      const payload = {
+        name: raw.name || "",
+        email: raw.email || "",
+        subject: isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding",
+        message: (isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding") + " via orivea.nl\nNaam: " + (raw.name || "") + "\nE-mail: " + (raw.email || ""),
+        email_subject: isUnsubscribe ? "Je nieuwsbriefvoorkeur is bijgewerkt | ORIVÈA" : "Welkom bij ORIVÈA ✨",
+        message_type: isUnsubscribe ? "Nieuwsbrief afmelding bevestigd" : "Nieuwsbrief aanmelding bevestigd",
+        message_body: isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief. Je ontvangt als eerste nieuws over nieuwe collecties, exclusieve acties en premium geuren."
+      };
       try {
         if (!window.emailjs) throw new Error("EmailJS niet geladen");
         await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
         form.reset();
-        status.textContent = isUnsubscribe ? "Je afmelding is ontvangen. We verwerken deze zo snel mogelijk." : "Bedankt voor je aanmelding. Je ontvangt binnenkort ORIVÈA updates.";
+        status.textContent = isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief.";
       } catch {
         status.textContent = isUnsubscribe ? "Afmelden lukte niet direct. Mail ons via shop@orivea.nl." : "Aanmelden lukte niet direct. Mail ons via shop@orivea.nl.";
       }
@@ -405,6 +577,30 @@
   }
 
   document.addEventListener("click", (event) => {
+    const variantChoice = event.target.closest("[data-card-variant]");
+    if (variantChoice) {
+      const card = variantChoice.closest("[data-product-card]");
+      $$("[data-card-variant]", card).forEach((button) => button.classList.toggle("selected", button === variantChoice));
+    }
+    const cardQtyPlus = event.target.closest("[data-card-qty-plus]");
+    if (cardQtyPlus) {
+      const input = $("[data-card-qty]", cardQtyPlus.closest("[data-product-card]"));
+      if (input) input.value = String(Math.max(1, Number(input.value || 1) + 1));
+    }
+    const cardQtyMinus = event.target.closest("[data-card-qty-minus]");
+    if (cardQtyMinus) {
+      const input = $("[data-card-qty]", cardQtyMinus.closest("[data-product-card]"));
+      if (input) input.value = String(Math.max(1, Number(input.value || 1) - 1));
+    }
+    const cardAdd = event.target.closest("[data-card-add]");
+    if (cardAdd) {
+      const card = cardAdd.closest("[data-product-card]");
+      const variant = $("[data-card-variant].selected", card)?.dataset.cardVariant || "signature";
+      const qty = Math.max(1, Number($("[data-card-qty]", card)?.value || 1));
+      addToCart(cardAdd.dataset.cardAdd, qty, variant);
+    }
+    const premiumInfo = event.target.closest("[data-premium-info]");
+    if (premiumInfo) openPremiumModal(productById(premiumInfo.dataset.premiumInfo));
     const add = event.target.closest("[data-add-to-cart]");
     if (add) addToCart(add.dataset.addToCart, 1, add.dataset.variant || "signature");
     const plus = event.target.closest("[data-qty-plus]");

@@ -2,13 +2,15 @@ window.ORIVEA_CONFIG = {
   "brand": "ORIVÈA",
   "domain": "https://orivea.nl",
   "contactEmail": "shop@orivea.nl",
-  "paymentEnabled": false,
+  "paymentEnabled": true,
+  "paypalClientId": "",
+  "paypalCurrency": "EUR",
   "currency": "EUR",
   "emailJs": {
     "serviceId": "service_r55nwxz",
     "publicKey": "w3x9SY9OqatVgYJOw",
-    "orderTemplate": "template_u5h46h4",
-    "contactTemplate": "template_ehokbkn"
+    "orderTemplate": "template_ehokbkn",
+    "contactTemplate": "template_u5h46h4"
   },
   "shippingRules": [
     {
@@ -65,12 +67,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -126,12 +122,6 @@ window.ORIVEA_PRODUCTS = [
       "thierry mugler"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -162,12 +152,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -247,12 +231,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -332,12 +310,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -368,12 +340,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -404,12 +370,6 @@ window.ORIVEA_PRODUCTS = [
       "versace"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -515,12 +475,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -583,7 +537,7 @@ window.ORIVEA_PRODUCTS = [
     "categorie": "Dames",
     "geurgroep": "Floraal - Aldehyde - Citrus",
     "merkReferentie": "Chanel",
-    "parfumReferentie": "Chanel N?5",
+    "parfumReferentie": "Chanel No. 5",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-lifestyle.jpg",
@@ -592,7 +546,7 @@ window.ORIVEA_PRODUCTS = [
     "zoektermen": [
       "458",
       "chanel",
-      "chanel n?5",
+      "chanel no. 5",
       "dames",
       "floraal - aldehyde - citrus",
       "fris"
@@ -626,12 +580,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -662,12 +610,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -772,12 +714,6 @@ window.ORIVEA_PRODUCTS = [
       "zoet"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -908,12 +844,6 @@ window.ORIVEA_PRODUCTS = [
       "versace"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -969,12 +899,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1005,12 +929,6 @@ window.ORIVEA_PRODUCTS = [
       "si"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1041,12 +959,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1197,12 +1109,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1354,12 +1260,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1414,12 +1314,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1669,12 +1563,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1777,12 +1665,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1838,12 +1720,6 @@ window.ORIVEA_PRODUCTS = [
       "versense"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -1898,12 +1774,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2030,12 +1900,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2186,12 +2050,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2222,12 +2080,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2306,12 +2158,6 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2390,12 +2236,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2426,12 +2266,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2462,12 +2296,6 @@ window.ORIVEA_PRODUCTS = [
       "zoet"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2498,12 +2326,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2559,12 +2381,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2595,12 +2411,6 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2631,12 +2441,6 @@ window.ORIVEA_PRODUCTS = [
       "scandal"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2667,12 +2471,6 @@ window.ORIVEA_PRODUCTS = [
       "si passione"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2703,12 +2501,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2739,12 +2531,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2775,12 +2561,6 @@ window.ORIVEA_PRODUCTS = [
       "pure xs for her"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2811,12 +2591,6 @@ window.ORIVEA_PRODUCTS = [
       "zoet"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2847,12 +2621,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -2958,12 +2726,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3019,12 +2781,6 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3080,12 +2836,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3116,12 +2866,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3152,12 +2896,6 @@ window.ORIVEA_PRODUCTS = [
       "thierry mugler"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3188,12 +2926,6 @@ window.ORIVEA_PRODUCTS = [
       "si intense"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3224,12 +2956,6 @@ window.ORIVEA_PRODUCTS = [
       "very good girl"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3260,12 +2986,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3296,12 +3016,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3332,12 +3046,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3368,12 +3076,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3404,12 +3106,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3490,12 +3186,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3526,12 +3216,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3562,12 +3246,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3598,12 +3276,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3684,12 +3356,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -3845,12 +3511,6 @@ window.ORIVEA_PRODUCTS = [
       "valentino"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
   },
   {
@@ -4003,12 +3663,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4039,12 +3693,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4292,12 +3940,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4328,12 +3970,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4486,12 +4122,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4594,12 +4224,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4849,12 +4473,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -4933,12 +4551,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5043,12 +4655,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5104,12 +4710,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5190,12 +4790,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5227,12 +4821,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5313,12 +4901,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5349,12 +4931,6 @@ window.ORIVEA_PRODUCTS = [
       "sauvage 2015"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5371,12 +4947,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "image": "assets/images/glantier-premium-heren-box-transparent.png",
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png",
     "omschrijving": "Een verfijnd aromatisch, varen geurprofiel met een luxe, draagbare uitstraling.",
@@ -5421,12 +4991,6 @@ window.ORIVEA_PRODUCTS = [
       "stronger with you"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5457,12 +5021,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5504,12 +5062,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "image": "assets/images/glantier-premium-heren-box-transparent.png",
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png",
     "omschrijving": "Een verfijnd oriëntaals, kruidig geurprofiel met een luxe, draagbare uitstraling.",
@@ -5553,12 +5105,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5589,12 +5135,6 @@ window.ORIVEA_PRODUCTS = [
       "stronger with you intensely"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5625,12 +5165,6 @@ window.ORIVEA_PRODUCTS = [
       "tom ford"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5661,12 +5195,6 @@ window.ORIVEA_PRODUCTS = [
       "sauvage elixir"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5708,12 +5236,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "image": "assets/images/glantier-premium-heren-box-transparent.png",
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png",
     "omschrijving": "Een verfijnd amber geurprofiel met een luxe, draagbare uitstraling.",
@@ -5783,12 +5305,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5819,12 +5335,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5855,12 +5365,6 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -5991,12 +5495,6 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumVoordelen": [
-      "22% parfumconcentraat",
-      "Luxe flacon",
-      "Luxe verpakking",
-      "Langere geurbeleving"
-    ],
     "premiumImage": "assets/images/glantier-premium-heren-box-transparent.png"
   },
   {
@@ -6271,11 +5769,6 @@ window.ORIVEA_PRODUCTS = [
       "782"
     ],
     "premiumPrijs": 22.95,
-    "premiumVoordelen": [
-      "Premium Parfum 50 ml",
-      "Doucheolie 400 ml",
-      "Grijze cadeautas"
-    ],
     "premiumImage": "assets/images/orivea-vaderdag-set-759.png"
   }
 ];
