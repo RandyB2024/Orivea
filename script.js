@@ -350,15 +350,15 @@
     return new Promise((resolve, reject) => {
       const existing = document.querySelector("script[data-paypal-sdk]");
       if (existing) {
-        existing.addEventListener("load", () => resolve(window.paypal));
+        existing.addEventListener("load", () => window.paypal ? resolve(window.paypal) : reject(new Error("PayPal SDK niet beschikbaar na laden")));
         existing.addEventListener("error", reject);
         return;
       }
       const script = document.createElement("script");
       script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
       script.dataset.paypalSdk = "true";
-      script.onload = () => resolve(window.paypal);
-      script.onerror = reject;
+      script.onload = () => window.paypal ? resolve(window.paypal) : reject(new Error("PayPal SDK niet beschikbaar na laden"));
+      script.onerror = () => reject(new Error("PayPal SDK kon niet laden"));
       document.head.appendChild(script);
     });
   }
@@ -463,8 +463,9 @@
             if (status) status.textContent = 'PayPal kon de betaling niet starten. Controleer je gegevens en probeer opnieuw.';
           }
         }).render(target);
-      } catch {
-        if (status) status.textContent = 'PayPal kan nog niet laden. Controleer de PayPal Client ID in de configuratie.';
+      } catch (error) {
+        console.warn("PayPal kon niet laden", error);
+        if (status) status.textContent = 'PayPal is tijdelijk niet beschikbaar. Neem contact op via shop@orivea.nl om je bestelling af te ronden.';
       }
     };
 
