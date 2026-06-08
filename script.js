@@ -173,6 +173,7 @@
         ${reference}
         <p class="scent-group">${scentGroup}</p>
         <p class="product-short">${product.omschrijving}</p>
+        <p class="sample-mini">Gratis ORIV&egrave;A Discovery Sample bij iedere bestelling.</p>
         <div class="product-purchase">
           ${variantSelector}
           ${premiumInfo}
