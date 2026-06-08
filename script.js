@@ -174,7 +174,6 @@
         <p class="scent-group">${scentGroup}</p>
         <p class="product-short">${product.omschrijving}</p>
         <div class="product-purchase">
-          <span class="price">Vanaf ${isFragrance ? money(product.prijs) : money(product.prijs)}</span>
           ${variantSelector}
           ${premiumInfo}
           ${actions}
