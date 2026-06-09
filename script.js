@@ -54,6 +54,11 @@
     if (variant === "premium" && product.premiumBeschikbaar) {
       return { ...product, naam: `${product.naam} Premium 50 ml`, type: "Premium", inhoud: "50 ml", prijs: product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95, image: product.premiumImage || product.image };
     }
+    if ((String(variant || "").startsWith("geur-") || product.geurKeuzes?.length) && product.geurKeuzes?.length) {
+      const number = String(variant || "").startsWith("geur-") ? String(variant).replace("geur-", "") : product.geurKeuzes[0].nummer;
+      const choice = product.geurKeuzes.find((item) => item.nummer === number) || product.geurKeuzes[0];
+      return { ...product, naam: `${product.naam} - ${choice.naam}`, type: product.type, inhoud: `${product.inhoud} - ${choice.geurgroep}`, prijs: product.prijs };
+    }
     return { ...product, type: product.id === "vaderdag-premium-set" ? product.type : "Signature EDP", inhoud: product.inhoud || "50 ml", prijs: product.prijs };
   }
 
@@ -157,11 +162,13 @@
     const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " • ") : "";
     const title = product.glantierNummer ? `GLANTIER ${product.glantierNummer}` : product.naam;
     const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : "";
+    const choiceSelector = product.geurKeuzes?.length ? `<label class="choice-selector">Kies je geur<select data-card-choice>${product.geurKeuzes.map((choice) => `<option value="geur-${choice.nummer}">${choice.naam} - ${choice.geurgroep}</option>`).join("")}</select></label>` : "";
     const variantSelector = isFragrance ? `<div class="variant-selector" data-card-variants>
           <button class="variant-option" type="button" data-card-variant="discovery">15 ml <span>${money(CONFIG.pricing?.discovery15 || 5.95)}</span></button>
           <button class="variant-option selected" type="button" data-card-variant="signature">50 ml <span>${money(product.prijs)}</span></button>
           ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95)}</span></button>` : ""}
         </div>` : "";
+    const priceLine = isFragrance ? "" : `<p class="price product-price">${money(product.prijs)}</p>`;
     const actions = product.id === "vaderdag-premium-set"
       ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Bestel Vaderdag Set</button>`
       : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
@@ -173,8 +180,10 @@
         ${reference}
         <p class="scent-group">${scentGroup}</p>
         <p class="product-short">${product.omschrijving}</p>
+        ${priceLine}
         <p class="sample-mini">Gratis ORIV&Eacute;A Discovery Sample bij iedere bestelling.</p>
         <div class="product-purchase">
+          ${choiceSelector}
           ${variantSelector}
           ${premiumInfo}
           ${actions}
@@ -600,7 +609,7 @@
     const cardAdd = event.target.closest("[data-card-add]");
     if (cardAdd) {
       const card = cardAdd.closest("[data-product-card]");
-      const variant = $("[data-card-variant].selected", card)?.dataset.cardVariant || "signature";
+      const variant = $("[data-card-choice]", card)?.value || $("[data-card-variant].selected", card)?.dataset.cardVariant || "signature";
       const qty = Math.max(1, Number($("[data-card-qty]", card)?.value || 1));
       addToCart(cardAdd.dataset.cardAdd, qty, variant);
     }

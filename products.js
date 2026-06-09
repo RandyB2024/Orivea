@@ -5607,6 +5607,23 @@ window.ORIVEA_PRODUCTS = [
     "image": "assets/images/glantier-geurstokjes-500.jpg",
     "omschrijving": "Elegante Glantier geurstokjes voor een verfijnde geurbeleving in huis. Verkrijgbaar in 500 met zwarte bes, roos en vanille, 585 met jasmijn, tuberoos en vanille, en 596 met mango, jasmijn en musk.",
     "moment": "Woonkamer, slaapkamer of kantoor",
+    "geurKeuzes": [
+      {
+        "nummer": "500",
+        "naam": "Glantier 500",
+        "geurgroep": "Chypre en Fruitig"
+      },
+      {
+        "nummer": "585",
+        "naam": "Glantier 585",
+        "geurgroep": "Floraal"
+      },
+      {
+        "nummer": "596",
+        "naam": "Glantier 596",
+        "geurgroep": "Floraal en Musk"
+      }
+    ],
     "zoektermen": [
       "geurstokjes",
       "interieur",
