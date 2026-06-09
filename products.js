@@ -5577,12 +5577,18 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "",
     "premiumBeschikbaar": false,
     "prijs": 22,
-    "image": "assets/images/glantier-box-dames.png",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
+    "image": "assets/images/glantier-parfum-box-5x15.jpg",
+    "omschrijving": "Een luxe discovery box met vijf zorgvuldig geselecteerde Glantier bestsellers van 15 ml. Compact, elegant en ideaal om cadeau te geven of je favoriete geuren overal mee naartoe te nemen.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "box",
-      "cadeau"
+      "cadeau",
+      "discovery",
+      "500",
+      "507",
+      "548",
+      "553",
+      "585"
     ]
   },
   {
