@@ -275,7 +275,7 @@
   function initCatalog() {
     const grid = $("[data-catalog-grid]");
     if (!grid) return;
-    const filters = ["Dames", "Heren", "Unisex", "Premium", "15 ml", "Boxen", "Geurstokjes", "Geurhangers", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
+    const filters = ["Dames", "Heren", "Unisex", "Premium", "15 ml", "Bodymist", "Boxen", "Geurstokjes", "Geurhangers", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
     let active = new URLSearchParams(location.search).get("filter") || "";
     if (filterList) filterList.innerHTML = filters.map((filter) => `<button type="button" data-filter="${filter}" class="${normalize(filter) === normalize(active) ? "active" : ""}">${filter}</button>`).join("");
