@@ -5592,45 +5592,31 @@ window.ORIVEA_PRODUCTS = [
     ]
   },
   {
-    "id": "box-8-50",
-    "glantierNummer": "",
-    "naam": "Glantier Parfum Box 8 ml + 50 ml",
-    "type": "Parfum box",
-    "inhoud": "8 ml + 50 ml",
-    "doelgroep": "Unisex",
-    "categorie": "Boxen",
-    "geurgroep": "Cadeau - Luxe",
-    "merkReferentie": "",
-    "parfumReferentie": "",
-    "premiumBeschikbaar": false,
-    "prijs": 24,
-    "image": "assets/images/glantier-box-dames.png",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "box",
-      "cadeau"
-    ]
-  },
-  {
     "id": "geurstokjes-100",
     "glantierNummer": "",
-    "naam": "Glantier Geurstokjes",
+    "naam": "Glantier Geurstokjes 100 ml",
     "type": "Geurstokjes",
     "inhoud": "100 ml",
     "doelgroep": "Unisex",
     "categorie": "Geurstokjes",
-    "geurgroep": "Interieur - Zacht",
+    "geurgroep": "500 Chypre & Fruitig • 585 Floraal • 596 Floraal & Musk",
     "merkReferentie": "",
     "parfumReferentie": "",
     "premiumBeschikbaar": false,
-    "prijs": 14,
-    "image": "assets/images/glantier-geurstokjes.png",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
-    "moment": "Dagelijks gebruik",
+    "prijs": 13.95,
+    "image": "assets/images/glantier-geurstokjes-500.jpg",
+    "omschrijving": "Elegante Glantier geurstokjes voor een verfijnde geurbeleving in huis. Verkrijgbaar in 500 met zwarte bes, roos en vanille, 585 met jasmijn, tuberoos en vanille, en 596 met mango, jasmijn en musk.",
+    "moment": "Woonkamer, slaapkamer of kantoor",
     "zoektermen": [
       "geurstokjes",
-      "interieur"
+      "interieur",
+      "500",
+      "585",
+      "596",
+      "chypre",
+      "fruitig",
+      "floraal",
+      "musk"
     ]
   },
   {
