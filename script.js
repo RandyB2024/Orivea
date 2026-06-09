@@ -49,7 +49,7 @@
       };
     }
     if (variant === "discovery") {
-      return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: CONFIG.pricing?.discovery15 || 5.95 };
+      return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: CONFIG.pricing?.discovery15 || 5.95, image: "assets/images/orivea-discovery-sample-transparent.png" };
     }
     if (variant === "premium" && product.premiumBeschikbaar) {
       return { ...product, naam: `${product.naam} Premium 50 ml`, type: "Premium", inhoud: "50 ml", prijs: product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95, image: product.premiumImage || product.image };
@@ -200,7 +200,7 @@
         items = PRODUCTS.filter((product) => product.zoektermen?.some((term) => ["bestseller", "sauvage", "one million", "good girl", "black opium", "coco mademoiselle"].includes(term))).slice(0, 8);
       }
       if (type === "gifts") {
-        items = PRODUCTS.filter((product) => ["Boxen", "Geurstokjes", "Geurhangers", "15 ml", "Bodymist"].includes(product.categorie)).slice(0, 4);
+        items = PRODUCTS.filter((product) => ["Boxen", "Geurstokjes", "Bodymist"].includes(product.categorie)).slice(0, 4);
       }
       target.innerHTML = items.map(productCard).join("");
     });
@@ -275,7 +275,7 @@
   function initCatalog() {
     const grid = $("[data-catalog-grid]");
     if (!grid) return;
-    const filters = ["Dames", "Heren", "Unisex", "Premium", "15 ml", "Bodymist", "Boxen", "Geurstokjes", "Geurhangers", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
+    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
     let active = new URLSearchParams(location.search).get("filter") || "";
     if (filterList) filterList.innerHTML = filters.map((filter) => `<button type="button" data-filter="${filter}" class="${normalize(filter) === normalize(active) ? "active" : ""}">${filter}</button>`).join("");

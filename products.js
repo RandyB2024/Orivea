@@ -5637,26 +5637,6 @@ window.ORIVEA_PRODUCTS = [
     ]
   },
   {
-    "id": "kast-hanger",
-    "glantierNummer": "",
-    "naam": "Glantier Kledingkast Geurhanger",
-    "type": "Kledingkast geurhanger",
-    "inhoud": "1 stuk",
-    "doelgroep": "Unisex",
-    "categorie": "Geurhangers",
-    "geurgroep": "Textiel - Fris",
-    "merkReferentie": "",
-    "parfumReferentie": "",
-    "premiumBeschikbaar": false,
-    "prijs": 3.5,
-    "image": "assets/images/glantier-geurstokjes.png",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "kledingkast geurhanger"
-    ]
-  },
-  {
     "id": "originals-100",
     "glantierNummer": "",
     "naam": "Glantier Originals Parfum",
@@ -5675,50 +5655,6 @@ window.ORIVEA_PRODUCTS = [
     "zoektermen": [
       "originals",
       "premium"
-    ]
-  },
-  {
-    "id": "sample-15ml-dames",
-    "glantierNummer": "",
-    "naam": "Glantier 15 ml Dames",
-    "type": "Discovery",
-    "inhoud": "15 ml",
-    "doelgroep": "Dames",
-    "categorie": "15 ml",
-    "geurgroep": "Compact - Ontdekken",
-    "merkReferentie": "",
-    "parfumReferentie": "",
-    "premiumBeschikbaar": false,
-    "prijs": 5.95,
-    "image": "assets/images/glantier-15ml-dames.png",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "15 ml",
-      "travel",
-      "dames"
-    ]
-  },
-  {
-    "id": "sample-15ml-heren",
-    "glantierNummer": "",
-    "naam": "Glantier 15 ml Heren",
-    "type": "Discovery",
-    "inhoud": "15 ml",
-    "doelgroep": "Heren",
-    "categorie": "15 ml",
-    "geurgroep": "Compact - Ontdekken",
-    "merkReferentie": "",
-    "parfumReferentie": "",
-    "premiumBeschikbaar": false,
-    "prijs": 5.95,
-    "image": "assets/images/glantier-heren-citrus.jpg",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "15 ml",
-      "travel",
-      "heren"
     ]
   },
   {
