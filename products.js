@@ -5637,27 +5637,6 @@ window.ORIVEA_PRODUCTS = [
     ]
   },
   {
-    "id": "originals-100",
-    "glantierNummer": "",
-    "naam": "Glantier Originals Parfum",
-    "type": "Glantier Originals Parfum",
-    "inhoud": "100 ml",
-    "doelgroep": "Unisex",
-    "categorie": "Premium",
-    "geurgroep": "Originals - Luxe",
-    "merkReferentie": "",
-    "parfumReferentie": "",
-    "premiumBeschikbaar": true,
-    "prijs": 25,
-    "image": "assets/images/glantier-premium-dames.jpg",
-    "omschrijving": "Een zorgvuldig gekozen Glantier product voor een verzorgde geurbeleving.",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "originals",
-      "premium"
-    ]
-  },
-  {
     "id": "vaderdag-premium-set",
     "glantierNummer": "",
     "naam": "Vaderdag Premium Set",
