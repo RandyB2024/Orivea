@@ -325,9 +325,17 @@
     };
   }
 
+  function normalizeOrderFormData(source) {
+    const formData = source instanceof HTMLFormElement ? checkoutFormData(source) : source || {};
+    return {
+      ...formData,
+      customer_address: formData.customer_address || ((formData.street || "") + " " + (formData.house_number || "") + ", " + (formData.postal_code || "") + " " + (formData.city || "")).trim()
+    };
+  }
+
   function buildOrderPayload(form, paypal) {
     const data = totals();
-    const formData = checkoutFormData(form);
+    const formData = normalizeOrderFormData(form);
     const orderNumber = generateOrderNumber();
     return {
       order_number: orderNumber,
@@ -378,6 +386,141 @@
     return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.orderTemplate, payload);
   }
 
+  function quickCheckoutModal() {
+    document.querySelector("[data-quick-checkout-modal]")?.remove();
+    const modal = document.createElement("div");
+    modal.className = "premium-modal quick-checkout-modal";
+    modal.dataset.quickCheckoutModal = "true";
+    modal.innerHTML = `<div class="premium-modal-panel quick-checkout-panel" role="dialog" aria-modal="true" aria-label="Snel bestellen met PayPal">
+      <button class="drawer-close" type="button" data-quick-close>Sluiten</button>
+      <div>
+        <p class="eyebrow">Snel betalen met PayPal</p>
+        <h2>Snel bestellen</h2>
+        <p class="quick-intro">Vul je gegevens in en rond je bestelling veilig af via PayPal.</p>
+        <form class="quick-checkout-form" data-quick-form>
+          <label>Naam<input name="customer_name" autocomplete="name" required></label>
+          <label>E-mailadres<input type="email" name="customer_email" autocomplete="email" required></label>
+          <label>Telefoon<input name="customer_phone" autocomplete="tel" required></label>
+          <div class="two-col">
+            <label>Straat<input name="street" autocomplete="address-line1" required></label>
+            <label>Huisnummer<input name="house_number" required></label>
+          </div>
+          <div class="two-col">
+            <label>Postcode<input name="postal_code" autocomplete="postal-code" required></label>
+            <label>Plaats<input name="city" autocomplete="address-level2" required></label>
+          </div>
+          <button class="button primary full" type="submit">PayPal betaling tonen</button>
+        </form>
+      </div>
+      <div class="quick-payment-panel">
+        <h3>Overzicht</h3>
+        <div data-quick-totals></div>
+        <p class="notice">Bij iedere bestelling ontvang je gratis een willekeurige ORIV&Eacute;A Discovery Sample.</p>
+        <div data-quick-paypal hidden></div>
+        <p class="form-status" data-quick-status></p>
+      </div>
+    </div>`;
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function initQuickCheckout() {
+    const drawerPanel = $(".drawer-panel");
+    if (!drawerPanel || drawerPanel.querySelector("[data-quick-checkout-open]")) return;
+    const checkoutLink = drawerPanel.querySelector('a[href="checkout.html"]');
+    if (!checkoutLink) return;
+    const quickBlock = document.createElement("section");
+    quickBlock.className = "quick-cart-pay";
+    quickBlock.innerHTML = `<h3>Snel betalen</h3><p>Betaal direct veilig via PayPal.</p><button class="button ghost full" type="button" data-quick-checkout-open>PayPal snel betalen</button>`;
+    checkoutLink.insertAdjacentElement("afterend", quickBlock);
+
+    quickBlock.querySelector("[data-quick-checkout-open]").addEventListener("click", () => {
+      const data = totals();
+      const message = quickBlock.querySelector("p");
+      if (!data.lines.length) {
+        if (message) message.textContent = "Je winkelwagen is nog leeg.";
+        return;
+      }
+      if (message) message.textContent = "Betaal direct veilig via PayPal.";
+      const modal = quickCheckoutModal();
+      const form = $("[data-quick-form]", modal);
+      const paypalTarget = $("[data-quick-paypal]", modal);
+      const status = $("[data-quick-status]", modal);
+      const totalsTarget = $("[data-quick-totals]", modal);
+      let quickFormData = null;
+      let paypalRendered = false;
+      let processing = false;
+
+      totalsTarget.innerHTML = totalsHtml(data);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal || event.target.closest("[data-quick-close]")) modal.remove();
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        quickFormData = checkoutFormData(form);
+        paypalTarget.hidden = false;
+        if (paypalRendered) return;
+        try {
+          const paypal = await loadPayPalSdk();
+          paypalRendered = true;
+          status.textContent = "";
+          paypal.Buttons({
+            style: { layout: "vertical", color: "gold", shape: "rect", label: "paypal" },
+            createOrder: (_data, actions) => {
+              if (processing) return Promise.reject(new Error("Betaling wordt al verwerkt"));
+              const current = totals();
+              if (!current.lines.length) {
+                status.textContent = "Je winkelwagen is nog leeg.";
+                return Promise.reject(new Error("Winkelwagen leeg"));
+              }
+              return actions.order.create({
+                purchase_units: [{
+                  description: "ORIVÈA Glantier bestelling",
+                  amount: { currency_code: CONFIG.paypalCurrency || CONFIG.currency || "EUR", value: current.total.toFixed(2) }
+                }]
+              });
+            },
+            onApprove: async (data, actions) => {
+              if (processing) return;
+              processing = true;
+              paypalTarget.style.pointerEvents = "none";
+              paypalTarget.style.opacity = "0.58";
+              status.textContent = "Betaling wordt bevestigd...";
+              const details = await actions.order.capture();
+              const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
+              const confirmed = capture?.status === "COMPLETED" || details?.status === "COMPLETED";
+              if (!confirmed) throw new Error("PayPal betaling niet bevestigd");
+              const payload = buildOrderPayload(quickFormData, {
+                transactionId: capture?.id || data.orderID || details?.id || "",
+                paymentStatus: "COMPLETED"
+              });
+              storeOrder(payload);
+              try {
+                await sendOrderConfirmation(payload);
+              } catch (error) {
+                console.warn("Orderbevestiging kon niet direct worden verzonden", error);
+              }
+              localStorage.removeItem(CART_KEY);
+              renderCartState();
+              window.location.href = "checkout.html?order=success";
+            },
+            onError: () => {
+              processing = false;
+              paypalTarget.style.pointerEvents = "";
+              paypalTarget.style.opacity = "";
+              status.textContent = "PayPal kon de betaling niet bevestigen. Probeer opnieuw.";
+            }
+          }).render(paypalTarget);
+        } catch (error) {
+          console.warn("Snelle PayPal checkout kon niet laden", error);
+          status.textContent = "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
+        }
+      });
+    });
+  }
+
   function openPremiumModal(product) {
     if (!product) return;
     document.querySelector("[data-premium-modal]")?.remove();
@@ -399,6 +542,7 @@
     const status = $("[data-paypal-status]");
     const orderStatus = $("[data-order-status]");
     const successPanel = $("[data-order-success]");
+    const params = new URLSearchParams(window.location.search);
 
     const showStep = (next) => {
       step = Math.min(5, Math.max(1, next));
@@ -491,6 +635,12 @@
     $$('[data-prev-step]').forEach((button) => button.addEventListener('click', () => showStep(step - 1)));
     $$('[data-step-tab]').forEach((button) => button.addEventListener('click', () => showStep(Number(button.dataset.stepTab))));
     form.addEventListener('submit', (event) => event.preventDefault());
+    if (params.get("order") === "success") {
+      if (successPanel) successPanel.hidden = false;
+      const lastOrder = JSON.parse(localStorage.getItem(LAST_ORDER_KEY) || "null");
+      if (orderStatus && lastOrder?.order_number) orderStatus.textContent = `Order ${lastOrder.order_number} is bevestigd. De betaling is succesvol ontvangen.`;
+      showStep(5);
+    }
   }
 
   function initContact() {
@@ -649,6 +799,7 @@
   window.addEventListener("scroll", updateHeaderState, { passive: true });
 
   renderCartState();
+  initQuickCheckout();
   initCampaigns();
   renderHomeProducts();
   initMatch();
