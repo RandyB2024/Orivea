@@ -341,7 +341,7 @@
       shipping_cost: data.shipping === 0 ? "Gratis" : money(data.shipping),
       total: money(data.total),
       paypal_transaction_id: paypal?.transactionId || "",
-      payment_status: paypal?.paymentStatus || "COMPLETED",
+      payment_status: paypal?.paymentStatus || "Betaald",
       note: formData.note || ""
     };
   }
@@ -453,9 +453,11 @@
             if (status) status.textContent = 'Betaling wordt bevestigd...';
             const details = await actions.order.capture();
             const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
+            const confirmed = capture?.status === 'COMPLETED' || details?.status === 'COMPLETED';
+            if (!confirmed) throw new Error('PayPal betaling niet bevestigd');
             const payload = buildOrderPayload(form, {
               transactionId: capture?.id || data.orderID || details?.id || '',
-              paymentStatus: capture?.status || details?.status || 'COMPLETED'
+              paymentStatus: 'Betaald'
             });
             storeOrder(payload);
             try {
@@ -463,19 +465,23 @@
               localStorage.removeItem(CART_KEY);
               renderCartState();
               if (successPanel) successPanel.hidden = false;
-              if (orderStatus) orderStatus.textContent = `Order ${payload.order_number} is bevestigd. Je ontvangt de orderbevestiging per e-mail.`;
+              if (orderStatus) orderStatus.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen.`;
               showStep(5);
             } catch {
-              if (status) status.textContent = 'Betaling ontvangen, maar de bevestigingsmail kon niet direct worden verzonden. Neem contact op via shop@orivea.nl met je PayPal transactienummer.';
+              localStorage.removeItem(CART_KEY);
+              renderCartState();
+              if (successPanel) successPanel.hidden = false;
+              if (orderStatus) orderStatus.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen. De bevestigingsmail kon niet direct worden verzonden.`;
+              showStep(5);
             }
           },
           onError: () => {
-            if (status) status.textContent = 'PayPal kon de betaling niet starten. Controleer je gegevens en probeer opnieuw.';
+            if (status) status.textContent = 'PayPal kon de betaling niet bevestigen. Controleer je gegevens en probeer opnieuw.';
           }
         }).render(target);
       } catch (error) {
         console.warn("PayPal kon niet laden", error);
-        if (status) status.textContent = 'PayPal is tijdelijk niet beschikbaar. Neem contact op via shop@orivea.nl om je bestelling af te ronden.';
+        if (status) status.textContent = 'PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.';
       }
     };
 
