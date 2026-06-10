@@ -438,6 +438,7 @@
       total: money(data.total),
       paypal_transaction_id: paypal?.transactionId || "",
       payment_status: paypal?.paymentStatus || "Betaald",
+      payment_method: paypal?.paymentMethod || "PayPal",
       note: formData.note || ""
     };
   }
@@ -461,7 +462,7 @@
         return;
       }
       const script = document.createElement("script");
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons,applepay&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
       script.dataset.paypalSdk = "true";
       script.onload = () => window.paypal ? resolve(window.paypal) : reject(new Error("PayPal SDK niet beschikbaar na laden"));
       script.onerror = () => reject(new Error("PayPal SDK kon niet laden"));
@@ -474,6 +475,141 @@
     return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.orderTemplate, payload);
   }
 
+  async function finalizePaidOrder(source, payment, options = {}) {
+    const payload = buildOrderPayload(source, payment);
+    storeOrder(payload);
+    try {
+      await sendOrderConfirmation(payload);
+    } catch (error) {
+      console.warn("Orderbevestiging kon niet direct worden verzonden", error);
+    }
+    localStorage.removeItem(CART_KEY);
+    renderCartState();
+    if (options.successPanel) options.successPanel.hidden = false;
+    if (options.orderStatus) options.orderStatus.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen.`;
+    if (options.redirect) window.location.href = options.redirect;
+    if (options.showStep) options.showStep(5);
+    return payload;
+  }
+
+  function paypalApiBase() {
+    return (CONFIG.paypalApiBase || "/api/paypal").replace(/\/$/, "");
+  }
+
+  async function createServerPayPalOrder(data) {
+    const response = await fetch(`${paypalApiBase()}/create-order`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: data.total.toFixed(2),
+        currency: CONFIG.paypalCurrency || CONFIG.currency || "EUR",
+        description: "ORIVÈA Glantier bestelling"
+      })
+    });
+    if (!response.ok) throw new Error("PayPal order kon niet worden aangemaakt");
+    return response.json();
+  }
+
+  async function captureServerPayPalOrder(orderId) {
+    const response = await fetch(`${paypalApiBase()}/capture-order`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId })
+    });
+    if (!response.ok) throw new Error("PayPal order kon niet worden gecaptured");
+    return response.json();
+  }
+
+  async function applePayConfig(paypal) {
+    if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments?.() || !paypal?.Applepay) return null;
+    const applepay = paypal.Applepay();
+    const config = await applepay.config();
+    if (config?.isEligible === false) return null;
+    return { applepay, config };
+  }
+
+  async function renderApplePayButton({ target, source, status, validate, onSuccess, label = "Snel betalen met Apple Pay" }) {
+    if (!target || target.dataset.applePayReady === "true") return;
+    target.hidden = true;
+    try {
+      const paypal = await loadPayPalSdk();
+      const available = await applePayConfig(paypal);
+      if (!available) return;
+      const { applepay, config } = available;
+      target.dataset.applePayReady = "true";
+      target.hidden = false;
+      target.innerHTML = `<p class="apple-pay-label">${label}</p><button class="apple-pay-button" type="button" aria-label="${label}"></button>`;
+      const button = $(".apple-pay-button", target);
+      button.addEventListener("click", () => {
+        if (button.disabled) return;
+        if (validate && !validate()) return;
+        const current = totals();
+        if (!current.lines.length) {
+          if (status) status.textContent = "Je winkelwagen is nog leeg.";
+          return;
+        }
+        const amount = current.total.toFixed(2);
+        const request = {
+          countryCode: CONFIG.applePayCountryCode || "NL",
+          currencyCode: CONFIG.paypalCurrency || CONFIG.currency || "EUR",
+          merchantCapabilities: config.merchantCapabilities || ["supports3DS"],
+          supportedNetworks: config.supportedNetworks || ["visa", "masterCard", "amex"],
+          total: { label: "ORIVÈA", amount },
+          requiredBillingContactFields: ["postalAddress", "name", "email"]
+        };
+        const session = new ApplePaySession(4, request);
+        let processing = false;
+        session.onvalidatemerchant = async (event) => {
+          try {
+            const validation = await applepay.validateMerchant({ validationUrl: event.validationURL });
+            session.completeMerchantValidation(validation.merchantSession || validation);
+          } catch (error) {
+            console.warn("Apple Pay merchant validatie mislukt", error);
+            session.abort();
+          }
+        };
+        session.onpaymentauthorized = async (event) => {
+          if (processing) return;
+          processing = true;
+          button.disabled = true;
+          if (status) status.textContent = "Apple Pay betaling wordt bevestigd...";
+          try {
+            const order = await createServerPayPalOrder(current);
+            const orderId = order.id || order.orderID;
+            if (!orderId) throw new Error("Geen PayPal order ID ontvangen");
+            await applepay.confirmOrder({
+              orderId,
+              orderID: orderId,
+              token: event.payment.token,
+              billingContact: event.payment.billingContact,
+              shippingContact: event.payment.shippingContact
+            });
+            const captureDetails = await captureServerPayPalOrder(orderId);
+            const capture = captureDetails?.purchase_units?.[0]?.payments?.captures?.[0];
+            const confirmed = capture?.status === "COMPLETED" || captureDetails?.status === "COMPLETED";
+            if (!confirmed) throw new Error("Apple Pay betaling niet voltooid via PayPal");
+            session.completePayment(ApplePaySession.STATUS_SUCCESS);
+            await finalizePaidOrder(source(), {
+              transactionId: capture?.id || orderId,
+              paymentStatus: "COMPLETED",
+              paymentMethod: "Apple Pay"
+            }, onSuccess || {});
+          } catch (error) {
+            console.warn("Apple Pay betaling mislukt", error);
+            session.completePayment(ApplePaySession.STATUS_FAILURE);
+            button.disabled = false;
+            processing = false;
+            if (status) status.textContent = "Apple Pay kon de betaling niet afronden. Kies PayPal of probeer opnieuw.";
+          }
+        };
+        session.begin();
+      });
+    } catch (error) {
+      console.warn("Apple Pay is niet beschikbaar", error);
+      target.hidden = true;
+    }
+  }
+
   function quickCheckoutModal() {
     document.querySelector("[data-quick-checkout-modal]")?.remove();
     const modal = document.createElement("div");
@@ -482,9 +618,9 @@
     modal.innerHTML = `<div class="premium-modal-panel quick-checkout-panel" role="dialog" aria-modal="true" aria-label="Snel bestellen met PayPal">
       <button class="drawer-close" type="button" data-quick-close>Sluiten</button>
       <div>
-        <p class="eyebrow">Snel betalen met PayPal</p>
+        <p class="eyebrow">Snel betalen</p>
         <h2>Snel bestellen</h2>
-        <p class="quick-intro">Vul je gegevens in en rond je bestelling veilig af via PayPal.</p>
+        <p class="quick-intro">Vul je gegevens in en rond je bestelling veilig af via PayPal of Apple Pay.</p>
         <form class="quick-checkout-form" data-quick-form>
           <label>Naam<input name="customer_name" autocomplete="name" required></label>
           <label>E-mailadres<input type="email" name="customer_email" autocomplete="email" required></label>
@@ -497,13 +633,14 @@
             <label>Postcode<input name="postal_code" autocomplete="postal-code" required></label>
             <label>Plaats<input name="city" autocomplete="address-level2" required></label>
           </div>
-          <button class="button primary full" type="submit">PayPal betaling tonen</button>
+          <button class="button primary full" type="submit">Betaalopties tonen</button>
         </form>
       </div>
       <div class="quick-payment-panel">
         <h3>Overzicht</h3>
         <div data-quick-totals></div>
         <p class="notice">Bij iedere bestelling ontvang je gratis een willekeurige ORIV&Eacute;A Discovery Sample.</p>
+        <div data-quick-apple-pay hidden></div>
         <div data-quick-paypal hidden></div>
         <p class="form-status" data-quick-status></p>
       </div>
@@ -517,9 +654,17 @@
     if (!drawerPanel || drawerPanel.querySelector("[data-quick-checkout-open]")) return;
     const checkoutLink = drawerPanel.querySelector('a[href="checkout.html"]');
     if (!checkoutLink) return;
+    if (!drawerPanel.querySelector("[data-continue-shopping]")) {
+      const continueLink = document.createElement("a");
+      continueLink.className = "button ghost full continue-shopping-button";
+      continueLink.href = "catalogus.html";
+      continueLink.dataset.continueShopping = "true";
+      continueLink.textContent = "Verder winkelen";
+      checkoutLink.insertAdjacentElement("beforebegin", continueLink);
+    }
     const quickBlock = document.createElement("section");
     quickBlock.className = "quick-cart-pay";
-    quickBlock.innerHTML = `<h3>Snel betalen</h3><p>Betaal direct veilig via PayPal.</p><button class="button ghost full" type="button" data-quick-checkout-open>PayPal snel betalen</button>`;
+    quickBlock.innerHTML = `<h3>Snel betalen</h3><p>Veilig, snel en vertrouwd.</p><button class="button ghost full" type="button" data-quick-checkout-open>Snel bestellen met PayPal</button>`;
     checkoutLink.insertAdjacentElement("afterend", quickBlock);
 
     quickBlock.querySelector("[data-quick-checkout-open]").addEventListener("click", () => {
@@ -529,10 +674,12 @@
         if (message) message.textContent = "Je winkelwagen is nog leeg.";
         return;
       }
-      if (message) message.textContent = "Betaal direct veilig via PayPal.";
+      if (message) message.textContent = "Veilig, snel en vertrouwd.";
+      closeCart();
       const modal = quickCheckoutModal();
       const form = $("[data-quick-form]", modal);
       const paypalTarget = $("[data-quick-paypal]", modal);
+      const applePayTarget = $("[data-quick-apple-pay]", modal);
       const status = $("[data-quick-status]", modal);
       const totalsTarget = $("[data-quick-totals]", modal);
       let quickFormData = null;
@@ -549,6 +696,14 @@
         if (!form.reportValidity()) return;
         quickFormData = checkoutFormData(form);
         paypalTarget.hidden = false;
+        await renderApplePayButton({
+          target: applePayTarget,
+          source: () => quickFormData,
+          status,
+          validate: () => Boolean(quickFormData) && form.reportValidity(),
+          onSuccess: { redirect: "checkout.html?order=success" },
+          label: "Snel betalen met Apple Pay"
+        });
         if (paypalRendered) return;
         try {
           const paypal = await loadPayPalSdk();
@@ -573,6 +728,7 @@
             onApprove: async (data, actions) => {
               if (processing) return;
               processing = true;
+              console.info("Snelle PayPal checkout: betaling autoriseren", data);
               paypalTarget.style.pointerEvents = "none";
               paypalTarget.style.opacity = "0.58";
               status.textContent = "Betaling wordt bevestigd...";
@@ -580,21 +736,14 @@
               const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
               const confirmed = capture?.status === "COMPLETED" || details?.status === "COMPLETED";
               if (!confirmed) throw new Error("PayPal betaling niet bevestigd");
-              const payload = buildOrderPayload(quickFormData, {
+              await finalizePaidOrder(quickFormData, {
                 transactionId: capture?.id || data.orderID || details?.id || "",
-                paymentStatus: "COMPLETED"
-              });
-              storeOrder(payload);
-              try {
-                await sendOrderConfirmation(payload);
-              } catch (error) {
-                console.warn("Orderbevestiging kon niet direct worden verzonden", error);
-              }
-              localStorage.removeItem(CART_KEY);
-              renderCartState();
-              window.location.href = "checkout.html?order=success";
+                paymentStatus: "COMPLETED",
+                paymentMethod: "PayPal"
+              }, { redirect: "checkout.html?order=success" });
             },
-            onError: () => {
+            onError: (error) => {
+              console.warn("Snelle PayPal checkout fout", error);
               processing = false;
               paypalTarget.style.pointerEvents = "";
               paypalTarget.style.opacity = "";
@@ -627,6 +776,7 @@
     if (!form) return;
     let step = 1;
     let paypalRendered = false;
+    let paymentProcessing = false;
     const status = $("[data-paypal-status]");
     const orderStatus = $("[data-order-status]");
     const successPanel = $("[data-order-success]");
@@ -637,7 +787,17 @@
       $$('[data-step]').forEach((el) => el.classList.toggle('active', Number(el.dataset.step) === step));
       $$('[data-step-tab]').forEach((el) => el.classList.toggle('active', Number(el.dataset.stepTab) === step));
       renderCartState();
-      if (step === 4) renderPayPalButtons();
+      if (step === 4) {
+        renderApplePayButton({
+          target: $('[data-apple-pay-buttons]'),
+          source: () => form,
+          status,
+          validate: validateCheckout,
+          onSuccess: { successPanel, orderStatus, showStep },
+          label: "Snel betalen met Apple Pay"
+        });
+        renderPayPalButtons();
+      }
     };
 
     const validateVisibleStep = () => {
@@ -672,6 +832,7 @@
         paypal.Buttons({
           style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
           createOrder: (_data, actions) => {
+            if (paymentProcessing) return Promise.reject(new Error('Betaling wordt al verwerkt'));
             if (!validateCheckout()) return Promise.reject(new Error('Checkout niet compleet'));
             const data = totals();
             return actions.order.create({
@@ -682,32 +843,23 @@
             });
           },
           onApprove: async (data, actions) => {
+            if (paymentProcessing) return;
+            paymentProcessing = true;
+            console.info("PayPal checkout: betaling autoriseren", data);
             if (status) status.textContent = 'Betaling wordt bevestigd...';
             const details = await actions.order.capture();
             const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
             const confirmed = capture?.status === 'COMPLETED' || details?.status === 'COMPLETED';
             if (!confirmed) throw new Error('PayPal betaling niet bevestigd');
-            const payload = buildOrderPayload(form, {
+            await finalizePaidOrder(form, {
               transactionId: capture?.id || data.orderID || details?.id || '',
-              paymentStatus: 'Betaald'
-            });
-            storeOrder(payload);
-            try {
-              await sendOrderConfirmation(payload);
-              localStorage.removeItem(CART_KEY);
-              renderCartState();
-              if (successPanel) successPanel.hidden = false;
-              if (orderStatus) orderStatus.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen.`;
-              showStep(5);
-            } catch {
-              localStorage.removeItem(CART_KEY);
-              renderCartState();
-              if (successPanel) successPanel.hidden = false;
-              if (orderStatus) orderStatus.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen. De bevestigingsmail kon niet direct worden verzonden.`;
-              showStep(5);
-            }
+              paymentStatus: 'COMPLETED',
+              paymentMethod: 'PayPal'
+            }, { successPanel, orderStatus, showStep });
           },
-          onError: () => {
+          onError: (error) => {
+            paymentProcessing = false;
+            console.warn("PayPal checkout fout", error);
             if (status) status.textContent = 'PayPal kon de betaling niet bevestigen. Controleer je gegevens en probeer opnieuw.';
           }
         }).render(target);

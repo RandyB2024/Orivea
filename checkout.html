@@ -61,7 +61,7 @@
         <label>Plaats<input name="city" required></label>
       </div>
       <label>Opmerking<textarea name="note" rows="4"></textarea></label>
-      <div class="step-actions"><button class="button ghost" type="button" data-prev-step>Terug</button><button class="button primary" type="button" data-next-step>Volgende</button></div>
+      <div class="step-actions"><a class="button ghost continue-shopping-button" href="catalogus.html">Verder winkelen</a><button class="button ghost" type="button" data-prev-step>Terug</button><button class="button primary" type="button" data-next-step>Volgende</button></div>
     </section>
 
     <section class="checkout-step" data-step="3">
@@ -75,11 +75,12 @@
     <section class="checkout-step" data-step="4">
       <h2>Betaling</h2>
       <div class="paypal-panel">
-        <p>Betaal veilig via PayPal. Je order wordt pas bevestigd nadat de betaling succesvol is ontvangen.</p>
+        <p>Betaal veilig met:</p>
+        <div data-apple-pay-buttons hidden></div>
         <div data-paypal-buttons></div>
         <p class="form-status" data-paypal-status></p>
       </div>
-      <div class="step-actions"><button class="button ghost" type="button" data-prev-step>Terug</button></div>
+      <div class="step-actions"><a class="button ghost continue-shopping-button" href="catalogus.html">Verder winkelen</a><button class="button ghost" type="button" data-prev-step>Terug</button></div>
     </section>
 
     <section class="checkout-step" data-step="5">
