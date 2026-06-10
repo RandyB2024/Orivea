@@ -5,7 +5,7 @@
   const ORDERS_KEY = "orivea_orders";
   const LAST_ORDER_KEY = "orivea_last_order";
   const CATALOG_CONFIG = {
-    productsPerPage: 5
+    productsPerPage: 8
   };
   const currency = new Intl.NumberFormat("nl-NL", { style: "currency", currency: CONFIG.currency || "EUR" });
 

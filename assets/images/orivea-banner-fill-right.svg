@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff8ec"/>
+      <stop offset=".55" stop-color="#f5e8d0"/>
+      <stop offset="1" stop-color="#eadbc0"/>
+    </linearGradient>
+    <radialGradient id="petal" cx=".62" cy=".44" r=".38">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".88"/>
+      <stop offset=".62" stop-color="#f7eadc" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#f7eadc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d7b45" stop-opacity=".52"/>
+      <stop offset="1" stop-color="#b7b77a" stop-opacity=".18"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" fill="url(#base)"/>
+  <circle cx="540" cy="220" r="260" fill="url(#petal)"/>
+  <circle cx="780" cy="430" r="210" fill="#fffdf6" opacity=".35"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M690 20 C610 118 586 222 612 348" stroke="#82905c" stroke-opacity=".34" stroke-width="5"/>
+    <path d="M740 -10 C690 82 682 172 726 284" stroke="#83935f" stroke-opacity=".28" stroke-width="4"/>
+    <path d="M620 168 C690 134 742 116 832 116" stroke="#7c8d59" stroke-opacity=".24" stroke-width="3"/>
+  </g>
+  <g fill="url(#leaf)">
+    <ellipse cx="650" cy="110" rx="26" ry="72" transform="rotate(42 650 110)"/>
+    <ellipse cx="720" cy="82" rx="22" ry="62" transform="rotate(56 720 82)"/>
+    <ellipse cx="674" cy="210" rx="22" ry="64" transform="rotate(-18 674 210)"/>
+    <ellipse cx="792" cy="150" rx="20" ry="58" transform="rotate(74 792 150)"/>
+  </g>
+  <g fill="#ffffff" opacity=".55">
+    <circle cx="760" cy="315" r="24"/>
+    <circle cx="792" cy="300" r="18"/>
+    <circle cx="816" cy="330" r="15"/>
+    <circle cx="736" cy="342" r="16"/>
+  </g>
+  <path d="M80 560 C258 456 458 458 720 612" fill="none" stroke="#c29c57" stroke-opacity=".14" stroke-width="2"/>
+</svg>
