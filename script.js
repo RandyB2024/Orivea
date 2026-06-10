@@ -278,7 +278,7 @@
   function initCatalog() {
     const grid = $("[data-catalog-grid]");
     if (!grid) return;
-    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Ori�ntaals", "Aquatisch", "Aromatisch", "Chypre"];
+    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
     let active = new URLSearchParams(location.search).get("filter") || "";
     let currentPage = 1;
@@ -324,8 +324,8 @@
 
     function renderPagination() {
       const showPagination = totalPages > 1;
-      const numbers = pageNumbers().map((page) => `<button type="button" data-page="${page}" class="${page === currentPage ? "active" : ""}" aria-current="${page === currentPage ? "page" : "false"}">${page}</button>`).join("");
-      const html = showPagination ? `<button type="button" data-prev-page ${currentPage === 1 ? "disabled" : ""}>Vorige</button><div class="page-numbers">${numbers}</div><span class="mobile-page-count">${currentPage} / ${totalPages}</span><button type="button" data-next-page ${currentPage === totalPages ? "disabled" : ""}>Volgende</button>` : "";
+      const numbers = pageNumbers().map((page) => `<button type="button" data-page-action="page" data-page="${page}" class="${page === currentPage ? "active" : ""}" aria-current="${page === currentPage ? "page" : "false"}">${page}</button>`).join("");
+      const html = showPagination ? `<button type="button" data-page-action="previous" ${currentPage === 1 ? "disabled" : ""}>Vorige</button><div class="page-numbers">${numbers}</div><span class="mobile-page-count">${currentPage} / ${totalPages}</span><button type="button" data-page-action="next" ${currentPage === totalPages ? "disabled" : ""}>Volgende</button>` : "";
       paginationTop.innerHTML = html;
       paginationBottom.innerHTML = html;
       paginationTop.hidden = !showPagination;
@@ -369,13 +369,18 @@
       renderCatalog();
     }
 
+    function handlePaginationClick(event) {
+      const button = event.target.closest("[data-page-action]");
+      if (!button || button.disabled) return;
+      event.preventDefault();
+      const action = button.dataset.pageAction;
+      if (action === "page") goToPage(button.dataset.page);
+      if (action === "previous") previousPage();
+      if (action === "next") nextPage();
+    }
+
     [paginationTop, paginationBottom].forEach((pagination) => {
-      pagination.addEventListener("click", (event) => {
-        const pageButton = event.target.closest("[data-page]");
-        if (pageButton) goToPage(pageButton.dataset.page);
-        if (event.target.closest("[data-prev-page]")) previousPage();
-        if (event.target.closest("[data-next-page]")) nextPage();
-      });
+      pagination.addEventListener("click", handlePaginationClick);
     });
 
     filterList?.addEventListener("click", (event) => {
@@ -769,7 +774,7 @@
         email: raw.email || "",
         subject: isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding",
         message: (isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding") + " via orivea.nl\nNaam: " + (raw.name || "") + "\nE-mail: " + (raw.email || ""),
-        email_subject: isUnsubscribe ? "Je nieuwsbriefvoorkeur is bijgewerkt | ORIVÈA" : "Welkom bij ORIVÈA ✨",
+        email_subject: isUnsubscribe ? "Je nieuwsbriefvoorkeur is bijgewerkt | ORIVÈA" : "Welkom bij ORIVÈA",
         message_type: isUnsubscribe ? "Nieuwsbrief afmelding bevestigd" : "Nieuwsbrief aanmelding bevestigd",
         message_body: isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief. Je ontvangt als eerste nieuws over nieuwe collecties, exclusieve acties en premium geuren."
       };
