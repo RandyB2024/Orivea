@@ -4,6 +4,9 @@
   const CART_KEY = "orivea_glantier_cart";
   const ORDERS_KEY = "orivea_orders";
   const LAST_ORDER_KEY = "orivea_last_order";
+  const CATALOG_CONFIG = {
+    productsPerPage: 5
+  };
   const currency = new Intl.NumberFormat("nl-NL", { style: "currency", currency: CONFIG.currency || "EUR" });
 
   if (window.emailjs && CONFIG.emailJs?.publicKey) {
@@ -275,12 +278,28 @@
   function initCatalog() {
     const grid = $("[data-catalog-grid]");
     if (!grid) return;
-    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "OriÃ«ntaals", "Aquatisch", "Aromatisch", "Chypre"];
+    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
     let active = new URLSearchParams(location.search).get("filter") || "";
+    let currentPage = 1;
+    let filteredProducts = [];
+    let totalPages = 1;
+    const productsPerPage = CATALOG_CONFIG.productsPerPage;
+    const catalogContent = grid.parentElement;
+    const paginationInfo = document.createElement("p");
+    const paginationTop = document.createElement("div");
+    const paginationBottom = document.createElement("div");
+
+    paginationInfo.className = "catalog-page-info";
+    paginationTop.className = "catalog-pagination catalog-pagination-top";
+    paginationBottom.className = "catalog-pagination catalog-pagination-bottom";
+    grid.insertAdjacentElement("beforebegin", paginationInfo);
+    grid.insertAdjacentElement("beforebegin", paginationTop);
+    grid.insertAdjacentElement("afterend", paginationBottom);
+
     if (filterList) filterList.innerHTML = filters.map((filter) => `<button type="button" data-filter="${filter}" class="${normalize(filter) === normalize(active) ? "active" : ""}">${filter}</button>`).join("");
 
-    function render() {
+    function getFilteredProducts() {
       const query = $("[data-catalog-search]")?.value || "";
       let items = PRODUCTS.filter((product) => !active || normalize([product.doelgroep, product.categorie, product.geurgroep, product.type, product.premiumBeschikbaar ? "Premium" : ""].join(" ")).includes(normalize(active)));
       if (query) {
@@ -290,23 +309,87 @@
       if (sort === "price-asc") items.sort((a, b) => a.prijs - b.prijs);
       if (sort === "price-desc") items.sort((a, b) => b.prijs - a.prijs);
       if (sort === "number") items.sort((a, b) => String(a.glantierNummer || "9999").localeCompare(String(b.glantierNummer || "9999")));
-      grid.innerHTML = items.map(productCard).join("");
-      const count = $("[data-product-count]");
-      if (count) count.textContent = `${items.length} producten`;
+      return items;
     }
+
+    function pageNumbers() {
+      if (totalPages <= 5) return Array.from({ length: totalPages }, (_, index) => index + 1);
+      if (window.matchMedia("(max-width: 620px)").matches) {
+        const start = Math.max(1, Math.min(currentPage - 1, totalPages - 2));
+        return [start, start + 1, start + 2];
+      }
+      const start = Math.max(1, Math.min(currentPage - 2, totalPages - 4));
+      return Array.from({ length: 5 }, (_, index) => start + index);
+    }
+
+    function renderPagination() {
+      const showPagination = totalPages > 1;
+      const numbers = pageNumbers().map((page) => `<button type="button" data-page="${page}" class="${page === currentPage ? "active" : ""}" aria-current="${page === currentPage ? "page" : "false"}">${page}</button>`).join("");
+      const html = showPagination ? `<button type="button" data-prev-page ${currentPage === 1 ? "disabled" : ""}>Vorige</button><div class="page-numbers">${numbers}</div><span class="mobile-page-count">${currentPage} / ${totalPages}</span><button type="button" data-next-page ${currentPage === totalPages ? "disabled" : ""}>Volgende</button>` : "";
+      paginationTop.innerHTML = html;
+      paginationBottom.innerHTML = html;
+      paginationTop.hidden = !showPagination;
+      paginationBottom.hidden = !showPagination;
+    }
+
+    function renderCatalog() {
+      filteredProducts = getFilteredProducts();
+      totalPages = Math.max(1, Math.ceil(filteredProducts.length / productsPerPage));
+      currentPage = Math.min(currentPage, totalPages);
+      const start = (currentPage - 1) * productsPerPage;
+      const end = start + productsPerPage;
+      const pagedItems = filteredProducts.slice(start, end);
+      grid.innerHTML = pagedItems.length ? pagedItems.map(productCard).join("") : '<p class="empty">Geen producten gevonden.</p>';
+      const from = filteredProducts.length ? start + 1 : 0;
+      const to = Math.min(end, filteredProducts.length);
+      const resultText = filteredProducts.length === 1 ? "product" : "producten";
+      const rangeText = filteredProducts.length ? `Toont ${from}-${to} van ${filteredProducts.length} ${resultText}` : "Geen producten gevonden";
+      const count = $("[data-product-count]");
+      if (count) count.textContent = rangeText;
+      paginationInfo.textContent = rangeText;
+      renderPagination();
+    }
+
+    function goToPage(page) {
+      currentPage = Math.min(totalPages, Math.max(1, Number(page) || 1));
+      renderCatalog();
+      catalogContent?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function nextPage() {
+      goToPage(currentPage + 1);
+    }
+
+    function previousPage() {
+      goToPage(currentPage - 1);
+    }
+
+    function resetAndRender() {
+      currentPage = 1;
+      renderCatalog();
+    }
+
+    [paginationTop, paginationBottom].forEach((pagination) => {
+      pagination.addEventListener("click", (event) => {
+        const pageButton = event.target.closest("[data-page]");
+        if (pageButton) goToPage(pageButton.dataset.page);
+        if (event.target.closest("[data-prev-page]")) previousPage();
+        if (event.target.closest("[data-next-page]")) nextPage();
+      });
+    });
 
     filterList?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-filter]");
       if (!button) return;
       active = active === button.dataset.filter ? "" : button.dataset.filter;
-      $$("[data-filter]", filterList).forEach((btn) => btn.classList.toggle("active", btn.dataset.filter === active));
-      render();
+      $$('[data-filter]', filterList).forEach((btn) => btn.classList.toggle("active", btn.dataset.filter === active));
+      resetAndRender();
     });
-    $("[data-catalog-search]")?.addEventListener("input", render);
-    $("[data-sort]")?.addEventListener("change", render);
-    render();
+    $("[data-catalog-search]")?.addEventListener("input", resetAndRender);
+    $("[data-sort]")?.addEventListener("change", resetAndRender);
+    window.addEventListener("resize", renderPagination, { passive: true });
+    renderCatalog();
   }
-
 
   function generateOrderNumber() {
     const date = new Date();
