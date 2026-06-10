@@ -3,7 +3,7 @@ window.ORIVEA_CONFIG = {
   "domain": "https://orivea.nl",
   "contactEmail": "shop@orivea.nl",
   "paymentEnabled": true,
-  "paypalClientId": "BAAdPPUoA4N0UCgkNgTdp",
+  "paypalClientId": "AdHVkRJT6Lr_2eatUAvqxQmJfEkrXuWYwHp1Rrs1qtzR10EWFNna5XJIa80RLEnvfQHJ--E16dnpBS3a",
   "paypalCurrency": "EUR",
   "currency": "EUR",
   "emailJs": {
