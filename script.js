@@ -251,7 +251,7 @@
       return;
     }
     result.innerHTML = matches.map((product) => {
-      const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " ? ") : "";
+      const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " &bull; ") : "";
       const reference = product.parfumReferentie ? `<p>Geïnspireerd door de geurbeleving van ${product.parfumReferentie}</p>` : "";
       return `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>GLANTIER ${product.glantierNummer || product.id}</h3>${reference}<p>${scentGroup} • ${product.doelgroep}</p><p>${product.omschrijving}</p><p class="price">Vanaf ${money(product.prijs)}</p><div class="hero-actions"><button class="button primary cart-symbol-button" type="button" data-add-to-cart="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`;
     }).join("");
