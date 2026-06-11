@@ -531,8 +531,16 @@
     return capture?.status === "COMPLETED" || details?.status === "COMPLETED";
   }
 
+  function paypalPaymentMethod(data, fallback = "PayPal") {
+    const source = String(data?.paymentSource || data?.fundingSource || "").toLowerCase();
+    if (source === "ideal") return "iDEAL via PayPal";
+    if (source === "card") return "Betaalkaart via PayPal";
+    return fallback;
+  }
+
   function serverPayPalButtonOptions({ source, status, validate, onSuccess, paymentMethod, fundingSource }) {
     let processing = false;
+    let paymentStarted = false;
     const label = paymentMethod || "PayPal";
     const style = { layout: "vertical", color: "gold", shape: "rect" };
     if (!fundingSource) style.label = "paypal";
@@ -546,6 +554,7 @@
           if (status) status.textContent = "Je winkelwagen is nog leeg.";
           throw new Error("Winkelwagen leeg");
         }
+        paymentStarted = true;
         const order = await createServerPayPalOrder(current);
         const orderId = order.id || order.orderID;
         if (!orderId) throw new Error("Geen PayPal order ID ontvangen");
@@ -570,7 +579,7 @@
           await finalizePaidOrder(source(), {
             transactionId: capture?.id || data.orderID || captureDetails?.id || "",
             paymentStatus: "COMPLETED",
-            paymentMethod: label
+            paymentMethod: paypalPaymentMethod(data, label)
           }, onSuccess || {});
         } catch (error) {
           processing = false;
@@ -580,12 +589,15 @@
       },
       onCancel: () => {
         processing = false;
+        paymentStarted = false;
         if (status) status.textContent = "Betaling geannuleerd. Je winkelwagen is bewaard.";
       },
       onError: (error) => {
         processing = false;
+        const shouldShowError = paymentStarted;
+        paymentStarted = false;
         console.warn(`${label} checkout fout`, error);
-        if (status) status.textContent = `${label} is tijdelijk niet beschikbaar. Probeer PayPal of probeer het later opnieuw.`;
+        if (status) status.textContent = shouldShowError ? `${label} kon de betaling niet starten of bevestigen. Probeer opnieuw of kies PayPal.` : "";
       }
     };
     if (fundingSource) options.fundingSource = fundingSource;
@@ -597,6 +609,7 @@
     const paypalSlot = document.createElement("div");
     paypalSlot.className = "paypal-funding-slot";
     target.appendChild(paypalSlot);
+    if (status) status.textContent = "";
     await paypal.Buttons(serverPayPalButtonOptions({
       source,
       status,
@@ -604,30 +617,6 @@
       onSuccess,
       paymentMethod: "PayPal"
     })).render(paypalSlot);
-
-    const idealFunding = paypal.FUNDING?.IDEAL || "ideal";
-    const idealSlot = document.createElement("div");
-    idealSlot.className = "paypal-funding-slot paypal-funding-slot-ideal";
-    target.appendChild(idealSlot);
-    try {
-      const idealButtons = paypal.Buttons(serverPayPalButtonOptions({
-        source,
-        status,
-        validate,
-        onSuccess,
-        paymentMethod: "iDEAL via PayPal",
-        fundingSource: idealFunding
-      }));
-      if (typeof idealButtons.isEligible !== "function" || idealButtons.isEligible()) {
-        await idealButtons.render(idealSlot);
-      } else {
-        idealSlot.remove();
-        console.info("iDEAL via PayPal is niet eligible voor deze sessie");
-      }
-    } catch (error) {
-      idealSlot.remove();
-      console.info("iDEAL via PayPal kon niet worden weergegeven", error);
-    }
   }
 
   async function applePayConfig(paypal) {
