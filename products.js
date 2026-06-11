@@ -5,6 +5,7 @@ window.ORIVEA_CONFIG = {
   "paymentEnabled": true,
   "paypalClientId": "AdHVkRJT6Lr_2eatUAvqxQmJfEkrXuWYwHp1Rrs1qtzR10EWFNna5XJIa80RLEnvfQHJ--E16dnpBS3a",
   "paypalCurrency": "EUR",
+  "paypalEnabledFunding": ["ideal"],
   "currency": "EUR",
   "emailJs": {
     "serviceId": "service_r55nwxz",

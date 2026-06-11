@@ -50,6 +50,11 @@ export async function onRequestPost({ request, env }) {
       },
       body: JSON.stringify({
         intent: "CAPTURE",
+        application_context: {
+          brand_name: "ORIVEA",
+          shipping_preference: "NO_SHIPPING",
+          user_action: "PAY_NOW"
+        },
         purchase_units: [{
           description: body.description || "ORIVÈA bestelling",
           amount: {

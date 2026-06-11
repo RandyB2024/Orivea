@@ -454,6 +454,7 @@
     if (window.paypal) return Promise.resolve(window.paypal);
     const clientId = CONFIG.paypalClientId || "";
     if (!clientId) return Promise.reject(new Error("PayPal Client ID ontbreekt"));
+    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal"]).join(",");
     return new Promise((resolve, reject) => {
       const existing = document.querySelector("script[data-paypal-sdk]");
       if (existing) {
@@ -462,7 +463,7 @@
         return;
       }
       const script = document.createElement("script");
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons,applepay&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons,applepay&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture&enable-funding=${encodeURIComponent(enabledFunding)}`;
       script.dataset.paypalSdk = "true";
       script.onload = () => window.paypal ? resolve(window.paypal) : reject(new Error("PayPal SDK niet beschikbaar na laden"));
       script.onerror = () => reject(new Error("PayPal SDK kon niet laden"));
@@ -518,6 +519,114 @@
     });
     if (!response.ok) throw new Error("PayPal order kon niet worden gecaptured");
     return response.json();
+  }
+
+  function paypalCapture(details) {
+    return details?.purchase_units?.[0]?.payments?.captures?.[0] || null;
+  }
+
+  function paypalCaptureCompleted(details) {
+    const capture = paypalCapture(details);
+    return capture?.status === "COMPLETED" || details?.status === "COMPLETED";
+  }
+
+  function serverPayPalButtonOptions({ source, status, validate, onSuccess, paymentMethod, fundingSource }) {
+    let processing = false;
+    const label = paymentMethod || "PayPal";
+    const style = { layout: "vertical", color: "gold", shape: "rect" };
+    if (!fundingSource) style.label = "paypal";
+    const options = {
+      style,
+      createOrder: async () => {
+        if (processing) throw new Error("Betaling wordt al verwerkt");
+        if (validate && !validate()) throw new Error("Checkout niet compleet");
+        const current = totals();
+        if (!current.lines.length) {
+          if (status) status.textContent = "Je winkelwagen is nog leeg.";
+          throw new Error("Winkelwagen leeg");
+        }
+        const order = await createServerPayPalOrder(current);
+        const orderId = order.id || order.orderID;
+        if (!orderId) throw new Error("Geen PayPal order ID ontvangen");
+        console.info(`${label}: PayPal order aangemaakt`, { orderId, status: order.status });
+        return orderId;
+      },
+      onApprove: async (data) => {
+        if (processing) return;
+        processing = true;
+        if (status) status.textContent = "Betaling wordt bevestigd...";
+        try {
+          console.info(`${label}: betaling goedgekeurd`, data);
+          const captureDetails = await captureServerPayPalOrder(data.orderID);
+          const capture = paypalCapture(captureDetails);
+          console.info(`${label}: PayPal capture ontvangen`, {
+            orderId: data.orderID,
+            orderStatus: captureDetails?.status,
+            captureId: capture?.id,
+            captureStatus: capture?.status
+          });
+          if (!paypalCaptureCompleted(captureDetails)) throw new Error(`${label} betaling niet bevestigd`);
+          await finalizePaidOrder(source(), {
+            transactionId: capture?.id || data.orderID || captureDetails?.id || "",
+            paymentStatus: "COMPLETED",
+            paymentMethod: label
+          }, onSuccess || {});
+        } catch (error) {
+          processing = false;
+          console.warn(`${label} checkout fout`, error);
+          if (status) status.textContent = `${label} kon de betaling niet bevestigen. Probeer opnieuw of kies PayPal.`;
+        }
+      },
+      onCancel: () => {
+        processing = false;
+        if (status) status.textContent = "Betaling geannuleerd. Je winkelwagen is bewaard.";
+      },
+      onError: (error) => {
+        processing = false;
+        console.warn(`${label} checkout fout`, error);
+        if (status) status.textContent = `${label} is tijdelijk niet beschikbaar. Probeer PayPal of probeer het later opnieuw.`;
+      }
+    };
+    if (fundingSource) options.fundingSource = fundingSource;
+    return options;
+  }
+
+  async function renderPayPalFundingButtons({ paypal, target, source, status, validate, onSuccess }) {
+    target.innerHTML = "";
+    const paypalSlot = document.createElement("div");
+    paypalSlot.className = "paypal-funding-slot";
+    target.appendChild(paypalSlot);
+    await paypal.Buttons(serverPayPalButtonOptions({
+      source,
+      status,
+      validate,
+      onSuccess,
+      paymentMethod: "PayPal"
+    })).render(paypalSlot);
+
+    const idealFunding = paypal.FUNDING?.IDEAL || "ideal";
+    const idealSlot = document.createElement("div");
+    idealSlot.className = "paypal-funding-slot paypal-funding-slot-ideal";
+    target.appendChild(idealSlot);
+    try {
+      const idealButtons = paypal.Buttons(serverPayPalButtonOptions({
+        source,
+        status,
+        validate,
+        onSuccess,
+        paymentMethod: "iDEAL via PayPal",
+        fundingSource: idealFunding
+      }));
+      if (typeof idealButtons.isEligible !== "function" || idealButtons.isEligible()) {
+        await idealButtons.render(idealSlot);
+      } else {
+        idealSlot.remove();
+        console.info("iDEAL via PayPal is niet eligible voor deze sessie");
+      }
+    } catch (error) {
+      idealSlot.remove();
+      console.info("iDEAL via PayPal kon niet worden weergegeven", error);
+    }
   }
 
   async function applePayConfig(paypal) {
@@ -684,7 +793,6 @@
       const totalsTarget = $("[data-quick-totals]", modal);
       let quickFormData = null;
       let paypalRendered = false;
-      let processing = false;
 
       totalsTarget.innerHTML = totalsHtml(data);
       modal.addEventListener("click", (event) => {
@@ -709,47 +817,14 @@
           const paypal = await loadPayPalSdk();
           paypalRendered = true;
           status.textContent = "";
-          paypal.Buttons({
-            style: { layout: "vertical", color: "gold", shape: "rect", label: "paypal" },
-            createOrder: (_data, actions) => {
-              if (processing) return Promise.reject(new Error("Betaling wordt al verwerkt"));
-              const current = totals();
-              if (!current.lines.length) {
-                status.textContent = "Je winkelwagen is nog leeg.";
-                return Promise.reject(new Error("Winkelwagen leeg"));
-              }
-              return actions.order.create({
-                purchase_units: [{
-                  description: "ORIVÈA Glantier bestelling",
-                  amount: { currency_code: CONFIG.paypalCurrency || CONFIG.currency || "EUR", value: current.total.toFixed(2) }
-                }]
-              });
-            },
-            onApprove: async (data, actions) => {
-              if (processing) return;
-              processing = true;
-              console.info("Snelle PayPal checkout: betaling autoriseren", data);
-              paypalTarget.style.pointerEvents = "none";
-              paypalTarget.style.opacity = "0.58";
-              status.textContent = "Betaling wordt bevestigd...";
-              const details = await actions.order.capture();
-              const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
-              const confirmed = capture?.status === "COMPLETED" || details?.status === "COMPLETED";
-              if (!confirmed) throw new Error("PayPal betaling niet bevestigd");
-              await finalizePaidOrder(quickFormData, {
-                transactionId: capture?.id || data.orderID || details?.id || "",
-                paymentStatus: "COMPLETED",
-                paymentMethod: "PayPal"
-              }, { redirect: "checkout.html?order=success" });
-            },
-            onError: (error) => {
-              console.warn("Snelle PayPal checkout fout", error);
-              processing = false;
-              paypalTarget.style.pointerEvents = "";
-              paypalTarget.style.opacity = "";
-              status.textContent = "PayPal kon de betaling niet bevestigen. Probeer opnieuw.";
-            }
-          }).render(paypalTarget);
+          await renderPayPalFundingButtons({
+            paypal,
+            target: paypalTarget,
+            source: () => quickFormData,
+            status,
+            validate: () => Boolean(quickFormData) && form.reportValidity(),
+            onSuccess: { redirect: "checkout.html?order=success" }
+          });
         } catch (error) {
           console.warn("Snelle PayPal checkout kon niet laden", error);
           status.textContent = "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
@@ -776,7 +851,6 @@
     if (!form) return;
     let step = 1;
     let paypalRendered = false;
-    let paymentProcessing = false;
     const status = $("[data-paypal-status]");
     const orderStatus = $("[data-order-status]");
     const successPanel = $("[data-order-success]");
@@ -829,40 +903,14 @@
         const paypal = await loadPayPalSdk();
         paypalRendered = true;
         if (status) status.textContent = '';
-        paypal.Buttons({
-          style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
-          createOrder: (_data, actions) => {
-            if (paymentProcessing) return Promise.reject(new Error('Betaling wordt al verwerkt'));
-            if (!validateCheckout()) return Promise.reject(new Error('Checkout niet compleet'));
-            const data = totals();
-            return actions.order.create({
-              purchase_units: [{
-                description: 'ORIVÈA Glantier bestelling',
-                amount: { currency_code: CONFIG.paypalCurrency || CONFIG.currency || 'EUR', value: data.total.toFixed(2) }
-              }]
-            });
-          },
-          onApprove: async (data, actions) => {
-            if (paymentProcessing) return;
-            paymentProcessing = true;
-            console.info("PayPal checkout: betaling autoriseren", data);
-            if (status) status.textContent = 'Betaling wordt bevestigd...';
-            const details = await actions.order.capture();
-            const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
-            const confirmed = capture?.status === 'COMPLETED' || details?.status === 'COMPLETED';
-            if (!confirmed) throw new Error('PayPal betaling niet bevestigd');
-            await finalizePaidOrder(form, {
-              transactionId: capture?.id || data.orderID || details?.id || '',
-              paymentStatus: 'COMPLETED',
-              paymentMethod: 'PayPal'
-            }, { successPanel, orderStatus, showStep });
-          },
-          onError: (error) => {
-            paymentProcessing = false;
-            console.warn("PayPal checkout fout", error);
-            if (status) status.textContent = 'PayPal kon de betaling niet bevestigen. Controleer je gegevens en probeer opnieuw.';
-          }
-        }).render(target);
+        await renderPayPalFundingButtons({
+          paypal,
+          target,
+          source: () => form,
+          status,
+          validate: validateCheckout,
+          onSuccess: { successPanel, orderStatus, showStep }
+        });
       } catch (error) {
         console.warn("PayPal kon niet laden", error);
         if (status) status.textContent = 'PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.';
