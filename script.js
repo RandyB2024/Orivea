@@ -4,7 +4,6 @@
   const CART_KEY = "orivea_glantier_cart";
   const ORDERS_KEY = "orivea_orders";
   const LAST_ORDER_KEY = "orivea_last_order";
-  const QUICK_CUSTOMER_KEY = "orivea_quick_customer";
   const CATALOG_CONFIG = {
     productsPerPage: 8
   };
@@ -18,7 +17,6 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const money = (value) => currency.format(Number(value || 0));
   const normalize = (value) => String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
-  const attr = (value) => String(value || "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
   const productById = (id) => PRODUCTS.find((product) => product.id === id);
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
   const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
@@ -423,24 +421,6 @@
     };
   }
 
-  function quickCustomerData() {
-    try {
-      return JSON.parse(localStorage.getItem(QUICK_CUSTOMER_KEY) || "null");
-    } catch {
-      return null;
-    }
-  }
-
-  function saveQuickCustomerData(data) {
-    const normalized = normalizeOrderFormData(data);
-    localStorage.setItem(QUICK_CUSTOMER_KEY, JSON.stringify(normalized));
-    return normalized;
-  }
-
-  function hasQuickCustomerData(data = quickCustomerData()) {
-    return Boolean(data?.customer_name && data?.customer_email && data?.customer_phone && data?.street && data?.house_number && data?.postal_code && data?.city);
-  }
-
   function buildOrderPayload(form, paypal) {
     const data = totals();
     const formData = normalizeOrderFormData(form);
@@ -482,7 +462,7 @@
         return;
       }
       const script = document.createElement("script");
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons,applepay&enable-funding=ideal,wero&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons,applepay&currency=${encodeURIComponent(CONFIG.paypalCurrency || CONFIG.currency || "EUR")}&intent=capture`;
       script.dataset.paypalSdk = "true";
       script.onload = () => window.paypal ? resolve(window.paypal) : reject(new Error("PayPal SDK niet beschikbaar na laden"));
       script.onerror = () => reject(new Error("PayPal SDK kon niet laden"));
@@ -775,189 +755,6 @@
           status.textContent = "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
         }
       });
-    });
-  }
-
-  function quickCustomerModal() {
-    document.querySelector("[data-quick-customer-modal]")?.remove();
-    const saved = quickCustomerData() || {};
-    const modal = document.createElement("div");
-    modal.className = "premium-modal quick-checkout-modal";
-    modal.dataset.quickCustomerModal = "true";
-    modal.innerHTML = `<div class="premium-modal-panel quick-checkout-panel quick-customer-panel" role="dialog" aria-modal="true" aria-label="Snel betalen gegevens">
-      <button class="drawer-close" type="button" data-quick-close>Sluiten</button>
-      <div>
-        <p class="eyebrow">Snel betalen</p>
-        <h2>Gegevens</h2>
-        <p class="quick-intro">Vul je gegevens eenmalig in en rond je bestelling direct af met je favoriete betaalmethode.</p>
-        <form class="quick-checkout-form" data-quick-form>
-          <label>Naam<input name="customer_name" autocomplete="name" required value="${attr(saved.customer_name)}"></label>
-          <label>E-mailadres<input type="email" name="customer_email" autocomplete="email" required value="${attr(saved.customer_email)}"></label>
-          <label>Telefoon<input name="customer_phone" autocomplete="tel" required value="${attr(saved.customer_phone)}"></label>
-          <div class="two-col">
-            <label>Straat<input name="street" autocomplete="address-line1" required value="${attr(saved.street)}"></label>
-            <label>Huisnummer<input name="house_number" required value="${attr(saved.house_number)}"></label>
-          </div>
-          <div class="two-col">
-            <label>Postcode<input name="postal_code" autocomplete="postal-code" required value="${attr(saved.postal_code)}"></label>
-            <label>Plaats<input name="city" autocomplete="address-level2" required value="${attr(saved.city)}"></label>
-          </div>
-          <button class="button primary full" type="submit">Gegevens opslaan</button>
-        </form>
-      </div>
-      <div class="quick-payment-panel">
-        <h3>Snel bestellen</h3>
-        <p>Na opslaan kun je direct veilig betalen via PayPal, iDEAL, Wero of Apple Pay als dit op je apparaat beschikbaar is.</p>
-        <p class="notice">Bij iedere bestelling ontvang je gratis een willekeurige ORIV&Eacute;A Discovery Sample.</p>
-      </div>
-    </div>`;
-    document.body.appendChild(modal);
-    return new Promise((resolve) => {
-      const close = (value = null) => {
-        modal.remove();
-        resolve(value);
-      };
-      modal.addEventListener("click", (event) => {
-        if (event.target === modal || event.target.closest("[data-quick-close]")) close(null);
-      });
-      $("[data-quick-form]", modal).addEventListener("submit", (event) => {
-        event.preventDefault();
-        const form = event.currentTarget;
-        if (!form.reportValidity()) return;
-        close(saveQuickCustomerData(checkoutFormData(form)));
-      });
-    });
-  }
-
-  async function ensureQuickCustomerData(status) {
-    const saved = quickCustomerData();
-    if (hasQuickCustomerData(saved)) return saved;
-    if (status) status.textContent = "Vul je gegevens eenmalig in om snel te betalen.";
-    const data = await quickCustomerModal();
-    if (data && status) status.textContent = "Gegevens opgeslagen. Kies je betaalmethode.";
-    return data;
-  }
-
-  function renderFundingButton({ paypal, target, fundingSource, paymentMethod, status }) {
-    if (!target || !fundingSource || target.dataset.paypalReady === "true") return;
-    target.hidden = true;
-    try {
-      const button = paypal.Buttons({
-        fundingSource,
-        style: { layout: "vertical", color: "gold", shape: "rect", label: "paypal" },
-        onClick: async (_data, actions) => {
-          const current = totals();
-          if (!current.lines.length) {
-            if (status) status.textContent = "Je winkelwagen is nog leeg.";
-            return actions.reject();
-          }
-          const customer = await ensureQuickCustomerData(status);
-          if (!hasQuickCustomerData(customer)) return actions.reject();
-          return actions.resolve();
-        },
-        createOrder: (_data, actions) => {
-          const current = totals();
-          if (!current.lines.length) {
-            if (status) status.textContent = "Je winkelwagen is nog leeg.";
-            return Promise.reject(new Error("Winkelwagen leeg"));
-          }
-          return actions.order.create({
-            purchase_units: [{
-              description: "ORIVÃˆA Glantier bestelling",
-              amount: { currency_code: CONFIG.paypalCurrency || CONFIG.currency || "EUR", value: current.total.toFixed(2) }
-            }]
-          });
-        },
-        onApprove: async (data, actions) => {
-          if (target.dataset.processing === "true") return;
-          target.dataset.processing = "true";
-          target.style.pointerEvents = "none";
-          target.style.opacity = "0.58";
-          if (status) status.textContent = "Betaling wordt bevestigd...";
-          try {
-            console.info(`Snelle ${paymentMethod} checkout: betaling autoriseren`, data);
-            const details = await actions.order.capture();
-            const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
-            const confirmed = capture?.status === "COMPLETED" || details?.status === "COMPLETED";
-            if (!confirmed) throw new Error(`${paymentMethod} betaling niet bevestigd`);
-            await finalizePaidOrder(quickCustomerData(), {
-              transactionId: capture?.id || data.orderID || details?.id || "",
-              paymentStatus: "COMPLETED",
-              paymentMethod
-            }, { redirect: "checkout.html?order=success" });
-          } catch (error) {
-            console.warn(`Snelle ${paymentMethod} checkout fout`, error);
-            target.dataset.processing = "false";
-            target.style.pointerEvents = "";
-            target.style.opacity = "";
-            if (status) status.textContent = `${paymentMethod} kon de betaling niet bevestigen. Probeer opnieuw.`;
-          }
-        },
-        onError: (error) => {
-          console.warn(`Snelle ${paymentMethod} checkout fout`, error);
-          target.dataset.processing = "false";
-          target.style.pointerEvents = "";
-          target.style.opacity = "";
-          if (status) status.textContent = `${paymentMethod} is tijdelijk niet beschikbaar. Probeer opnieuw.`;
-        }
-      });
-      if (button.isEligible && !button.isEligible()) return;
-      target.hidden = false;
-      target.dataset.paypalReady = "true";
-      button.render(target);
-    } catch (error) {
-      console.warn(`${paymentMethod} via PayPal is niet beschikbaar`, error);
-      target.hidden = true;
-    }
-  }
-
-  function initQuickCheckout() {
-    const drawerPanel = $(".drawer-panel");
-    if (!drawerPanel || drawerPanel.querySelector("[data-quick-payments]")) return;
-    const checkoutLink = drawerPanel.querySelector('a[href="checkout.html"]');
-    if (!checkoutLink) return;
-    if (!drawerPanel.querySelector("[data-continue-shopping]")) {
-      const continueLink = document.createElement("a");
-      continueLink.className = "button ghost full continue-shopping-button";
-      continueLink.href = "catalogus.html";
-      continueLink.dataset.continueShopping = "true";
-      continueLink.textContent = "Verder winkelen";
-      checkoutLink.insertAdjacentElement("beforebegin", continueLink);
-    }
-    const quickBlock = document.createElement("section");
-    quickBlock.className = "quick-cart-pay";
-    quickBlock.innerHTML = `<h3>Snel betalen</h3>
-      <p>Rond je bestelling direct af met je favoriete betaalmethode.</p>
-      <div class="quick-payments" data-quick-payments>
-        <div class="quick-payment-slot" data-quick-paypal></div>
-        <div class="quick-payment-slot" data-quick-ideal hidden></div>
-        <div class="quick-payment-slot" data-quick-wero hidden></div>
-        <div class="quick-payment-slot" data-quick-apple-pay hidden></div>
-      </div>
-      <p class="notice">Veilig betalen via PayPal.</p>
-      <p class="form-status" data-quick-status></p>`;
-    checkoutLink.insertAdjacentElement("afterend", quickBlock);
-
-    const status = $("[data-quick-status]", quickBlock);
-    loadPayPalSdk().then((paypal) => {
-      renderFundingButton({ paypal, target: $("[data-quick-paypal]", quickBlock), fundingSource: paypal.FUNDING?.PAYPAL || "paypal", paymentMethod: "PayPal", status });
-      renderFundingButton({ paypal, target: $("[data-quick-ideal]", quickBlock), fundingSource: paypal.FUNDING?.IDEAL, paymentMethod: "iDEAL", status });
-      renderFundingButton({ paypal, target: $("[data-quick-wero]", quickBlock), fundingSource: paypal.FUNDING?.WERO, paymentMethod: "Wero", status });
-      renderApplePayButton({
-        target: $("[data-quick-apple-pay]", quickBlock),
-        source: () => quickCustomerData(),
-        status,
-        validate: () => {
-          if (hasQuickCustomerData()) return true;
-          ensureQuickCustomerData(status);
-          return false;
-        },
-        onSuccess: { redirect: "checkout.html?order=success" },
-        label: "Snel betalen met Apple Pay"
-      });
-    }).catch((error) => {
-      console.warn("Snelle betaalopties konden niet laden", error);
-      if (status) status.textContent = "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
     });
   }
 
