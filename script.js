@@ -109,7 +109,8 @@
       return { ...item, key: itemKey(item), product: productVariant(base, item.variant || "signature") };
     }).filter((line) => line.product);
     const subtotal = lines.reduce((sum, line) => sum + line.product.prijs * line.qty, 0);
-    const shipping = shippingFor(subtotal);
+    const shippableSubtotal = lines.reduce((sum, line) => line.product.freeShipping ? sum : sum + line.product.prijs * line.qty, 0);
+    const shipping = shippingFor(shippableSubtotal);
     return { lines, subtotal, shipping, total: subtotal + shipping };
   }
 

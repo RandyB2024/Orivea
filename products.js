@@ -41,6 +41,28 @@ window.ORIVEA_CONFIG = {
 
 window.ORIVEA_PRODUCTS = [
   {
+    "id": "testbetaling-010",
+    "naam": "ORIVÈA Testbetaling",
+    "type": "Testproduct",
+    "inhoud": "Digitale betaaltest",
+    "doelgroep": "Test",
+    "categorie": "Testbetaling",
+    "geurgroep": "Betaaltest",
+    "premiumBeschikbaar": false,
+    "prijs": 0.10,
+    "freeShipping": true,
+    "image": "assets/images/orivea-discovery-sample-transparent.png",
+    "omschrijving": "Testproduct om veilig te controleren of de betaling en orderbevestiging correct doorkomen.",
+    "moment": "Alleen voor betaaltesten",
+    "zoektermen": [
+      "test",
+      "testbetaling",
+      "paypal",
+      "ideal",
+      "betaling"
+    ]
+  },
+  {
     "id": "401",
     "glantierNummer": "401",
     "naam": "Glantier No. 401",
