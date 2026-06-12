@@ -462,6 +462,7 @@
     const province = form.elements.province;
     if (!postal || !houseNumber || !street || !city) return;
     form.dataset.addressAutocomplete = "true";
+    const result = form.querySelector("[data-address-result]");
 
     let status = form.querySelector("[data-address-status]");
     if (!status) {
@@ -470,6 +471,14 @@
       status.dataset.addressStatus = "true";
       city.closest("label")?.insertAdjacentElement("afterend", status);
     }
+
+    const setAddressFieldsVisible = (visible) => {
+      if (result) result.hidden = !visible;
+      [street, city, province].filter(Boolean).forEach((field) => {
+        field.disabled = !visible;
+      });
+    };
+    setAddressFieldsVisible(Boolean(street.value || city.value));
 
     let timer = null;
     let lastLookup = "";
@@ -481,6 +490,7 @@
         if (postal.value && normalizedPostcode !== postal.value.toUpperCase()) postal.value = normalizedPostcode;
         if (!normalizedPostcode || !normalizedHouseNumber || !isValidDutchPostcode(normalizedPostcode)) {
           status.textContent = "";
+          setAddressFieldsVisible(false);
           return;
         }
         const key = `${normalizedPostcode}|${normalizedHouseNumber}|${addition?.value || ""}`;
@@ -490,9 +500,11 @@
         try {
           const address = await lookupAddress(normalizedPostcode, normalizedHouseNumber, addition?.value || "");
           if (!address?.street || !address?.city) {
+            setAddressFieldsVisible(true);
             status.textContent = "Adres niet gevonden. Vul je adres handmatig in.";
             return;
           }
+          setAddressFieldsVisible(true);
           street.value = address.street;
           houseNumber.value = address.houseNumber;
           if (addition && address.addition) addition.value = address.addition;
@@ -854,18 +866,20 @@
           <label>E-mailadres<input type="email" name="customer_email" autocomplete="email" required></label>
           <label>Telefoon<input name="customer_phone" autocomplete="tel" required></label>
           <div class="two-col">
-            <label>Straat<input name="street" autocomplete="address-line1" required></label>
             <label>Huisnummer<input name="house_number" inputmode="numeric" pattern="[0-9]*" required></label>
-          </div>
-          <div class="two-col">
-            <label>Toevoeging<input name="addition" autocomplete="address-line2"></label>
             <label>Postcode<input name="postal_code" autocomplete="postal-code" required></label>
           </div>
-          <div class="two-col">
-            <label>Plaats<input name="city" autocomplete="address-level2" required></label>
-            <label>Provincie<input name="province" autocomplete="address-level1"></label>
+          <div class="address-addition-row">
+            <label>Toevoeging<input name="addition" autocomplete="address-line2"></label>
           </div>
           <p class="address-status" data-address-status></p>
+          <div class="address-result" data-address-result hidden>
+            <div class="two-col">
+              <label>Straat<input name="street" autocomplete="address-line1" required></label>
+              <label>Plaats<input name="city" autocomplete="address-level2" required></label>
+            </div>
+            <label>Provincie<input name="province" autocomplete="address-level1"></label>
+          </div>
           <button class="button primary full" type="submit">Betaalopties tonen</button>
         </form>
       </div>
@@ -926,6 +940,13 @@
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        const hiddenAddress = form.querySelector("[data-address-result][hidden]");
+        if (hiddenAddress) {
+          hiddenAddress.hidden = false;
+          $$("input", hiddenAddress).forEach((field) => { field.disabled = false; });
+          const addressStatus = $("[data-address-status]", form);
+          if (addressStatus) addressStatus.textContent = "Controleer je adres of vul het handmatig aan.";
+        }
         if (!form.reportValidity()) return;
         quickFormData = checkoutFormData(form);
         paypalTarget.hidden = false;
@@ -1002,6 +1023,16 @@
 
     const validateVisibleStep = () => {
       const current = $(`[data-step="${step}"]`, form);
+      const hiddenAddress = current?.querySelector("[data-address-result][hidden]");
+      if (hiddenAddress) {
+        hiddenAddress.hidden = false;
+        $$("input", hiddenAddress).forEach((field) => { field.disabled = false; });
+        const addressStatus = $("[data-address-status]", current);
+        if (addressStatus) addressStatus.textContent = "Controleer je adres of vul het handmatig aan.";
+        const streetFocus = hiddenAddress.querySelector("input[name='street']");
+        if (streetFocus) streetFocus.focus();
+        return false;
+      }
       const fields = current ? $$('input, textarea, select', current) : [];
       for (const field of fields) {
         if (!field.checkValidity()) {

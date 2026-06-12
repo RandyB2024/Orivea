@@ -53,18 +53,20 @@
     <section class="checkout-step" data-step="2">
       <h2>Verzendgegevens</h2>
       <div class="two-col">
-        <label>Straat<input name="street" required></label>
         <label>Huisnummer<input name="house_number" inputmode="numeric" pattern="[0-9]*" required></label>
-      </div>
-      <div class="two-col">
-        <label>Toevoeging<input name="addition" autocomplete="address-line2"></label>
         <label>Postcode<input name="postal_code" autocomplete="postal-code" required></label>
       </div>
-      <div class="two-col">
-        <label>Plaats<input name="city" required></label>
-        <label>Provincie<input name="province"></label>
+      <div class="address-addition-row">
+        <label>Toevoeging<input name="addition" autocomplete="address-line2"></label>
       </div>
       <p class="address-status" data-address-status></p>
+      <div class="address-result" data-address-result hidden>
+        <div class="two-col">
+          <label>Straat<input name="street" required></label>
+          <label>Plaats<input name="city" required></label>
+        </div>
+        <label>Provincie<input name="province"></label>
+      </div>
       <label>Opmerking<textarea name="note" rows="4"></textarea></label>
       <div class="step-actions"><a class="button ghost continue-shopping-button" href="catalogus.html">Verder winkelen</a><button class="button ghost" type="button" data-prev-step>Terug</button><button class="button primary" type="button" data-next-step>Volgende</button></div>
     </section>
