@@ -29,5 +29,6 @@
 .payment-badges{display:flex;flex-wrap:wrap;gap:8px;max-width:260px}
 .payment-badges span{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:6px 10px;border:1px solid rgba(217,184,117,.3);border-radius:999px;background:linear-gradient(145deg,rgba(217,184,117,.1),rgba(255,255,255,.035));color:var(--gold2)!important;font-size:.76rem;font-weight:700;letter-spacing:.03em;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
 .paypal-funding-slot + .paypal-funding-slot{margin-top:10px}
+.address-status{min-height:1.4em;margin:0;color:var(--gold2);font-size:.9rem}
 @media (max-width:980px){.site-footer{grid-template-columns:1fr}.payment-badges{max-width:360px}}
 

@@ -402,23 +402,152 @@
     return `ORI-${date.toISOString().slice(0, 10).replaceAll("-", "")}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
   }
 
+  function normalizePostcode(postcode) {
+    const compact = String(postcode || "").toUpperCase().replace(/\s+/g, "");
+    return /^[1-9][0-9]{3}[A-Z]{2}$/.test(compact) ? `${compact.slice(0, 4)} ${compact.slice(4)}` : compact;
+  }
+
+  function isValidDutchPostcode(postcode) {
+    return /^[1-9][0-9]{3}\s?[A-Z]{2}$/i.test(String(postcode || "").trim());
+  }
+
+  function normalizeHouseNumber(value) {
+    const match = String(value || "").match(/\d+/);
+    return match ? match[0] : "";
+  }
+
+  async function lookupAddress(postcode, houseNumber, addition = "") {
+    const normalizedPostcode = normalizePostcode(postcode);
+    const normalizedHouseNumber = normalizeHouseNumber(houseNumber);
+    if (!normalizedPostcode || !normalizedHouseNumber) return null;
+    const params = new URLSearchParams();
+    params.set("rows", "10");
+    params.set("q", "*:*");
+    params.append("fq", "type:adres");
+    params.append("fq", `postcode:${normalizedPostcode.replace(/\s+/g, "")}`);
+    params.append("fq", `huisnummer:${normalizedHouseNumber}`);
+    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?${params.toString()}`;
+    const response = await fetch(url, { headers: { Accept: "application/json" } });
+    if (!response.ok) throw new Error("Adreslookup mislukt");
+    const data = await response.json();
+    const docs = data?.response?.docs || [];
+    const normalizedAddition = normalize(addition);
+    const doc = normalizedAddition
+      ? docs.find((item) => normalize([item.huisletter, item.huisnummertoevoeging, item.huis_nlt].filter(Boolean).join(" ")).includes(normalizedAddition)) || docs[0]
+      : docs[0];
+    if (!doc) return null;
+    return {
+      street: doc.straatnaam || doc.weergavenaam?.split(" ")[0] || "",
+      houseNumber: doc.huisnummer || normalizedHouseNumber,
+      addition: doc.huisletter || doc.huisnummertoevoeging || addition || "",
+      postalCode: normalizePostcode(doc.postcode || normalizedPostcode),
+      city: doc.woonplaatsnaam || "",
+      province: doc.provincienaam || ""
+    };
+  }
+
+  function formatAddress(addressData) {
+    if (!addressData) return "";
+    const addition = addressData.addition ? ` ${addressData.addition}` : "";
+    return `${addressData.street} ${addressData.houseNumber}${addition}\n${addressData.postalCode} ${addressData.city}`.trim();
+  }
+
+  function setupAddressAutocomplete(form) {
+    if (!form || form.dataset.addressAutocomplete === "true") return;
+    const postal = form.elements.postal_code;
+    const houseNumber = form.elements.house_number;
+    const addition = form.elements.addition;
+    const street = form.elements.street;
+    const city = form.elements.city;
+    const province = form.elements.province;
+    if (!postal || !houseNumber || !street || !city) return;
+    form.dataset.addressAutocomplete = "true";
+
+    let status = form.querySelector("[data-address-status]");
+    if (!status) {
+      status = document.createElement("p");
+      status.className = "address-status";
+      status.dataset.addressStatus = "true";
+      city.closest("label")?.insertAdjacentElement("afterend", status);
+    }
+
+    let timer = null;
+    let lastLookup = "";
+    const runLookup = () => {
+      clearTimeout(timer);
+      timer = setTimeout(async () => {
+        const normalizedPostcode = normalizePostcode(postal.value);
+        const normalizedHouseNumber = normalizeHouseNumber(houseNumber.value);
+        if (postal.value && normalizedPostcode !== postal.value.toUpperCase()) postal.value = normalizedPostcode;
+        if (!normalizedPostcode || !normalizedHouseNumber || !isValidDutchPostcode(normalizedPostcode)) {
+          status.textContent = "";
+          return;
+        }
+        const key = `${normalizedPostcode}|${normalizedHouseNumber}|${addition?.value || ""}`;
+        if (key === lastLookup) return;
+        lastLookup = key;
+        status.textContent = "Adres zoeken...";
+        try {
+          const address = await lookupAddress(normalizedPostcode, normalizedHouseNumber, addition?.value || "");
+          if (!address?.street || !address?.city) {
+            status.textContent = "Adres niet gevonden. Vul je adres handmatig in.";
+            return;
+          }
+          street.value = address.street;
+          houseNumber.value = address.houseNumber;
+          if (addition && address.addition) addition.value = address.addition;
+          postal.value = address.postalCode;
+          city.value = address.city;
+          if (province) province.value = address.province || "";
+          status.textContent = "Adres gevonden";
+        } catch (error) {
+          console.info("Adreslookup niet beschikbaar", error);
+          status.textContent = "Adres niet gevonden. Vul je adres handmatig in.";
+        }
+      }, 450);
+    };
+
+    [postal, houseNumber, addition].filter(Boolean).forEach((field) => {
+      field.addEventListener("input", runLookup);
+      field.addEventListener("blur", runLookup);
+    });
+  }
+
   function formatOrderLines(data) {
     return data.lines.map((line) => `${line.qty}x ${line.product.naam} (${line.product.type}, ${line.product.inhoud}) - ${money(line.product.prijs * line.qty)}`).join("\n");
   }
 
   function checkoutFormData(form) {
     const formData = Object.fromEntries(new FormData(form).entries());
+    const addressData = {
+      street: formData.street || "",
+      houseNumber: formData.house_number || "",
+      addition: formData.addition || "",
+      postalCode: normalizePostcode(formData.postal_code || ""),
+      city: formData.city || "",
+      province: formData.province || ""
+    };
     return {
       ...formData,
-      customer_address: ((formData.street || "") + " " + (formData.house_number || "") + ", " + (formData.postal_code || "") + " " + (formData.city || "")).trim()
+      postal_code: addressData.postalCode,
+      customer_address: formatAddress(addressData)
     };
   }
 
   function normalizeOrderFormData(source) {
     const formData = source instanceof HTMLFormElement ? checkoutFormData(source) : source || {};
+    const addressData = {
+      street: formData.street || "",
+      houseNumber: formData.house_number || "",
+      addition: formData.addition || "",
+      postalCode: normalizePostcode(formData.postal_code || ""),
+      city: formData.city || "",
+      province: formData.province || ""
+    };
     return {
       ...formData,
-      customer_address: formData.customer_address || ((formData.street || "") + " " + (formData.house_number || "") + ", " + (formData.postal_code || "") + " " + (formData.city || "")).trim()
+      postal_code: addressData.postalCode,
+      customer_address: formData.customer_address || formatAddress(addressData)
     };
   }
 
@@ -726,12 +855,17 @@
           <label>Telefoon<input name="customer_phone" autocomplete="tel" required></label>
           <div class="two-col">
             <label>Straat<input name="street" autocomplete="address-line1" required></label>
-            <label>Huisnummer<input name="house_number" required></label>
+            <label>Huisnummer<input name="house_number" inputmode="numeric" pattern="[0-9]*" required></label>
           </div>
           <div class="two-col">
+            <label>Toevoeging<input name="addition" autocomplete="address-line2"></label>
             <label>Postcode<input name="postal_code" autocomplete="postal-code" required></label>
-            <label>Plaats<input name="city" autocomplete="address-level2" required></label>
           </div>
+          <div class="two-col">
+            <label>Plaats<input name="city" autocomplete="address-level2" required></label>
+            <label>Provincie<input name="province" autocomplete="address-level1"></label>
+          </div>
+          <p class="address-status" data-address-status></p>
           <button class="button primary full" type="submit">Betaalopties tonen</button>
         </form>
       </div>
@@ -784,6 +918,7 @@
       let quickFormData = null;
       let paypalRendered = false;
 
+      setupAddressAutocomplete(form);
       totalsTarget.innerHTML = totalsHtml(data);
       modal.addEventListener("click", (event) => {
         if (event.target === modal || event.target.closest("[data-quick-close]")) modal.remove();
@@ -839,6 +974,7 @@
   function initCheckout() {
     const form = $("[data-checkout-form]");
     if (!form) return;
+    setupAddressAutocomplete(form);
     let step = 1;
     let paypalRendered = false;
     const status = $("[data-paypal-status]");
