@@ -3647,7 +3647,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Aventus",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-24.png",
+    "image": "assets/images/glantier-heren-random-18.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -3924,7 +3924,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Spicebomb",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-24.png",
+    "image": "assets/images/glantier-heren-random-21.png",
     "omschrijving": "Een verfijnd kruidig, warm geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -4481,7 +4481,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Le Male",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-24.png",
+    "image": "assets/images/glantier-heren-random-07.png",
     "omschrijving": "Een verfijnd oriëntaals, varen geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -4496,7 +4496,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-heren-random-24.png"
+    "premiumImage": "assets/images/glantier-heren-random-07.png"
   },
   {
     "id": "739",
@@ -4535,7 +4535,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Spicebomb",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-24.png",
+    "image": "assets/images/glantier-heren-random-14.png",
     "omschrijving": "Een verfijnd kruidig, warm geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -5059,7 +5059,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Eros Flame",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-24.png",
+    "image": "assets/images/glantier-heren-random-02.jpg",
     "omschrijving": "Een verfijnd houtachtig, kruidig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -5403,7 +5403,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "1 Million Royal",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-24.png",
+    "image": "assets/images/glantier-heren-random-08.png",
     "omschrijving": "Een verfijnd oriëntaals, houtachtig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
