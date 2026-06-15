@@ -75,7 +75,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Lacoste Pour Femme",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-20.png",
     "omschrijving": "Een verfijnd floraal, houtachtig, muskus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -90,7 +90,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-20.png"
   },
   {
     "id": "402",
@@ -105,7 +105,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Amor Amor",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-26.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -130,7 +130,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Alien",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-21.png",
     "omschrijving": "Een verfijnd oriëntaals, houtachtig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -145,7 +145,7 @@ window.ORIVEA_PRODUCTS = [
       "thierry mugler"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-21.png"
   },
   {
     "id": "404",
@@ -160,7 +160,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chance",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-04.jpg",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -175,7 +175,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-04.jpg"
   },
   {
     "id": "409",
@@ -190,7 +190,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Guilty",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -215,7 +215,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Jimmy Choo",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd chypre, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -239,7 +239,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "D&G Light Blue",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -254,7 +254,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-01.jpg"
   },
   {
     "id": "412",
@@ -269,7 +269,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Bruno Banani Woman",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-08.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -294,7 +294,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Naomi Campbell",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -318,7 +318,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Lady Million",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-09.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -333,7 +333,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-09.jpg"
   },
   {
     "id": "416",
@@ -348,7 +348,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chloe Eau De Parfum",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -363,7 +363,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-12.jpeg"
   },
   {
     "id": "417",
@@ -378,7 +378,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Crystal Noir",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -393,7 +393,7 @@ window.ORIVEA_PRODUCTS = [
       "versace"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "432",
@@ -408,7 +408,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Moschino Funny!",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -433,7 +433,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Boss Woman",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-26.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -458,7 +458,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Green Tea",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-07.jpg",
     "omschrijving": "Een verfijnd citrus, aromatisch geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -483,7 +483,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "DKNY Be Delicious",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -498,7 +498,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-01.jpg"
   },
   {
     "id": "455",
@@ -513,7 +513,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Flower by Kenzo",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -538,7 +538,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miracle",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -563,7 +563,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chanel No. 5",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-10.png",
     "omschrijving": "Een verfijnd floraal, aldehyde, citrus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -588,7 +588,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Euphoria Blossom",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -603,7 +603,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-17.png"
   },
   {
     "id": "477",
@@ -618,7 +618,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "La Vie Est Belle",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-08.jpg",
     "omschrijving": "Een verfijnd floraal, praline geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -633,7 +633,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-08.jpg"
   },
   {
     "id": "478",
@@ -648,7 +648,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Christina Aguilera",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -672,7 +672,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Eternity",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -697,7 +697,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Acqua di Gio",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-09.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -722,7 +722,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Angel",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -737,7 +737,7 @@ window.ORIVEA_PRODUCTS = [
       "zoet"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-01.jpg"
   },
   {
     "id": "488",
@@ -752,7 +752,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Dolce Vita",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-22.png",
     "omschrijving": "Een verfijnd oriëntaals, houtachtig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -777,7 +777,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "212 VIP",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-02.jpg",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -802,7 +802,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Kenzo Jungle L'Elephant",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-20.png",
     "omschrijving": "Een verfijnd oriëntaals, kruidig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -827,7 +827,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "1881",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -852,7 +852,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Bright Crystal",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -867,7 +867,7 @@ window.ORIVEA_PRODUCTS = [
       "versace"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-24.png"
   },
   {
     "id": "496",
@@ -882,7 +882,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Cool Water",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-13.png",
     "omschrijving": "Een verfijnd floraal, aquatisch geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -907,7 +907,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "CK IN2U for Her",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -922,7 +922,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-16.png"
   },
   {
     "id": "500",
@@ -937,7 +937,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-18.png",
     "omschrijving": "Een verfijnd chypre, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -952,7 +952,7 @@ window.ORIVEA_PRODUCTS = [
       "si"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-18.png"
   },
   {
     "id": "501",
@@ -967,7 +967,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Euphoria",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -982,7 +982,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-17.png"
   },
   {
     "id": "502",
@@ -997,7 +997,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-26.png",
     "omschrijving": "Een verfijnd zoet, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1021,7 +1021,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chloe",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-19.png",
     "omschrijving": "Een verfijnd romantisch, roos geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1044,7 +1044,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-23.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1068,7 +1068,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Boss Nuit Pour Femme",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1093,7 +1093,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Alien",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd chypre, elegant geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1117,7 +1117,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Coco Mademoiselle",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-04.jpg",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1132,7 +1132,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-04.jpg"
   },
   {
     "id": "508",
@@ -1147,7 +1147,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Hugo Woman",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1172,7 +1172,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chloe",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd romantisch, roos geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1195,7 +1195,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-06.jpg",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1219,7 +1219,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miss Dior",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd avond, intens geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1243,7 +1243,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Hypnotic Poison",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -1268,7 +1268,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Acqua di Gioia",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-03.jpg",
     "omschrijving": "Een verfijnd floraal, aquatisch geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1283,7 +1283,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-03.jpg"
   },
   {
     "id": "514",
@@ -1298,7 +1298,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-08.jpg",
     "omschrijving": "Een verfijnd zoet, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1322,7 +1322,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Boss Orange",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1337,7 +1337,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "516",
@@ -1352,7 +1352,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-20.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1376,7 +1376,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Emporio Armani Lei",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -1401,7 +1401,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Touch of Pink",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-09.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1426,7 +1426,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "J'adore",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-14.jpg",
     "omschrijving": "Een verfijnd fris, bloemig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1450,7 +1450,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd zoet, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1474,7 +1474,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Rose The One",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1499,7 +1499,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-21.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1523,7 +1523,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miss Dior",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-02.jpg",
     "omschrijving": "Een verfijnd avond, intens geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1547,7 +1547,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Alien",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-18.png",
     "omschrijving": "Een verfijnd chypre, elegant geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1571,7 +1571,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "J'adore",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-26.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1586,7 +1586,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-26.png"
   },
   {
     "id": "526",
@@ -1601,7 +1601,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd zoet, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1625,7 +1625,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chloe",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-19.png",
     "omschrijving": "Een verfijnd romantisch, roos geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1648,7 +1648,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Flora by Gucci",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1673,7 +1673,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Gucci Rush 2",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-22.png",
     "omschrijving": "Een verfijnd floraal, muskus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1688,7 +1688,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-22.png"
   },
   {
     "id": "530",
@@ -1703,7 +1703,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Noa",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-23.png",
     "omschrijving": "Een verfijnd floraal, houtachtig, muskus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1728,7 +1728,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Versense",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-06.jpg",
     "omschrijving": "Een verfijnd floraal, muskus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1743,7 +1743,7 @@ window.ORIVEA_PRODUCTS = [
       "versense"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-06.jpg"
   },
   {
     "id": "532",
@@ -1758,7 +1758,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-08.jpg",
     "omschrijving": "Een verfijnd zoet, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1782,7 +1782,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Gucci Rush",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd chypre, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1797,7 +1797,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "534",
@@ -1812,7 +1812,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-20.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1836,7 +1836,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miss Dior",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-20.png",
     "omschrijving": "Een verfijnd avond, intens geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1860,7 +1860,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Alien",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-04.jpg",
     "omschrijving": "Een verfijnd chypre, elegant geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1884,7 +1884,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "J'adore",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-07.jpg",
     "omschrijving": "Een verfijnd fris, bloemig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1908,7 +1908,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Boss Ma Vie Pour Femme",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1923,7 +1923,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-17.png"
   },
   {
     "id": "539",
@@ -1938,7 +1938,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chloe",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd romantisch, roos geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -1961,7 +1961,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-21.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -1985,7 +1985,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miss Dior",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd avond, intens geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -2009,7 +2009,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-22.png",
     "omschrijving": "Een verfijnd floraal, houtachtig, muskus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2034,7 +2034,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "J'adore",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-10.png",
     "omschrijving": "Een verfijnd fris, bloemig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2058,7 +2058,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Olympea",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2073,7 +2073,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-12.jpeg"
   },
   {
     "id": "545",
@@ -2088,7 +2088,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chance Eau Tendre",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-09.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2103,7 +2103,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-09.jpg"
   },
   {
     "id": "546",
@@ -2118,7 +2118,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-23.png",
     "omschrijving": "Een verfijnd luxe, amber geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -2142,7 +2142,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miss Dior",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd avond, intens geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Overdag en avond",
     "zoektermen": [
@@ -2166,7 +2166,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Black Opium",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd oriëntaals, kruidig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2181,7 +2181,7 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-01.jpg"
   },
   {
     "id": "549",
@@ -2196,7 +2196,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "J'adore",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-fris.jpg",
+    "image": "assets/images/glantier-dames-family-13.png",
     "omschrijving": "Een verfijnd fris, bloemig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2220,7 +2220,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Daisy",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd zoet, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2244,7 +2244,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "L'Imperatrice 3",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-03.jpg",
     "omschrijving": "Een verfijnd floraal, aquatisch geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2259,7 +2259,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-03.jpg"
   },
   {
     "id": "553",
@@ -2274,7 +2274,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Good Girl",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2289,7 +2289,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "554",
@@ -2304,7 +2304,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "La Nuit Tresor",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-02.jpg",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2319,7 +2319,7 @@ window.ORIVEA_PRODUCTS = [
       "zoet"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-02.jpg"
   },
   {
     "id": "555",
@@ -2334,7 +2334,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Boss The Scent For Her",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-26.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2349,7 +2349,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-26.png"
   },
   {
     "id": "556",
@@ -2364,7 +2364,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Poison Girl",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-20.png",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2389,7 +2389,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Decadence",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd oriëntaals, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2404,7 +2404,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-01.jpg"
   },
   {
     "id": "559",
@@ -2419,7 +2419,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Mon Paris",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-18.png",
     "omschrijving": "Een verfijnd chypre, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2434,7 +2434,7 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-18.png"
   },
   {
     "id": "562",
@@ -2449,7 +2449,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Scandal",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-19.png",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2464,7 +2464,7 @@ window.ORIVEA_PRODUCTS = [
       "scandal"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-19.png"
   },
   {
     "id": "563",
@@ -2479,7 +2479,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si Passione",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-08.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2494,7 +2494,7 @@ window.ORIVEA_PRODUCTS = [
       "si passione"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-08.jpg"
   },
   {
     "id": "565",
@@ -2509,7 +2509,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Because It's You",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-09.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2524,7 +2524,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-09.jpg"
   },
   {
     "id": "568",
@@ -2539,7 +2539,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Nomade",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2554,7 +2554,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "569",
@@ -2569,7 +2569,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Pure XS for Her",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2584,7 +2584,7 @@ window.ORIVEA_PRODUCTS = [
       "pure xs for her"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-11.png"
   },
   {
     "id": "570",
@@ -2599,7 +2599,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Black Opium Nuit Blanche",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2614,7 +2614,7 @@ window.ORIVEA_PRODUCTS = [
       "zoet"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-24.png"
   },
   {
     "id": "571",
@@ -2629,7 +2629,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Good Girl Dot Drama",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2644,7 +2644,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-16.png"
   },
   {
     "id": "573",
@@ -2659,7 +2659,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "La Vie Est Belle L'Eclat",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2684,7 +2684,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "In Love With You",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-24.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2709,7 +2709,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Lady Million Empire",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-04.jpg",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2734,7 +2734,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Idole",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2749,7 +2749,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-05.jpg"
   },
   {
     "id": "579",
@@ -2764,7 +2764,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Miss Dior Rose N'Roses",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2789,7 +2789,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Libre",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-05.jpg",
     "omschrijving": "Een verfijnd oriëntaals, varen geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2804,7 +2804,7 @@ window.ORIVEA_PRODUCTS = [
       "yves saint laurent"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-05.jpg"
   },
   {
     "id": "583",
@@ -2819,7 +2819,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chloe Rose Tangerine",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-26.png",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2844,7 +2844,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "My Way",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2859,7 +2859,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "586",
@@ -2874,7 +2874,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Perfect",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2889,7 +2889,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-11.png"
   },
   {
     "id": "587",
@@ -2904,7 +2904,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Angel Nova",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -2919,7 +2919,7 @@ window.ORIVEA_PRODUCTS = [
       "thierry mugler"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-16.png"
   },
   {
     "id": "588",
@@ -2934,7 +2934,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si Intense",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-18.png",
     "omschrijving": "Een verfijnd chypre, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2949,7 +2949,7 @@ window.ORIVEA_PRODUCTS = [
       "si intense"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-18.png"
   },
   {
     "id": "589",
@@ -2964,7 +2964,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Very Good Girl",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -2979,7 +2979,7 @@ window.ORIVEA_PRODUCTS = [
       "very good girl"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-01.jpg"
   },
   {
     "id": "590",
@@ -2994,7 +2994,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Coco Mademoiselle L'Eau Privee",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3009,7 +3009,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-17.png"
   },
   {
     "id": "592",
@@ -3024,7 +3024,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Lady Million Fabulous",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3039,7 +3039,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-12.jpeg"
   },
   {
     "id": "595",
@@ -3054,7 +3054,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Paradoxe",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3069,7 +3069,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "596",
@@ -3084,7 +3084,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Fame",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-06.jpg",
     "omschrijving": "Een verfijnd floraal, muskus geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3099,7 +3099,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-06.jpg"
   },
   {
     "id": "597",
@@ -3114,7 +3114,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "My Way Floral",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3129,7 +3129,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-11.png"
   },
   {
     "id": "598",
@@ -3144,7 +3144,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Black Opium Illicit Green",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-08.jpg",
     "omschrijving": "Een verfijnd floraal, praline geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3169,7 +3169,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Si Passione Eclat",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-09.jpg",
     "omschrijving": "Een verfijnd floraal, fruitig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3194,7 +3194,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Goddess",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd aromatisch geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3209,7 +3209,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-16.png"
   },
   {
     "id": "602",
@@ -3224,7 +3224,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Good Girl Blush",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-19.png",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3239,7 +3239,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-19.png"
   },
   {
     "id": "603",
@@ -3254,7 +3254,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Flora Gorgeous Jasmine",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3269,7 +3269,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-17.png"
   },
   {
     "id": "604",
@@ -3284,7 +3284,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "God Is A Woman",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3299,7 +3299,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-12.jpeg"
   },
   {
     "id": "605",
@@ -3314,7 +3314,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Lost Cherry (unisex)",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3339,7 +3339,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Cherry Smoke (unisex)",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-01.jpg",
     "omschrijving": "Een verfijnd oriëntaals, kruidig geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3364,7 +3364,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Baccarat Rouge 540",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-11.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3379,7 +3379,7 @@ window.ORIVEA_PRODUCTS = [
       "premium"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-11.png"
   },
   {
     "id": "608",
@@ -3394,7 +3394,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Vanilla Sex",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-02.jpg",
     "omschrijving": "Een verfijnd oriëntaals, vanille geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3419,7 +3419,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Chance Eau Fraiche",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd chypre, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3444,7 +3444,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Flora Gorgeous Gardenia",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-16.png",
     "omschrijving": "Een verfijnd floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
@@ -3469,7 +3469,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Birds Of Paradise For Her",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-17.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3494,7 +3494,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Libre L'Absolu Platine",
     "premiumBeschikbaar": false,
     "prijs": 12.95,
-    "image": "assets/images/glantier-dames-lifestyle.jpg",
+    "image": "assets/images/glantier-dames-family-12.jpeg",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3519,7 +3519,7 @@ window.ORIVEA_PRODUCTS = [
     "parfumReferentie": "Donna Born In Roma",
     "premiumBeschikbaar": true,
     "prijs": 12.95,
-    "image": "assets/images/glantier-premium-dames-box-transparent.png",
+    "image": "assets/images/glantier-dames-family-25.png",
     "omschrijving": "Een verfijnd oriëntaals, floraal geurprofiel met een luxe, draagbare uitstraling.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
@@ -3534,7 +3534,7 @@ window.ORIVEA_PRODUCTS = [
       "valentino"
     ],
     "premiumPrijs": 16.95,
-    "premiumImage": "assets/images/glantier-premium-dames-box-transparent.png"
+    "premiumImage": "assets/images/glantier-dames-family-25.png"
   },
   {
     "id": "701",
