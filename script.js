@@ -257,7 +257,7 @@
     result.innerHTML = matches.map((product) => {
       const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " &bull; ") : "";
       const reference = product.parfumReferentie ? `<p>Geïnspireerd door de geurbeleving van ${product.parfumReferentie}</p>` : "";
-      return `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>GLANTIER ${product.glantierNummer || product.id}</h3>${reference}<p>${scentGroup} • ${product.doelgroep}</p><p>${product.omschrijving}</p><p class="price">Vanaf ${money(product.prijs)}</p><div class="hero-actions"><button class="button primary cart-symbol-button" type="button" data-add-to-cart="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`;
+      return `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>GLANTIER ${product.glantierNummer || product.id}</h3>${reference}<p>${scentGroup} • ${product.doelgroep}</p><p>${product.omschrijving}</p><p class="price">50 ml ${money(product.prijs)}</p><div class="hero-actions"><button class="button primary cart-symbol-button" type="button" data-add-to-cart="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`;
     }).join("");
   }
 
@@ -1245,7 +1245,7 @@
 
   function initVisualLayer() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const revealTargets = $$("body[data-page='home'] .hero-banner, body[data-page='home'] .hero-match, body[data-page='home'] .campaign-section, body[data-page='home'] .category-strip, body[data-page='home'] .product-showcase, body[data-page='home'] .split-band, body[data-page='home'] .sample-usp-section, body[data-page='home'] .newsletter-section, body[data-page='home'] .faq, body[data-page='catalogus'] .catalog-banner, body[data-page='catalogus'] .page-hero, body[data-page='catalogus'] .catalog-layout");
+    const revealTargets = $$("body[data-page='home'] .hero-match, body[data-page='home'] .campaign-section, body[data-page='home'] .category-strip, body[data-page='home'] .product-showcase, body[data-page='home'] .split-band, body[data-page='home'] .sample-usp-section, body[data-page='home'] .newsletter-section, body[data-page='home'] .faq, body[data-page='catalogus'] .page-hero");
     if (!reduced && "IntersectionObserver" in window) {
       revealTargets.forEach((element) => element.classList.add("reveal"));
       const observer = new IntersectionObserver((entries) => {
