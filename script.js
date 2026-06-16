@@ -20,6 +20,12 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const money = (value) => currency.format(Number(value || 0));
+  const VAT_RATE = 0.21;
+  const VAT_LABEL = "21%";
+  const vatFromIncluded = (value) => {
+    const amount = Number(value || 0);
+    return amount - (amount / (1 + VAT_RATE));
+  };
   const normalize = (value) => String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   const productById = (id) => PRODUCTS.find((product) => product.id === id);
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
@@ -119,7 +125,14 @@
     const subtotal = lines.reduce((sum, line) => sum + line.product.prijs * line.qty, 0);
     const shippableSubtotal = lines.reduce((sum, line) => line.product.freeShipping ? sum : sum + line.product.prijs * line.qty, 0);
     const shipping = shippingFor(shippableSubtotal);
-    return { lines, subtotal, shipping, total: subtotal + shipping };
+    const total = subtotal + shipping;
+    const vat = {
+      rate: VAT_LABEL,
+      subtotal: vatFromIncluded(subtotal),
+      shipping: vatFromIncluded(shipping),
+      total: vatFromIncluded(total)
+    };
+    return { lines, subtotal, shipping, total, vat };
   }
 
   function cartLineHtml(line) {
@@ -138,9 +151,10 @@
       <p class="shipping-note">Gratis verzending vanaf ${money(freeShippingFrom)}</p>
       <div class="shipping-progress" aria-label="${notice}"><span style="width:${progress}%"></span></div>
       <p class="notice">${notice}</p>
-      <div><span>Subtotaal</span><strong>${money(data.subtotal)}</strong></div>
-      <div><span>Verzendkosten</span><strong>${data.shipping === 0 && data.subtotal > 0 ? "Gratis" : money(data.shipping)}</strong></div>
-      <div><span>Totaal</span><strong>${money(data.total)}</strong></div>
+      <div><span>Subtotaal incl. btw</span><strong>${money(data.subtotal)}</strong></div>
+      <div><span>Waarvan 21% btw</span><strong>${money(data.vat?.total || 0)}</strong></div>
+      <div><span>Verzendkosten incl. btw</span><strong>${money(data.shipping)}</strong></div>
+      <div><span>Totaal incl. btw</span><strong>${money(data.total)}</strong></div>
     </div>`;
   }
 
@@ -625,6 +639,11 @@
       subtotal: money(data.subtotal),
       shipping_cost: data.shipping === 0 ? "Gratis" : money(data.shipping),
       total: money(data.total),
+      vat_rate: VAT_LABEL,
+      vat_amount: money(data.vat?.total || 0),
+      subtotal_incl_vat: money(data.subtotal),
+      shipping_incl_vat: money(data.shipping),
+      total_incl_vat: money(data.total),
       paypal_transaction_id: paypal?.transactionId || "",
       payment_status: paypal?.paymentStatus || "",
       payment_method: paypal?.paymentMethod || "PayPal",
@@ -652,6 +671,11 @@
       subtotal: payload.subtotal || money(0),
       shipping_cost: payload.shipping_cost || money(0),
       total: payload.total || money(0),
+      vat_rate: payload.vat_rate || VAT_LABEL,
+      vat_amount: payload.vat_amount || money(0),
+      subtotal_incl_vat: payload.subtotal_incl_vat || payload.subtotal || money(0),
+      shipping_incl_vat: payload.shipping_incl_vat || payload.shipping_cost || money(0),
+      total_incl_vat: payload.total_incl_vat || payload.total || money(0),
       paypal_transaction_id: payload.paypal_transaction_id || "",
       payment_status: payload.payment_status || "",
       payment_method: payload.payment_method || "PayPal"
@@ -670,6 +694,11 @@
       "subtotal",
       "shipping_cost",
       "total",
+      "vat_rate",
+      "vat_amount",
+      "subtotal_incl_vat",
+      "shipping_incl_vat",
+      "total_incl_vat",
       "paypal_transaction_id",
       "payment_status",
       "payment_method"
@@ -761,6 +790,8 @@
     }
     console.log("Building EmailJS templateParams...");
     console.log("EmailJS templateParams:", templateParams);
+    console.log("VAT amount:", templateParams.vat_amount);
+    console.log("Order total incl VAT:", templateParams.total_incl_vat);
     console.log("Sending EmailJS order confirmation...");
     return emailjs
       .send(
@@ -961,10 +992,12 @@
           console.log("Capture ID:", captureId);
           if (!captureId) throw new Error("PayPal capture ID ontbreekt");
           captureCompleted = true;
+          const payment_method = paypalPaymentMethod({ ...data, fundingSource }, label);
+          console.log("PayPal payment method:", payment_method);
           await finalizePaidOrder(source(), {
             transactionId: captureId,
             paymentStatus: "COMPLETED",
-            paymentMethod: paypalPaymentMethod({ ...data, fundingSource }, label)
+            paymentMethod: payment_method
           }, { ...(onSuccess || {}), status });
         }).catch((error) => {
           processing = false;
@@ -972,6 +1005,7 @@
             console.error("Betaling ontvangen, ordermail afronden mislukt:", error);
             return;
           }
+          console.error("Payment error:", error);
           logPayPalError(error);
           if (status) status.textContent = `${label} kon de betaling niet bevestigen. Probeer opnieuw of kies PayPal.`;
         });
@@ -986,6 +1020,7 @@
         processing = false;
         const shouldShowError = paymentStarted;
         paymentStarted = false;
+        console.error("Payment error:", error);
         logPayPalError(error);
         if (status) status.textContent = shouldShowError ? `${label} kon de betaling niet starten of bevestigen. Probeer opnieuw of kies PayPal.` : "";
       }
@@ -1004,6 +1039,9 @@
       paypal.FUNDING?.WERO,
       paypal.FUNDING?.CARD
     ].filter(Boolean);
+    console.log("Available PayPal funding sources:", fundingSources);
+    if (!paypal.FUNDING?.IDEAL) console.error("iDEAL/Wero unavailable:", "iDEAL funding source ontbreekt in PayPal SDK");
+    if (!paypal.FUNDING?.WERO) console.error("iDEAL/Wero unavailable:", "Wero funding source ontbreekt in PayPal SDK");
     for (const fundingSource of fundingSources) {
       const options = paypalButtonOptions({
         source,
@@ -1015,7 +1053,12 @@
       });
       try {
         const buttons = paypal.Buttons(options);
-        if (buttons.isEligible && !buttons.isEligible()) continue;
+        if (buttons.isEligible && !buttons.isEligible()) {
+          if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
+            console.error("iDEAL/Wero unavailable:", fundingSource);
+          }
+          continue;
+        }
         const paypalSlot = document.createElement("div");
         paypalSlot.className = "paypal-funding-slot";
         target.appendChild(paypalSlot);
@@ -1023,6 +1066,9 @@
         await buttons.render(paypalSlot);
         renderedButtons += 1;
       } catch (error) {
+        if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
+          console.error("iDEAL/Wero unavailable:", error);
+        }
         console.warn(`${paypalFundingLabel(fundingSource)} knop kon niet renderen`, error);
       }
     }
@@ -1033,11 +1079,32 @@
   }
 
   async function applePayConfig(paypal) {
-    if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments?.() || !paypal?.Applepay) return null;
+    if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments?.() || !paypal?.Applepay) {
+      console.error("Apple Pay eligibility failed:", "Apple PaySession of PayPal Applepay niet beschikbaar");
+      return null;
+    }
     const applepay = paypal.Applepay();
     const config = await applepay.config();
-    if (config?.isEligible === false) return null;
+    if (config?.isEligible === false) {
+      console.error("Apple Pay eligibility failed:", config);
+      return null;
+    }
     return { applepay, config };
+  }
+
+  async function applePayDomainAssociationAvailable() {
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return true;
+    try {
+      const response = await fetch("/.well-known/apple-developer-merchantid-domain-association", {
+        method: "GET",
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error(`Apple Pay domain association status ${response.status}`);
+      return true;
+    } catch (error) {
+      console.error("Apple Pay eligibility failed:", error);
+      return false;
+    }
   }
 
   async function renderApplePayButton({ target, source, status, validate, onSuccess, label = "Snel betalen met Apple Pay" }) {
@@ -1047,6 +1114,8 @@
       const paypal = await loadPayPalSdk();
       const available = await applePayConfig(paypal);
       if (!available) return;
+      const domainReady = await applePayDomainAssociationAvailable();
+      if (!domainReady) return;
       const { applepay, config } = available;
       target.dataset.applePayReady = "true";
       target.hidden = false;
@@ -1100,13 +1169,18 @@
             const capture = captureDetails?.purchase_units?.[0]?.payments?.captures?.[0];
             const confirmed = capture?.status === "COMPLETED" || captureDetails?.status === "COMPLETED";
             if (!confirmed) throw new Error("Apple Pay betaling niet voltooid via PayPal");
+            console.log("PayPal capture status:", captureDetails?.status || capture?.status);
+            console.log("PayPal capture details:", captureDetails);
+            console.log("PayPal transaction ID:", capture?.id || orderId);
+            console.log("PayPal payment method:", "Apple Pay");
             session.completePayment(ApplePaySession.STATUS_SUCCESS);
             await finalizePaidOrder(source(), {
               transactionId: capture?.id || orderId,
               paymentStatus: "COMPLETED",
               paymentMethod: "Apple Pay"
-            }, onSuccess || {});
+            }, { ...(onSuccess || {}), status });
           } catch (error) {
+            console.error("Payment error:", error);
             console.warn("Apple Pay betaling mislukt", error);
             session.completePayment(ApplePaySession.STATUS_FAILURE);
             button.disabled = false;
@@ -1117,6 +1191,7 @@
         session.begin();
       });
     } catch (error) {
+      console.error("Apple Pay eligibility failed:", error);
       console.warn("Apple Pay is niet beschikbaar", error);
       target.hidden = true;
     }
