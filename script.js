@@ -1243,6 +1243,74 @@
   updateHeaderState();
   window.addEventListener("scroll", updateHeaderState, { passive: true });
 
+  function initVisualLayer() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealTargets = $$("body[data-page='home'] .hero-banner, body[data-page='home'] .hero-match, body[data-page='home'] .campaign-section, body[data-page='home'] .category-strip, body[data-page='home'] .product-showcase, body[data-page='home'] .split-band, body[data-page='home'] .sample-usp-section, body[data-page='home'] .newsletter-section, body[data-page='home'] .faq, body[data-page='catalogus'] .catalog-banner, body[data-page='catalogus'] .page-hero, body[data-page='catalogus'] .catalog-layout");
+    if (!reduced && "IntersectionObserver" in window) {
+      revealTargets.forEach((element) => element.classList.add("reveal"));
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealTargets.forEach((element) => observer.observe(element));
+    } else {
+      revealTargets.forEach((element) => element.classList.add("visible"));
+    }
+
+    const canvas = $("#particles");
+    if (!canvas || reduced) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let raf = 0;
+    const createParticle = () => ({
+      x: Math.random() * width,
+      y: height + Math.random() * height * 0.3,
+      radius: 35 + Math.random() * 70,
+      speed: 0.12 + Math.random() * 0.32,
+      drift: (Math.random() - 0.5) * 0.25,
+      alpha: 0.035 + Math.random() * 0.09,
+      life: Math.random() * 400
+    });
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = Math.max(1, Math.floor(rect.width));
+      height = Math.max(1, Math.floor(rect.height));
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      particles = Array.from({ length: Math.min(28, Math.max(12, Math.round(width / 60))) }, createParticle);
+    };
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach((particle, index) => {
+        particle.y -= particle.speed;
+        particle.x += particle.drift + Math.sin(particle.life * 0.018) * 0.08;
+        particle.life += 1;
+        if (particle.y < -particle.radius) particles[index] = createParticle();
+        const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.radius);
+        gradient.addColorStop(0, `rgba(201,169,110,${particle.alpha})`);
+        gradient.addColorStop(1, "rgba(201,169,110,0)");
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      raf = window.requestAnimationFrame(draw);
+    };
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+    raf = window.requestAnimationFrame(draw);
+    window.addEventListener("pagehide", () => window.cancelAnimationFrame(raf), { once: true });
+  }
+
   renderCartState();
   initQuickCheckout();
   initCampaigns();
@@ -1252,4 +1320,5 @@
   initCheckout();
   initContact();
   initNewsletter();
+  initVisualLayer();
 })();
