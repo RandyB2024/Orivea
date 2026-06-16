@@ -13,11 +13,9 @@
     intent: "capture"
   };
   let paypalSdkPromise = null;
+  let emailJsInitialized = false;
+  let emailJsSdkPromise = null;
   const currency = new Intl.NumberFormat("nl-NL", { style: "currency", currency: CONFIG.currency || "EUR" });
-
-  if (window.emailjs && CONFIG.emailJs?.publicKey) {
-    emailjs.init(CONFIG.emailJs.publicKey);
-  }
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -462,6 +460,40 @@
     return `${addressData.street} ${addressData.houseNumber}${addition}\n${addressData.postalCode} ${addressData.city}`.trim();
   }
 
+  function loadEmailJsSdk() {
+    if (window.emailjs) return Promise.resolve(window.emailjs);
+    if (emailJsSdkPromise) return emailJsSdkPromise;
+    emailJsSdkPromise = new Promise((resolve, reject) => {
+      const existing = document.querySelector("script[data-emailjs-sdk]");
+      if (existing) {
+        existing.addEventListener("load", () => window.emailjs ? resolve(window.emailjs) : reject(new Error("EmailJS SDK niet beschikbaar na laden")), { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+      script.dataset.emailjsSdk = "true";
+      script.dataset.cookieconsent = "ignore";
+      script.onload = () => window.emailjs ? resolve(window.emailjs) : reject(new Error("EmailJS SDK niet beschikbaar na laden"));
+      script.onerror = () => {
+        emailJsSdkPromise = null;
+        reject(new Error("EmailJS SDK kon niet laden"));
+      };
+      document.head.appendChild(script);
+    });
+    return emailJsSdkPromise;
+  }
+
+  async function initEmailJs() {
+    await loadEmailJsSdk();
+    const publicKey = CONFIG.emailJs?.publicKey || "w3x9SY9OqatVgYJOw";
+    if (!emailJsInitialized && publicKey) {
+      emailjs.init(publicKey);
+      emailJsInitialized = true;
+    }
+    return publicKey;
+  }
+
   function setupAddressAutocomplete(form) {
     if (!form || form.dataset.addressAutocomplete === "true") return;
     const postal = form.elements.postal_code;
@@ -536,7 +568,12 @@
   }
 
   function formatOrderLines(data) {
-    return data.lines.map((line) => `${line.qty}x ${line.product.naam} (${line.product.type}, ${line.product.inhoud}) - ${money(line.product.prijs * line.qty)}`).join("\n");
+    const lines = data.lines.map((line) => {
+      const variant = [line.product.type, line.product.inhoud].filter(Boolean).join(" - ");
+      return `${line.qty}x ${line.product.naam}${variant ? ` - ${variant}` : ""} - ${money(line.product.prijs * line.qty)}`;
+    });
+    if (lines.length) lines.push("1x ORIVÈA Discovery Sample - Gratis");
+    return lines.join("\n");
   }
 
   function checkoutFormData(form) {
@@ -593,6 +630,55 @@
       payment_method: paypal?.paymentMethod || "PayPal",
       note: formData.note || ""
     };
+  }
+
+  function orderEmailStorageKey(payload) {
+    return `orivea_order_email_sent_${payload.paypal_transaction_id || payload.order_number}`;
+  }
+
+  function publicOrderPayload(payload) {
+    const fallbackFields = [];
+    if (!String(payload.customer_name || "").trim()) fallbackFields.push("customer_name");
+    if (!String(payload.customer_address || "").trim()) fallbackFields.push("customer_address");
+    if (fallbackFields.length) console.warn("EmailJS order parameters gebruiken fallback:", fallbackFields);
+    return {
+      order_number: payload.order_number || "",
+      customer_name: payload.customer_name || "Klant",
+      customer_email: payload.customer_email || "",
+      customer_phone: payload.customer_phone || "",
+      customer_address: payload.customer_address || "Adres niet ingevuld",
+      order_date: payload.order_date || new Date().toLocaleString("nl-NL"),
+      order_items: payload.order_items || "",
+      subtotal: payload.subtotal || money(0),
+      shipping_cost: payload.shipping_cost || money(0),
+      total: payload.total || money(0),
+      paypal_transaction_id: payload.paypal_transaction_id || "",
+      payment_status: payload.payment_status || "",
+      payment_method: payload.payment_method || "PayPal"
+    };
+  }
+
+  function validateOrderEmailPayload(payload) {
+    const required = [
+      "order_number",
+      "customer_name",
+      "customer_email",
+      "customer_phone",
+      "customer_address",
+      "order_date",
+      "order_items",
+      "subtotal",
+      "shipping_cost",
+      "total",
+      "paypal_transaction_id",
+      "payment_status",
+      "payment_method"
+    ];
+    const missing = required.filter((key) => !String(payload[key] || "").trim());
+    if (missing.length) console.warn("EmailJS order parameters ontbreken:", missing);
+    if (!String(payload.customer_email || "").trim()) throw new Error("Orderbevestiging niet verstuurd: klant e-mailadres ontbreekt");
+    if (payload.payment_status !== "COMPLETED") throw new Error(`Orderbevestiging niet verstuurd: betalingstatus is ${payload.payment_status || "onbekend"}`);
+    return missing;
   }
 
   function storeOrder(payload) {
@@ -663,23 +749,69 @@
     return paypalSdkPromise;
   }
 
-  function sendOrderConfirmation(payload) {
-    if (!window.emailjs) return Promise.reject(new Error("EmailJS niet geladen"));
-    return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.orderTemplate, payload);
+  async function sendOrderConfirmation(payload) {
+    const publicKey = await initEmailJs();
+    const templateParams = publicOrderPayload(payload);
+    validateOrderEmailPayload(templateParams);
+    const sentKey = orderEmailStorageKey(templateParams);
+    const existing = JSON.parse(localStorage.getItem(sentKey) || "null");
+    if (existing?.sent === true) {
+      console.log("EmailJS order confirmation already sent:", existing);
+      return Promise.resolve(existing.response || { skipped: true });
+    }
+    console.log("Building EmailJS templateParams...");
+    console.log("EmailJS templateParams:", templateParams);
+    console.log("Sending EmailJS order confirmation...");
+    return emailjs
+      .send(
+        CONFIG.emailJs?.serviceId || "service_r55nwxz",
+        CONFIG.emailJs?.orderTemplate || "template_ehokbkn",
+        templateParams,
+        publicKey
+      )
+      .then((response) => {
+        console.log("EmailJS order confirmation sent:", response);
+        localStorage.setItem(sentKey, JSON.stringify({
+          sent: true,
+          order_number: templateParams.order_number,
+          paypal_transaction_id: templateParams.paypal_transaction_id,
+          response
+        }));
+        return response;
+      })
+      .catch((error) => {
+        console.error("EmailJS order confirmation failed:", error);
+        try {
+          console.error("EmailJS error JSON:", JSON.stringify(error, null, 2));
+        } catch {
+          console.error("EmailJS error JSON:", String(error));
+        }
+        throw error;
+      });
   }
 
   async function finalizePaidOrder(source, payment, options = {}) {
     const payload = buildOrderPayload(source, payment);
-    storeOrder(payload);
+    const statusTarget = options.orderStatus || options.status;
+    if (payload.payment_status !== "COMPLETED") {
+      throw new Error(`Order afronden geblokkeerd: betalingstatus is ${payload.payment_status || "onbekend"}`);
+    }
     try {
       await sendOrderConfirmation(payload);
     } catch (error) {
-      console.warn("Orderbevestiging kon niet direct worden verzonden", error);
+      payload.email_status = "FAILED";
+      storeOrder(payload);
+      if (statusTarget) {
+        statusTarget.textContent = `Je betaling is ontvangen, maar de automatische bevestigingsmail kon niet worden verzonden. Neem contact op via shop@orivea.nl met je ordernummer ${payload.order_number}.`;
+      }
+      throw error;
     }
+    payload.email_status = "SENT";
+    storeOrder(payload);
     localStorage.removeItem(CART_KEY);
     renderCartState();
     if (options.successPanel) options.successPanel.hidden = false;
-    if (options.orderStatus) options.orderStatus.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen.`;
+    if (statusTarget) statusTarget.textContent = `Order ${payload.order_number} is bevestigd. De betaling is succesvol ontvangen.`;
     if (options.redirect) window.location.href = options.redirect;
     if (options.showStep) options.showStep(5);
     return payload;
@@ -815,22 +947,31 @@
         console.log("onApprove started:", data);
         if (processing) return;
         processing = true;
+        let captureCompleted = false;
         if (status) status.textContent = "Betaling wordt bevestigd...";
         return actions.order.capture().then(async (details) => {
+          console.log("PayPal capture status:", details?.status);
+          console.log("PayPal capture details:", details);
           console.log("Capture result:", details);
           if (!details || details.status !== "COMPLETED") {
             throw new Error(`PayPal capture niet voltooid. Status: ${details && details.status}`);
           }
           const captureId = paypalCaptureId(details);
+          console.log("PayPal transaction ID:", captureId);
           console.log("Capture ID:", captureId);
           if (!captureId) throw new Error("PayPal capture ID ontbreekt");
+          captureCompleted = true;
           await finalizePaidOrder(source(), {
             transactionId: captureId,
             paymentStatus: "COMPLETED",
             paymentMethod: paypalPaymentMethod({ ...data, fundingSource }, label)
-          }, onSuccess || {});
+          }, { ...(onSuccess || {}), status });
         }).catch((error) => {
           processing = false;
+          if (captureCompleted) {
+            console.error("Betaling ontvangen, ordermail afronden mislukt:", error);
+            return;
+          }
           logPayPalError(error);
           if (status) status.textContent = `${label} kon de betaling niet bevestigen. Probeer opnieuw of kies PayPal.`;
         });
@@ -1237,7 +1378,7 @@
         message_body: "Bedankt voor je bericht. Ons team bekijkt je aanvraag zo snel mogelijk en neemt indien nodig contact met je op."
       };
       try {
-        if (!window.emailjs) throw new Error("EmailJS niet geladen");
+        await initEmailJs();
         await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
         form.reset();
         status.textContent = "Bedankt voor je bericht. ORIVÈA neemt zo snel mogelijk contact met je op.";
@@ -1267,7 +1408,7 @@
         message_body: isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief. Je ontvangt als eerste nieuws over nieuwe collecties, exclusieve acties en premium geuren."
       };
       try {
-        if (!window.emailjs) throw new Error("EmailJS niet geladen");
+        await initEmailJs();
         await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
         form.reset();
         status.textContent = isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief.";
