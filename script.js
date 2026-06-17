@@ -12,6 +12,9 @@
     currency: CONFIG.paypalCurrency || CONFIG.currency || "EUR",
     intent: "capture"
   };
+  const ORDER_EMAILJS_SERVICE_ID = "service_r55nwxz";
+  const ORDER_EMAILJS_TEMPLATE_ID = "template_ehokbkn";
+  const ORDER_EMAILJS_PUBLIC_KEY = "w3x9SY9OqatVgYJOw";
   // PayPal Web SDK v6 requires a server-side browser-safe client token route; keep v5 until that endpoint is available.
   let paypalSdkPromise = null;
   let emailJsInitialized = false;
@@ -499,11 +502,11 @@
     return emailJsSdkPromise;
   }
 
-  async function initEmailJs() {
+  async function initEmailJs(publicKeyOverride) {
     await loadEmailJsSdk();
-    const publicKey = CONFIG.emailJs?.publicKey || "w3x9SY9OqatVgYJOw";
+    const publicKey = publicKeyOverride || CONFIG.emailJs?.publicKey || ORDER_EMAILJS_PUBLIC_KEY;
     if (!emailJsInitialized && publicKey) {
-      emailjs.init(publicKey);
+      window.emailjs.init(publicKey);
       emailJsInitialized = true;
     }
     return publicKey;
@@ -783,7 +786,7 @@
   }
 
   async function sendOrderConfirmation(payload) {
-    const publicKey = await initEmailJs();
+    await initEmailJs(ORDER_EMAILJS_PUBLIC_KEY);
     const templateParams = publicOrderPayload(payload);
     validateOrderEmailPayload(templateParams);
     const sentKey = orderEmailStorageKey(templateParams);
@@ -792,37 +795,33 @@
       console.log("EmailJS order confirmation already sent:", existing);
       return Promise.resolve(existing.response || { skipped: true });
     }
-    console.log("Building EmailJS templateParams...");
     console.log("EmailJS templateParams:", templateParams);
     console.log("VAT amount:", templateParams.vat_amount);
     console.log("Order total incl VAT:", templateParams.total_incl_vat);
-    console.log("Sending EmailJS order confirmation...");
-    return emailjs
-      .send(
-        CONFIG.emailJs?.serviceId || "service_r55nwxz",
-        CONFIG.emailJs?.orderTemplate || "template_ehokbkn",
+    try {
+      const response = await window.emailjs.send(
+        ORDER_EMAILJS_SERVICE_ID,
+        ORDER_EMAILJS_TEMPLATE_ID,
         templateParams,
-        publicKey
-      )
-      .then((response) => {
-        console.log("EmailJS order confirmation sent:", response);
-        localStorage.setItem(sentKey, JSON.stringify({
-          sent: true,
-          order_number: templateParams.order_number,
-          paypal_transaction_id: templateParams.paypal_transaction_id,
-          response
-        }));
-        return response;
-      })
-      .catch((error) => {
-        console.error("EmailJS order confirmation failed:", error);
-        try {
-          console.error("EmailJS error JSON:", JSON.stringify(error, null, 2));
-        } catch {
-          console.error("EmailJS error JSON:", String(error));
-        }
-        throw error;
-      });
+        ORDER_EMAILJS_PUBLIC_KEY
+      );
+      console.log("EmailJS verzonden:", response);
+      localStorage.setItem(sentKey, JSON.stringify({
+        sent: true,
+        order_number: templateParams.order_number,
+        paypal_transaction_id: templateParams.paypal_transaction_id,
+        response
+      }));
+      return response;
+    } catch (error) {
+      console.error("EmailJS fout:", error);
+      try {
+        console.error("EmailJS error JSON:", JSON.stringify(error, null, 2));
+      } catch {
+        console.error("EmailJS error JSON:", String(error));
+      }
+      throw error;
+    }
   }
 
   async function finalizePaidOrder(source, payment, options = {}) {
@@ -1316,7 +1315,7 @@
           source: () => quickFormData,
           status,
           validate: () => Boolean(quickFormData) && form.reportValidity(),
-          onSuccess: { redirect: "checkout.html?order=success" },
+          onSuccess: { redirect: "bedankt.html" },
           label: "Snel betalen met Apple Pay"
         });
         if (paypalRendered) return;
@@ -1330,7 +1329,7 @@
             source: () => quickFormData,
             status,
             validate: () => Boolean(quickFormData) && form.reportValidity(),
-            onSuccess: { redirect: "checkout.html?order=success" }
+            onSuccess: { redirect: "bedankt.html" }
           });
       } catch (error) {
         console.warn("Snelle PayPal checkout kon niet laden", error);
@@ -1375,7 +1374,7 @@
           source: () => form,
           status,
           validate: validateCheckout,
-          onSuccess: { successPanel, orderStatus, showStep },
+          onSuccess: { successPanel, orderStatus, showStep, redirect: "bedankt.html" },
           label: "Snel betalen met Apple Pay"
         });
         renderPayPalButtons();
@@ -1427,7 +1426,7 @@
           source: () => form,
           status,
           validate: validateCheckout,
-          onSuccess: { successPanel, orderStatus, showStep }
+          onSuccess: { successPanel, orderStatus, showStep, redirect: "bedankt.html" }
         });
       } catch (error) {
         console.warn("PayPal kon niet laden", error);
