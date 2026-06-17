@@ -151,9 +151,9 @@
       <p class="shipping-note">Gratis verzending vanaf ${money(freeShippingFrom)}</p>
       <div class="shipping-progress" aria-label="${notice}"><span style="width:${progress}%"></span></div>
       <p class="notice">${notice}</p>
-      <div><span>Subtotaal incl. btw</span><strong>${money(data.subtotal)}</strong></div>
+      <div><span>Subtotaal</span><strong>${money(data.subtotal)}</strong></div>
       <div><span>Waarvan 21% btw</span><strong>${money(data.vat?.total || 0)}</strong></div>
-      <div><span>Verzendkosten incl. btw</span><strong>${money(data.shipping)}</strong></div>
+      <div><span>Verzendkosten</span><strong>${money(data.shipping)}</strong></div>
       <div><span>Totaal incl. btw</span><strong>${money(data.total)}</strong></div>
     </div>`;
   }
