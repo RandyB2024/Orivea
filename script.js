@@ -12,6 +12,7 @@
     currency: CONFIG.paypalCurrency || CONFIG.currency || "EUR",
     intent: "capture"
   };
+  // PayPal Web SDK v6 requires a server-side browser-safe client token route; keep v5 until that endpoint is available.
   let paypalSdkPromise = null;
   let emailJsInitialized = false;
   let emailJsSdkPromise = null;
@@ -719,6 +720,7 @@
 
   function loadPayPalSdk() {
     if (window.paypal) {
+      console.log("PayPal SDK version/mode:", window.paypal.version || "v5", "live");
       console.log("PayPal SDK loaded");
       return Promise.resolve(window.paypal);
     }
@@ -731,9 +733,9 @@
     if (clientId.length < 30) {
       console.warn("PayPal Client ID lijkt kort of mogelijk onvolledig:", clientId);
     }
-    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal"]).join(",");
+    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal", "card"]).join(",");
     paypalSdkPromise = new Promise((resolve, reject) => {
-      const existing = document.querySelector("script[data-paypal-sdk]");
+      const existing = document.querySelector("script[data-paypal-sdk], script[src*='paypal.com/sdk/js']");
       if (existing) {
         existing.addEventListener("load", () => {
           if (!window.paypal) {
@@ -741,6 +743,7 @@
             reject(new Error("PayPal SDK niet beschikbaar na laden"));
             return;
           }
+          console.log("PayPal SDK version/mode:", window.paypal.version || "v5", existing.src?.includes("sandbox") ? "sandbox" : "live");
           console.log("PayPal SDK loaded");
           resolve(window.paypal);
         }, { once: true });
@@ -766,6 +769,7 @@
           reject(new Error("PayPal SDK niet beschikbaar na laden"));
           return;
         }
+        console.log("PayPal SDK version/mode:", window.paypal.version || "v5", script.src.includes("sandbox") ? "sandbox" : "live");
         console.log("PayPal SDK loaded");
         resolve(window.paypal);
       };
@@ -898,7 +902,7 @@
     const source = String(fundingSource || "").toLowerCase();
     if (source === "ideal") return "iDEAL via PayPal";
     if (source === "wero") return "Wero via PayPal";
-    if (source === "card") return "Creditcard via PayPal";
+    if (source === "card") return "Debit/Creditcard via PayPal";
     return "PayPal";
   }
 
@@ -993,6 +997,7 @@
           if (!captureId) throw new Error("PayPal capture ID ontbreekt");
           captureCompleted = true;
           const payment_method = paypalPaymentMethod({ ...data, fundingSource }, label);
+          console.log("Payment method selected:", payment_method);
           console.log("PayPal payment method:", payment_method);
           await finalizePaidOrder(source(), {
             transactionId: captureId,
@@ -1005,6 +1010,7 @@
             console.error("Betaling ontvangen, ordermail afronden mislukt:", error);
             return;
           }
+          console.error("PayPal payment method error:", error);
           console.error("Payment error:", error);
           logPayPalError(error);
           if (status) status.textContent = `${label} kon de betaling niet bevestigen. Probeer opnieuw of kies PayPal.`;
@@ -1020,6 +1026,7 @@
         processing = false;
         const shouldShowError = paymentStarted;
         paymentStarted = false;
+        console.error("PayPal payment method error:", error);
         console.error("Payment error:", error);
         logPayPalError(error);
         if (status) status.textContent = shouldShowError ? `${label} kon de betaling niet starten of bevestigen. Probeer opnieuw of kies PayPal.` : "";
@@ -1040,8 +1047,10 @@
       paypal.FUNDING?.CARD
     ].filter(Boolean);
     console.log("Available PayPal funding sources:", fundingSources);
+    console.log("Eligible payment methods:", []);
     if (!paypal.FUNDING?.IDEAL) console.error("iDEAL/Wero unavailable:", "iDEAL funding source ontbreekt in PayPal SDK");
     if (!paypal.FUNDING?.WERO) console.error("iDEAL/Wero unavailable:", "Wero funding source ontbreekt in PayPal SDK");
+    const eligibleMethods = [];
     for (const fundingSource of fundingSources) {
       const options = paypalButtonOptions({
         source,
@@ -1059,6 +1068,10 @@
           }
           continue;
         }
+        const methodLabel = paypalFundingLabel(fundingSource);
+        eligibleMethods.push(methodLabel);
+        console.log("Eligible payment methods:", eligibleMethods);
+        console.log("Rendering payment method:", methodLabel);
         const paypalSlot = document.createElement("div");
         paypalSlot.className = "paypal-funding-slot";
         target.appendChild(paypalSlot);
@@ -1069,6 +1082,7 @@
         if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
           console.error("iDEAL/Wero unavailable:", error);
         }
+        console.error("PayPal payment method error:", error);
         console.warn(`${paypalFundingLabel(fundingSource)} knop kon niet renderen`, error);
       }
     }
