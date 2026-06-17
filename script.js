@@ -732,6 +732,8 @@
     if (window.paypal) {
       console.log("PayPal SDK version/mode:", window.paypal.version || "v5", "live");
       console.log("PayPal SDK loaded");
+      const sdkScript = document.querySelector("script[data-paypal-sdk], script[src*='paypal.com/sdk/js']");
+      if (sdkScript?.src) console.log("PayPal SDK URL:", sdkScript.src);
       return Promise.resolve(window.paypal);
     }
     if (paypalSdkPromise) return paypalSdkPromise;
@@ -755,6 +757,7 @@
           }
           console.log("PayPal SDK version/mode:", window.paypal.version || "v5", existing.src?.includes("sandbox") ? "sandbox" : "live");
           console.log("PayPal SDK loaded");
+          console.log("PayPal SDK URL:", existing.src);
           resolve(window.paypal);
         }, { once: true });
         existing.addEventListener("error", (error) => {
@@ -766,7 +769,7 @@
       const script = document.createElement("script");
       const params = new URLSearchParams({
         "client-id": clientId,
-        components: "buttons,payment-fields,marks,funding-eligibility,applepay",
+        components: "buttons,funding-eligibility,applepay",
         "enable-funding": enabledFunding,
         currency: PAYPAL_CONFIG.currency,
         intent: PAYPAL_CONFIG.intent
@@ -781,6 +784,7 @@
         }
         console.log("PayPal SDK version/mode:", window.paypal.version || "v5", script.src.includes("sandbox") ? "sandbox" : "live");
         console.log("PayPal SDK loaded");
+        console.log("PayPal SDK URL:", script.src);
         resolve(window.paypal);
       };
       script.onerror = () => {
@@ -938,6 +942,65 @@
     } catch {
       console.error("PayPal error JSON:", String(error));
     }
+  }
+
+  async function logPayPalFundingEligibility(paypal) {
+    if (!paypal) return {};
+    const rawFundingSources = typeof paypal.getFundingSources === "function" ? paypal.getFundingSources() : [];
+    if (typeof paypal.getFundingSources === "function") console.log(paypal.getFundingSources());
+    console.log("paypal.getFundingSources():", rawFundingSources);
+    const diagnostics = [
+      { key: "paypal", label: "PayPal", source: paypal.FUNDING?.PAYPAL || "paypal" },
+      { key: "card", label: "Card", source: paypal.FUNDING?.CARD || "card" },
+      { key: "ideal", label: "iDEAL", source: paypal.FUNDING?.IDEAL || "ideal" },
+      { key: "applepay", label: "Apple Pay", source: paypal.FUNDING?.APPLEPAY || "applepay", applePay: true },
+      { key: "googlepay", label: "Google Pay", source: paypal.FUNDING?.GOOGLEPAY || "googlepay" },
+      { key: "venmo", label: "Venmo", source: paypal.FUNDING?.VENMO || "venmo" },
+      { key: "wero", label: "Wero", source: paypal.FUNDING?.WERO || "wero" }
+    ];
+    const summary = {};
+    console.groupCollapsed("ORIVÈA PayPal funding eligibility");
+    for (const item of diagnostics) {
+      if (item.applePay) {
+        const browserAvailable = Boolean(window.ApplePaySession?.canMakePayments?.());
+        const paypalAvailable = Boolean(paypal.Applepay);
+        let eligible = browserAvailable && paypalAvailable;
+        let reason = eligible ? "Apple Pay browser en PayPal Applepay component beschikbaar" : "Apple PaySession of PayPal Applepay component niet beschikbaar";
+        if (eligible) {
+          try {
+            const config = await paypal.Applepay().config();
+            eligible = config?.isEligible !== false;
+            reason = eligible ? "PayPal Apple Pay config eligible" : "PayPal Apple Pay config isEligible=false";
+            summary[item.key] = { eligible, fundingSource: item.source, browserAvailable, paypalAvailable, config, reason };
+          } catch (error) {
+            eligible = false;
+            reason = error?.message || String(error);
+            summary[item.key] = { eligible, fundingSource: item.source, browserAvailable, paypalAvailable, reason };
+          }
+        } else {
+          summary[item.key] = { eligible: false, fundingSource: item.source, browserAvailable, paypalAvailable, reason };
+        }
+        console.log(`${item.label} eligible?`, summary[item.key].eligible, summary[item.key]);
+        continue;
+      }
+      try {
+        const buttons = paypal.Buttons({ fundingSource: item.source });
+        const eligible = typeof buttons.isEligible === "function" ? buttons.isEligible() : true;
+        summary[item.key] = { eligible, fundingSource: item.source, reason: eligible ? "paypal.Buttons().isEligible()=true" : "paypal.Buttons().isEligible()=false" };
+        console.log(`${item.label} eligible?`, eligible, summary[item.key]);
+      } catch (error) {
+        summary[item.key] = { eligible: false, fundingSource: item.source, reason: error?.message || String(error) };
+        console.log(`${item.label} eligible?`, false, summary[item.key]);
+      }
+    }
+    console.table(Object.fromEntries(Object.entries(summary).map(([key, value]) => [key, {
+      eligible: value.eligible,
+      fundingSource: value.fundingSource,
+      reason: value.reason
+    }])));
+    console.groupEnd();
+    window.ORIVEA_PAYPAL_ELIGIBILITY = summary;
+    return summary;
   }
 
   function createPayPalOrder(data, actions, context = {}) {
@@ -1145,15 +1208,16 @@
 
   async function renderPayPalFundingButtons({ paypal, target, source, status, validate, onSuccess }) {
     target.innerHTML = `
-      <div id="ideal-button-container" class="paypal-funding-slot" hidden></div>
-      <div id="wero-button-container" class="paypal-funding-slot" hidden></div>
-      <div id="card-button-container" class="paypal-funding-slot" hidden></div>
-      <div id="paypal-button-container" class="paypal-funding-slot" hidden></div>
+      <div id="ideal-button-container" class="paypal-funding-slot"></div>
+      <div id="wero-button-container" class="paypal-funding-slot"></div>
+      <div id="card-button-container" class="paypal-funding-slot"></div>
+      <div id="paypal-button-container" class="paypal-funding-slot"></div>
     `;
     if (status) status.textContent = "";
     let renderedButtons = 0;
     const sdkFundingSources = typeof paypal.getFundingSources === "function" ? paypal.getFundingSources() : [];
     console.log("Funding sources:", sdkFundingSources);
+    await logPayPalFundingEligibility(paypal);
     const fundingSources = [
       paypal.FUNDING?.IDEAL || "ideal",
       paypal.FUNDING?.WERO || "wero",
@@ -1186,8 +1250,8 @@
           if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
             console.error("iDEAL/Wero unavailable:", fundingSource);
           }
-          const hiddenContainer = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
-          if (hiddenContainer) hiddenContainer.hidden = true;
+          const diagnosticContainer = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
+          if (diagnosticContainer) diagnosticContainer.dataset.eligible = "false";
           continue;
         }
         const methodLabel = paypalFundingLabel(fundingSource);
@@ -1200,14 +1264,14 @@
           continue;
         }
         paypalSlot.innerHTML = "";
-        paypalSlot.hidden = false;
+        paypalSlot.dataset.eligible = "true";
         console.log("Rendering PayPal buttons in:", paypalSlot);
         await buttons.render(paypalSlot);
         renderedButtons += 1;
       } catch (error) {
         const fundingKey = String(fundingSource).toLowerCase();
-        const hiddenContainer = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
-        if (hiddenContainer) hiddenContainer.hidden = true;
+        const diagnosticContainer = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
+        if (diagnosticContainer) diagnosticContainer.dataset.eligible = "error";
         if (fundingKey === "paypal") console.log("PayPal eligible:", false);
         if (fundingKey === "card") console.log("Card eligible:", false);
         if (fundingKey === "ideal") console.log("Ideal eligible:", false);
