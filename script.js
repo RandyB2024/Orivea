@@ -736,7 +736,7 @@
     if (clientId.length < 30) {
       console.warn("PayPal Client ID lijkt kort of mogelijk onvolledig:", clientId);
     }
-    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal", "card"]).join(",");
+    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal", "card", "paylater"]).join(",");
     paypalSdkPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector("script[data-paypal-sdk], script[src*='paypal.com/sdk/js']");
       if (existing) {
@@ -762,6 +762,7 @@
         components: "buttons,applepay,funding-eligibility",
         currency: PAYPAL_CONFIG.currency,
         intent: PAYPAL_CONFIG.intent,
+        locale: CONFIG.paypalLocale || "nl_NL",
         "enable-funding": enabledFunding
       });
       script.src = `https://www.paypal.com/sdk/js?${params.toString()}`;
@@ -902,6 +903,7 @@
     if (source === "ideal") return "iDEAL via PayPal";
     if (source === "wero") return "Wero via PayPal";
     if (source === "card") return "Debit/Creditcard via PayPal";
+    if (source === "paylater") return "Pay Later via PayPal";
     return "PayPal";
   }
 
@@ -1039,12 +1041,14 @@
     target.innerHTML = "";
     if (status) status.textContent = "";
     let renderedButtons = 0;
+    const sdkFundingSources = typeof paypal.getFundingSources === "function" ? paypal.getFundingSources() : [];
+    console.log("Funding sources:", sdkFundingSources);
     const fundingSources = [
-      paypal.FUNDING?.PAYPAL,
-      paypal.FUNDING?.IDEAL,
-      paypal.FUNDING?.WERO,
-      paypal.FUNDING?.CARD
-    ].filter(Boolean);
+      paypal.FUNDING?.IDEAL || "ideal",
+      paypal.FUNDING?.WERO || "wero",
+      paypal.FUNDING?.CARD || "card",
+      paypal.FUNDING?.PAYPAL || "paypal"
+    ].filter((fundingSource, index, sources) => sources.indexOf(fundingSource) === index);
     console.log("Available PayPal funding sources:", fundingSources);
     console.log("Eligible payment methods:", []);
     if (!paypal.FUNDING?.IDEAL) console.error("iDEAL/Wero unavailable:", "iDEAL funding source ontbreekt in PayPal SDK");
@@ -1061,7 +1065,13 @@
       });
       try {
         const buttons = paypal.Buttons(options);
-        if (buttons.isEligible && !buttons.isEligible()) {
+        const eligible = buttons.isEligible ? buttons.isEligible() : true;
+        const fundingKey = String(fundingSource).toLowerCase();
+        if (fundingKey === "paypal") console.log("PayPal eligible:", eligible);
+        if (fundingKey === "card") console.log("Card eligible:", eligible);
+        if (fundingKey === "ideal") console.log("Ideal eligible:", eligible);
+        if (fundingKey === "wero") console.log("Wero eligible:", eligible);
+        if (!eligible) {
           if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
             console.error("iDEAL/Wero unavailable:", fundingSource);
           }
@@ -1078,7 +1088,12 @@
         await buttons.render(paypalSlot);
         renderedButtons += 1;
       } catch (error) {
-        if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
+        const fundingKey = String(fundingSource).toLowerCase();
+        if (fundingKey === "paypal") console.log("PayPal eligible:", false);
+        if (fundingKey === "card") console.log("Card eligible:", false);
+        if (fundingKey === "ideal") console.log("Ideal eligible:", false);
+        if (fundingKey === "wero") console.log("Wero eligible:", false);
+        if (fundingKey === "ideal" || fundingKey === "wero") {
           console.error("iDEAL/Wero unavailable:", error);
         }
         console.error("PayPal payment method error:", error);
@@ -1093,15 +1108,18 @@
 
   async function applePayConfig(paypal) {
     if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments?.() || !paypal?.Applepay) {
+      console.log("Apple Pay eligible:", false);
       console.error("Apple Pay eligibility failed:", "Apple PaySession of PayPal Applepay niet beschikbaar");
       return null;
     }
     const applepay = paypal.Applepay();
     const config = await applepay.config();
     if (config?.isEligible === false) {
+      console.log("Apple Pay eligible:", false);
       console.error("Apple Pay eligibility failed:", config);
       return null;
     }
+    console.log("Apple Pay eligible:", true);
     return { applepay, config };
   }
 
