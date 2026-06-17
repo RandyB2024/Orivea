@@ -26,6 +26,8 @@
   const money = (value) => currency.format(Number(value || 0));
   const VAT_RATE = 0.21;
   const VAT_LABEL = "21%";
+  const SALES_PAUSED = CONFIG.salesPaused !== false;
+  const SALES_PAUSED_MESSAGE = CONFIG.salesPausedMessage || "ORIV\u00C8A wordt momenteel ter beoordeling voorgelegd aan Glantier. Bestellen is tijdelijk nog niet beschikbaar.";
   const vatFromIncluded = (value) => {
     const amount = Number(value || 0);
     return amount - (amount / (1 + VAT_RATE));
@@ -39,12 +41,12 @@
     ? "PayPal Client ID lijkt ongeldig of onvolledig. Controleer de live Client ID in PayPal Developer."
     : "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
   const vaderdagScents = {
-    "717": { inspiredBy: "Acqua di Gio", image: "assets/images/orivea-vaderdag-set-717.png" },
-    "724": { inspiredBy: "Invictus", image: "assets/images/orivea-vaderdag-set-724.png" },
-    "728": { inspiredBy: "Boss Bottled", image: "assets/images/orivea-vaderdag-set-728.png" },
-    "759": { inspiredBy: "One Million", image: "assets/images/orivea-vaderdag-set-759.png" },
-    "771": { inspiredBy: "Sauvage", image: "assets/images/orivea-vaderdag-set-771.png" },
-    "782": { inspiredBy: "Bad Boy", image: "assets/images/orivea-vaderdag-set-782.png" }
+    "717": { profile: "Aquatisch en aromatisch", image: "assets/images/orivea-vaderdag-set-717.png" },
+    "724": { profile: "Fris en krachtig", image: "assets/images/orivea-vaderdag-set-724.png" },
+    "728": { profile: "Warm en houtachtig", image: "assets/images/orivea-vaderdag-set-728.png" },
+    "759": { profile: "Orientaal en kruidig", image: "assets/images/orivea-vaderdag-set-759.png" },
+    "771": { profile: "Aromatisch en intens", image: "assets/images/orivea-vaderdag-set-771.png" },
+    "782": { profile: "Kruidig en uitgesproken", image: "assets/images/orivea-vaderdag-set-782.png" }
   };
 
   function shippingFor(subtotal) {
@@ -63,8 +65,7 @@
         ...product,
         naam: `${product.naam} - Glantier ${glantier}`,
         type: "Vaderdag Premium Set",
-        inhoud: "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
-        parfumReferentie: `Geïnspireerd door de geurbeleving van ${selected.inspiredBy}`,
+        inhoud: "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
         image: selected.image,
         prijs: product.prijs
       };
@@ -97,6 +98,10 @@
   }
 
   function addToCart(id, qty = 1, variant = "signature") {
+    if (SALES_PAUSED) {
+      alert(SALES_PAUSED_MESSAGE);
+      return;
+    }
     const product = productById(id);
     if (!product) return;
     if (variant === "premium" && !product.premiumBeschikbaar) return;
@@ -187,8 +192,7 @@
   }
 
   function productCard(product) {
-    const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
-    const reference = product.parfumReferentie ? `<p class="product-reference">Geïnspireerd door de geurbeleving van ${product.parfumReferentie}</p>` : "";
+    const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
     const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " • ") : "";
     const title = product.glantierNummer ? `GLANTIER ${product.glantierNummer}` : product.naam;
     const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : "";
@@ -199,15 +203,15 @@
           ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95)}</span></button>` : ""}
         </div>` : "";
     const priceLine = isFragrance ? "" : `<p class="price product-price">${money(product.prijs)}</p>`;
-    const actions = product.id === "vaderdag-premium-set"
+    const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
+    const actions = SALES_PAUSED ? pausedAction : product.id === "vaderdag-premium-set"
       ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Bestel Vaderdag Set</button>`
       : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
     return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
       <img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy">
       <div class="product-body">
         <span class="product-meta">${product.categorie}</span>
-        <h3>${title}</h3>
-        ${reference}
+        <h3>${title}</h3>
         <p class="scent-group">${scentGroup}</p>
         <p class="product-short">${product.omschrijving}</p>
         ${priceLine}
@@ -227,7 +231,7 @@
       const type = target.dataset.products;
       let items = PRODUCTS;
       if (type === "bestsellers") {
-        items = PRODUCTS.filter((product) => product.zoektermen?.some((term) => ["bestseller", "sauvage", "one million", "good girl", "black opium", "coco mademoiselle"].includes(term))).slice(0, 8);
+        items = PRODUCTS.filter((product) => ["Dames", "Heren", "Unisex"].includes(product.categorie)).slice(0, 8);
       }
       if (type === "gifts") {
         items = PRODUCTS.filter((product) => ["Boxen", "Geurstokjes", "Bodymist"].includes(product.categorie)).slice(0, 4);
@@ -251,7 +255,7 @@
   function scoreProduct(product, query) {
     const q = normalize(query);
     if (!q) return 0;
-    const haystack = [product.id, product.glantierNummer, product.naam, product.type, product.doelgroep, product.categorie, product.geurgroep, product.merkReferentie, product.parfumReferentie, ...(product.zoektermen || [])].map(normalize).filter(Boolean);
+    const haystack = [product.id, product.glantierNummer, product.naam, product.type, product.doelgroep, product.categorie, product.geurgroep, product.moment, ...(product.zoektermen || [])].map(normalize).filter(Boolean);
     let score = 0;
     for (const term of haystack) {
       if (term === q) score = Math.max(score, 100);
@@ -264,7 +268,7 @@
     return score;
   }
 
-  function findMatches(query, limit = 4) {
+  function findGeurprofielen(query, limit = 4) {
     return PRODUCTS.map((product) => ({ product, score: scoreProduct(product, query) }))
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score || a.product.prijs - b.product.prijs)
@@ -272,33 +276,36 @@
       .map((item) => item.product);
   }
 
-  function renderMatch(query) {
-    const result = $("[data-match-result]");
+  function renderGeurwijzer(query) {
+    const result = $("[data-geurwijzer-result]");
     if (!result) return;
-    const matches = findMatches(query, 4);
-    if (!matches.length) {
-      result.innerHTML = '<p class="notice">Geen directe match gevonden. Probeer een merknaam, geurgroep of Glantier nummer.</p>';
+    const geurprofielen = findGeurprofielen(query, 4);
+    if (!geurprofielen.length) {
+      result.innerHTML = '<p class="notice">Geen direct geurprofiel gevonden. Probeer een geurfamilie, karakter of Glantier nummer.</p>';
       return;
     }
-    result.innerHTML = matches.map((product) => {
+    result.innerHTML = geurprofielen.map((product) => {
       const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " &bull; ") : "";
-      const reference = product.parfumReferentie ? `<p class="product-reference">Geïnspireerd door de geurbeleving van ${product.parfumReferentie}</p>` : "";
-      return `<div class="match-card"><img src="${product.premiumImage || product.image}" alt="${product.naam}"><div><p class="eyebrow">Beste match</p><h3>GLANTIER ${product.glantierNummer || product.id}</h3>${reference}<p>${scentGroup} • ${product.doelgroep}</p><p>${product.omschrijving}</p><p class="price">50 ml ${money(product.prijs)}</p><div class="hero-actions"><button class="button primary cart-symbol-button" type="button" data-add-to-cart="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button><a class="button ghost" href="catalogus.html">Bekijk collectie</a></div><p class="notice">Alle merknamen worden uitsluitend gebruikt als vergelijkingsreferentie. ORIVÈA verkoopt Glantier-producten.</p></div></div>`;
+      const action = SALES_PAUSED
+        ? '<button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>'
+        : '<button class="button primary cart-symbol-button" type="button" data-add-to-cart="' + product.id + '" aria-label="Toevoegen aan winkelwagen">' + cartIcon() + '</button>';
+
+      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p>' + product.omschrijving + '</p><p class="price">50 ml ' + money(product.prijs) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (SALES_PAUSED ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
     }).join("");
   }
 
   function initMatch() {
-    const form = $("[data-match-form]");
+    const form = $("[data-geurwijzer-form]");
     if (!form) return;
-    const input = $("[data-match-input]");
+    const input = $("[data-geurwijzer-input]");
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      renderMatch(input.value);
+      renderGeurwijzer(input.value);
     });
-    input.addEventListener("input", () => renderMatch(input.value));
-    $$("[data-match-examples] button").forEach((button) => button.addEventListener("click", () => {
+    input.addEventListener("input", () => renderGeurwijzer(input.value));
+    $$("[data-geurwijzer-examples] button").forEach((button) => button.addEventListener("click", () => {
       input.value = button.textContent;
-      renderMatch(input.value);
+      renderGeurwijzer(input.value);
     }));
   }
 
@@ -438,8 +445,8 @@
   }
 
   function normalizeHouseNumber(value) {
-    const match = String(value || "").match(/\d+/);
-    return match ? match[0] : "";
+    const number = /\d+/.exec(String(value || ""));
+    return number ? number[0] : "";
   }
 
   async function lookupAddress(postcode, houseNumber, addition = "") {
@@ -935,6 +942,10 @@
 
   function createPayPalOrder(data, actions, context = {}) {
     console.log("createOrder started");
+    if (SALES_PAUSED) {
+      if (context.status) context.status.textContent = SALES_PAUSED_MESSAGE;
+      throw new Error("Bestellen tijdelijk niet beschikbaar");
+    }
     if (context.processing?.()) throw new Error("Betaling wordt al verwerkt");
     if (context.validate && !context.validate()) throw new Error("Checkout niet compleet");
     const current = totals();
@@ -1402,6 +1413,11 @@
     checkoutLink.insertAdjacentElement("afterend", quickBlock);
 
     quickBlock.querySelector("[data-quick-checkout-open]").addEventListener("click", () => {
+      if (SALES_PAUSED) {
+        const message = quickBlock.querySelector("p");
+        if (message) message.textContent = SALES_PAUSED_MESSAGE;
+        return;
+      }
       const data = totals();
       const message = quickBlock.querySelector("p");
       if (!data.lines.length) {
@@ -1531,6 +1547,10 @@
     };
 
     const validateCheckout = () => {
+      if (SALES_PAUSED) {
+        if (status) status.textContent = SALES_PAUSED_MESSAGE;
+        return false;
+      }
       const data = totals();
       if (!data.lines.length) {
         if (status) status.textContent = 'Je winkelwagen is nog leeg.';
@@ -1732,7 +1752,7 @@
 
   function initVisualLayer() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const revealTargets = $$("body[data-page='home'] .hero-match, body[data-page='home'] .campaign-section, body[data-page='home'] .category-strip, body[data-page='home'] .product-showcase, body[data-page='home'] .split-band, body[data-page='home'] .sample-usp-section, body[data-page='home'] .newsletter-section, body[data-page='home'] .faq, body[data-page='catalogus'] .page-hero");
+    const revealTargets = $$("body[data-page='home'] .hero-geurwijzer, body[data-page='home'] .campaign-section, body[data-page='home'] .category-strip, body[data-page='home'] .product-showcase, body[data-page='home'] .split-band, body[data-page='home'] .sample-usp-section, body[data-page='home'] .newsletter-section, body[data-page='home'] .faq, body[data-page='catalogus'] .page-hero");
     if (!reduced && "IntersectionObserver" in window) {
       revealTargets.forEach((element) => element.classList.add("reveal"));
       const observer = new IntersectionObserver((entries) => {
