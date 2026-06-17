@@ -736,7 +736,7 @@
     if (clientId.length < 30) {
       console.warn("PayPal Client ID lijkt kort of mogelijk onvolledig:", clientId);
     }
-    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal", "card", "paylater"]).join(",");
+    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal", "card"]).join(",");
     paypalSdkPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector("script[data-paypal-sdk], script[src*='paypal.com/sdk/js']");
       if (existing) {
@@ -759,11 +759,10 @@
       const script = document.createElement("script");
       const params = new URLSearchParams({
         "client-id": clientId,
-        components: "buttons,applepay,funding-eligibility",
+        components: "buttons,payment-fields,marks,funding-eligibility,applepay",
+        "enable-funding": enabledFunding,
         currency: PAYPAL_CONFIG.currency,
-        intent: PAYPAL_CONFIG.intent,
-        locale: CONFIG.paypalLocale || "nl_NL",
-        "enable-funding": enabledFunding
+        intent: PAYPAL_CONFIG.intent
       });
       script.src = `https://www.paypal.com/sdk/js?${params.toString()}`;
       script.dataset.paypalSdk = "true";
@@ -913,6 +912,14 @@
     return style;
   }
 
+  function paypalFundingContainerId(fundingSource) {
+    const source = String(fundingSource || "").toLowerCase();
+    if (source === "ideal") return "ideal-button-container";
+    if (source === "wero") return "wero-button-container";
+    if (source === "card") return "card-button-container";
+    return "paypal-button-container";
+  }
+
   function paypalCaptureId(details) {
     return paypalCapture(details)?.id || "";
   }
@@ -926,14 +933,86 @@
     }
   }
 
+  function createPayPalOrder(data, actions, context = {}) {
+    console.log("createOrder started");
+    if (context.processing?.()) throw new Error("Betaling wordt al verwerkt");
+    if (context.validate && !context.validate()) throw new Error("Checkout niet compleet");
+    const current = totals();
+    const cartItems = current.lines.map((line) => ({
+      id: line.product.id,
+      name: line.product.naam,
+      qty: line.qty,
+      price: Number(line.product.prijs),
+      total: Number(line.product.prijs * line.qty)
+    }));
+    console.log("Cart items:", cartItems);
+    console.log("Subtotal:", current.subtotal);
+    console.log("Shipping:", current.shipping);
+    console.log("Total:", current.total);
+    if (!cartItems.length) {
+      if (context.status) context.status.textContent = "Je winkelwagen is nog leeg.";
+      throw new Error("Winkelwagen is leeg");
+    }
+    if (Number(current.total) <= 0) {
+      if (context.status) context.status.textContent = "Ongeldig totaalbedrag.";
+      throw new Error("Ongeldig totaalbedrag");
+    }
+    context.paymentStarted = true;
+    const total = Number(current.total).toFixed(2);
+    console.log("PayPal total:", total);
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          currency_code: PAYPAL_CONFIG.currency,
+          value: total
+        }
+      }]
+    }).then((orderId) => {
+      console.log("Order ID:", orderId);
+      return orderId;
+    });
+  }
+
+  async function handlePayPalApprove(data, actions, paymentMethod, context = {}) {
+    console.log("onApprove started:", paymentMethod, data);
+    const details = await actions.order.capture();
+    console.log("PayPal capture status:", details?.status);
+    console.log("PayPal capture details:", details);
+    console.log("Capture result:", details);
+    if (!details || details.status !== "COMPLETED") {
+      throw new Error(`PayPal capture niet voltooid. Status: ${details && details.status}`);
+    }
+    const transactionId = paypalCaptureId(details) || data.orderID;
+    console.log("PayPal transaction ID:", transactionId);
+    console.log("Transaction ID:", transactionId);
+    if (!transactionId) throw new Error("PayPal capture ID ontbreekt");
+    context.captureCompleted = true;
+    console.log("Payment method selected:", paymentMethod);
+    console.log("PayPal payment method:", paymentMethod);
+    return finalizePaidOrder(context.source(), {
+      transactionId,
+      paymentStatus: "COMPLETED",
+      paymentMethod
+    }, { ...(context.onSuccess || {}), status: context.status });
+  }
+
   function paypalButtonOptions({ source, status, validate, onSuccess, paymentMethod, fundingSource }) {
     let processing = false;
     let paymentStarted = false;
+    const context = {
+      source,
+      status,
+      validate,
+      onSuccess,
+      captureCompleted: false,
+      paymentStarted: false,
+      processing: () => processing
+    };
     const label = paymentMethod || "PayPal";
     const options = {
       style: paypalFundingStyle(fundingSource),
       onClick: (data, actions) => {
-        console.log("PayPal button clicked");
+        console.log("PayPal button clicked:", label);
         if (validate && !validate()) {
           return actions.reject();
         }
@@ -942,6 +1021,9 @@
       createOrder: (data, actions) => {
         console.log("createOrder started");
         if (processing) throw new Error("Betaling wordt al verwerkt");
+        paymentStarted = true;
+        context.paymentStarted = true;
+        return createPayPalOrder(data, actions, context);
         if (validate && !validate()) throw new Error("Checkout niet compleet");
         const current = totals();
         const cartItems = current.lines.map((line) => ({
@@ -983,6 +1065,19 @@
         console.log("onApprove started:", data);
         if (processing) return;
         processing = true;
+        const payment_method = paypalPaymentMethod({ ...data, fundingSource }, label);
+        if (status) status.textContent = "Betaling wordt bevestigd...";
+        return handlePayPalApprove(data, actions, payment_method, context).catch((error) => {
+          processing = false;
+          if (context.captureCompleted) {
+            console.error("Betaling ontvangen, ordermail afronden mislukt:", error);
+            return;
+          }
+          console.error("PayPal payment method error:", error);
+          console.error("Payment error:", error);
+          logPayPalError(error);
+          if (status) status.textContent = `${label} kon de betaling niet bevestigen. Probeer opnieuw of kies PayPal.`;
+        });
         let captureCompleted = false;
         if (status) status.textContent = "Betaling wordt bevestigd...";
         return actions.order.capture().then(async (details) => {
@@ -1038,7 +1133,12 @@
   }
 
   async function renderPayPalFundingButtons({ paypal, target, source, status, validate, onSuccess }) {
-    target.innerHTML = "";
+    target.innerHTML = `
+      <div id="ideal-button-container" class="paypal-funding-slot" hidden></div>
+      <div id="wero-button-container" class="paypal-funding-slot" hidden></div>
+      <div id="card-button-container" class="paypal-funding-slot" hidden></div>
+      <div id="paypal-button-container" class="paypal-funding-slot" hidden></div>
+    `;
     if (status) status.textContent = "";
     let renderedButtons = 0;
     const sdkFundingSources = typeof paypal.getFundingSources === "function" ? paypal.getFundingSources() : [];
@@ -1075,20 +1175,28 @@
           if (String(fundingSource).toLowerCase() === "ideal" || String(fundingSource).toLowerCase() === "wero") {
             console.error("iDEAL/Wero unavailable:", fundingSource);
           }
+          const hiddenContainer = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
+          if (hiddenContainer) hiddenContainer.hidden = true;
           continue;
         }
         const methodLabel = paypalFundingLabel(fundingSource);
         eligibleMethods.push(methodLabel);
         console.log("Eligible payment methods:", eligibleMethods);
         console.log("Rendering payment method:", methodLabel);
-        const paypalSlot = document.createElement("div");
-        paypalSlot.className = "paypal-funding-slot";
-        target.appendChild(paypalSlot);
+        const paypalSlot = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
+        if (!paypalSlot) {
+          console.warn("Container niet gevonden:", `#${paypalFundingContainerId(fundingSource)}`);
+          continue;
+        }
+        paypalSlot.innerHTML = "";
+        paypalSlot.hidden = false;
         console.log("Rendering PayPal buttons in:", paypalSlot);
         await buttons.render(paypalSlot);
         renderedButtons += 1;
       } catch (error) {
         const fundingKey = String(fundingSource).toLowerCase();
+        const hiddenContainer = target.querySelector(`#${paypalFundingContainerId(fundingSource)}`);
+        if (hiddenContainer) hiddenContainer.hidden = true;
         if (fundingKey === "paypal") console.log("PayPal eligible:", false);
         if (fundingKey === "card") console.log("Card eligible:", false);
         if (fundingKey === "ideal") console.log("Ideal eligible:", false);
@@ -1140,6 +1248,7 @@
 
   async function renderApplePayButton({ target, source, status, validate, onSuccess, label = "Snel betalen met Apple Pay" }) {
     if (!target || target.dataset.applePayReady === "true") return;
+    if (!target.id) target.id = "applepay-button-container";
     target.hidden = true;
     try {
       const paypal = await loadPayPalSdk();
