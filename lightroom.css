@@ -1079,3 +1079,24 @@ body[data-page="catalogus"] .product-grid.catalog {
     grid-template-columns: 1fr !important;
   }
 }
+
+body[data-page="home"] .hero-geurwijzer .hero-copy h1,
+body[data-page="home"] .hero-match .hero-copy h1 {
+  font-size: clamp(3.15rem, 6.6vw, 6.25rem) !important;
+  line-height: .9 !important;
+  letter-spacing: .08em !important;
+  color: var(--gold) !important;
+  background: linear-gradient(135deg, #f2d99f 0%, #c59a47 45%, #8a642b 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 18px 45px rgba(138, 100, 43, .16) !important;
+}
+
+@media (max-width: 768px) {
+  body[data-page="home"] .hero-geurwijzer .hero-copy h1,
+  body[data-page="home"] .hero-match .hero-copy h1 {
+    font-size: clamp(2.65rem, 14vw, 4.25rem) !important;
+    letter-spacing: .06em !important;
+  }
+}
