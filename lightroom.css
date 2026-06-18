@@ -1146,17 +1146,24 @@ body[data-page="b2b"] .b2b-page {
   padding: clamp(1.5rem, 3vw, 2.5rem);
   border-radius: 20px;
   background:
-    linear-gradient(145deg, rgba(34, 27, 20, .94), rgba(82, 60, 32, .86)),
-    radial-gradient(circle at 20% 12%, rgba(232, 199, 129, .18), transparent 18rem);
+    linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(248, 239, 222, .82)),
+    radial-gradient(circle at 20% 12%, rgba(196, 160, 90, .2), transparent 18rem);
   border: 1px solid rgba(196, 160, 90, .28);
-  color: #fff8ea;
+  color: var(--ink);
   box-shadow: 0 30px 75px rgba(35, 25, 12, .2);
+}
+
+.b2b-hero-panel.glass {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(248, 239, 222, .82)),
+    radial-gradient(circle at 20% 12%, rgba(196, 160, 90, .2), transparent 18rem) !important;
+  color: var(--ink) !important;
 }
 
 .b2b-hero-panel .eyebrow,
 .b2b-card span,
 .b2b-process span {
-  color: #d2a84f;
+  color: #8c652a;
 }
 
 .b2b-feature-list {
@@ -1169,8 +1176,8 @@ body[data-page="b2b"] .b2b-page {
 
 .b2b-feature-list li {
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 248, 234, .14);
-  color: #fff8ea;
+  border-bottom: 1px solid rgba(147, 108, 45, .18);
+  color: rgba(39, 31, 23, .86);
   font-size: 1rem;
 }
 
@@ -1282,13 +1289,13 @@ body[data-page="b2b"] .b2b-page {
 
 .b2b-form {
   padding: clamp(1.2rem, 3vw, 2rem);
-  background: rgba(34, 27, 20, .94);
-  color: #fff8ea;
+  background: rgba(255, 255, 255, .82) !important;
+  color: var(--ink);
 }
 
 .b2b-form label,
 .b2b-form .form-status {
-  color: #fff8ea;
+  color: rgba(39, 31, 23, .86) !important;
 }
 
 .b2b-form .form-row {
@@ -1301,9 +1308,9 @@ body[data-page="b2b"] .b2b-page {
 .b2b-form select,
 .b2b-form textarea {
   width: 100%;
-  color: #fff8ea;
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 248, 234, .2);
+  color: var(--ink) !important;
+  background: rgba(255, 255, 255, .86) !important;
+  border: 1px solid rgba(147, 108, 45, .24) !important;
 }
 
 .b2b-form select option {
@@ -1313,7 +1320,7 @@ body[data-page="b2b"] .b2b-page {
 
 .b2b-form input::placeholder,
 .b2b-form textarea::placeholder {
-  color: rgba(255, 248, 234, .55);
+  color: rgba(39, 31, 23, .5);
 }
 
 .b2b-disclaimer {
