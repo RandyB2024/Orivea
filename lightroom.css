@@ -1100,3 +1100,251 @@ body[data-page="home"] .hero-match .hero-copy h1 {
     letter-spacing: .06em !important;
   }
 }
+
+/* B2B page */
+body[data-page="b2b"] .b2b-page {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(198, 155, 78, .18), transparent 30rem),
+    linear-gradient(180deg, rgba(255, 250, 239, .62), rgba(255, 255, 255, .96));
+}
+
+.b2b-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .72fr);
+  gap: clamp(1.5rem, 4vw, 3.75rem);
+  align-items: stretch;
+  max-width: min(1180px, calc(100% - 2rem));
+  min-height: auto;
+  margin: 0 auto;
+  padding: clamp(4.5rem, 9vw, 7rem) 0 clamp(2rem, 5vw, 4rem);
+}
+
+.b2b-hero .hero-copy {
+  align-self: center;
+  max-width: 760px;
+}
+
+.b2b-hero .hero-copy h1 {
+  max-width: 760px;
+  color: var(--ink);
+  font-size: clamp(2.75rem, 6vw, 5.7rem);
+  line-height: .95;
+  letter-spacing: 0;
+}
+
+.b2b-hero .hero-copy p:not(.eyebrow) {
+  max-width: 660px;
+  color: rgba(39, 31, 23, .72);
+}
+
+.b2b-hero-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 420px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(34, 27, 20, .94), rgba(82, 60, 32, .86)),
+    radial-gradient(circle at 20% 12%, rgba(232, 199, 129, .18), transparent 18rem);
+  border: 1px solid rgba(196, 160, 90, .28);
+  color: #fff8ea;
+  box-shadow: 0 30px 75px rgba(35, 25, 12, .2);
+}
+
+.b2b-hero-panel .eyebrow,
+.b2b-card span,
+.b2b-process span {
+  color: #d2a84f;
+}
+
+.b2b-feature-list {
+  display: grid;
+  gap: .95rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.b2b-feature-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 248, 234, .14);
+  color: #fff8ea;
+  font-size: 1rem;
+}
+
+.b2b-feature-list li:last-child {
+  border-bottom: 0;
+}
+
+.b2b-section {
+  max-width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(2.75rem, 6vw, 4.75rem) 0;
+}
+
+.b2b-section .section-heading {
+  max-width: 760px;
+  margin-bottom: clamp(1.4rem, 3vw, 2rem);
+}
+
+.b2b-section .section-heading h2,
+.b2b-offer-copy h2,
+.b2b-disclaimer h2 {
+  color: var(--ink);
+}
+
+.b2b-section .section-heading p:not(.eyebrow),
+.b2b-offer-copy p,
+.b2b-disclaimer p,
+.b2b-card p,
+.b2b-process p {
+  color: rgba(39, 31, 23, .72);
+}
+
+.b2b-tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.b2b-tag-grid span {
+  padding: .78rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .74);
+  border: 1px solid rgba(196, 160, 90, .26);
+  color: rgba(39, 31, 23, .78);
+  box-shadow: 0 14px 34px rgba(70, 50, 25, .08);
+}
+
+.b2b-card-grid,
+.b2b-process {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.b2b-card,
+.b2b-process article,
+.b2b-disclaimer {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(196, 160, 90, .22);
+  box-shadow: 0 18px 48px rgba(70, 50, 25, .08);
+}
+
+.b2b-card {
+  padding: clamp(1.2rem, 2.4vw, 1.75rem);
+}
+
+.b2b-card span,
+.b2b-process span {
+  display: inline-flex;
+  margin-bottom: .85rem;
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.b2b-card h3,
+.b2b-process h3 {
+  color: var(--ink);
+  margin-bottom: .55rem;
+}
+
+.b2b-process {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.b2b-process article {
+  padding: clamp(1.2rem, 2.4vw, 1.9rem);
+}
+
+.b2b-offer-section {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(360px, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.b2b-offer-copy {
+  position: sticky;
+  top: 110px;
+}
+
+.b2b-direct-mail a {
+  color: #9f7936;
+  font-weight: 700;
+}
+
+.b2b-form {
+  padding: clamp(1.2rem, 3vw, 2rem);
+  background: rgba(34, 27, 20, .94);
+  color: #fff8ea;
+}
+
+.b2b-form label,
+.b2b-form .form-status {
+  color: #fff8ea;
+}
+
+.b2b-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.b2b-form input,
+.b2b-form select,
+.b2b-form textarea {
+  width: 100%;
+  color: #fff8ea;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 248, 234, .2);
+}
+
+.b2b-form select option {
+  color: #271f17;
+  background: #fff8ea;
+}
+
+.b2b-form input::placeholder,
+.b2b-form textarea::placeholder {
+  color: rgba(255, 248, 234, .55);
+}
+
+.b2b-disclaimer {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(1rem, 4vw, 2rem);
+}
+
+@media (max-width: 980px) {
+  .b2b-hero,
+  .b2b-offer-section {
+    grid-template-columns: 1fr;
+  }
+
+  .b2b-hero-panel {
+    min-height: auto;
+  }
+
+  .b2b-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .b2b-offer-copy {
+    position: static;
+  }
+}
+
+@media (max-width: 680px) {
+  .b2b-hero {
+    padding-top: 5.25rem;
+  }
+
+  .b2b-card-grid,
+  .b2b-process,
+  .b2b-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}

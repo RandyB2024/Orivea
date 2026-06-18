@@ -1659,6 +1659,11 @@
     }
   }
 
+  async function sendContactTemplate(payload) {
+    await initEmailJs();
+    return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
+  }
+
   function initContact() {
     const form = $("[data-contact-form]");
     if (!form) return;
@@ -1677,12 +1682,49 @@
         message_body: "Bedankt voor je bericht. Ons team bekijkt je aanvraag zo snel mogelijk en neemt indien nodig contact met je op."
       };
       try {
-        await initEmailJs();
-        await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
+        await sendContactTemplate(payload);
         form.reset();
         status.textContent = "Bedankt voor je bericht. ORIVÈA neemt zo snel mogelijk contact met je op.";
       } catch {
         status.textContent = "Verzenden lukte niet direct. Mail ons via shop@orivea.nl.";
+      }
+    });
+  }
+
+  function initB2B() {
+    const form = $("[data-b2b-form]");
+    if (!form) return;
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = $("[data-b2b-status]");
+      if (status) status.textContent = "Aanvraag wordt verzonden...";
+      const raw = Object.fromEntries(new FormData(form).entries());
+      const message = [
+        "Zakelijke B2B aanvraag via orivea.nl",
+        `Naam: ${raw.name || ""}`,
+        `Bedrijfsnaam: ${raw.company || ""}`,
+        `E-mail: ${raw.email || ""}`,
+        `Telefoon: ${raw.phone || ""}`,
+        `Type onderneming: ${raw.business_type || ""}`,
+        "",
+        "Gewenste aantallen en toepassing:",
+        raw.message || ""
+      ].join("\n");
+      const payload = {
+        name: raw.name || "",
+        email: raw.email || "",
+        subject: "Zakelijke B2B aanvraag",
+        message,
+        email_subject: "Bedankt voor je zakelijke aanvraag | ORIV\u00C8A",
+        message_type: "Zakelijke aanvraag ontvangen",
+        message_body: "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A bekijkt je wensen en neemt zo snel mogelijk contact met je op."
+      };
+      try {
+        await sendContactTemplate(payload);
+        form.reset();
+        if (status) status.textContent = "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A neemt zo snel mogelijk contact met je op.";
+      } catch {
+        if (status) status.textContent = "Verzenden lukte niet direct. Mail ons via shop@orivea.nl.";
       }
     });
   }
@@ -1707,8 +1749,7 @@
         message_body: isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief. Je ontvangt als eerste nieuws over nieuwe collecties, exclusieve acties en premium geuren."
       };
       try {
-        await initEmailJs();
-        await emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
+        await sendContactTemplate(payload);
         form.reset();
         status.textContent = isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief.";
       } catch {
@@ -1890,6 +1931,7 @@
   initCatalog();
   initCheckout();
   initContact();
+  initB2B();
   initNewsletter();
   initVisualLayer();
 })();
