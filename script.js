@@ -28,12 +28,15 @@
   const VAT_LABEL = "21%";
   const SALES_PAUSED = CONFIG.salesPaused !== false;
   const SALES_PAUSED_MESSAGE = CONFIG.salesPausedMessage || "ORIV\u00C8A wordt momenteel ter beoordeling voorgelegd aan Glantier. Bestellen is tijdelijk nog niet beschikbaar.";
+  const TEST_PRODUCT_ID = "testbetaling-010";
   const vatFromIncluded = (value) => {
     const amount = Number(value || 0);
     return amount - (amount / (1 + VAT_RATE));
   };
   const normalize = (value) => String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   const productById = (id) => PRODUCTS.find((product) => product.id === id);
+  const isTestProductId = (id) => String(id || "").toLowerCase() === TEST_PRODUCT_ID;
+  const isTestProduct = (product) => isTestProductId(product?.id);
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
   const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
   const paypalClientIdLooksIncomplete = () => !PAYPAL_CONFIG.clientId || PAYPAL_CONFIG.clientId.length < 30;
@@ -98,7 +101,7 @@
   }
 
   function addToCart(id, qty = 1, variant = "signature") {
-    if (SALES_PAUSED) {
+    if (SALES_PAUSED && !isTestProductId(id)) {
       alert(SALES_PAUSED_MESSAGE);
       return;
     }
@@ -142,6 +145,10 @@
       total: vatFromIncluded(total)
     };
     return { lines, subtotal, shipping, total, vat };
+  }
+
+  function checkoutAllowedDuringPause(data = totals()) {
+    return !SALES_PAUSED || (data.lines.length > 0 && data.lines.every((line) => isTestProduct(line.product)));
   }
 
   function cartLineHtml(line) {
@@ -204,7 +211,8 @@
         </div>` : "";
     const priceLine = isFragrance ? "" : `<p class="price product-price">${money(product.prijs)}</p>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
-    const actions = SALES_PAUSED ? pausedAction : product.id === "vaderdag-premium-set"
+    const productPaused = SALES_PAUSED && !isTestProduct(product);
+    const actions = productPaused ? pausedAction : product.id === "vaderdag-premium-set"
       ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Bestel Vaderdag Set</button>`
       : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
     return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
@@ -286,11 +294,12 @@
     }
     result.innerHTML = geurprofielen.map((product) => {
       const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " &bull; ") : "";
-      const action = SALES_PAUSED
+      const productPaused = SALES_PAUSED && !isTestProduct(product);
+      const action = productPaused
         ? '<button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>'
         : '<button class="button primary cart-symbol-button" type="button" data-add-to-cart="' + product.id + '" aria-label="Toevoegen aan winkelwagen">' + cartIcon() + '</button>';
 
-      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p>' + product.omschrijving + '</p><p class="price">50 ml ' + money(product.prijs) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (SALES_PAUSED ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
+      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p>' + product.omschrijving + '</p><p class="price">50 ml ' + money(product.prijs) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
     }).join("");
   }
 
@@ -1005,13 +1014,13 @@
 
   function createPayPalOrder(data, actions, context = {}) {
     console.log("createOrder started");
-    if (SALES_PAUSED) {
-      if (context.status) context.status.textContent = SALES_PAUSED_MESSAGE;
-      throw new Error("Bestellen tijdelijk niet beschikbaar");
-    }
     if (context.processing?.()) throw new Error("Betaling wordt al verwerkt");
     if (context.validate && !context.validate()) throw new Error("Checkout niet compleet");
     const current = totals();
+    if (!checkoutAllowedDuringPause(current)) {
+      if (context.status) context.status.textContent = SALES_PAUSED_MESSAGE;
+      throw new Error("Bestellen tijdelijk niet beschikbaar");
+    }
     const cartItems = current.lines.map((line) => ({
       id: line.product.id,
       name: line.product.naam,
@@ -1477,12 +1486,12 @@
     checkoutLink.insertAdjacentElement("afterend", quickBlock);
 
     quickBlock.querySelector("[data-quick-checkout-open]").addEventListener("click", () => {
-      if (SALES_PAUSED) {
+      const data = totals();
+      if (!checkoutAllowedDuringPause(data)) {
         const message = quickBlock.querySelector("p");
         if (message) message.textContent = SALES_PAUSED_MESSAGE;
         return;
       }
-      const data = totals();
       const message = quickBlock.querySelector("p");
       if (!data.lines.length) {
         if (message) message.textContent = "Je winkelwagen is nog leeg.";
@@ -1611,11 +1620,11 @@
     };
 
     const validateCheckout = () => {
-      if (SALES_PAUSED) {
+      const data = totals();
+      if (!checkoutAllowedDuringPause(data)) {
         if (status) status.textContent = SALES_PAUSED_MESSAGE;
         return false;
       }
-      const data = totals();
       if (!data.lines.length) {
         if (status) status.textContent = 'Je winkelwagen is nog leeg.';
         return false;
