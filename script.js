@@ -43,14 +43,6 @@
   const paypalUnavailableMessage = () => paypalClientIdLooksIncomplete()
     ? "PayPal Client ID lijkt ongeldig of onvolledig. Controleer de live Client ID in PayPal Developer."
     : "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
-  const vaderdagScents = {
-    "717": { profile: "Aquatisch en aromatisch", image: "assets/images/orivea-vaderdag-set-717.png" },
-    "724": { profile: "Fris en krachtig", image: "assets/images/orivea-vaderdag-set-724.png" },
-    "728": { profile: "Warm en houtachtig", image: "assets/images/orivea-vaderdag-set-728.png" },
-    "759": { profile: "Orientaal en kruidig", image: "assets/images/orivea-vaderdag-set-759.png" },
-    "771": { profile: "Aromatisch en intens", image: "assets/images/orivea-vaderdag-set-771.png" },
-    "782": { profile: "Kruidig en uitgesproken", image: "assets/images/orivea-vaderdag-set-782.png" }
-  };
 
   function shippingFor(subtotal) {
     if (!subtotal) return 0;
@@ -60,19 +52,6 @@
 
   function productVariant(product, variant = "signature") {
     if (!product) return null;
-    if (product.id === "vaderdag-premium-set") {
-      const scent = String(variant || "").replace("vaderdag-", "");
-      const selected = vaderdagScents[scent] || vaderdagScents["717"];
-      const glantier = vaderdagScents[scent] ? scent : "717";
-      return {
-        ...product,
-        naam: `${product.naam} - Glantier ${glantier}`,
-        type: "Vaderdag Premium Set",
-        inhoud: "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
-        image: selected.image,
-        prijs: product.prijs
-      };
-    }
     if (variant === "discovery") {
       return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: CONFIG.pricing?.discovery15 || 5.95, image: "assets/images/orivea-discovery-sample-transparent.png" };
     }
@@ -84,7 +63,7 @@
       const choice = product.geurKeuzes.find((item) => item.nummer === number) || product.geurKeuzes[0];
       return { ...product, naam: `${product.naam} - ${choice.naam}`, type: product.type, inhoud: `${product.inhoud} - ${choice.geurgroep}`, prijs: product.prijs };
     }
-    return { ...product, type: product.id === "vaderdag-premium-set" ? product.type : "Signature EDP", inhoud: product.inhoud || "50 ml", prijs: product.prijs };
+    return { ...product, type: "Signature EDP", inhoud: product.inhoud || "50 ml", prijs: product.prijs };
   }
 
   function cart() {
@@ -212,9 +191,7 @@
     const priceLine = isFragrance ? "" : `<p class="price product-price">${money(product.prijs)}</p>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
     const productPaused = SALES_PAUSED && !isTestProduct(product);
-    const actions = productPaused ? pausedAction : product.id === "vaderdag-premium-set"
-      ? `<button class="button primary" type="button" data-add-to-cart="${product.id}">Bestel Vaderdag Set</button>`
-      : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
+    const actions = productPaused ? pausedAction : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
     return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
       <img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy">
       <div class="product-body">
@@ -1765,51 +1742,6 @@
         status.textContent = isUnsubscribe ? "Afmelden lukte niet direct. Mail ons via shop@orivea.nl." : "Aanmelden lukte niet direct. Mail ons via shop@orivea.nl.";
       }
     });
-  }
-
-  function initCampaigns() {
-    const campaign = $("[data-vaderdag-campaign]");
-    if (!campaign) return;
-    const product = productById("vaderdag-premium-set");
-    const start = new Date(product?.campaignStart || "2026-05-22T00:00:00+02:00");
-    const end = new Date(product?.campaignEnd || "2026-06-21T23:59:59+02:00");
-    const now = new Date();
-    if (now < start || now > end || !product) {
-      campaign.hidden = true;
-      return;
-    }
-    let selectedScent = "717";
-    const image = $("[data-vaderdag-image]", campaign);
-    const photoLabel = $("[data-vaderdag-photo-label]", campaign);
-    const setSelectedScent = (scent) => {
-      selectedScent = scent;
-      $$("[data-vaderdag-scent]", campaign).forEach((card) => {
-        const active = card.dataset.vaderdagScent === scent;
-        card.classList.toggle("selected", active);
-        card.setAttribute("aria-pressed", String(active));
-      });
-      const selected = vaderdagScents[scent] || vaderdagScents["717"];
-      if (image) {
-        image.src = selected.image;
-        image.alt = `Glantier Vaderdag Premium Set ${scent}`;
-      }
-      if (photoLabel) photoLabel.textContent = `Glantier ${scent}`;
-    };
-    $$("[data-vaderdag-scent]", campaign).forEach((card) => card.addEventListener("click", () => setSelectedScent(card.dataset.vaderdagScent)));
-    $("[data-vaderdag-add]", campaign)?.addEventListener("click", () => addToCart("vaderdag-premium-set", 1, `vaderdag-${selectedScent}`));
-    const timer = $("[data-vaderdag-countdown]", campaign);
-    const update = () => {
-      const diff = end - new Date();
-      if (diff <= 0) {
-        campaign.hidden = true;
-        return;
-      }
-      const days = Math.floor(diff / 86400000);
-      if (timer) timer.textContent = `Nog ${days} dagen beschikbaar`;
-    };
-    setSelectedScent(selectedScent);
-    update();
-    window.setInterval(update, 60000);
   }
 
   document.addEventListener("click", (event) => {

@@ -37,8 +37,7 @@ window.ORIVEA_CONFIG = {
   "pricing": {
     "discovery15": 5.95,
     "signature50": 12.95,
-    "premium50": 16.95,
-    "vaderdagSet": 22.95
+    "premium50": 16.95
   },
   "salesPaused": true,
   "salesPausedMessage": "ORIVÈA wordt momenteel ter beoordeling voorgelegd aan Glantier. Bestellen is tijdelijk nog niet beschikbaar."
@@ -5282,54 +5281,5 @@ window.ORIVEA_PRODUCTS = [
       "Glantier 596",
       "Floraal en Musk"
     ]
-  },
-  {
-    "id": "vaderdag-premium-set",
-    "glantierNummer": "",
-    "naam": "Vaderdag Premium Set",
-    "type": "Tijdelijke campagne",
-    "inhoud": "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
-    "doelgroep": "Heren",
-    "categorie": "Vaderdag",
-    "geurgroep": "Cadeau - Premium",
-    "premiumBeschikbaar": true,
-    "prijs": 22.95,
-    "image": "assets/images/orivea-vaderdag-set-759.png",
-    "omschrijving": "Een premium Glantier cadeauset met gekozen geur, doucheolie en luxe cadeautas.",
-    "moment": "Vaderdag 2026",
-    "campaignStart": "2026-05-22T00:00:00+02:00",
-    "campaignEnd": "2026-06-21T23:59:59+02:00",
-    "variants": [
-      {
-        "glantier": "717"
-      },
-      {
-        "glantier": "724"
-      },
-      {
-        "glantier": "728"
-      },
-      {
-        "glantier": "759"
-      },
-      {
-        "glantier": "771"
-      },
-      {
-        "glantier": "782"
-      }
-    ],
-    "zoektermen": [
-      "vaderdag-premium-set",
-      "Vaderdag Premium Set",
-      "Tijdelijke campagne",
-      "Premium parfum 50 ml, doucheolie 400 ml en luxe cadeautas",
-      "Heren",
-      "Vaderdag",
-      "Cadeau - Premium",
-      "Vaderdag 2026"
-    ],
-    "premiumPrijs": 22.95,
-    "premiumImage": "assets/images/orivea-vaderdag-set-759.png"
   }
 ];
