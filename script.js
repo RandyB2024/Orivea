@@ -1866,7 +1866,7 @@
 
   renderCartState();
   initQuickCheckout();
-  initCampaigns();
+  if (typeof initCampaigns === "function") initCampaigns();
   renderHomeProducts();
   initMatch();
   initCatalog();
