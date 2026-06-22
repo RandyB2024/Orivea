@@ -40,11 +40,62 @@
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
   const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
   const perfumesOfTheWeek = [
-    { number: "528", family: "Floraal" },
-    { number: "576", family: "Floraal & Fruitig" },
-    { number: "586", family: "Floraal" },
-    { number: "744", family: "Ori\u00EBntaals & Kruidig" },
-    { number: "793", family: "Amber" }
+    {
+      number: "528",
+      family: "Floraal",
+      discount: 10,
+      image: "assets/images/glantier-dames-family-16.png",
+      accords: [
+        { label: "floraal", strength: 100, color: "#9C7B3F" },
+        { label: "zacht", strength: 82, color: "#D7C5A1" },
+        { label: "poederig", strength: 68, color: "#C8B8A0" }
+      ]
+    },
+    {
+      number: "576",
+      family: "Floraal & Fruitig",
+      discount: 10,
+      image: "assets/images/glantier-dames-family-24.png",
+      accords: [
+        { label: "floraal", strength: 100, color: "#9C7B3F" },
+        { label: "fruitig", strength: 88, color: "#B8924D" },
+        { label: "fris", strength: 70, color: "#D7C5A1" }
+      ]
+    },
+    {
+      number: "586",
+      family: "Floraal",
+      discount: 10,
+      image: "assets/images/glantier-dames-family-11.png",
+      accords: [
+        { label: "floraal", strength: 100, color: "#9C7B3F" },
+        { label: "elegant", strength: 82, color: "#D7C5A1" },
+        { label: "zacht", strength: 66, color: "#C8B8A0" }
+      ]
+    },
+    {
+      number: "744",
+      family: "Ori\u00EBntaals & Kruidig",
+      discount: 10,
+      image: "assets/images/glantier-heren-random-02.jpg",
+      accords: [
+        { label: "ori\u00EBntaals", strength: 100, color: "#7A4A24" },
+        { label: "kruidig", strength: 90, color: "#9C7B3F" },
+        { label: "warm", strength: 78, color: "#B8924D" },
+        { label: "intens", strength: 62, color: "#6B3F2A" }
+      ]
+    },
+    {
+      number: "793",
+      family: "Amber",
+      discount: 10,
+      image: "assets/images/glantier-heren-random-21.png",
+      accords: [
+        { label: "amber", strength: 100, color: "#9C7B3F" },
+        { label: "warm", strength: 86, color: "#B8924D" },
+        { label: "sensueel", strength: 72, color: "#7A4A24" }
+      ]
+    }
   ];
   const WEEKLY_DISCOUNT_RATE = 0.10;
   const WEEKLY_DISCOUNT_NUMBERS = new Set(perfumesOfTheWeek.map((item) => item.number));
@@ -253,16 +304,35 @@
     });
   }
 
+  function weeklyAccordProfile(accords = []) {
+    return `<div class="weekly-accord-profile" aria-label="Geurprofiel">
+      ${accords.map((accord) => `<div class="weekly-accord-row">
+        <span>${accord.label}</span>
+        <div class="weekly-accord-track"><span style="width:${accord.strength}%;background:${accord.color};"></span></div>
+      </div>`).join("")}
+    </div>`;
+  }
+
   function renderPerfumesOfTheWeek() {
     const target = $("[data-weekly-perfumes]");
     if (!target) return;
     target.innerHTML = perfumesOfTheWeek.map((item) => {
       const product = PRODUCTS.find((entry) => productNumber(entry) === item.number);
-      const price = product ? discountedPriceFor(product, product.prijs) : 0;
+      if (!product) return "";
+      const price = discountedPriceFor(product, product.prijs);
+      const image = item.image || product.image;
       return `<article class="weekly-perfume-card">
-        <span class="weekly-perfume-number">${item.number}</span>
-        <span class="weekly-perfume-family">${item.family}</span>
-        ${product ? `<span class="weekly-perfume-price">50 ml nu ${money(price)}</span>` : ""}
+        <div class="weekly-card-media">
+          <img src="${image}" alt="Glantier ${item.number}" loading="lazy">
+          <span class="weekly-discount-badge">Deze week -${item.discount}%</span>
+        </div>
+        <div class="weekly-card-body">
+          <span class="weekly-perfume-number">GLANTIER ${item.number}</span>
+          <span class="weekly-perfume-family">${item.family}</span>
+          <span class="weekly-perfume-price">50 ml nu ${money(price)}</span>
+          ${weeklyAccordProfile(item.accords)}
+          <a class="button primary weekly-card-button" href="catalogus.html?q=${encodeURIComponent(item.number)}">Bekijk geur</a>
+        </div>
       </article>`;
     }).join("");
   }

@@ -55,19 +55,27 @@ body{font-family:var(--sans);font-size:16px;font-weight:300;line-height:1.6;back
 @media (max-width:992px){.hero-banner,.catalog-banner{height:340px}.hero-geurwijzer{grid-template-columns:1fr;min-height:auto}.hero-geurwijzer .hero-copy{text-align:center;justify-items:center}.hero-geurwijzer .hero-note{margin-left:auto;margin-right:auto}.hero-geurwijzer .hero-actions{justify-content:center}}
 @media (max-width:768px){.hero-banner,.catalog-banner{height:240px}.hero-geurwijzer{padding:48px 18px}.hero-geurwijzer .hero-copy h1{font-size:clamp(3.4rem,18vw,5rem)}.hero-geurwijzer .hero-subtitle{font-size:2.35rem}.hero-geurwijzer-panel{padding:22px}.category-strip{grid-template-columns:1fr 1fr}.product-grid{grid-template-columns:1fr}.site-footer{grid-template-columns:1fr}.sample-usp-section{grid-template-columns:1fr}}
 
-.weekly-perfumes-section{max-width:var(--max);margin:34px auto 42px;padding:42px 34px;background:#FAF8F5;color:#20190f;border:1px solid rgba(156,123,63,.14);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.08)}
+.weekly-perfumes-section{max-width:var(--max);margin:34px auto 42px;padding:6rem 34px;background:#FAF8F5;color:#20190f;border:1px solid rgba(156,123,63,.14);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.08)}
 .weekly-perfumes-section .eyebrow{color:#9C7B3F}
 .weekly-heading{max-width:760px;margin:0 auto 28px;text-align:center}
 .weekly-heading h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:42px;font-weight:600;line-height:1.05;color:#17110a;letter-spacing:.04em}
 .weekly-heading p{max-width:700px;margin:14px auto 0;color:#5d5140}
-.weekly-perfume-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
-.weekly-perfume-card{background:#fff;border:1px solid rgba(156,123,63,.1);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.05);padding:28px 18px;text-align:center;transition:transform .2s ease,box-shadow .2s ease}
+.weekly-perfume-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.weekly-perfume-card{background:#fff;border:1px solid rgba(156,123,63,.1);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
 .weekly-perfume-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.075)}
-.weekly-perfume-number{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.4rem,4vw,3.7rem);font-weight:600;line-height:1;color:#9C7B3F}
-.weekly-perfume-family{display:block;margin-top:10px;color:#2f2619;font-family:"DM Sans",system-ui,sans-serif;font-weight:700}
-.weekly-perfume-price{display:block;margin-top:12px;color:#9C7B3F;font-weight:700}
-.weekly-description{max-width:860px;margin:28px auto 0;text-align:center;color:#5d5140}
+.weekly-card-media{position:relative;aspect-ratio:1/1;background:#f7f1e8;overflow:hidden}
+.weekly-card-media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .28s ease}
+.weekly-perfume-card:hover .weekly-card-media img{transform:scale(1.035)}
+.weekly-discount-badge{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.92);color:#7a5c22;border:1px solid rgba(156,123,63,.24);border-radius:999px;padding:8px 12px;font-size:.78rem;font-weight:800;letter-spacing:.02em;box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.weekly-card-body{padding:22px 18px 20px;text-align:left}
+.weekly-perfume-number{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.62rem;font-weight:700;line-height:1;color:#20190f;letter-spacing:.02em}
+.weekly-perfume-family{display:block;margin-top:6px;color:#9C7B3F;font-family:"DM Sans",system-ui,sans-serif;font-weight:800}
+.weekly-perfume-price{display:block;margin-top:12px;color:#20190f;font-weight:800}
+.weekly-accord-profile{display:grid;gap:9px;margin-top:18px}
+.weekly-accord-row{display:grid;grid-template-columns:78px 1fr;align-items:center;gap:10px;color:#5d5140;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.weekly-accord-track{height:7px;background:#efe8dc;border-radius:999px;overflow:hidden}
+.weekly-accord-track span{display:block;height:100%;border-radius:inherit}
+.weekly-card-button{width:100%;justify-content:center;margin-top:20px;text-align:center}
 .weekly-notice{max-width:860px;margin:22px auto 0;background:#FBF3E6;border-left:4px solid #9C7B3F;color:#3a2b17;padding:16px 18px;border-radius:0 14px 14px 0}
 .weekly-actions{display:flex;justify-content:center;margin-top:24px}
-@media (max-width:980px){.weekly-perfume-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:620px){.weekly-perfumes-section{margin:22px 16px 32px;padding:28px 18px;border-radius:18px}.weekly-heading h2{font-size:2.25rem}.weekly-perfume-grid{grid-template-columns:1fr}.weekly-actions .button{width:100%;text-align:center}}
+@media (max-width:620px){.weekly-perfumes-section{margin:22px 16px 32px;padding:3rem 18px;border-radius:18px}.weekly-heading h2{font-size:2.25rem}.weekly-perfume-grid{grid-template-columns:1fr}.weekly-actions .button{width:100%;text-align:center}}
