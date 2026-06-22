@@ -39,6 +39,15 @@
   const isTestProduct = (product) => isTestProductId(product?.id);
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
   const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
+  const perfumesOfTheWeek = [
+    { number: "528", family: "Floraal" },
+    { number: "576", family: "Floraal & Fruitig" },
+    { number: "586", family: "Floraal" },
+    { number: "744", family: "Ori\u00EBntaals & Kruidig" },
+    { number: "793", family: "Amber" }
+  ];
+  const WEEKLY_DISCOUNT_RATE = 0.10;
+  const WEEKLY_DISCOUNT_NUMBERS = new Set(perfumesOfTheWeek.map((item) => item.number));
   const paypalClientIdLooksIncomplete = () => !PAYPAL_CONFIG.clientId || PAYPAL_CONFIG.clientId.length < 30;
   const paypalUnavailableMessage = () => paypalClientIdLooksIncomplete()
     ? "PayPal Client ID lijkt ongeldig of onvolledig. Controleer de live Client ID in PayPal Developer."
@@ -50,20 +59,36 @@
     return Number(rule?.cost ?? 0);
   }
 
+  function productNumber(product) {
+    return String(product?.glantierNummer || product?.id || "");
+  }
+
+  function isPerfumeOfTheWeek(product) {
+    return WEEKLY_DISCOUNT_NUMBERS.has(productNumber(product));
+  }
+
+  function discountedPriceFor(product, price) {
+    const basePrice = Number(price || 0);
+    if (!isPerfumeOfTheWeek(product)) return basePrice;
+    return Number((Math.floor(basePrice * (1 - WEEKLY_DISCOUNT_RATE) * 20) / 20).toFixed(2));
+  }
+
   function productVariant(product, variant = "signature") {
     if (!product) return null;
     if (variant === "discovery") {
-      return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: CONFIG.pricing?.discovery15 || 5.95, image: "assets/images/orivea-discovery-sample-transparent.png" };
+      const price = CONFIG.pricing?.discovery15 || 5.95;
+      return { ...product, naam: `${product.naam} Discovery 15 ml`, type: "Discovery", inhoud: "15 ml", prijs: discountedPriceFor(product, price), image: "assets/images/orivea-discovery-sample-transparent.png" };
     }
     if (variant === "premium" && product.premiumBeschikbaar) {
-      return { ...product, naam: `${product.naam} Premium 50 ml`, type: "Premium", inhoud: "50 ml", prijs: product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95, image: product.premiumImage || product.image };
+      const price = product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95;
+      return { ...product, naam: `${product.naam} Premium 50 ml`, type: "Premium", inhoud: "50 ml", prijs: discountedPriceFor(product, price), image: product.premiumImage || product.image };
     }
     if ((String(variant || "").startsWith("geur-") || product.geurKeuzes?.length) && product.geurKeuzes?.length) {
       const number = String(variant || "").startsWith("geur-") ? String(variant).replace("geur-", "") : product.geurKeuzes[0].nummer;
       const choice = product.geurKeuzes.find((item) => item.nummer === number) || product.geurKeuzes[0];
-      return { ...product, naam: `${product.naam} - ${choice.naam}`, type: product.type, inhoud: `${product.inhoud} - ${choice.geurgroep}`, prijs: product.prijs };
+      return { ...product, naam: `${product.naam} - ${choice.naam}`, type: product.type, inhoud: `${product.inhoud} - ${choice.geurgroep}`, prijs: discountedPriceFor(product, product.prijs) };
     }
-    return { ...product, type: "Signature EDP", inhoud: product.inhoud || "50 ml", prijs: product.prijs };
+    return { ...product, type: "Signature EDP", inhoud: product.inhoud || "50 ml", prijs: discountedPriceFor(product, product.prijs) };
   }
 
   function cart() {
@@ -178,17 +203,20 @@
   }
 
   function productCard(product) {
-    const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
+    const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
+    const signaturePrice = discountedPriceFor(product, product.prijs);
+    const discoveryPrice = discountedPriceFor(product, CONFIG.pricing?.discovery15 || 5.95);
+    const premiumPrice = discountedPriceFor(product, product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95);
     const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " • ") : "";
     const title = product.glantierNummer ? `GLANTIER ${product.glantierNummer}` : product.naam;
     const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : "";
     const choiceSelector = product.geurKeuzes?.length ? `<label class="choice-selector">Kies je geur<select data-card-choice>${product.geurKeuzes.map((choice) => `<option value="geur-${choice.nummer}">${choice.naam} - ${choice.geurgroep}</option>`).join("")}</select></label>` : "";
     const variantSelector = isFragrance ? `<div class="variant-selector" data-card-variants>
-          <button class="variant-option" type="button" data-card-variant="discovery">15 ml <span>${money(CONFIG.pricing?.discovery15 || 5.95)}</span></button>
-          <button class="variant-option selected" type="button" data-card-variant="signature">50 ml <span>${money(product.prijs)}</span></button>
-          ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95)}</span></button>` : ""}
+          <button class="variant-option" type="button" data-card-variant="discovery">15 ml <span>${money(discoveryPrice)}</span></button>
+          <button class="variant-option selected" type="button" data-card-variant="signature">50 ml <span>${money(signaturePrice)}</span></button>
+          ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(premiumPrice)}</span></button>` : ""}
         </div>` : "";
-    const priceLine = isFragrance ? "" : `<p class="price product-price">${money(product.prijs)}</p>`;
+    const priceLine = isFragrance ? "" : `<p class="price product-price">${money(signaturePrice)}</p>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
     const productPaused = SALES_PAUSED && !isTestProduct(product);
     const actions = productPaused ? pausedAction : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
@@ -223,6 +251,20 @@
       }
       target.innerHTML = items.map(productCard).join("");
     });
+  }
+
+  function renderPerfumesOfTheWeek() {
+    const target = $("[data-weekly-perfumes]");
+    if (!target) return;
+    target.innerHTML = perfumesOfTheWeek.map((item) => {
+      const product = PRODUCTS.find((entry) => productNumber(entry) === item.number);
+      const price = product ? discountedPriceFor(product, product.prijs) : 0;
+      return `<article class="weekly-perfume-card">
+        <span class="weekly-perfume-number">${item.number}</span>
+        <span class="weekly-perfume-family">${item.family}</span>
+        ${product ? `<span class="weekly-perfume-price">50 ml nu ${money(price)}</span>` : ""}
+      </article>`;
+    }).join("");
   }
 
   function levenshtein(a, b) {
@@ -276,7 +318,7 @@
         ? '<button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>'
         : '<button class="button primary cart-symbol-button" type="button" data-add-to-cart="' + product.id + '" aria-label="Toevoegen aan winkelwagen">' + cartIcon() + '</button>';
 
-      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p>' + product.omschrijving + '</p><p class="price">50 ml ' + money(product.prijs) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
+      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p>' + product.omschrijving + '</p><p class="price">50 ml ' + money(discountedPriceFor(product, product.prijs)) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
     }).join("");
   }
 
@@ -1868,6 +1910,7 @@
   initQuickCheckout();
   if (typeof initCampaigns === "function") initCampaigns();
   renderHomeProducts();
+  renderPerfumesOfTheWeek();
   initMatch();
   initCatalog();
   initCheckout();
