@@ -253,6 +253,50 @@
     return `<svg class="cart-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.2 6h15l-1.9 8.4a2 2 0 0 1-2 1.6H9.1a2 2 0 0 1-2-1.7L5.5 3H2.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.7" cy="20" r="1.4" fill="currentColor"/><circle cx="17.3" cy="20" r="1.4" fill="currentColor"/></svg><span class="sr-only">${label}</span>`;
   }
 
+  function normalizeAccordLabel(label = "") {
+    return label.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  }
+
+  function accordMeta(label = "") {
+    const map = {
+      amber: { label: "amber", color: "#B8924D" },
+      aquatisch: { label: "aquatisch", color: "#7FA6B8" },
+      aromatisch: { label: "aromatisch", color: "#8A9A5B" },
+      bloemig: { label: "bloemig", color: "#C9A3A3" },
+      chypre: { label: "chypre", color: "#9C7B3F" },
+      citrus: { label: "citrus", color: "#D7B85B" },
+      floraal: { label: "floraal", color: "#9C7B3F" },
+      fruitig: { label: "fruitig", color: "#B8924D" },
+      houtachtig: { label: "houtachtig", color: "#7A4A24" },
+      kruidig: { label: "kruidig", color: "#8A5B35" },
+      leder: { label: "leder", color: "#5C4033" },
+      musk: { label: "musk", color: "#B6AA94" },
+      muskus: { label: "muskus", color: "#B6AA94" },
+      orientaals: { label: "ori\u00EBntaals", color: "#9C7B3F" },
+      praline: { label: "praline", color: "#A47551" },
+      vanille: { label: "vanille", color: "#D7C5A1" },
+      varen: { label: "varen", color: "#7F8F5B" }
+    };
+    return map[normalizeAccordLabel(label)] || { label: label.toLowerCase(), color: "#9C7B3F" };
+  }
+
+  function productAccords(product) {
+    const group = product.geurgroep || product.type || product.categorie || "";
+    const parts = group
+      .replace(/\s*&\s*/g, " - ")
+      .replace(/\s*•\s*/g, " - ")
+      .split(/\s*-\s*|\s*,\s*|\s*\/\s*/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+    const strengths = [100, 84, 68, 56];
+    return [...new Set(parts.map((part) => accordMeta(part).label))]
+      .slice(0, 4)
+      .map((label, index) => {
+        const meta = accordMeta(label);
+        return { label: meta.label, color: meta.color, strength: strengths[index] || 56 };
+      });
+  }
+
   function productCard(product) {
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
     const signaturePrice = discountedPriceFor(product, product.prijs);
@@ -277,6 +321,7 @@
         <span class="product-meta">${product.categorie}</span>
         <h3>${title}</h3>
         <p class="scent-group">${scentGroup}</p>
+        ${weeklyAccordProfile(productAccords(product))}
         <p class="product-short">${product.omschrijving}</p>
         ${priceLine}
         <p class="sample-mini">Gratis ORIV&Eacute;A Discovery Sample bij iedere bestelling.</p>
@@ -305,6 +350,7 @@
   }
 
   function weeklyAccordProfile(accords = []) {
+    if (!accords.length) return "";
     return `<div class="weekly-accord-profile" aria-label="Geurprofiel">
       ${accords.map((accord) => `<div class="weekly-accord-row">
         <span>${accord.label}</span>
@@ -321,6 +367,10 @@
       if (!product) return "";
       const price = discountedPriceFor(product, product.prijs);
       const image = item.image || product.image;
+      const productPaused = SALES_PAUSED && !isTestProduct(product);
+      const weeklyAction = productPaused
+        ? `<button class="button primary weekly-card-button weekly-card-cart" type="button" disabled aria-label="Bestellen tijdelijk niet beschikbaar">${cartIcon("Bestellen tijdelijk niet beschikbaar")}</button>`
+        : `<button class="button primary weekly-card-button weekly-card-cart" type="button" data-add-to-cart="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button>`;
       return `<article class="weekly-perfume-card">
         <div class="weekly-card-media">
           <img src="${image}" alt="Glantier ${item.number}" loading="lazy">
@@ -331,7 +381,7 @@
           <span class="weekly-perfume-family">${item.family}</span>
           <span class="weekly-perfume-price">50 ml nu ${money(price)}</span>
           ${weeklyAccordProfile(item.accords)}
-          <a class="button primary weekly-card-button" href="catalogus.html?q=${encodeURIComponent(item.number)}">Bekijk geur</a>
+          ${weeklyAction}
         </div>
       </article>`;
     }).join("");

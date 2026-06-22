@@ -76,6 +76,7 @@ body{font-family:var(--sans);font-size:16px;font-weight:300;line-height:1.6;back
 .weekly-accord-track{height:7px;background:#efe8dc;border-radius:999px;overflow:hidden}
 .weekly-accord-track span{display:block;height:100%;border-radius:inherit}
 .weekly-card-button{width:100%;justify-content:center;margin-top:20px;text-align:center}
+.weekly-card-cart{width:52px;min-width:52px;min-height:46px;padding:0;display:inline-grid;place-items:center;align-self:center}
 .weekly-notice{max-width:860px;margin:22px auto 0;background:#FBF3E6;border-left:4px solid #9C7B3F;color:#3a2b17;padding:16px 18px;border-radius:0 14px 14px 0}
 .weekly-actions{display:flex;justify-content:center;margin-top:24px}
 @media (max-width:620px){.weekly-perfumes-section{margin:22px 16px 32px;padding:3rem 18px;border-radius:18px}.weekly-heading h2{font-size:2.25rem}.weekly-perfume-grid{grid-template-columns:1fr}.weekly-actions .button{width:100%;text-align:center}}
