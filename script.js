@@ -322,7 +322,6 @@
         <h3>${title}</h3>
         <p class="scent-group">${scentGroup}</p>
         ${weeklyAccordProfile(productAccords(product))}
-        <p class="product-short">${product.omschrijving}</p>
         ${priceLine}
         <p class="sample-mini">Gratis ORIV&Eacute;A Discovery Sample bij iedere bestelling.</p>
         <div class="product-purchase">
@@ -438,7 +437,7 @@
         ? '<button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>'
         : '<button class="button primary cart-symbol-button" type="button" data-add-to-cart="' + product.id + '" aria-label="Toevoegen aan winkelwagen">' + cartIcon() + '</button>';
 
-      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p>' + product.omschrijving + '</p><p class="price">50 ml ' + money(discountedPriceFor(product, product.prijs)) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
+      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p class="price">50 ml ' + money(discountedPriceFor(product, product.prijs)) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
     }).join("");
   }
 
