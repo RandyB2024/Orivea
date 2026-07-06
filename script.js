@@ -342,7 +342,7 @@
         items = PRODUCTS.filter((product) => ["Dames", "Heren", "Unisex"].includes(product.categorie)).slice(0, 8);
       }
       if (type === "gifts") {
-        items = PRODUCTS.filter((product) => ["Boxen", "Geurstokjes", "Bodymist"].includes(product.categorie)).slice(0, 4);
+        items = PRODUCTS.filter((product) => ["Boxen", "Geurstokjes", "Bodymist", "Herenverzorging"].includes(product.categorie)).slice(0, 4);
       }
       target.innerHTML = items.map(productCard).join("");
     });
@@ -459,7 +459,7 @@
   function initCatalog() {
     const grid = $("[data-catalog-grid]");
     if (!grid) return;
-    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
+    const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Herenverzorging", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
     let active = new URLSearchParams(location.search).get("filter") || "";
     let currentPage = 1;

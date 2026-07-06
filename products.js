@@ -39,7 +39,7 @@ window.ORIVEA_CONFIG = {
     "signature50": 12.95,
     "premium50": 16.95
   },
-  "salesPaused": true,
+  "salesPaused": false,
   "salesPausedMessage": "ORIVÈA wordt momenteel ter beoordeling voorgelegd aan Glantier. Bestellen is tijdelijk nog niet beschikbaar."
 };
 
@@ -5280,6 +5280,90 @@ window.ORIVEA_PRODUCTS = [
       "596",
       "Glantier 596",
       "Floraal en Musk"
+    ]
+  },
+  {
+    "id": "herenverzorging-baardolie",
+    "glantierNummer": "",
+    "naam": "Glantier Baardolie",
+    "type": "Verzorging",
+    "inhoud": "30 ml",
+    "doelgroep": "Heren",
+    "categorie": "Herenverzorging",
+    "geurgroep": "Baardverzorging",
+    "premiumBeschikbaar": false,
+    "prijs": 7.95,
+    "image": "assets/images/orivea-baardolie.webp",
+    "alt": "Glantier Baardolie herenverzorging",
+    "omschrijving": "Verzorgende baardolie voor een zachte, soepele en verzorgde baard. Geschikt voor dagelijks gebruik.",
+    "moment": "Dagelijks gebruik",
+    "zoektermen": [
+      "herenverzorging-baardolie",
+      "Glantier Baardolie",
+      "Baardolie",
+      "baardolie",
+      "baard",
+      "Verzorging",
+      "Herenverzorging",
+      "Heren",
+      "Dagelijks gebruik"
+    ]
+  },
+  {
+    "id": "herenverzorging-doucheolie",
+    "glantierNummer": "",
+    "naam": "Glantier Doucheolie",
+    "type": "Verzorging",
+    "inhoud": "400 ml",
+    "doelgroep": "Heren",
+    "categorie": "Herenverzorging",
+    "geurgroep": "Doucheverzorging",
+    "premiumBeschikbaar": false,
+    "prijs": 8.95,
+    "image": "assets/images/orivea-doucheolie.webp",
+    "alt": "Glantier Doucheolie herenverzorging",
+    "omschrijving": "Verzorgende doucheolie die de huid reinigt en helpt comfortabel en verzorgd aan te laten voelen.",
+    "moment": "Dagelijks gebruik",
+    "zoektermen": [
+      "herenverzorging-doucheolie",
+      "Glantier Doucheolie",
+      "Doucheolie",
+      "doucheolie",
+      "douche",
+      "Verzorging",
+      "Herenverzorging",
+      "Heren",
+      "Dagelijks gebruik"
+    ]
+  },
+  {
+    "id": "herenverzorging-handcreme",
+    "glantierNummer": "",
+    "naam": "Glantier Handcrème",
+    "type": "Verzorging",
+    "inhoud": "75 ml",
+    "doelgroep": "Heren",
+    "categorie": "Herenverzorging",
+    "geurgroep": "Handverzorging",
+    "premiumBeschikbaar": false,
+    "prijs": 4.5,
+    "image": "assets/images/orivea-handcreme.webp",
+    "alt": "Glantier Handcrème herenverzorging",
+    "omschrijving": "Verzorgende handcrème die snel intrekt en helpt de handen zacht en verzorgd te houden.",
+    "moment": "Dagelijks gebruik",
+    "zoektermen": [
+      "herenverzorging-handcreme",
+      "Glantier Handcrème",
+      "Glantier Handcreme",
+      "Handcrème",
+      "Handcreme",
+      "handcrème",
+      "handcreme",
+      "hand",
+      "Verzorging",
+      "Herenverzorging",
+      "Heren",
+      "Dagelijks gebruik"
     ]
   }
 ];
