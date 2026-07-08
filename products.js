@@ -81,7 +81,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, houtachtig, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "401",
@@ -107,7 +106,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-26.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "402",
@@ -131,7 +129,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, houtachtig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "403",
@@ -157,7 +154,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "404",
@@ -183,7 +179,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "409",
@@ -207,7 +202,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "410",
@@ -231,7 +225,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "411",
@@ -257,7 +250,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-08.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "412",
@@ -281,7 +273,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "413",
@@ -305,7 +296,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "415",
@@ -331,7 +321,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "416",
@@ -357,7 +346,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "417",
@@ -383,7 +371,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "432",
@@ -407,7 +394,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-26.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "445",
@@ -431,7 +417,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-07.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met citrus, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "446",
@@ -455,7 +440,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "454",
@@ -481,7 +465,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "455",
@@ -505,7 +488,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "457",
@@ -529,7 +511,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-10.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, aldehyde, citrus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "458",
@@ -553,7 +534,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "466",
@@ -579,7 +559,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-08.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, praline accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "477",
@@ -605,7 +584,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "478",
@@ -629,7 +607,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "480",
@@ -653,7 +630,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "483",
@@ -677,7 +653,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "485",
@@ -703,7 +678,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-22.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, houtachtig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "488",
@@ -727,7 +701,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "489",
@@ -751,7 +724,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "490",
@@ -775,7 +747,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "492",
@@ -799,7 +770,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "493",
@@ -825,7 +795,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-13.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "496",
@@ -849,7 +818,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "497",
@@ -875,7 +843,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "500",
@@ -901,7 +868,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "501",
@@ -927,7 +893,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-26.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met zoet, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "502",
@@ -951,7 +916,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met romantisch, roos accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "503",
@@ -975,7 +939,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-23.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "504",
@@ -999,7 +962,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "505",
@@ -1023,7 +985,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, elegant accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "506",
@@ -1047,7 +1008,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "507",
@@ -1073,7 +1033,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "508",
@@ -1097,7 +1056,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met romantisch, roos accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "509",
@@ -1121,7 +1079,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-06.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "510",
@@ -1145,7 +1102,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "511",
@@ -1169,7 +1125,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "512",
@@ -1193,7 +1148,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-03.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "513",
@@ -1219,7 +1173,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-08.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met zoet, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "514",
@@ -1243,7 +1196,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "515",
@@ -1269,7 +1221,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "516",
@@ -1293,7 +1244,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "517",
@@ -1317,7 +1267,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "518",
@@ -1341,7 +1290,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-14.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, bloemig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "519",
@@ -1365,7 +1313,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met zoet, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "520",
@@ -1389,7 +1336,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "521",
@@ -1413,7 +1359,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "522",
@@ -1437,7 +1382,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "523",
@@ -1461,7 +1405,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, elegant accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "524",
@@ -1485,7 +1428,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-26.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "525",
@@ -1511,7 +1453,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met zoet, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "526",
@@ -1535,7 +1476,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met romantisch, roos accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "527",
@@ -1559,7 +1499,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "528",
@@ -1583,7 +1522,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-22.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "529",
@@ -1609,7 +1547,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-23.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, houtachtig, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "530",
@@ -1633,7 +1570,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-06.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "531",
@@ -1659,7 +1595,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-08.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met zoet, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "532",
@@ -1683,7 +1618,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "533",
@@ -1709,7 +1643,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "534",
@@ -1733,7 +1666,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "535",
@@ -1757,7 +1689,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, elegant accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "536",
@@ -1781,7 +1712,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-07.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, bloemig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "537",
@@ -1805,7 +1735,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "538",
@@ -1831,7 +1760,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met romantisch, roos accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "539",
@@ -1855,7 +1783,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "540",
@@ -1879,7 +1806,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "541",
@@ -1903,7 +1829,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-22.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, houtachtig, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "542",
@@ -1927,7 +1852,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-10.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, bloemig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "543",
@@ -1951,7 +1875,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "544",
@@ -1977,7 +1900,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "545",
@@ -2003,7 +1925,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-23.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "546",
@@ -2027,7 +1948,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "547",
@@ -2051,7 +1971,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "548",
@@ -2077,7 +1996,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-13.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, bloemig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "549",
@@ -2101,7 +2019,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met zoet, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "550",
@@ -2125,7 +2042,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-03.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "552",
@@ -2151,7 +2067,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "553",
@@ -2177,7 +2092,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "554",
@@ -2203,7 +2117,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-26.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "555",
@@ -2229,7 +2142,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "556",
@@ -2253,7 +2165,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "557",
@@ -2279,7 +2190,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "559",
@@ -2305,7 +2215,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "562",
@@ -2331,7 +2240,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-08.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "563",
@@ -2357,7 +2265,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "565",
@@ -2383,7 +2290,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "568",
@@ -2409,7 +2315,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "569",
@@ -2435,7 +2340,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "570",
@@ -2461,7 +2365,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "571",
@@ -2487,7 +2390,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "573",
@@ -2511,7 +2413,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-24.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "576",
@@ -2535,7 +2436,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "577",
@@ -2559,7 +2459,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "578",
@@ -2585,7 +2484,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "579",
@@ -2609,7 +2507,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "581",
@@ -2635,7 +2532,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-26.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "583",
@@ -2659,7 +2555,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "585",
@@ -2685,7 +2580,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "586",
@@ -2711,7 +2605,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "587",
@@ -2737,7 +2630,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "588",
@@ -2763,7 +2655,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "589",
@@ -2789,7 +2680,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "590",
@@ -2815,7 +2705,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "592",
@@ -2841,7 +2730,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "595",
@@ -2867,7 +2755,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-06.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "596",
@@ -2893,7 +2780,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "597",
@@ -2919,7 +2805,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-08.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, praline accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "598",
@@ -2943,7 +2828,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal, fruitig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "599",
@@ -2967,7 +2851,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "601",
@@ -2993,7 +2876,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "602",
@@ -3019,7 +2901,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "603",
@@ -3045,7 +2926,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "604",
@@ -3071,7 +2951,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "605",
@@ -3095,7 +2974,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-01.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "606",
@@ -3119,7 +2997,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-11.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "607",
@@ -3145,7 +3022,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, vanille accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "608",
@@ -3169,7 +3045,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met chypre, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "609",
@@ -3193,7 +3068,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "610",
@@ -3217,7 +3091,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "611",
@@ -3241,7 +3114,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-12.jpeg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "612",
@@ -3265,7 +3137,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-dames-family-25.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, floraal accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "613",
@@ -3291,7 +3162,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-aqua.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "701",
@@ -3315,7 +3185,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-11.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met sportief, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "702",
@@ -3339,7 +3208,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-15.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "703",
@@ -3363,7 +3231,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met kruidig, warm accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "704",
@@ -3387,7 +3254,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "705",
@@ -3411,7 +3277,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-houtachtig.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "706",
@@ -3437,7 +3302,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-03.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "707",
@@ -3463,7 +3327,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-citrus.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met citrus, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "708",
@@ -3487,7 +3350,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, droog accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "709",
@@ -3511,7 +3373,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met kruidig, warm accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "710",
@@ -3535,7 +3396,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "711",
@@ -3559,7 +3419,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "712",
@@ -3583,7 +3442,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-01.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, citrus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "713",
@@ -3607,7 +3465,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met sportief, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "714",
@@ -3631,7 +3488,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, droog accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "715",
@@ -3655,7 +3511,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met kruidig, warm accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "716",
@@ -3679,7 +3534,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-22.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "717",
@@ -3705,7 +3559,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "718",
@@ -3731,7 +3584,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-03.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, groen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "719",
@@ -3755,7 +3607,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-aqua.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met sportief, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "720",
@@ -3779,7 +3630,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, droog accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "721",
@@ -3803,7 +3653,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met kruidig, warm accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "722",
@@ -3827,7 +3676,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-12.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "723",
@@ -3851,7 +3699,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-11.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "724",
@@ -3877,7 +3724,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-10.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, citrus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "725",
@@ -3901,7 +3747,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-15.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met sportief, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "726",
@@ -3925,7 +3770,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, droog accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "727",
@@ -3949,7 +3793,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "728",
@@ -3975,7 +3818,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "729",
@@ -3999,7 +3841,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-07.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "730",
@@ -4023,7 +3864,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-13.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, citrus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "731",
@@ -4047,7 +3887,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-08.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, houtachtig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "732",
@@ -4071,7 +3910,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, droog accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "733",
@@ -4095,7 +3933,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met kruidig, warm accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "734",
@@ -4119,7 +3956,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met luxe, amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "735",
@@ -4143,7 +3979,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-houtachtig.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "736",
@@ -4167,7 +4002,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-17.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met fris, citrus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "737",
@@ -4191,7 +4025,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-07.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "738",
@@ -4217,7 +4050,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-03.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, droog accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "739",
@@ -4241,7 +4073,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met kruidig, warm accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "740",
@@ -4265,7 +4096,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "741",
@@ -4291,7 +4121,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met avond, intens accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Overdag en avond",
     "zoektermen": [
       "742",
@@ -4315,7 +4144,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "743",
@@ -4339,7 +4167,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "744",
@@ -4363,7 +4190,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "745",
@@ -4389,7 +4215,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-23.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met citrus, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "747",
@@ -4413,7 +4238,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "749",
@@ -4439,7 +4263,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-16.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "752",
@@ -4463,7 +4286,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-12.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "756",
@@ -4487,7 +4309,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-18.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "758",
@@ -4513,7 +4334,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "759",
@@ -4539,7 +4359,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "764",
@@ -4563,7 +4382,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, floraal, muskus accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "768",
@@ -4587,7 +4405,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "769",
@@ -4613,7 +4430,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-22.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "771",
@@ -4641,7 +4457,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumPrijs": 16.95,
     "image": "assets/images/glantier-heren-random-04.jpg",
     "premiumImage": "assets/images/glantier-heren-random-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "774",
@@ -4665,7 +4480,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-07.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "777",
@@ -4691,7 +4505,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "778",
@@ -4717,7 +4530,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "781",
@@ -4743,7 +4555,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumPrijs": 16.95,
     "image": "assets/images/glantier-heren-random-02.jpg",
     "premiumImage": "assets/images/glantier-heren-random-02.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "782",
@@ -4767,7 +4578,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-houtachtig.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "783",
@@ -4793,7 +4603,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-08.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "784",
@@ -4819,7 +4628,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met leder accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "788",
@@ -4845,7 +4653,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "791",
@@ -4871,7 +4678,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-03.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "792",
@@ -4897,7 +4703,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumPrijs": 16.95,
     "image": "assets/images/glantier-heren-random-21.png",
     "premiumImage": "assets/images/glantier-heren-random-21.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met amber accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "793",
@@ -4921,7 +4726,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-04.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "794",
@@ -4945,7 +4749,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-05.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "796",
@@ -4971,7 +4774,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-09.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "797",
@@ -4997,7 +4799,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-12.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "798",
@@ -5023,7 +4824,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-08.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, houtachtig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "799",
@@ -5047,7 +4847,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-12.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aromatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "800",
@@ -5071,7 +4870,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-20.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met leder accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "801",
@@ -5095,7 +4893,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-aqua.jpg",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met houtachtig, aquatisch accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "802",
@@ -5119,7 +4916,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": true,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-19.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met aromatisch, varen accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Dagelijks gebruik",
     "zoektermen": [
       "803",
@@ -5145,7 +4941,6 @@ window.ORIVEA_PRODUCTS = [
     "premiumBeschikbaar": false,
     "prijs": 12.95,
     "image": "assets/images/glantier-heren-random-14.png",
-    "omschrijving": "Een zorgvuldig samengesteld Glantier geurprofiel met oriëntaals, kruidig accenten en een verfijnd karakter. Kies dit profiel op basis van geurfamilie, intensiteit en draagmoment.",
     "moment": "Avond en speciale momenten",
     "zoektermen": [
       "804",
@@ -5295,8 +5090,25 @@ window.ORIVEA_PRODUCTS = [
     "prijs": 7.95,
     "image": "assets/images/orivea-baardolie.webp",
     "alt": "Glantier Baardolie herenverzorging",
-    "omschrijving": "Verzorgende baardolie voor een zachte, soepele en verzorgde baard. Geschikt voor dagelijks gebruik.",
+    "omschrijving": "Glantier baardolie verzorgt baard en huid onder de baard met een lichte, verzorgde finish. Beschikbaar in geselecteerde Glantier-geuren.",
     "moment": "Dagelijks gebruik",
+    "geurKeuzes": [
+      {
+        "nummer": "717",
+        "naam": "Glantier 717",
+        "geurgroep": "Aromatisch en Aquatisch"
+      },
+      {
+        "nummer": "728",
+        "naam": "Glantier 728",
+        "geurgroep": "Houtachtig en Kruidig"
+      },
+      {
+        "nummer": "759",
+        "naam": "Glantier 759",
+        "geurgroep": "Houtachtig en Kruidig"
+      }
+    ],
     "zoektermen": [
       "herenverzorging-baardolie",
       "Glantier Baardolie",
@@ -5322,8 +5134,35 @@ window.ORIVEA_PRODUCTS = [
     "prijs": 8.95,
     "image": "assets/images/orivea-doucheolie.webp",
     "alt": "Glantier Doucheolie herenverzorging",
-    "omschrijving": "Verzorgende doucheolie die de huid reinigt en helpt comfortabel en verzorgd aan te laten voelen.",
+    "omschrijving": "Glantier doucheolie reinigt mild en laat de huid comfortabel verzorgd aanvoelen. Beschikbaar in geselecteerde Glantier-geuren.",
     "moment": "Dagelijks gebruik",
+    "geurKeuzes": [
+      {
+        "nummer": "717",
+        "naam": "Glantier 717",
+        "geurgroep": "Aromatisch en Aquatisch"
+      },
+      {
+        "nummer": "724",
+        "naam": "Glantier 724",
+        "geurgroep": "Houtachtig en Aquatisch"
+      },
+      {
+        "nummer": "728",
+        "naam": "Glantier 728",
+        "geurgroep": "Houtachtig en Kruidig"
+      },
+      {
+        "nummer": "759",
+        "naam": "Glantier 759",
+        "geurgroep": "Houtachtig en Kruidig"
+      },
+      {
+        "nummer": "771",
+        "naam": "Glantier 771",
+        "geurgroep": "Aromatisch en Varen"
+      }
+    ],
     "zoektermen": [
       "herenverzorging-doucheolie",
       "Glantier Doucheolie",
@@ -5349,8 +5188,15 @@ window.ORIVEA_PRODUCTS = [
     "prijs": 4.5,
     "image": "assets/images/orivea-handcreme.webp",
     "alt": "Glantier Handcrème herenverzorging",
-    "omschrijving": "Verzorgende handcrème die snel intrekt en helpt de handen zacht en verzorgd te houden.",
+    "omschrijving": "Glantier handcreme trekt snel in en helpt droge handen zacht en verzorgd te houden. Beschikbaar in Glantier 728.",
     "moment": "Dagelijks gebruik",
+    "geurKeuzes": [
+      {
+        "nummer": "728",
+        "naam": "Glantier 728",
+        "geurgroep": "Houtachtig en Kruidig"
+      }
+    ],
     "zoektermen": [
       "herenverzorging-handcreme",
       "Glantier Handcrème",
