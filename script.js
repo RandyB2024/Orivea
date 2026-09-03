@@ -44,6 +44,25 @@
     ? "PayPal Client ID lijkt ongeldig of onvolledig. Controleer de live Client ID in PayPal Developer."
     : "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
 
+  function ensureScentClubNavigation() {
+    $$(".main-nav").forEach((nav) => {
+      if (nav.querySelector('a[href="scent-club.html"]')) return;
+      const contact = nav.querySelector('a[href="contact.html"]');
+      const link = document.createElement("a");
+      link.href = "scent-club.html";
+      link.textContent = "Scent Club";
+      nav.insertBefore(link, contact || null);
+    });
+    $$(".site-footer .footer-column").forEach((column) => {
+      if (column.querySelector('a[href="catalogus.html"]') && !column.querySelector('a[href="scent-club.html"]')) {
+        const link = document.createElement("a");
+        link.href = "scent-club.html";
+        link.textContent = "Scent Club";
+        column.appendChild(link);
+      }
+    });
+  }
+
   function shippingFor(subtotal) {
     if (!subtotal) return 0;
     const rule = (CONFIG.shippingRules || []).find((item) => subtotal >= item.min && (item.max === null || subtotal <= item.max));
@@ -1705,6 +1724,13 @@
     return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
   }
 
+  window.ORIVEA_EMAIL = {
+    async send(payload, templateId = CONFIG.emailJs.contactTemplate) {
+      await initEmailJs();
+      return emailjs.send(CONFIG.emailJs.serviceId, templateId, payload);
+    }
+  };
+
   function initContact() {
     const form = $("[data-contact-form]");
     if (!form) return;
@@ -1919,6 +1945,7 @@
     window.addEventListener("pagehide", () => window.cancelAnimationFrame(raf), { once: true });
   }
 
+  ensureScentClubNavigation();
   renderCartState();
   initQuickCheckout();
   if (typeof initCampaigns === "function") initCampaigns();
