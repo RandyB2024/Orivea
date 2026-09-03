@@ -538,3 +538,41 @@ body[data-page="home"] .product-showcase,body[data-page="home"] .split-band,body
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+.home-seo-copy { margin-bottom: clamp(54px, 8vw, 92px); }
+.seo-copy-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(22px, 4vw, 48px); }
+.seo-copy-columns p { margin: 0; }
+.seo-copy-link { margin: 24px 0 0; }
+.breadcrumbs { max-width: 1180px; margin: 0 auto; padding: 22px 24px 0; color: #756c61; font-size: .86rem; }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.breadcrumbs li + li::before { content: ">"; margin-right: 8px; color: #9c7b3f; }
+.breadcrumbs a { color: inherit; }
+.netherlands-hero { max-width: 1180px; margin: 28px auto clamp(54px, 8vw, 96px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr); background: #f4efe7; overflow: hidden; }
+.netherlands-hero-copy { align-self: center; padding: clamp(44px, 7vw, 88px); }
+.netherlands-hero h1 { max-width: 9ch; margin: 10px 0 22px; font: 500 clamp(3.2rem, 6vw, 5.7rem)/.96 var(--serif); color: var(--club-dark); }
+.netherlands-hero-copy > p:not(.eyebrow) { max-width: 44ch; color: var(--club-muted); line-height: 1.75; }
+.netherlands-hero-media { min-height: 560px; }
+.netherlands-hero-media img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.netherlands-content { max-width: 980px; margin: 0 auto; padding: 0 24px clamp(70px, 9vw, 112px); }
+.netherlands-content section { padding: clamp(34px, 6vw, 64px) 0; border-top: 1px solid rgba(156, 123, 63, .18); }
+.netherlands-content h2 { margin: 0 0 18px; font: 500 clamp(2rem, 4vw, 3.2rem)/1.05 var(--serif); color: var(--club-dark); }
+.netherlands-content p { max-width: 72ch; color: var(--club-muted); line-height: 1.78; }
+.collection-link-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.collection-link-grid article { padding: 28px; background: #fff; border: 1px solid rgba(156, 123, 63, .18); }
+.collection-link-grid h2 { font-size: clamp(1.75rem, 3vw, 2.35rem); }
+.collection-link-grid a, .netherlands-content a:not(.button) { color: #80622f; text-decoration: underline; text-underline-offset: 3px; }
+.seo-faq details { border-top: 1px solid rgba(156, 123, 63, .18); padding: 20px 0; }
+.seo-faq summary { color: var(--club-dark); font-weight: 500; cursor: pointer; }
+.seo-faq details p { margin-bottom: 0; }
+
+@media (max-width: 800px) {
+  .seo-copy-columns, .netherlands-hero, .collection-link-grid { grid-template-columns: 1fr; }
+  .netherlands-hero { margin-top: 20px; }
+  .netherlands-hero-media { min-height: 380px; }
+}
+
+@media (max-width: 520px) {
+  .breadcrumbs, .netherlands-content { padding-inline: 16px; }
+  .netherlands-hero-copy { padding: 42px 20px; }
+  .netherlands-hero h1 { font-size: 3rem; }
+}
