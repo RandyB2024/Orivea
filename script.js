@@ -372,8 +372,23 @@
     if (!grid) return;
     const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Herenverzorging", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
-    let active = new URLSearchParams(location.search).get("filter") || "";
+    const urlParams = new URLSearchParams(location.search);
+    let active = document.body.dataset.catalogFilter || urlParams.get("filter") || "";
     let currentPage = 1;
+
+    if (location.pathname.endsWith("/catalogus.html") || location.pathname.endsWith("catalogus.html")) {
+      const canonicalTargets = {
+        dames: "https://orivea.nl/glantier-dames-parfum.html",
+        heren: "https://orivea.nl/glantier-heren-parfum.html",
+        premium: "https://orivea.nl/glantier-premium-parfum.html"
+      };
+      const canonical = $("link[rel='canonical']");
+      if (canonical) canonical.href = canonicalTargets[normalize(active)] || "https://orivea.nl/catalogus.html";
+      if (urlParams.has("search")) {
+        const robots = $("meta[name='robots']");
+        if (robots) robots.content = "noindex, follow";
+      }
+    }
     let filteredProducts = [];
     let totalPages = 1;
     const productsPerPage = CATALOG_CONFIG.productsPerPage;

@@ -513,3 +513,28 @@ body[data-page="home"] .product-showcase,body[data-page="home"] .split-band,body
     white-space: normal;
   }
 }
+
+.category-seo-copy {
+  max-width: 850px;
+  margin: clamp(42px, 7vw, 78px) auto 0;
+  padding: clamp(26px, 4vw, 42px);
+  border-top: 1px solid rgba(156, 123, 63, .2);
+  color: var(--club-muted);
+}
+
+.category-seo-copy h2 {
+  margin: 6px 0 18px;
+  font: 500 clamp(2rem, 4vw, 3.1rem)/1.05 var(--serif);
+  color: var(--club-dark);
+}
+
+.category-seo-copy p {
+  line-height: 1.75;
+}
+
+.category-seo-copy a,
+.page-hero.small a {
+  color: #80622f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
