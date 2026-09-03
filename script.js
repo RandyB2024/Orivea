@@ -257,29 +257,27 @@
     const premiumPrice = discountedPriceFor(product, product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95);
     const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " • ") : "";
     const title = product.glantierNummer ? `GLANTIER ${product.glantierNummer}` : product.naam;
-    const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : "";
-    const choiceSelector = product.geurKeuzes?.length ? `<label class="choice-selector">Kies je geur<select data-card-choice>${product.geurKeuzes.map((choice) => `<option value="geur-${choice.nummer}">${choice.naam} - ${choice.geurgroep}</option>`).join("")}</select></label>` : "";
+    const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : `<span class="premium-info-placeholder" aria-hidden="true"></span>`;
+    const choiceSelector = product.geurKeuzes?.length ? `<label class="choice-selector">Kies je geur<select data-card-choice>${product.geurKeuzes.map((choice) => `<option value="geur-${choice.nummer}">${choice.naam} - ${choice.geurgroep}</option>`).join("")}</select></label>` : `<span class="choice-selector-placeholder" aria-hidden="true"></span>`;
     const variantSelector = isFragrance ? `<div class="variant-selector" data-card-variants>
           <button class="variant-option" type="button" data-card-variant="discovery">15 ml <span>${money(discoveryPrice)}</span></button>
           <button class="variant-option selected" type="button" data-card-variant="signature">50 ml <span>${money(signaturePrice)}</span></button>
-          ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(premiumPrice)}</span></button>` : ""}
-        </div>` : "";
-    const priceLine = isFragrance ? "" : `<p class="price product-price">${money(signaturePrice)}</p>`;
+          ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(premiumPrice)}</span></button>` : `<span class="variant-option-placeholder" aria-hidden="true"></span>`}
+        </div>` : `<div class="variant-selector product-single-price"><div class="variant-option selected"><span>${product.inhoud || "Product"}</span><strong>${money(signaturePrice)}</strong></div><span class="variant-option-placeholder" aria-hidden="true"></span><span class="variant-option-placeholder" aria-hidden="true"></span></div>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
     const productPaused = SALES_PAUSED && !isTestProduct(product);
     const actions = productPaused ? pausedAction : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
     return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
-      <img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy">
+      <div class="product-card-image-wrap"><img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy"></div>
       <div class="product-body">
         <span class="product-meta">${product.categorie}</span>
         <h3>${title}</h3>
         <p class="scent-group">${scentGroup}</p>
-        ${priceLine}
         <div class="product-purchase">
-          ${choiceSelector}
-          ${variantSelector}
-          ${premiumInfo}
-          ${actions}
+          <div class="product-choice-zone">${choiceSelector}</div>
+          <div class="product-variant-zone">${variantSelector}</div>
+          <div class="product-premium-zone">${premiumInfo}</div>
+          <div class="product-control-zone">${actions}</div>
         </div>
       </div>
     </article>`;
@@ -1945,6 +1943,21 @@
     window.addEventListener("pagehide", () => window.cancelAnimationFrame(raf), { once: true });
   }
 
+  function initCatalogSlider() {
+    const slider = $("[data-catalog-slider]");
+    if (!slider) return;
+    const previous = $("[data-catalog-prev]");
+    const next = $("[data-catalog-next]");
+    const scrollOneCard = (direction) => {
+      const slide = $(".catalog-slide", slider);
+      if (!slide) return;
+      const gap = Number.parseFloat(getComputedStyle(slider).columnGap) || 16;
+      slider.scrollBy({ left: direction * (slide.getBoundingClientRect().width + gap), behavior: "smooth" });
+    };
+    previous?.addEventListener("click", () => scrollOneCard(-1));
+    next?.addEventListener("click", () => scrollOneCard(1));
+  }
+
   ensureScentClubNavigation();
   renderCartState();
   initQuickCheckout();
@@ -1956,5 +1969,6 @@
   initContact();
   initB2B();
   initNewsletter();
+  initCatalogSlider();
   initVisualLayer();
 })();
