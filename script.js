@@ -373,6 +373,8 @@
     const filters = ["Dames", "Heren", "Unisex", "Premium", "Bodymist", "Boxen", "Geurstokjes", "Herenverzorging", "Fris", "Bloemig", "Zoet", "Houtachtig", "Kruidig", "Oriëntaals", "Aquatisch", "Aromatisch", "Chypre"];
     const filterList = $("[data-filter-list]");
     const urlParams = new URLSearchParams(location.search);
+    const requestedProduct = urlParams.get("product") || "";
+    const requestedVariant = urlParams.get("variant") || "";
     let active = document.body.dataset.catalogFilter || urlParams.get("filter") || "";
     let currentPage = 1;
 
@@ -409,6 +411,9 @@
     function getFilteredProducts() {
       const query = $("[data-catalog-search]")?.value || "";
       let items = PRODUCTS.filter((product) => !active || normalize([product.doelgroep, product.categorie, product.geurgroep, product.type, product.premiumBeschikbaar ? "Premium" : ""].join(" ")).includes(normalize(active)));
+      if (requestedProduct) {
+        items = items.filter((product) => normalize(product.id) === normalize(requestedProduct) || normalize(product.glantierNummer) === normalize(requestedProduct));
+      }
       if (query) {
         items = items.map((product) => ({ product, score: scoreProduct(product, query) })).filter((item) => item.score > 0).sort((a, b) => b.score - a.score).map((item) => item.product);
       }
@@ -447,6 +452,13 @@
       const end = start + productsPerPage;
       const pagedItems = filteredProducts.slice(start, end);
       grid.innerHTML = pagedItems.length ? pagedItems.map(productCard).join("") : '<p class="empty">Geen producten gevonden.</p>';
+      if (requestedProduct && requestedVariant) {
+        const card = $("[data-product-card]", grid);
+        const choice = $("[data-card-choice]", card);
+        const variant = $(`[data-card-variant="${CSS.escape(requestedVariant)}"]`, card);
+        if (choice && Array.from(choice.options).some((option) => option.value === requestedVariant)) choice.value = requestedVariant;
+        if (variant) $$('[data-card-variant]', card).forEach((button) => button.classList.toggle("selected", button === variant));
+      }
       const from = filteredProducts.length ? start + 1 : 0;
       const to = Math.min(end, filteredProducts.length);
       const resultText = filteredProducts.length === 1 ? "product" : "producten";
