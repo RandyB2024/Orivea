@@ -5,6 +5,20 @@
     <link>https://orivea.nl/</link>
     <description>Glantier parfums verkrijgbaar via ORIVÉA</description>
     <item>
+      <g:id>glantier-glantier-top-10-samples</g:id>
+      <g:item_group_id>glantier-glantier-top-10-samples</g:item_group_id>
+      <g:title>Glantier — Top 10 Samples</g:title>
+      <g:description>Ontdek de bestsellers van Glantier in één handige sample set met 10 parfum samples van 1,2 ml.</g:description>
+      <g:link>https://orivea.nl/glantier-top-10-samples.html</g:link>
+      <g:image_link>https://orivea.nl/assets/images/glantier-top-10-parfums.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>7.95 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>Glantier</g:brand>
+      <g:product_type>Samples &gt; Parfum sample set</g:product_type>
+      <g:size>10 parfum samples van 1,2 ml</g:size>
+    </item>
+    <item>
       <g:id>glantier-401-15ml</g:id>
       <g:item_group_id>glantier-401</g:item_group_id>
       <g:title>Glantier 401 damesparfum 15 ml</g:title>
@@ -2245,34 +2259,6 @@
       <g:size>50 ml</g:size>
     </item>
     <item>
-      <g:id>glantier-537-15ml</g:id>
-      <g:item_group_id>glantier-537</g:item_group_id>
-      <g:title>Glantier 537 damesparfum 15 ml</g:title>
-      <g:description>Glantier 537 damesparfum met een fris, bloemig geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
-      <g:link>https://orivea.nl/catalogus.html?product=537&amp;variant=discovery</g:link>
-      <g:image_link>https://orivea.nl/assets/images/glantier-dames-family-07.jpg</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>5.95 EUR</g:price>
-      <g:condition>new</g:condition>
-      <g:brand>Glantier</g:brand>
-      <g:product_type>Parfum &gt; Dames</g:product_type>
-      <g:size>15 ml</g:size>
-    </item>
-    <item>
-      <g:id>glantier-537-50ml</g:id>
-      <g:item_group_id>glantier-537</g:item_group_id>
-      <g:title>Glantier 537 damesparfum 50 ml</g:title>
-      <g:description>Glantier 537 damesparfum met een fris, bloemig geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
-      <g:link>https://orivea.nl/catalogus.html?product=537&amp;variant=signature</g:link>
-      <g:image_link>https://orivea.nl/assets/images/glantier-dames-family-07.jpg</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>12.95 EUR</g:price>
-      <g:condition>new</g:condition>
-      <g:brand>Glantier</g:brand>
-      <g:product_type>Parfum &gt; Dames</g:product_type>
-      <g:size>50 ml</g:size>
-    </item>
-    <item>
       <g:id>glantier-538-15ml</g:id>
       <g:item_group_id>glantier-538</g:item_group_id>
       <g:title>Glantier 538 damesparfum 15 ml</g:title>
@@ -4499,34 +4485,6 @@
       <g:size>50 ml</g:size>
     </item>
     <item>
-      <g:id>glantier-704-15ml</g:id>
-      <g:item_group_id>glantier-704</g:item_group_id>
-      <g:title>Glantier 704 herenparfum 15 ml</g:title>
-      <g:description>Glantier 704 herenparfum met een kruidig, warm geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
-      <g:link>https://orivea.nl/catalogus.html?product=704&amp;variant=discovery</g:link>
-      <g:image_link>https://orivea.nl/assets/images/glantier-heren-random-14.png</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>5.95 EUR</g:price>
-      <g:condition>new</g:condition>
-      <g:brand>Glantier</g:brand>
-      <g:product_type>Parfum &gt; Heren</g:product_type>
-      <g:size>15 ml</g:size>
-    </item>
-    <item>
-      <g:id>glantier-704-50ml</g:id>
-      <g:item_group_id>glantier-704</g:item_group_id>
-      <g:title>Glantier 704 herenparfum 50 ml</g:title>
-      <g:description>Glantier 704 herenparfum met een kruidig, warm geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
-      <g:link>https://orivea.nl/catalogus.html?product=704&amp;variant=signature</g:link>
-      <g:image_link>https://orivea.nl/assets/images/glantier-heren-random-14.png</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>12.95 EUR</g:price>
-      <g:condition>new</g:condition>
-      <g:brand>Glantier</g:brand>
-      <g:product_type>Parfum &gt; Heren</g:product_type>
-      <g:size>50 ml</g:size>
-    </item>
-    <item>
       <g:id>glantier-705-15ml</g:id>
       <g:item_group_id>glantier-705</g:item_group_id>
       <g:title>Glantier 705 herenparfum 15 ml</g:title>
@@ -4715,34 +4673,6 @@
       <g:description>Glantier 710 herenparfum met een kruidig, warm geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
       <g:link>https://orivea.nl/catalogus.html?product=710&amp;variant=signature</g:link>
       <g:image_link>https://orivea.nl/assets/images/glantier-heren-random-21.png</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>12.95 EUR</g:price>
-      <g:condition>new</g:condition>
-      <g:brand>Glantier</g:brand>
-      <g:product_type>Parfum &gt; Heren</g:product_type>
-      <g:size>50 ml</g:size>
-    </item>
-    <item>
-      <g:id>glantier-711-15ml</g:id>
-      <g:item_group_id>glantier-711</g:item_group_id>
-      <g:title>Glantier 711 herenparfum 15 ml</g:title>
-      <g:description>Glantier 711 herenparfum met een luxe, amber geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
-      <g:link>https://orivea.nl/catalogus.html?product=711&amp;variant=discovery</g:link>
-      <g:image_link>https://orivea.nl/assets/images/glantier-heren-random-14.png</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>5.95 EUR</g:price>
-      <g:condition>new</g:condition>
-      <g:brand>Glantier</g:brand>
-      <g:product_type>Parfum &gt; Heren</g:product_type>
-      <g:size>15 ml</g:size>
-    </item>
-    <item>
-      <g:id>glantier-711-50ml</g:id>
-      <g:item_group_id>glantier-711</g:item_group_id>
-      <g:title>Glantier 711 herenparfum 50 ml</g:title>
-      <g:description>Glantier 711 herenparfum met een luxe, amber geurprofiel. Verkrijgbaar bij ORIVÈA.</g:description>
-      <g:link>https://orivea.nl/catalogus.html?product=711&amp;variant=signature</g:link>
-      <g:image_link>https://orivea.nl/assets/images/glantier-heren-random-14.png</g:image_link>
       <g:availability>in_stock</g:availability>
       <g:price>12.95 EUR</g:price>
       <g:condition>new</g:condition>

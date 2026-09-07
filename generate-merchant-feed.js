@@ -96,7 +96,7 @@ function makeOffer(product, variant) {
     id: groupId,
     title: product.naam,
     description: product.omschrijving || [product.type, product.geurgroep, product.inhoud].filter(Boolean).join(". "),
-    link: productLink(product, "signature"),
+    link: product.detailUrl ? absoluteUrl(product.detailUrl) : productLink(product, "signature"),
     image: absoluteUrl(product.image),
     price: product.prijs,
     size: product.inhoud
@@ -104,6 +104,7 @@ function makeOffer(product, variant) {
 }
 
 const offers = products
+  .filter((product) => !product.pricePending && product.availableForSale !== false && Number.isFinite(Number(product.prijs)))
   .flatMap((product) => {
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
     if (isFragrance) {

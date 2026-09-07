@@ -43,6 +43,26 @@ window.ORIVEA_CONFIG = {
 
 window.ORIVEA_PRODUCTS = [
   {
+    "id": "glantier-top-10-samples",
+    "naam": "Glantier — Top 10 Samples",
+    "cardTitle": "Top 10 Samples",
+    "merk": "Glantier",
+    "type": "Parfum sample set",
+    "inhoud": "10 parfum samples van 1,2 ml",
+    "doelgroep": "Dames en Heren",
+    "categorie": "Samples",
+    "geurgroep": "Discovery Set - Cadeauset",
+    "premiumBeschikbaar": false,
+    "prijs": 7.95,
+    "pricePending": false,
+    "availableForSale": true,
+    "detailUrl": "glantier-top-10-samples.html",
+    "image": "assets/images/glantier-top-10-parfums.jpg",
+    "omschrijving": "Ontdek de bestsellers van Glantier in één handige sample set met 10 parfum samples van 1,2 ml.",
+    "moment": "Ontdekken en cadeau geven",
+    "zoektermen": ["Glantier Top 10", "samples", "sample set", "discovery set", "cadeauset", "parfum samples", "dames", "heren"]
+  },
+  {
     "id": "401",
     "glantierNummer": "401",
     "naam": "Glantier No. 401",
@@ -1674,29 +1694,6 @@ window.ORIVEA_PRODUCTS = [
     ]
   },
   {
-    "id": "537",
-    "glantierNummer": "537",
-    "naam": "Glantier No. 537",
-    "type": "Signature EDP",
-    "inhoud": "50 ml",
-    "doelgroep": "Dames",
-    "categorie": "Dames",
-    "geurgroep": "Fris - Bloemig",
-    "premiumBeschikbaar": false,
-    "prijs": 12.95,
-    "image": "assets/images/glantier-dames-family-07.jpg",
-    "moment": "Dagelijks gebruik",
-    "zoektermen": [
-      "537",
-      "Glantier No. 537",
-      "Signature EDP",
-      "50 ml",
-      "Dames",
-      "Fris - Bloemig",
-      "Dagelijks gebruik"
-    ]
-  },
-  {
     "id": "538",
     "glantierNummer": "538",
     "naam": "Glantier No. 538",
@@ -3193,29 +3190,6 @@ window.ORIVEA_PRODUCTS = [
     ]
   },
   {
-    "id": "704",
-    "glantierNummer": "704",
-    "naam": "Glantier No. 704",
-    "type": "Signature EDP",
-    "inhoud": "50 ml",
-    "doelgroep": "Heren",
-    "categorie": "Heren",
-    "geurgroep": "Kruidig - Warm",
-    "premiumBeschikbaar": false,
-    "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-14.png",
-    "moment": "Overdag en avond",
-    "zoektermen": [
-      "704",
-      "Glantier No. 704",
-      "Signature EDP",
-      "50 ml",
-      "Heren",
-      "Kruidig - Warm",
-      "Overdag en avond"
-    ]
-  },
-  {
     "id": "705",
     "glantierNummer": "705",
     "naam": "Glantier No. 705",
@@ -3354,29 +3328,6 @@ window.ORIVEA_PRODUCTS = [
       "50 ml",
       "Heren",
       "Kruidig - Warm",
-      "Overdag en avond"
-    ]
-  },
-  {
-    "id": "711",
-    "glantierNummer": "711",
-    "naam": "Glantier No. 711",
-    "type": "Signature EDP",
-    "inhoud": "50 ml",
-    "doelgroep": "Heren",
-    "categorie": "Heren",
-    "geurgroep": "Luxe - Amber",
-    "premiumBeschikbaar": false,
-    "prijs": 12.95,
-    "image": "assets/images/glantier-heren-random-14.png",
-    "moment": "Overdag en avond",
-    "zoektermen": [
-      "711",
-      "Glantier No. 711",
-      "Signature EDP",
-      "50 ml",
-      "Heren",
-      "Luxe - Amber",
       "Overdag en avond"
     ]
   },
