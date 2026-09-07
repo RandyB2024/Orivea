@@ -28,15 +28,13 @@
   const VAT_LABEL = "21%";
   const SALES_PAUSED = CONFIG.salesPaused !== false;
   const SALES_PAUSED_MESSAGE = CONFIG.salesPausedMessage || "ORIV\u00C8A wordt momenteel ter beoordeling voorgelegd aan Glantier. Bestellen is tijdelijk nog niet beschikbaar.";
-  const TEST_PRODUCT_ID = "testbetaling-010";
   const vatFromIncluded = (value) => {
     const amount = Number(value || 0);
     return amount - (amount / (1 + VAT_RATE));
   };
   const normalize = (value) => String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
   const productById = (id) => PRODUCTS.find((product) => product.id === id);
-  const isTestProductId = (id) => String(id || "").toLowerCase() === TEST_PRODUCT_ID;
-  const isTestProduct = (product) => isTestProductId(product?.id);
   const freeShippingFrom = Number(CONFIG.freeShippingFrom || 75);
   const itemKey = (item) => item.key || `${item.id}:${item.variant || "signature"}`;
   const paypalClientIdLooksIncomplete = () => !PAYPAL_CONFIG.clientId || PAYPAL_CONFIG.clientId.length < 30;
@@ -109,7 +107,7 @@
   }
 
   function addToCart(id, qty = 1, variant = "signature") {
-    if (SALES_PAUSED && !isTestProductId(id)) {
+    if (SALES_PAUSED) {
       alert(SALES_PAUSED_MESSAGE);
       return;
     }
@@ -156,7 +154,7 @@
   }
 
   function checkoutAllowedDuringPause(data = totals()) {
-    return !SALES_PAUSED || (data.lines.length > 0 && data.lines.every((line) => isTestProduct(line.product)));
+    return !SALES_PAUSED;
   }
 
   function cartLineHtml(line) {
@@ -265,7 +263,7 @@
           ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(premiumPrice)}</span></button>` : `<span class="variant-option-placeholder" aria-hidden="true"></span>`}
         </div>` : `<div class="variant-selector product-single-price"><div class="variant-option selected"><span>${product.inhoud || "Product"}</span><strong>${money(signaturePrice)}</strong></div><span class="variant-option-placeholder" aria-hidden="true"></span><span class="variant-option-placeholder" aria-hidden="true"></span></div>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
-    const productPaused = SALES_PAUSED && !isTestProduct(product);
+    const productPaused = SALES_PAUSED;
     const actions = productPaused ? pausedAction : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>`;
     return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
       <div class="product-card-image-wrap"><img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy"></div>
@@ -343,7 +341,7 @@
     }
     result.innerHTML = geurprofielen.map((product) => {
       const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " &bull; ") : "";
-      const productPaused = SALES_PAUSED && !isTestProduct(product);
+      const productPaused = SALES_PAUSED;
       const action = productPaused
         ? '<button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>'
         : '<button class="button primary cart-symbol-button" type="button" data-add-to-cart="' + product.id + '" aria-label="Toevoegen aan winkelwagen">' + cartIcon() + '</button>';
@@ -830,7 +828,7 @@
     if (clientId.length < 30) {
       console.warn("PayPal Client ID lijkt kort of mogelijk onvolledig:", clientId);
     }
-    const enabledFunding = (CONFIG.paypalEnabledFunding || ["ideal", "card"]).join(",");
+    const enabledFunding = (CONFIG.paypalEnabledFunding || []).join(",");
     paypalSdkPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector("script[data-paypal-sdk], script[src*='paypal.com/sdk/js']");
       if (existing) {
@@ -854,11 +852,11 @@
       const script = document.createElement("script");
       const params = new URLSearchParams({
         "client-id": clientId,
-        components: "buttons,funding-eligibility,applepay",
-        "enable-funding": enabledFunding,
+        components: "buttons",
         currency: PAYPAL_CONFIG.currency,
         intent: PAYPAL_CONFIG.intent
       });
+      if (enabledFunding) params.set("enable-funding", enabledFunding);
       script.src = `https://www.paypal.com/sdk/js?${params.toString()}`;
       script.dataset.paypalSdk = "true";
       script.onload = () => {
@@ -1275,7 +1273,8 @@
         processing = false;
         paymentStarted = false;
         console.warn("PayPal payment cancelled:", data);
-        if (status) status.textContent = "Betaling geannuleerd. Je winkelwagen is bewaard.";
+        if (status) status.innerHTML = 'De betaling is niet afgerond. Je bestelling is nog niet geplaatst. Je kunt het opnieuw proberen via PayPal. <button class="payment-retry" type="button">Opnieuw betalen</button>';
+        status?.querySelector(".payment-retry")?.addEventListener("click", () => { status.textContent = ""; status.parentElement?.querySelector("[data-paypal-buttons], [data-quick-paypal]")?.scrollIntoView({ behavior: "smooth", block: "center" }); });
       },
       onError: (error) => {
         processing = false;
@@ -1284,7 +1283,8 @@
         console.error("PayPal payment method error:", error);
         console.error("Payment error:", error);
         logPayPalError(error);
-        if (status) status.textContent = shouldShowError ? `${label} kon de betaling niet starten of bevestigen. Probeer opnieuw of kies PayPal.` : "";
+        if (status) status.innerHTML = shouldShowError ? 'De betaling is niet afgerond. Je bestelling is nog niet geplaatst. Je kunt het opnieuw proberen via PayPal. <button class="payment-retry" type="button">Opnieuw betalen</button>' : "";
+        status?.querySelector(".payment-retry")?.addEventListener("click", () => { status.textContent = ""; status.parentElement?.querySelector("[data-paypal-buttons], [data-quick-paypal]")?.scrollIntoView({ behavior: "smooth", block: "center" }); });
       }
     };
     if (fundingSource) options.fundingSource = fundingSource;
@@ -1293,9 +1293,6 @@
 
   async function renderPayPalFundingButtons({ paypal, target, source, status, validate, onSuccess }) {
     target.innerHTML = `
-      <div id="ideal-button-container" class="paypal-funding-slot"></div>
-      <div id="wero-button-container" class="paypal-funding-slot"></div>
-      <div id="card-button-container" class="paypal-funding-slot"></div>
       <div id="paypal-button-container" class="paypal-funding-slot"></div>
     `;
     if (status) status.textContent = "";
@@ -1303,16 +1300,9 @@
     const sdkFundingSources = typeof paypal.getFundingSources === "function" ? paypal.getFundingSources() : [];
     console.log("Funding sources:", sdkFundingSources);
     await logPayPalFundingEligibility(paypal);
-    const fundingSources = [
-      paypal.FUNDING?.IDEAL || "ideal",
-      paypal.FUNDING?.WERO || "wero",
-      paypal.FUNDING?.CARD || "card",
-      paypal.FUNDING?.PAYPAL || "paypal"
-    ].filter((fundingSource, index, sources) => sources.indexOf(fundingSource) === index);
+    const fundingSources = [paypal.FUNDING?.PAYPAL || "paypal"];
     console.log("Available PayPal funding sources:", fundingSources);
     console.log("Eligible payment methods:", []);
-    if (!paypal.FUNDING?.IDEAL) console.error("iDEAL/Wero unavailable:", "iDEAL funding source ontbreekt in PayPal SDK");
-    if (!paypal.FUNDING?.WERO) console.error("iDEAL/Wero unavailable:", "Wero funding source ontbreekt in PayPal SDK");
     const eligibleMethods = [];
     for (const fundingSource of fundingSources) {
       const options = paypalButtonOptions({
@@ -1507,7 +1497,7 @@
       <div>
         <p class="eyebrow">Snel betalen</p>
         <h2>Snel bestellen</h2>
-        <p class="quick-intro">Vul je gegevens in en rond je bestelling veilig af via PayPal of Apple Pay.</p>
+        <p class="quick-intro">Vul je gegevens in en rond je bestelling veilig af via PayPal.</p>
         <form class="quick-checkout-form" data-quick-form>
           <label>Naam<input name="customer_name" autocomplete="name" required></label>
           <label>E-mailadres<input type="email" name="customer_email" autocomplete="email" required></label>
@@ -1527,14 +1517,13 @@
             </div>
             <label>Provincie<input name="province" autocomplete="address-level1"></label>
           </div>
-          <button class="button primary full" type="submit">Betaalopties tonen</button>
+          <button class="button primary full" type="submit">Verder naar veilige betaling</button>
         </form>
       </div>
       <div class="quick-payment-panel">
         <h3>Overzicht</h3>
         <div data-quick-totals></div>
         <p class="notice">Bij iedere bestelling ontvang je gratis een willekeurige ORIV&Eacute;A Discovery Sample.</p>
-        <div data-quick-apple-pay hidden></div>
         <div data-quick-paypal hidden></div>
         <p class="form-status" data-quick-status></p>
       </div>
@@ -1558,7 +1547,8 @@
     }
     const quickBlock = document.createElement("section");
     quickBlock.className = "quick-cart-pay";
-    quickBlock.innerHTML = `<h3>Snel betalen</h3><p>Veilig, snel en vertrouwd.</p><button class="button ghost full" type="button" data-quick-checkout-open>Snel bestellen met PayPal</button>`;
+    checkoutLink.textContent = "Veilig afrekenen";
+    quickBlock.innerHTML = `<h3>ORIVÈA Veilig Afrekenen</h3><p>Voor jouw veiligheid verwerken wij betalingen via PayPal.</p><button class="button ghost full" type="button" data-quick-checkout-open>Naar veilige betaling</button>`;
     checkoutLink.insertAdjacentElement("afterend", quickBlock);
 
     quickBlock.querySelector("[data-quick-checkout-open]").addEventListener("click", () => {
@@ -1578,7 +1568,6 @@
       const modal = quickCheckoutModal();
       const form = $("[data-quick-form]", modal);
       const paypalTarget = $("[data-quick-paypal]", modal);
-      const applePayTarget = $("[data-quick-apple-pay]", modal);
       const status = $("[data-quick-status]", modal);
       const totalsTarget = $("[data-quick-totals]", modal);
       let quickFormData = null;
@@ -1602,14 +1591,6 @@
         if (!form.reportValidity()) return;
         quickFormData = checkoutFormData(form);
         paypalTarget.hidden = false;
-        await renderApplePayButton({
-          target: applePayTarget,
-          source: () => quickFormData,
-          status,
-          validate: () => Boolean(quickFormData) && form.reportValidity(),
-          onSuccess: { redirect: "bedankt.html" },
-          label: "Snel betalen met Apple Pay"
-        });
         if (paypalRendered) return;
         try {
           const paypal = await loadPayPalSdk();
@@ -1661,14 +1642,6 @@
       $$('[data-step-tab]').forEach((el) => el.classList.toggle('active', Number(el.dataset.stepTab) === step));
       renderCartState();
       if (step === 4) {
-        renderApplePayButton({
-          target: $('[data-apple-pay-buttons]'),
-          source: () => form,
-          status,
-          validate: validateCheckout,
-          onSuccess: { successPanel, orderStatus, showStep, redirect: "bedankt.html" },
-          label: "Snel betalen met Apple Pay"
-        });
         renderPayPalButtons();
       }
     };
@@ -1747,6 +1720,20 @@
   async function sendContactTemplate(payload) {
     await initEmailJs();
     return emailjs.send(CONFIG.emailJs.serviceId, CONFIG.emailJs.contactTemplate, payload);
+  }
+
+  function initThankYou() {
+    const orderTarget = $("[data-thank-you-order]");
+    const summaryTarget = $("[data-thank-you-summary]");
+    if (!orderTarget || !summaryTarget) return;
+    const order = JSON.parse(localStorage.getItem(LAST_ORDER_KEY) || "null");
+    if (!order || order.payment_status !== "COMPLETED") {
+      orderTarget.textContent = "Je ordergegevens zijn in deze browser niet beschikbaar.";
+      return;
+    }
+    orderTarget.innerHTML = `<strong>Ordernummer ${order.order_number}</strong>`;
+    const items = typeof order.order_items === "string" ? order.order_items : "";
+    summaryTarget.innerHTML = `<div class="thank-you-summary"><p>${escapeHtml(items).replace(/\n/g, "<br>")}</p><p><span>Totaal</span><strong>${escapeHtml(order.total)}</strong></p></div>`;
   }
 
   window.ORIVEA_EMAIL = {
@@ -1993,6 +1980,7 @@
   initMatch();
   initCatalog();
   initCheckout();
+  initThankYou();
   initContact();
   initB2B();
   initNewsletter();

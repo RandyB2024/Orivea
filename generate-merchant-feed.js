@@ -104,7 +104,6 @@ function makeOffer(product, variant) {
 }
 
 const offers = products
-  .filter((product) => product.id !== "testbetaling-010")
   .flatMap((product) => {
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
     if (isFragrance) {

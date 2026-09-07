@@ -5,10 +5,7 @@ window.ORIVEA_CONFIG = {
   "paymentEnabled": true,
   "paypalClientId": "AdHVkRJT6Lr_2eatUAvqxQmJfEkrXuWYwHp1Rrs1qtzR10EWFNna5XJIa80RLEnvfQHJ--E16dnpBS3a",
   "paypalCurrency": "EUR",
-  "paypalEnabledFunding": [
-    "ideal",
-    "card"
-  ],
+  "paypalEnabledFunding": [],
   "currency": "EUR",
   "emailJs": {
     "serviceId": "service_r55nwxz",
@@ -45,31 +42,6 @@ window.ORIVEA_CONFIG = {
 };
 
 window.ORIVEA_PRODUCTS = [
-  {
-    "id": "testbetaling-010",
-    "naam": "ORIVÈA Testbetaling",
-    "type": "Testproduct",
-    "inhoud": "Digitale betaaltest",
-    "doelgroep": "Test",
-    "categorie": "Testbetaling",
-    "geurgroep": "Betaaltest",
-    "premiumBeschikbaar": false,
-    "prijs": 0.1,
-    "freeShipping": true,
-    "image": "assets/images/orivea-discovery-sample-transparent.png",
-    "omschrijving": "Testproduct om veilig te controleren of de betaling en orderbevestiging correct doorkomen.",
-    "moment": "Alleen voor betaaltesten",
-    "zoektermen": [
-      "testbetaling-010",
-      "ORIVÈA Testbetaling",
-      "Testproduct",
-      "Digitale betaaltest",
-      "Test",
-      "Testbetaling",
-      "Betaaltest",
-      "Alleen voor betaaltesten"
-    ]
-  },
   {
     "id": "401",
     "glantierNummer": "401",
