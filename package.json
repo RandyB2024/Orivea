@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "import:glantier": "node import-glantier-products.js",
+    "import:glantier:refresh": "node import-glantier-products.js --refresh",
     "import:glantier:catalog": "node import-glantier-products.js --catalog",
     "import:glantier:apply-safe": "node apply-safe-glantier-import.js --all-safe",
     "generate:products": "node generate-product-pages.js",

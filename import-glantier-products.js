@@ -4,8 +4,11 @@ const vm = require("vm");
 const cheerio = require("cheerio");
 
 const ROOT = __dirname;
-const BASE_URL = "https://www.glantier.com";
-const CACHE_DIR = path.join(ROOT, "data", "glantier-cache");
+const sourceConfig = JSON.parse(fs.readFileSync(path.join(ROOT, "sources", "glantier.json"), "utf8"));
+const BASE_URL = sourceConfig.baseUrl;
+const ALLOWED_PREFIX = new URL(sourceConfig.allowedPathPrefix, BASE_URL).href;
+const CRAWLER_VERSION = sourceConfig.crawlerVersion;
+const CACHE_DIR = path.join(ROOT, "data", "crawler-cache");
 const PREVIEW_PATH = path.join(ROOT, "data", "glantier-import-preview.json");
 const NEW_PATH = path.join(ROOT, "data", "glantier-new-products.json");
 const REPORT_PATH = path.join(ROOT, "data", "glantier-import-report.json");
@@ -15,13 +18,8 @@ const args = process.argv.slice(2);
 const refresh = args.includes("--refresh");
 const fullCatalog = args.includes("--catalog");
 const refsArg = args.find((arg) => arg.startsWith("--refs="));
-const testReferences = refsArg ? refsArg.split("=")[1].split(",").map((item) => item.trim()).filter(Boolean) : ["477", "500", "548", "553", "585", "717", "724", "759", "771"];
-const categorySources = [
-  { url: `${BASE_URL}/nl/91-standaard-collectie-dames`, category: "Dames", premium: false },
-  { url: `${BASE_URL}/nl/92-standaard-collectie-heren`, category: "Heren", premium: false },
-  { url: `${BASE_URL}/nl/30-premium-parfums`, category: "Premium", premium: true },
-  { url: `${BASE_URL}/nl/170-premium-heren-parfums`, category: "Premium Heren", premium: true }
-];
+const testReferences = refsArg ? refsArg.split("=")[1].split(",").map((item) => item.trim()).filter(Boolean) : ["401", "500", "548", "717", "724"];
+const categorySources = sourceConfig.categoryPages.map((source) => ({ ...source, url: new URL(source.path, BASE_URL).href }));
 
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 const context = { window: {} };
@@ -30,6 +28,7 @@ const localProducts = context.window.ORIVEA_PRODUCTS || [];
 const discontinued = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, "data", "discontinued-products.json"), "utf8")));
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 let lastRequestAt = 0;
+let robotsRules;
 
 function clean(value) {
   return String(value || "").replace(/\s+/g, " ").replace(/\u00a0/g, " ").trim();
@@ -44,7 +43,8 @@ function cachePath(url) {
 }
 
 async function fetchOfficial(url) {
-  if (!url.startsWith(`${BASE_URL}/nl/`)) throw new Error(`Niet-officiële bron geweigerd: ${url}`);
+  if (!url.startsWith(ALLOWED_PREFIX)) throw new Error(`Niet-officiële bron geweigerd: ${url}`);
+  if (!(await isAllowedByRobots(url))) throw new Error(`robots.txt staat crawlen niet toe: ${url}`);
   const file = cachePath(url);
   if (!refresh && fs.existsSync(file)) {
     const cached = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -53,20 +53,38 @@ async function fetchOfficial(url) {
   const wait = Math.max(0, DELAY_MS - (Date.now() - lastRequestAt));
   if (wait) await sleep(wait);
   let error;
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
     try {
       lastRequestAt = Date.now();
       const response = await fetch(url, { headers: { "user-agent": "ORIVEA-ProductImporter/1.0 (+https://orivea.nl; low-rate official product check)", accept: "text/html,application/xhtml+xml" }, signal: AbortSignal.timeout(20000) });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const payload = { url: response.url, retrieved_at: new Date().toISOString(), html: await response.text() };
+      const payload = { url: response.url, retrieved_at: new Date().toISOString(), http_status: response.status, html: await response.text() };
       fs.writeFileSync(file, JSON.stringify(payload), "utf8");
       return { ...payload, cache_status: "miss" };
     } catch (caught) {
       error = caught;
-      if (attempt < 3) await sleep(1000 * attempt);
+      if (attempt < 2) await sleep(1000 * attempt);
     }
   }
   throw error;
+}
+
+async function isAllowedByRobots(url) {
+  if (!robotsRules) {
+    const response = await fetch(new URL("/robots.txt", BASE_URL), { headers: { "user-agent": "ORIVEA-ProductImporter/1.1" }, signal: AbortSignal.timeout(15000) });
+    if (!response.ok) throw new Error(`robots.txt kon niet worden gecontroleerd: HTTP ${response.status}`);
+    const lines = (await response.text()).split(/\r?\n/).map((line) => line.replace(/#.*/, "").trim()).filter(Boolean);
+    let applies = false;
+    robotsRules = [];
+    for (const line of lines) {
+      const [key, ...rest] = line.split(":");
+      const value = rest.join(":").trim();
+      if (/^user-agent$/i.test(key)) applies = value === "*" || /ORIVEA-ProductImporter/i.test(value);
+      if (applies && /^disallow$/i.test(key) && value) robotsRules.push(value);
+    }
+  }
+  const pathname = new URL(url).pathname;
+  return !robotsRules.some((rule) => pathname.startsWith(rule));
 }
 
 function referenceFromText(value) {
@@ -77,7 +95,7 @@ function referenceFromText(value) {
 function discoverLinks(html, source) {
   const $ = cheerio.load(html);
   const found = new Map();
-  $("a[href]").each((_, element) => {
+  $(sourceConfig.productLinkSelector).each((_, element) => {
     const anchor = $(element);
     const text = clean(anchor.text() || anchor.attr("title"));
     const href = absoluteUrl(anchor.attr("href"), source.url);
@@ -111,8 +129,12 @@ function note(text, label) {
 
 function parseProductPage(payload, hint) {
   const $ = cheerio.load(payload.html);
+  const jsonLdProducts = $("script[type='application/ld+json']").map((_, element) => {
+    try { return JSON.parse($(element).text()); } catch { return null; }
+  }).get().flatMap((entry) => entry?.["@graph"] || entry || []).filter((entry) => entry?.["@type"] === "Product");
+  const jsonLd = jsonLdProducts[0] || {};
   $("script,style,noscript,svg,form,nav,footer,header").remove();
-  const title = clean($("h1").first().text() || $("title").text());
+  const title = clean($(sourceConfig.titleSelector).first().text() || jsonLd.name || $("title").text());
   const body = clean($("body").text());
   const notesMarker = body.lastIndexOf("Geurnoten:");
   const notesBody = notesMarker >= 0 ? body.slice(notesMarker) : body;
@@ -121,9 +143,12 @@ function parseProductPage(payload, hint) {
   const familyFromTitle = title.match(/\s[-–]\s(.+?)$/)?.[1];
   const familyMatch = body.match(/Geurgroep\s*:\s*([^.!?€]{2,80})/i);
   const volumeMatch = body.match(/\b(\d+(?:[.,]\d+)?)\s*ml\b/i);
-  const ingredientsMatch = body.match(/Ingrediënten\s*:\s*(.*?)(?=Referentie|ean13|Grade|Specifieke referenties|$)/i);
-  const image = $("meta[property='og:image']").attr("content") || $("img[itemprop='image']").first().attr("src") || $(".product-cover img").first().attr("src");
-  const description = $("meta[name='description']").attr("content") || sectionText($, /^Glantier Parfum \d+/i);
+  const ingredientLabels = sourceConfig.ingredientsLabels.map((label) => label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  const ingredientsMatch = body.match(new RegExp(`(?:${ingredientLabels})\\s*:\\s*(.*?)(?=Referentie|ean13|Grade|Specifieke referenties|$)`, "i"));
+  const imageNode = $(sourceConfig.imageSelector).first();
+  const image = jsonLd.image?.[0] || jsonLd.image || imageNode.attr("content") || imageNode.attr("src");
+  const description = $(sourceConfig.descriptionSelector).attr("content") || jsonLd.description || sectionText($, /^Glantier Parfum \d+/i);
+  const ingredientsSourceText = ingredientsMatch ? clean(ingredientsMatch[1]).slice(0, 4000) : null;
   return {
     reference_number: reference,
     product_name: title,
@@ -138,7 +163,9 @@ function parseProductPage(payload, hint) {
     heart_notes: note(notesBody, "Hartnoten"),
     base_notes: note(notesBody, "Basisnoten"),
     short_description_source: description ? clean(description).slice(0, 1000) : null,
-    ingredients_source_text: ingredientsMatch ? clean(ingredientsMatch[1]).slice(0, 4000) : null,
+    description_source: description ? clean(description).slice(0, 1000) : null,
+    ingredients_source_text: ingredientsSourceText,
+    ingredients: ingredientsSourceText ? ingredientsSourceText.split(",").map(clean).filter(Boolean) : [],
     ingredients_status: ingredientsMatch ? "found" : "not_found",
     premium: hint.premium,
     image_url: absoluteUrl(image, payload.url),
@@ -148,7 +175,9 @@ function parseProductPage(payload, hint) {
     source_retrieved_at: payload.retrieved_at,
     source_last_checked: payload.retrieved_at,
     source_status: "matched",
-    cache_status: payload.cache_status
+    cache_status: payload.cache_status,
+    http_status: payload.http_status || 200,
+    crawler_version: CRAWLER_VERSION
   };
 }
 
@@ -195,11 +224,24 @@ function compare(local, official) {
   fs.writeFileSync(PREVIEW_PATH, `${JSON.stringify(preview, null, 2)}\n`, "utf8");
   fs.writeFileSync(NEW_PATH, `${JSON.stringify(newProducts, null, 2)}\n`, "utf8");
   const report = {
-    generated_at: new Date().toISOString(), source: `${BASE_URL}/nl/`, mode: fullCatalog ? "catalog" : "test", request_delay_ms: DELAY_MS, cache_ttl_days: TTL_MS / 86400000,
+    generated_at: new Date().toISOString(), source: ALLOWED_PREFIX, mode: fullCatalog ? "catalog" : "test", request_delay_ms: DELAY_MS, cache_ttl_days: TTL_MS / 86400000, crawler_version: CRAWLER_VERSION, robots_txt_respected: true,
     active_orivea_products: localProducts.length, official_products_discovered: unique.length, checked: preview.length, matched: preview.filter((item) => item.official.source_status === "matched").length,
     ingredients_found: preview.filter((item) => item.official.ingredients_status === "found").length, review_required: preview.filter((item) => item.comparison?.review_required || item.official.source_status !== "matched").length,
     official_page_not_found: testReferences.filter((reference) => !preview.some((item) => item.reference_number === reference)), new_products_found: newProducts.length,
-    discontinued_conflicts: newProducts.filter((item) => item.status === "discontinued").map((item) => item.reference_number), official_urls_used: preview.map((item) => item.official.official_product_url).filter(Boolean)
+    discontinued_conflicts: newProducts.filter((item) => item.status === "discontinued").map((item) => item.reference_number), official_urls_used: preview.map((item) => item.official.official_product_url).filter(Boolean),
+    fields_found: Object.fromEntries(["product_name", "image_url", "description_source", "fragrance_family", "ingredients_source_text"].map((field) => [field, preview.filter((item) => item.official?.[field]).length])),
+    fields_missing: Object.fromEntries(["product_name", "image_url", "description_source", "fragrance_family", "ingredients_source_text"].map((field) => [field, preview.filter((item) => !item.official?.[field]).length])),
+    conflicts: preview.flatMap((item) => (item.comparison?.differences || []).map((difference) => ({ reference_number: item.reference_number, ...difference }))),
+    playwright_fallback_used: false,
+    selectors_used: {
+      product_link: sourceConfig.productLinkSelector,
+      title: sourceConfig.titleSelector,
+      reference: sourceConfig.referenceSelector,
+      description: sourceConfig.descriptionSelector,
+      image: sourceConfig.imageSelector,
+      ingredients_labels: sourceConfig.ingredientsLabels
+    },
+    category_pages: categorySources.map((item) => item.url)
   };
   fs.writeFileSync(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   console.log(JSON.stringify(report, null, 2));
