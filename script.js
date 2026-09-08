@@ -267,13 +267,14 @@
     const premiumPrice = discountedPriceFor(product, product.premiumPrijs || CONFIG.pricing?.premium50 || 16.95);
     const scentGroup = product.geurgroep ? product.geurgroep.replace(/\s*-\s*/g, " • ") : "";
     const title = product.glantierNummer ? `GLANTIER ${product.glantierNummer}` : (product.cardTitle || product.naam);
+    const singleVariantLabel = product.id === "glantier-top-10-samples" ? "10 samples · 1,2 ml" : String(product.inhoud || product.type || "Product").replace(/\s+x\s+/i, " × ");
     const premiumInfo = product.premiumBeschikbaar ? `<button class="premium-info-link" type="button" data-premium-info="${product.id}">Wat is Premium?</button>` : `<span class="premium-info-placeholder" aria-hidden="true"></span>`;
     const choiceSelector = product.geurKeuzes?.length ? `<label class="choice-selector">Kies je geur<select data-card-choice>${product.geurKeuzes.map((choice) => `<option value="geur-${choice.nummer}">${choice.naam} - ${choice.geurgroep}</option>`).join("")}</select></label>` : `<span class="choice-selector-placeholder" aria-hidden="true"></span>`;
-    const variantSelector = product.pricePending ? `<div class="variant-selector product-single-price"><div class="variant-option selected"><span>${product.inhoud}</span><strong>Prijs volgt</strong></div></div>` : isFragrance ? `<div class="variant-selector" data-card-variants>
+    const variantSelector = product.pricePending ? `<div class="single-variant"><span class="single-variant__label">${singleVariantLabel}</span><strong class="single-variant__price">Prijs volgt</strong></div>` : isFragrance ? `<div class="variant-selector" data-card-variants>
           <button class="variant-option" type="button" data-card-variant="discovery">15 ml <span>${money(discoveryPrice)}</span></button>
           <button class="variant-option selected" type="button" data-card-variant="signature">50 ml <span>${money(signaturePrice)}</span></button>
           ${product.premiumBeschikbaar ? `<button class="variant-option premium-option" type="button" data-card-variant="premium">Premium 50 ml <span>${money(premiumPrice)}</span></button>` : `<span class="variant-option-placeholder" aria-hidden="true"></span>`}
-        </div>` : `<div class="variant-selector product-single-price"><div class="variant-option selected"><span>${product.inhoud || "Product"}</span><strong>${money(signaturePrice)}</strong></div><span class="variant-option-placeholder" aria-hidden="true"></span><span class="variant-option-placeholder" aria-hidden="true"></span></div>`;
+        </div>` : `<div class="single-variant"><span class="single-variant__label" title="${singleVariantLabel}">${singleVariantLabel}</span><strong class="single-variant__price">${money(signaturePrice)}</strong></div>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
     const productPaused = SALES_PAUSED;
     const detailUrl = productDetailUrl(product);
