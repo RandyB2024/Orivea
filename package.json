@@ -11,6 +11,7 @@
     "generate:products": "node generate-product-pages.js",
     "generate:feed": "node generate-merchant-feed.js",
     "generate:scent-club-catalog": "node generate-scent-club-catalog.js",
+    "generate:commerce-catalog": "node generate-commerce-catalog.js",
     "test:scent-club": "node test-scent-club-self-service.mjs",
     "test:glantier-catalog": "node test-glantier-catalog.js"
   },

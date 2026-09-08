@@ -971,6 +971,18 @@
 
   async function finalizePaidOrder(source, payment, options = {}) {
     const payload = buildOrderPayload(source, payment);
+    const serverOrder = options.serverOrder;
+    if (serverOrder) {
+      payload.order_number = serverOrder.order_number || options.orderNumber || payload.order_number;
+      payload.subtotal = money(serverOrder.subtotal);
+      payload.shipping_cost = serverOrder.shipping_cost === 0 ? "Gratis" : money(serverOrder.shipping_cost);
+      payload.total = money(serverOrder.total);
+      payload.vat_amount = money(Number(serverOrder.total || 0) - (Number(serverOrder.total || 0) / 1.21));
+      payload.subtotal_incl_vat = payload.subtotal;
+      payload.shipping_incl_vat = money(serverOrder.shipping_cost);
+      payload.total_incl_vat = payload.total;
+      payload.order_items = (serverOrder.items || []).map((item) => `${item.quantity}x ${item.product_name} - ${item.variant_label} - ${money(item.line_total)}`).join("\n");
+    }
     const statusTarget = options.orderStatus || options.status;
     if (payload.payment_status !== "COMPLETED") {
       throw new Error(`Order afronden geblokkeerd: betalingstatus is ${payload.payment_status || "onbekend"}`);
@@ -1001,18 +1013,31 @@
     return (CONFIG.paypalApiBase || "/api/paypal").replace(/\/$/, "");
   }
 
-  async function createServerPayPalOrder(data) {
+  async function createServerPayPalOrder(source) {
+    const current = totals();
+    const formData = normalizeOrderFormData(source);
+    let idempotencyKey = sessionStorage.getItem("orivea_checkout_idempotency");
+    if (!idempotencyKey) {
+      idempotencyKey = crypto.randomUUID();
+      sessionStorage.setItem("orivea_checkout_idempotency", idempotencyKey);
+    }
     const response = await fetch(`${paypalApiBase()}/create-order`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey },
       body: JSON.stringify({
-        amount: data.total.toFixed(2),
-        currency: CONFIG.paypalCurrency || CONFIG.currency || "EUR",
-        description: "ORIVÈA Glantier bestelling"
+        idempotencyKey,
+        customer: { name: formData.customer_name, email: formData.customer_email, phone: formData.customer_phone, address: formData.customer_address },
+        items: current.lines.map((line) => ({ id: line.product.id, variant: line.variant || line.product.variant || "signature", quantity: line.qty })),
+        newsletterOptIn: formData.newsletter_opt_in === "on" || formData.newsletter_opt_in === true,
+        termsAccepted: formData.terms_accepted === "on" || formData.terms_accepted === true,
+        returnPolicyAccepted: formData.return_policy_accepted === "on" || formData.return_policy_accepted === true,
+        note: formData.note || ""
+        ,memberCode: formData.scent_club_member_code || ""
       })
     });
-    if (!response.ok) throw new Error("PayPal order kon niet worden aangemaakt");
-    return response.json();
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "PayPal order kon niet worden aangemaakt");
+    return payload;
   }
 
   async function captureServerPayPalOrder(orderId) {
@@ -1021,8 +1046,9 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ orderId })
     });
-    if (!response.ok) throw new Error("PayPal order kon niet worden gecaptured");
-    return response.json();
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "PayPal order kon niet worden gecaptured");
+    return payload;
   }
 
   function paypalCapture(details) {
@@ -1138,7 +1164,7 @@
     return summary;
   }
 
-  function createPayPalOrder(data, actions, context = {}) {
+  async function createPayPalOrder(data, actions, context = {}) {
     console.log("createOrder started");
     if (context.processing?.()) throw new Error("Betaling wordt al verwerkt");
     if (context.validate && !context.validate()) throw new Error("Checkout niet compleet");
@@ -1147,13 +1173,7 @@
       if (context.status) context.status.textContent = SALES_PAUSED_MESSAGE;
       throw new Error("Bestellen tijdelijk niet beschikbaar");
     }
-    const cartItems = current.lines.map((line) => ({
-      id: line.product.id,
-      name: line.product.naam,
-      qty: line.qty,
-      price: Number(line.product.prijs),
-      total: Number(line.product.prijs * line.qty)
-    }));
+    const cartItems = current.lines.map((line) => ({ id: line.product.id, variant: line.variant || "signature", qty: line.qty }));
     console.log("Cart items:", cartItems);
     console.log("Subtotal:", current.subtotal);
     console.log("Shipping:", current.shipping);
@@ -1167,42 +1187,36 @@
       throw new Error("Ongeldig totaalbedrag");
     }
     context.paymentStarted = true;
-    const total = Number(current.total).toFixed(2);
-    console.log("PayPal total:", total);
-    return actions.order.create({
-      purchase_units: [{
-        amount: {
-          currency_code: PAYPAL_CONFIG.currency,
-          value: total
-        }
-      }]
-    }).then((orderId) => {
-      console.log("Order ID:", orderId);
-      return orderId;
-    });
+    const created = await createServerPayPalOrder(context.source());
+    context.serverOrder = created.order;
+    context.paypalOrderId = created.id;
+    console.log("Server order created:", created.orderNumber, created.order);
+    return created.id;
   }
 
   async function handlePayPalApprove(data, actions, paymentMethod, context = {}) {
     console.log("onApprove started:", paymentMethod, data);
-    const details = await actions.order.capture();
+    const details = await captureServerPayPalOrder(data.orderID);
     console.log("PayPal capture status:", details?.status);
     console.log("PayPal capture details:", details);
     console.log("Capture result:", details);
     if (!details || details.status !== "COMPLETED") {
       throw new Error(`PayPal capture niet voltooid. Status: ${details && details.status}`);
     }
-    const transactionId = paypalCaptureId(details) || data.orderID;
+    const transactionId = details.order?.paypal_transaction_id || paypalCaptureId(details) || data.orderID;
     console.log("PayPal transaction ID:", transactionId);
     console.log("Transaction ID:", transactionId);
     if (!transactionId) throw new Error("PayPal capture ID ontbreekt");
     context.captureCompleted = true;
     console.log("Payment method selected:", paymentMethod);
     console.log("PayPal payment method:", paymentMethod);
-    return finalizePaidOrder(context.source(), {
+    const result = await finalizePaidOrder(context.source(), {
       transactionId,
       paymentStatus: "COMPLETED",
       paymentMethod
-    }, { ...(context.onSuccess || {}), status: context.status });
+    }, { ...(context.onSuccess || {}), status: context.status, serverOrder: details.order, orderNumber: details.orderNumber });
+    sessionStorage.removeItem("orivea_checkout_idempotency");
+    return result;
   }
 
   function paypalButtonOptions({ source, status, validate, onSuccess, paymentMethod, fundingSource }) {
@@ -1325,6 +1339,7 @@
         processing = false;
         paymentStarted = false;
         console.warn("PayPal payment cancelled:", data);
+        fetch(`${paypalApiBase()}/cancel-order`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId: data.orderID || context.paypalOrderId }) }).catch((error) => console.warn("Annulering wordt later gesynchroniseerd:", error));
         if (status) status.innerHTML = 'De betaling is niet afgerond. Je bestelling is nog niet geplaatst. Je kunt het opnieuw proberen via PayPal. <button class="payment-retry" type="button">Opnieuw betalen</button>';
         status?.querySelector(".payment-retry")?.addEventListener("click", () => { status.textContent = ""; status.parentElement?.querySelector("[data-paypal-buttons], [data-quick-paypal]")?.scrollIntoView({ behavior: "smooth", block: "center" }); });
       },
@@ -1869,6 +1884,8 @@
         message_body: "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A bekijkt je wensen en neemt zo snel mogelijk contact met je op."
       };
       try {
+        const stored = await fetch("/api/newsletter/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: raw.email, name: raw.name, optIn: !isUnsubscribe }) });
+        if (!stored.ok) throw new Error((await stored.json()).error || "Nieuwsbriefvoorkeur kon niet worden opgeslagen.");
         await sendContactTemplate(payload);
         form.reset();
         if (status) status.textContent = "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A neemt zo snel mogelijk contact met je op.";
