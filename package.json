@@ -13,6 +13,7 @@
     "generate:scent-club-catalog": "node generate-scent-club-catalog.js",
     "generate:commerce-catalog": "node generate-commerce-catalog.js",
     "admin:catalog": "node catalog-import-admin-server.js",
+    "test:checkout": "node test-checkout-regression.js",
     "test:scent-club": "node test-scent-club-self-service.mjs",
     "test:glantier-catalog": "node test-glantier-catalog.js"
   },

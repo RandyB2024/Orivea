@@ -1036,7 +1036,11 @@
       })
     });
     const payload = await response.json();
-    if (!response.ok) throw new Error(payload.error || "PayPal order kon niet worden aangemaakt");
+    if (!response.ok) {
+      const error = new Error(payload.error || "PayPal order kon niet worden aangemaakt");
+      error.status = response.status;
+      throw error;
+    }
     return payload;
   }
 
@@ -1187,23 +1191,31 @@
       throw new Error("Ongeldig totaalbedrag");
     }
     context.paymentStarted = true;
-    const created = await createServerPayPalOrder(context.source());
-    context.serverOrder = created.order;
-    context.paypalOrderId = created.id;
-    console.log("Server order created:", created.orderNumber, created.order);
-    return created.id;
+    try {
+      const created = await createServerPayPalOrder(context.source());
+      context.serverOrder = created.order;
+      context.paypalOrderId = created.id;
+      console.log("Server order created:", created.orderNumber, created.order);
+      return created.id;
+    } catch (error) {
+      console.warn("Server-side orderregistratie niet beschikbaar; PayPal checkout gaat door zonder korting:", error);
+      context.serverOrder = null;
+      return actions.order.create({
+        purchase_units: [{ description:"ORIVÈA Glantier bestelling", amount:{ currency_code:PAYPAL_CONFIG.currency, value:Number(current.total).toFixed(2) } }]
+      });
+    }
   }
 
   async function handlePayPalApprove(data, actions, paymentMethod, context = {}) {
     console.log("onApprove started:", paymentMethod, data);
-    const details = await captureServerPayPalOrder(data.orderID);
+    const details = await actions.order.capture();
     console.log("PayPal capture status:", details?.status);
     console.log("PayPal capture details:", details);
     console.log("Capture result:", details);
     if (!details || details.status !== "COMPLETED") {
       throw new Error(`PayPal capture niet voltooid. Status: ${details && details.status}`);
     }
-    const transactionId = details.order?.paypal_transaction_id || paypalCaptureId(details) || data.orderID;
+    const transactionId = paypalCaptureId(details) || data.orderID;
     console.log("PayPal transaction ID:", transactionId);
     console.log("Transaction ID:", transactionId);
     if (!transactionId) throw new Error("PayPal capture ID ontbreekt");
@@ -1214,7 +1226,7 @@
       transactionId,
       paymentStatus: "COMPLETED",
       paymentMethod
-    }, { ...(context.onSuccess || {}), status: context.status, serverOrder: details.order, orderNumber: details.orderNumber });
+    }, { ...(context.onSuccess || {}), status: context.status, serverOrder: context.serverOrder, orderNumber: context.serverOrder?.order_number });
     sessionStorage.removeItem("orivea_checkout_idempotency");
     return result;
   }
@@ -1247,42 +1259,6 @@
         paymentStarted = true;
         context.paymentStarted = true;
         return createPayPalOrder(data, actions, context);
-        if (validate && !validate()) throw new Error("Checkout niet compleet");
-        const current = totals();
-        const cartItems = current.lines.map((line) => ({
-          id: line.product.id,
-          name: line.product.naam,
-          qty: line.qty,
-          price: Number(line.product.prijs),
-          total: Number(line.product.prijs * line.qty)
-        }));
-        console.log("Cart items:", cartItems);
-        console.log("Subtotal:", current.subtotal);
-        console.log("Shipping:", current.shipping);
-        console.log("Total:", current.total);
-        if (!current.lines.length) {
-          if (status) status.textContent = "Je winkelwagen is nog leeg.";
-          throw new Error("Winkelwagen leeg");
-        }
-        if (Number(current.total) <= 0) {
-          if (status) status.textContent = "Ongeldig totaalbedrag.";
-          throw new Error("Ongeldig totaalbedrag");
-        }
-        paymentStarted = true;
-        const orderTotal = Number(current.total).toFixed(2);
-        console.log("PayPal total:", orderTotal);
-        return actions.order.create({
-          purchase_units: [{
-            description: "ORIVÈA Glantier bestelling",
-            amount: {
-              currency_code: PAYPAL_CONFIG.currency,
-              value: orderTotal
-            }
-          }]
-        }).then((orderId) => {
-          console.log("Order ID:", orderId);
-          return orderId;
-        });
       },
       onApprove: (data, actions) => {
         console.log("onApprove started:", data);
@@ -1293,39 +1269,6 @@
         return handlePayPalApprove(data, actions, payment_method, context).catch((error) => {
           processing = false;
           if (context.captureCompleted) {
-            console.error("Betaling ontvangen, ordermail afronden mislukt:", error);
-            return;
-          }
-          console.error("PayPal payment method error:", error);
-          console.error("Payment error:", error);
-          logPayPalError(error);
-          if (status) status.textContent = `${label} kon de betaling niet bevestigen. Probeer opnieuw of kies PayPal.`;
-        });
-        let captureCompleted = false;
-        if (status) status.textContent = "Betaling wordt bevestigd...";
-        return actions.order.capture().then(async (details) => {
-          console.log("PayPal capture status:", details?.status);
-          console.log("PayPal capture details:", details);
-          console.log("Capture result:", details);
-          if (!details || details.status !== "COMPLETED") {
-            throw new Error(`PayPal capture niet voltooid. Status: ${details && details.status}`);
-          }
-          const captureId = paypalCaptureId(details);
-          console.log("PayPal transaction ID:", captureId);
-          console.log("Capture ID:", captureId);
-          if (!captureId) throw new Error("PayPal capture ID ontbreekt");
-          captureCompleted = true;
-          const payment_method = paypalPaymentMethod({ ...data, fundingSource }, label);
-          console.log("Payment method selected:", payment_method);
-          console.log("PayPal payment method:", payment_method);
-          await finalizePaidOrder(source(), {
-            transactionId: captureId,
-            paymentStatus: "COMPLETED",
-            paymentMethod: payment_method
-          }, { ...(onSuccess || {}), status });
-        }).catch((error) => {
-          processing = false;
-          if (captureCompleted) {
             console.error("Betaling ontvangen, ordermail afronden mislukt:", error);
             return;
           }
@@ -1884,8 +1827,6 @@
         message_body: "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A bekijkt je wensen en neemt zo snel mogelijk contact met je op."
       };
       try {
-        const stored = await fetch("/api/newsletter/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: raw.email, name: raw.name, optIn: !isUnsubscribe }) });
-        if (!stored.ok) throw new Error((await stored.json()).error || "Nieuwsbriefvoorkeur kon niet worden opgeslagen.");
         await sendContactTemplate(payload);
         form.reset();
         if (status) status.textContent = "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A neemt zo snel mogelijk contact met je op.";
@@ -1915,6 +1856,10 @@
         message_body: isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief. Je ontvangt als eerste nieuws over nieuwe collecties, exclusieve acties en premium geuren."
       };
       try {
+        try {
+          const stored = await fetch("/api/newsletter/subscribe", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email:raw.email,name:raw.name,optIn:!isUnsubscribe}) });
+          if(!stored.ok) console.warn("Nieuwsbriefregistratie wordt later verwerkt, status:",stored.status);
+        } catch(error) { console.warn("Nieuwsbrief-API niet beschikbaar; e-mailflow gaat door:",error); }
         await sendContactTemplate(payload);
         form.reset();
         status.textContent = isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief.";

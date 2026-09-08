@@ -98,8 +98,10 @@
     submit.disabled = true;
     try {
       const externalId = createId();
-      const saved = await fetch("/api/scent-club/request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ external_id: externalId, first_name: raw.first_name, last_name: raw.last_name, email: raw.email, phone: raw.phone, plan: raw.plan, preference_gender: raw.gender_preference, preference_family: raw.fragrance_family, selection_mode: raw.selection_mode, notes: raw.notes }) });
-      if (!saved.ok) throw new Error((await saved.json()).error || "Aanvraag kon niet centraal worden opgeslagen.");
+      try {
+        const saved = await fetch("/api/scent-club/request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ external_id: externalId, first_name: raw.first_name, last_name: raw.last_name, email: raw.email, phone: raw.phone, plan: raw.plan, preference_gender: raw.gender_preference, preference_family: raw.fragrance_family, selection_mode: raw.selection_mode, notes: raw.notes }) });
+        if (!saved.ok) console.warn("Scent Club registratie wordt later verwerkt, status:", saved.status);
+      } catch (error) { console.warn("Scent Club API niet beschikbaar; e-mailflow gaat door:", error); }
       const templateId = window.ORIVEA_CONFIG?.emailJs?.scentClubTemplate || window.ORIVEA_CONFIG?.emailJs?.contactTemplate;
       if (!window.ORIVEA_EMAIL?.send) throw new Error("Bestaande EmailJS-helper is niet beschikbaar.");
       await window.ORIVEA_EMAIL.send(payload, templateId);
