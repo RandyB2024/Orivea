@@ -21,8 +21,10 @@
     "id": "402",
     "reference": "402",
     "url": "product/glantier-402.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2-glantier-parfum-402-floraal-en-fruitig.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -30,8 +32,10 @@
     "id": "403",
     "reference": "403",
     "url": "product/glantier-403.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/3-glantier-403-orientaals-houtachtig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -39,8 +43,10 @@
     "id": "404",
     "reference": "404",
     "url": "product/glantier-404.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/4-glantier-404-cyprus-flower-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -48,8 +54,10 @@
     "id": "409",
     "reference": "409",
     "url": "product/glantier-409.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/9-geur-glantier-409-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -57,8 +65,10 @@
     "id": "410",
     "reference": "410",
     "url": "product/glantier-410.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/10-glantier-410-chypre-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -66,8 +76,10 @@
     "id": "411",
     "reference": "411",
     "url": "product/glantier-411.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/11-glantier-411-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -75,8 +87,10 @@
     "id": "412",
     "reference": "412",
     "url": "product/glantier-412.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/12-glantier-parfum-412-floraal-en-fruitig.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -84,8 +98,10 @@
     "id": "413",
     "reference": "413",
     "url": "product/glantier-413.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/13-glantier-413-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -93,8 +109,10 @@
     "id": "415",
     "reference": "415",
     "url": "product/glantier-415.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/15-glantier-415-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -102,8 +120,10 @@
     "id": "416",
     "reference": "416",
     "url": "product/glantier-416.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/16-glantier-416-bloemen-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -111,8 +131,10 @@
     "id": "417",
     "reference": "417",
     "url": "product/glantier-417.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/17-glantier-417-orientaals-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -120,8 +142,10 @@
     "id": "432",
     "reference": "432",
     "url": "product/glantier-432.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/32-glantier-432-bloemig-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -129,8 +153,10 @@
     "id": "445",
     "reference": "445",
     "url": "product/glantier-445.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/45-glantier-445-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -138,8 +164,10 @@
     "id": "446",
     "reference": "446",
     "url": "product/glantier-446.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/46-glantier-446-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -147,8 +175,10 @@
     "id": "454",
     "reference": "454",
     "url": "product/glantier-454.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/54-glantier-454-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -156,8 +186,10 @@
     "id": "455",
     "reference": "455",
     "url": "product/glantier-455.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/55-geur-glantier-455-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -165,8 +197,10 @@
     "id": "457",
     "reference": "457",
     "url": "product/glantier-457.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/57-glantier-457-bloemenparfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -183,8 +217,10 @@
     "id": "466",
     "reference": "466",
     "url": "product/glantier-466.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/66-glantier-parfum-466-orientaals-en-floraal.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -203,8 +239,10 @@
     "id": "478",
     "reference": "478",
     "url": "product/glantier-478.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/78-glantier-478-orientaals-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -212,8 +250,10 @@
     "id": "480",
     "reference": "480",
     "url": "product/glantier-480.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/80-glantier-parfum-480-floraal.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -221,8 +261,10 @@
     "id": "483",
     "reference": "483",
     "url": "product/glantier-483.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/83-glantier-483-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -230,8 +272,10 @@
     "id": "485",
     "reference": "485",
     "url": "product/glantier-485.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/85-glantier-485-oriental-vanilleparfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -239,8 +283,10 @@
     "id": "488",
     "reference": "488",
     "url": "product/glantier-488.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/88-glantier-488-orientaals-houtachtig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -248,8 +294,10 @@
     "id": "489",
     "reference": "489",
     "url": "product/glantier-489.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/89-glantier-489-orientaals-vanilleparfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -266,8 +314,10 @@
     "id": "492",
     "reference": "492",
     "url": "product/glantier-492.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/92-glantier-492-bloemenparfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -275,8 +325,10 @@
     "id": "493",
     "reference": "493",
     "url": "product/glantier-493.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/93-glantier-493-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -284,8 +336,10 @@
     "id": "496",
     "reference": "496",
     "url": "product/glantier-496.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/96-glantier-496-bloemig-aquatisch-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -293,8 +347,10 @@
     "id": "497",
     "reference": "497",
     "url": "product/glantier-497.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/97-glantier-parfum-497-orientaals-en-floraal.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -349,8 +405,10 @@
     "id": "505",
     "reference": "505",
     "url": "product/glantier-505.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/105-glantier-505-bloemen-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -367,8 +425,10 @@
     "id": "507",
     "reference": "507",
     "url": "product/glantier-507.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/107-geur-glantier-507-cyprus-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -376,8 +436,10 @@
     "id": "508",
     "reference": "508",
     "url": "product/glantier-508.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/108-glantier-508-bloemig-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -412,8 +474,10 @@
     "id": "512",
     "reference": "512",
     "url": "product/glantier-512.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/112-glantier-512-oriental-vanille-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -421,8 +485,10 @@
     "id": "513",
     "reference": "513",
     "url": "product/glantier-513.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/113-geur-glantier-513-bloemenwater.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -439,8 +505,10 @@
     "id": "515",
     "reference": "515",
     "url": "product/glantier-515.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/115-glantier-515-bloemenparfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -457,8 +525,10 @@
     "id": "517",
     "reference": "517",
     "url": "product/glantier-517.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/117-glantier-517-oriental-vanille-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -466,8 +536,10 @@
     "id": "518",
     "reference": "518",
     "url": "product/glantier-518.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/118-glantier-518-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -493,8 +565,10 @@
     "id": "521",
     "reference": "521",
     "url": "product/glantier-521.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/121-glantier-521-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -531,7 +605,7 @@
     "url": "product/glantier-525.html",
     "ingredients_status": "approved",
     "knowledge_sources": [
-      "glantier-top-10-samples.html"
+      "https://www.glantier.com/nl/glantier-damesparfums/125-glantier-525-bloemig-fruitig-parfum.html"
     ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
@@ -567,8 +641,10 @@
     "id": "529",
     "reference": "529",
     "url": "product/glantier-529.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/129-glantier-529-flower-feather-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -585,8 +661,10 @@
     "id": "531",
     "reference": "531",
     "url": "product/glantier-531.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/131-glantier-531-bloemig-musk-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -603,8 +681,10 @@
     "id": "533",
     "reference": "533",
     "url": "product/glantier-533.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/133-glantier-533-fruit-cypriotische-parfums.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -639,8 +719,10 @@
     "id": "538",
     "reference": "538",
     "url": "product/glantier-538.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/202-glantier-538-bloemige-parfums.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -693,8 +775,10 @@
     "id": "544",
     "reference": "544",
     "url": "product/glantier-544.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/257-glantier-544-oosterse-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -702,8 +786,10 @@
     "id": "545",
     "reference": "545",
     "url": "product/glantier-545.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/253-glantier-545-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -758,8 +844,10 @@
     "id": "552",
     "reference": "552",
     "url": "product/glantier-552.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/295-geur-glantier-552-bloemenwater.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -778,8 +866,10 @@
     "id": "554",
     "reference": "554",
     "url": "product/glantier-554.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/297-geur-glantier-554-orientaal-vanille.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -787,8 +877,10 @@
     "id": "555",
     "reference": "555",
     "url": "product/glantier-555.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/298-glantier-555-bloemig-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -796,8 +888,10 @@
     "id": "556",
     "reference": "556",
     "url": "product/glantier-556.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/299-glantier-556-orientaals-vanilleparfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -805,8 +899,10 @@
     "id": "557",
     "reference": "557",
     "url": "product/glantier-557.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/300-glantier-557-orientaals-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -814,8 +910,10 @@
     "id": "559",
     "reference": "559",
     "url": "product/glantier-559.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/302-glantier-559-cypriotische-fruit-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -823,8 +921,10 @@
     "id": "562",
     "reference": "562",
     "url": "product/glantier-562.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/311-glantier-562-chypre-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -832,8 +932,10 @@
     "id": "563",
     "reference": "563",
     "url": "product/glantier-563.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/313-glantier-563-bloemig-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -841,8 +943,10 @@
     "id": "565",
     "reference": "565",
     "url": "product/glantier-565.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/331-glantier-565-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -859,8 +963,10 @@
     "id": "569",
     "reference": "569",
     "url": "product/glantier-569.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/335-glantier-569-oriental-flower-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -868,8 +974,10 @@
     "id": "570",
     "reference": "570",
     "url": "product/glantier-570.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/336-glantier-570-orientaals-vanilleparfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -877,8 +985,10 @@
     "id": "571",
     "reference": "571",
     "url": "product/glantier-571.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/560-geur-glantier-571-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -886,8 +996,10 @@
     "id": "573",
     "reference": "573",
     "url": "product/glantier-573.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/562-glantier-573-oosterse-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -895,8 +1007,10 @@
     "id": "576",
     "reference": "576",
     "url": "product/glantier-576.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/565-glantier-576-bloemig-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -904,8 +1018,10 @@
     "id": "577",
     "reference": "577",
     "url": "product/glantier-577.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/755-glantier-577-cyprus-flower-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -913,8 +1029,10 @@
     "id": "578",
     "reference": "578",
     "url": "product/glantier-578.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/757-glantier-578-cyprus-flower-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -922,8 +1040,10 @@
     "id": "579",
     "reference": "579",
     "url": "product/glantier-579.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/759-glantier-579-bloemen-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -940,8 +1060,10 @@
     "id": "583",
     "reference": "583",
     "url": "product/glantier-583.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/961-glantier-583-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -960,8 +1082,10 @@
     "id": "586",
     "reference": "586",
     "url": "product/glantier-586.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/965-glantier-586-bloemig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -969,8 +1093,10 @@
     "id": "587",
     "reference": "587",
     "url": "product/glantier-587.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/966-geur-glantier-587-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -978,8 +1104,10 @@
     "id": "588",
     "reference": "588",
     "url": "product/glantier-588.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/967-glantier-588-chypre-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -987,8 +1115,10 @@
     "id": "589",
     "reference": "589",
     "url": "product/glantier-589.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/1438-glantier-589-fruit-en-bloemen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -996,8 +1126,10 @@
     "id": "590",
     "reference": "590",
     "url": "product/glantier-590.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/1439-geur-glantier-590-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1005,8 +1137,10 @@
     "id": "592",
     "reference": "592",
     "url": "product/glantier-592.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/1441-geur-glantier-592-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1016,7 +1150,7 @@
     "url": "product/glantier-595.html",
     "ingredients_status": "approved",
     "knowledge_sources": [
-      "glantier-top-10-samples.html"
+      "https://www.glantier.com/nl/glantier-damesparfums/2181-geur-glantier-595-oriental-flower.html"
     ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
@@ -1025,8 +1159,10 @@
     "id": "596",
     "reference": "596",
     "url": "product/glantier-596.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2182-geur-glantier-596-bloem-pijst.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1034,8 +1170,10 @@
     "id": "597",
     "reference": "597",
     "url": "product/glantier-597.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2183-geur-glantier-597-oriental-flower.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1043,8 +1181,10 @@
     "id": "598",
     "reference": "598",
     "url": "product/glantier-598.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2184-glantier-598-bloemen-pralineuze-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1052,8 +1192,10 @@
     "id": "599",
     "reference": "599",
     "url": "product/glantier-599.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2185-glantier-599-bloemig-fruitig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1061,8 +1203,10 @@
     "id": "601",
     "reference": "601",
     "url": "product/glantier-601.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2867-glantier-parfum-601-aromatisch.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1070,8 +1214,10 @@
     "id": "602",
     "reference": "602",
     "url": "product/glantier-602.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2868-glantier-602-cyprus-flower-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1079,8 +1225,10 @@
     "id": "603",
     "reference": "603",
     "url": "product/glantier-603.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2869-glantier-603-bloemenparfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1088,8 +1236,10 @@
     "id": "604",
     "reference": "604",
     "url": "product/glantier-604.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2870-glantier-parfum-604-orientaals-floraal-50-ml.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1097,8 +1247,10 @@
     "id": "605",
     "reference": "605",
     "url": "product/glantier-605.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2871-glantier-605-orientaal-bloemig-parfum-unisex.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1106,8 +1258,10 @@
     "id": "606",
     "reference": "606",
     "url": "product/glantier-606.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/glantier-damesparfums/2877-glantier-606-orientaal-speciaal-parfum-unisex.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1115,8 +1269,10 @@
     "id": "607",
     "reference": "607",
     "url": "product/glantier-607.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/nieuwe-collectie-dames/4279-glantier-premium-607-orientaals-en-floraal.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1169,8 +1325,10 @@
     "id": "613",
     "reference": "613",
     "url": "product/glantier-613.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/premium-parfums/4280-glantier-premium-613-orientaals-en-floraal.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1178,8 +1336,10 @@
     "id": "701",
     "reference": "701",
     "url": "product/glantier-701.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/136-glantier-701-aromatisch-waterparfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1196,8 +1356,10 @@
     "id": "703",
     "reference": "703",
     "url": "product/glantier-703.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/138-glantier-703-aromatisch-waterparfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1223,8 +1385,10 @@
     "id": "707",
     "reference": "707",
     "url": "product/glantier-707.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/142-glantier-707-houtachtig-aromatisch-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1232,8 +1396,10 @@
     "id": "708",
     "reference": "708",
     "url": "product/glantier-708.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/143-glantier-708-citrus-aromatisch-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1315,8 +1481,10 @@
     "id": "718",
     "reference": "718",
     "url": "product/glantier-718.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/153-glantier-718-houtachtig-kruidig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1324,8 +1492,10 @@
     "id": "719",
     "reference": "719",
     "url": "product/glantier-719.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/154-glantier-719-aromatisch-groen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1360,8 +1530,10 @@
     "id": "723",
     "reference": "723",
     "url": "product/glantier-723.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/158-geur-glantier-723.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1407,8 +1579,10 @@
     "id": "728",
     "reference": "728",
     "url": "product/glantier-728.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/163-geur-glantier-728.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1443,8 +1617,10 @@
     "id": "732",
     "reference": "732",
     "url": "product/glantier-732.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/167-glantier-732-oriental-wooden.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1497,8 +1673,10 @@
     "id": "738",
     "reference": "738",
     "url": "product/glantier-738.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/173-perfumes-glantier-738-oriental-paprocious.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1524,8 +1702,10 @@
     "id": "741",
     "reference": "741",
     "url": "product/glantier-741.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/176-geur-glantier-741.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1542,8 +1722,10 @@
     "id": "743",
     "reference": "743",
     "url": "product/glantier-743.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/178-geur-glantier-743.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1551,8 +1733,10 @@
     "id": "744",
     "reference": "744",
     "url": "product/glantier-744.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/179-geuren-glantier-744.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1560,8 +1744,10 @@
     "id": "745",
     "reference": "745",
     "url": "product/glantier-745.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/180-geur-glantier-745.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1569,8 +1755,10 @@
     "id": "747",
     "reference": "747",
     "url": "product/glantier-747.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/182-glantier-747-citroen-aromatische-parfums.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1578,8 +1766,10 @@
     "id": "749",
     "reference": "749",
     "url": "product/glantier-749.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/184-geuren-glantier-749.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1587,8 +1777,10 @@
     "id": "752",
     "reference": "752",
     "url": "product/glantier-752.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/187-geur-glantier-752.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1596,8 +1788,10 @@
     "id": "756",
     "reference": "756",
     "url": "product/glantier-756.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/191-glantier-756-perfumes-van-hout.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1605,8 +1799,10 @@
     "id": "758",
     "reference": "758",
     "url": "product/glantier-758.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/193-geur-glantier-758.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1625,8 +1821,10 @@
     "id": "764",
     "reference": "764",
     "url": "product/glantier-764.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/205-geur-glantier-764.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1643,8 +1841,10 @@
     "id": "769",
     "reference": "769",
     "url": "product/glantier-769.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/261-glantier-769-aromatische-parfums.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1663,8 +1863,10 @@
     "id": "774",
     "reference": "774",
     "url": "product/glantier-774.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/307-glantier-774-parfumen.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1672,8 +1874,10 @@
     "id": "777",
     "reference": "777",
     "url": "product/glantier-777.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/337-glantier-777-aromatisch-varenparfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1681,8 +1885,10 @@
     "id": "778",
     "reference": "778",
     "url": "product/glantier-778.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/566-geur-glantier-778.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1690,8 +1896,10 @@
     "id": "781",
     "reference": "781",
     "url": "product/glantier-781.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/569-geur-glantier-781.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1699,8 +1907,10 @@
     "id": "782",
     "reference": "782",
     "url": "product/glantier-782.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/769-geuren-glantier-782.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1708,8 +1918,10 @@
     "id": "783",
     "reference": "783",
     "url": "product/glantier-783.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/771-geuren-glantier-783.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1717,8 +1929,10 @@
     "id": "784",
     "reference": "784",
     "url": "product/glantier-784.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/773-geuren-glantier-784.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1726,8 +1940,10 @@
     "id": "788",
     "reference": "788",
     "url": "product/glantier-788.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/971-geuren-glantier-788.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1735,8 +1951,10 @@
     "id": "791",
     "reference": "791",
     "url": "product/glantier-791.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/1445-geur-glantier-791.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1744,8 +1962,10 @@
     "id": "792",
     "reference": "792",
     "url": "product/glantier-792.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/1446-geur-glantier-792.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1753,8 +1973,10 @@
     "id": "793",
     "reference": "793",
     "url": "product/glantier-793.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/1447-geuren-van-glantier-793-amber.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1762,8 +1984,10 @@
     "id": "794",
     "reference": "794",
     "url": "product/glantier-794.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2187-geur-glantier-794.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1771,8 +1995,10 @@
     "id": "796",
     "reference": "796",
     "url": "product/glantier-796.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2189-geur-glantier-796.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1780,8 +2006,10 @@
     "id": "797",
     "reference": "797",
     "url": "product/glantier-797.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2190-glantier-797-houtachtig-aromatisch-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1789,8 +2017,10 @@
     "id": "798",
     "reference": "798",
     "url": "product/glantier-798.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2872-glantier-798-aromatische-parfums.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1798,8 +2028,10 @@
     "id": "799",
     "reference": "799",
     "url": "product/glantier-799.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2873-glantier-799-orientaals-houtachtig-parfum.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1807,8 +2039,10 @@
     "id": "800",
     "reference": "800",
     "url": "product/glantier-800.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2874-geur-glantier-800.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
@@ -1816,8 +2050,10 @@
     "id": "801",
     "reference": "801",
     "url": "product/glantier-801.html",
-    "ingredients_status": "missing_data",
-    "knowledge_sources": [],
+    "ingredients_status": "approved",
+    "knowledge_sources": [
+      "https://www.glantier.com/nl/herenparfums/2875-geuren-glantier-801.html"
+    ],
     "quality_status": "approved",
     "last_updated": "2026-09-08"
   },
