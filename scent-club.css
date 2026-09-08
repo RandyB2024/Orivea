@@ -693,3 +693,40 @@ body[data-page="home"] .product-showcase,body[data-page="home"] .split-band,body
     justify-self: stretch;
   }
 }
+
+/* Secure Scent Club member self-service */
+.club-self-service { max-width: 1120px; margin: 0 auto; padding: clamp(64px, 9vw, 112px) 24px; }
+.club-login { max-width: 560px; margin: 0 auto; padding: clamp(30px, 5vw, 54px); background: #fff; border: 1px solid rgba(156,123,63,.2); box-shadow: 0 18px 48px rgba(42,34,25,.07); }
+.club-login h1, .club-account-head h1 { margin: 8px 0 14px; font: 500 clamp(2.7rem, 6vw, 4.8rem)/1 var(--serif); color: var(--club-dark); }
+.club-login > p:not(.eyebrow), .club-account-head p { color: var(--club-muted); line-height: 1.7; }
+.club-login-form { display: grid; gap: 18px; margin-top: 30px; }
+.club-login-form label { display: grid; gap: 8px; color: var(--club-dark); font-weight: 600; }
+.club-login-form input { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid rgba(92,74,48,.3); border-radius: 4px; background: #fff; color: #241f1a; font: inherit; box-sizing: border-box; }
+.club-login-form input:focus { outline: 2px solid rgba(156,123,63,.45); outline-offset: 2px; }
+.club-form-status { min-height: 1.5em; margin: 0; color: #69432d; }
+.club-account-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 34px; }
+.club-account-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+.club-account-card { padding: clamp(24px,4vw,38px); background: #fff; border: 1px solid rgba(156,123,63,.18); }
+.club-account-card h2 { margin: 0 0 22px; font: 500 clamp(1.8rem,3vw,2.5rem)/1.05 var(--serif); color: var(--club-dark); }
+.club-account-card > div:not(.club-self-catalog) { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-bottom: 1px solid rgba(156,123,63,.12); }
+.club-account-card span { color: var(--club-muted); }
+.club-account-card strong { color: var(--club-dark); text-align: right; }
+.club-actions > div { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 24px; }
+.club-actions .danger { color: #684338; text-decoration: underline; text-underline-offset: 4px; }
+.club-request-note { padding: 12px 14px; background: #fbf3e6; border-left: 3px solid #9c7b3f; }
+.club-choice-panel { margin-top: 22px; }
+.club-self-catalog { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.club-self-catalog article { min-width: 0; border: 1px solid rgba(156,123,63,.16); background: #faf8f5; }
+.club-self-catalog img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.club-self-catalog article div { padding: 16px; }
+.club-self-catalog h3 { margin: 5px 0 16px; font: 500 1.65rem/1 var(--serif); color: var(--club-dark); }
+.club-self-catalog small { color: var(--club-muted); }
+@media (max-width: 760px) {
+  .club-self-service { padding: 40px 16px 70px; }
+  .club-login { padding: 28px 20px; }
+  .club-account-head { align-items: flex-start; flex-direction: column; }
+  .club-account-grid { grid-template-columns: 1fr; }
+  .club-self-catalog { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+  .club-self-catalog article { flex: 0 0 min(78vw,280px); scroll-snap-align: start; }
+  .club-account-card > div:not(.club-self-catalog) { align-items: flex-start; }
+}
