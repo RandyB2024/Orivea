@@ -10,6 +10,7 @@ assert.equal(staged.status, "needs_price");
 assert.equal(staged.sale_enabled, false);
 assert.equal(staged.merchant_enabled, false);
 assert.throws(() => activate(staged, 0));
+assert.throws(() => activate(staged, -1));
 const active = activate(staged, 12.95);
 assert.equal(active.status, "active");
 assert.equal(active.sale_enabled, true);
