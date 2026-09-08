@@ -737,6 +737,10 @@
     const data = totals();
     const formData = normalizeOrderFormData(form);
     const orderNumber = generateOrderNumber();
+    const consentTimestamp = new Date().toISOString();
+    const termsAccepted = formData.terms_accepted === "on" || formData.terms_accepted === true;
+    const returnPolicyAccepted = formData.return_policy_accepted === "on" || formData.return_policy_accepted === true;
+    const newsletterOptIn = formData.newsletter_opt_in === "on" || formData.newsletter_opt_in === true;
     return {
       order_number: orderNumber,
       customer_name: formData.customer_name || "",
@@ -756,6 +760,12 @@
       paypal_transaction_id: paypal?.transactionId || "",
       payment_status: paypal?.paymentStatus || "",
       payment_method: paypal?.paymentMethod || "PayPal",
+      terms_accepted: termsAccepted,
+      terms_accepted_at: termsAccepted ? consentTimestamp : null,
+      return_policy_accepted: returnPolicyAccepted,
+      return_policy_accepted_at: returnPolicyAccepted ? consentTimestamp : null,
+      newsletter_opt_in: newsletterOptIn,
+      newsletter_opt_in_at: newsletterOptIn ? consentTimestamp : null,
       note: formData.note || ""
     };
   }
@@ -787,8 +797,34 @@
       total_incl_vat: payload.total_incl_vat || payload.total || money(0),
       paypal_transaction_id: payload.paypal_transaction_id || "",
       payment_status: payload.payment_status || "",
-      payment_method: payload.payment_method || "PayPal"
+      payment_method: payload.payment_method || "PayPal",
+      terms_accepted: payload.terms_accepted ? "Akkoord" : "Niet akkoord",
+      terms_accepted_at: payload.terms_accepted_at || "",
+      return_policy_accepted: payload.return_policy_accepted ? "Akkoord" : "Niet akkoord",
+      return_policy_accepted_at: payload.return_policy_accepted_at || "",
+      newsletter_opt_in: payload.newsletter_opt_in ? "Ja" : "Nee",
+      newsletter_opt_in_at: payload.newsletter_opt_in_at || ""
     };
+  }
+
+  async function processOrderNewsletterOptIn(payload) {
+    if (!payload.newsletter_opt_in || !payload.customer_email) return;
+    const storageKey = `orivea_newsletter_order_${payload.order_number}`;
+    if (localStorage.getItem(storageKey)) return;
+    try {
+      await sendContactTemplate({
+        name: payload.customer_name || "",
+        email: payload.customer_email,
+        subject: "Nieuwsbrief aanmelding via bestelling",
+        message: `Nieuwsbrief aanmelding via bestelling ${payload.order_number}\nNaam: ${payload.customer_name || ""}\nE-mail: ${payload.customer_email}`,
+        email_subject: "Welkom bij ORIVÈA",
+        message_type: "Nieuwsbrief aanmelding bevestigd",
+        message_body: "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief."
+      });
+      localStorage.setItem(storageKey, payload.newsletter_opt_in_at || new Date().toISOString());
+    } catch (error) {
+      console.warn("Nieuwsbriefinschrijving na bestelling kon niet worden verwerkt:", error);
+    }
   }
 
   function validateOrderEmailPayload(payload) {
@@ -951,6 +987,7 @@
     }
     payload.email_status = "SENT";
     storeOrder(payload);
+    await processOrderNewsletterOptIn(payload);
     localStorage.removeItem(CART_KEY);
     renderCartState();
     if (options.successPanel) options.successPanel.hidden = false;
@@ -1649,6 +1686,8 @@
     const status = $("[data-paypal-status]");
     const orderStatus = $("[data-order-status]");
     const successPanel = $("[data-order-success]");
+    const consentSection = $("[data-checkout-consents]", form);
+    const consentError = $("[data-consent-error]", form);
     const params = new URLSearchParams(window.location.search);
 
     const showStep = (next) => {
@@ -1693,9 +1732,25 @@
         if (status) status.textContent = 'Je winkelwagen is nog leeg.';
         return false;
       }
+      const terms = form.elements.terms_accepted;
+      const returns = form.elements.return_policy_accepted;
+      if (!terms?.checked || !returns?.checked) {
+        consentSection?.classList.add("has-error");
+        if (consentError) consentError.textContent = "Accepteer eerst de Algemene Voorwaarden en het Retourbeleid om verder te gaan.";
+        consentSection?.scrollIntoView({ behavior: "smooth", block: "center" });
+        (!terms?.checked ? terms : returns)?.focus({ preventScroll: true });
+        return false;
+      }
       if (!form.reportValidity()) return false;
       return true;
     };
+
+    consentSection?.addEventListener("change", () => {
+      if (form.elements.terms_accepted?.checked && form.elements.return_policy_accepted?.checked) {
+        consentSection.classList.remove("has-error");
+        if (consentError) consentError.textContent = "";
+      }
+    });
 
     const renderPayPalButtons = async () => {
       const target = $('[data-paypal-buttons]');
