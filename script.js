@@ -43,18 +43,19 @@
     : "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
 
   function ensureScentClubNavigation() {
+    const pagePrefix = location.pathname.includes("/product/") ? "../" : "";
     $$(".main-nav").forEach((nav) => {
-      if (nav.querySelector('a[href="scent-club.html"]')) return;
-      const contact = nav.querySelector('a[href="contact.html"]');
+      if (nav.querySelector('a[href$="scent-club.html"]')) return;
+      const contact = nav.querySelector('a[href$="contact.html"]');
       const link = document.createElement("a");
-      link.href = "scent-club.html";
+      link.href = `${pagePrefix}scent-club.html`;
       link.textContent = "Scent Club";
       nav.insertBefore(link, contact || null);
     });
     $$(".site-footer .footer-column").forEach((column) => {
-      if (column.querySelector('a[href="catalogus.html"]') && !column.querySelector('a[href="scent-club.html"]')) {
+      if (column.querySelector('a[href$="catalogus.html"]') && !column.querySelector('a[href$="scent-club.html"]')) {
         const link = document.createElement("a");
-        link.href = "scent-club.html";
+        link.href = `${pagePrefix}scent-club.html`;
         link.textContent = "Scent Club";
         column.appendChild(link);
       }
@@ -73,6 +74,12 @@
 
   function discountedPriceFor(_product, price) {
     return Number(price || 0);
+  }
+
+  function productDetailUrl(product) {
+    if (product.detailUrl) return product.detailUrl;
+    const value = String(product.glantierNummer || product.id || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    return `product/glantier-${value}.html`;
   }
 
   function productVariant(product, variant = "signature") {
@@ -269,13 +276,14 @@
         </div>` : `<div class="variant-selector product-single-price"><div class="variant-option selected"><span>${product.inhoud || "Product"}</span><strong>${money(signaturePrice)}</strong></div><span class="variant-option-placeholder" aria-hidden="true"></span><span class="variant-option-placeholder" aria-hidden="true"></span></div>`;
     const pausedAction = `<p class="notice">${SALES_PAUSED_MESSAGE}</p><button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>`;
     const productPaused = SALES_PAUSED;
-    const actions = product.pricePending ? `<a class="button primary full" href="${product.detailUrl}">Ontdek de set</a>` : productPaused ? pausedAction : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div>${product.detailUrl ? `<a class="premium-info-link product-detail-link" href="${product.detailUrl}">Bekijk product</a>` : ""}`;
+    const detailUrl = productDetailUrl(product);
+    const actions = product.pricePending ? `<a class="button primary full" href="${detailUrl}">Ontdek de set</a>` : productPaused ? pausedAction : `<div class="product-buy-row"><div class="card-qty"><button type="button" data-card-qty-minus>-</button><input type="number" min="1" value="1" inputmode="numeric" data-card-qty aria-label="Aantal"><button type="button" data-card-qty-plus>+</button></div><button class="button primary cart-symbol-button" type="button" data-card-add="${product.id}" aria-label="Toevoegen aan winkelwagen">${cartIcon()}</button></div><a class="premium-info-link product-detail-link" href="${detailUrl}">Bekijk product</a>`;
     return `<article class="product-card product-card-refined ${product.premiumBeschikbaar ? "premium-available" : ""}" data-product-card>
-      <div class="product-card-image-wrap"><img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy">${product.detailUrl ? `<a class="product-image-info" href="${product.detailUrl}#ingredienten" aria-label="Ingrediënten en productinformatie">i</a>` : ""}</div>
+      <div class="product-card-image-wrap"><img src="${product.premiumImage || product.image}" alt="${product.naam}" loading="lazy"><a class="product-image-info" href="${detailUrl}#ingredienten" aria-label="Ingrediënten en productinformatie">i</a></div>
       <div class="product-body">
         <span class="product-meta">${product.categorie}</span>
         <h3>${title}</h3>
-        ${product.detailUrl && product.omschrijving ? `<p class="product-short">${product.omschrijving}</p>` : ""}
+        ${product.omschrijving ? `<p class="product-short">${product.omschrijving}</p>` : ""}
         <p class="scent-group">${scentGroup}</p>
         <div class="product-purchase">
           <div class="product-choice-zone">${choiceSelector}</div>
@@ -352,7 +360,7 @@
         ? '<button class="button primary" type="button" disabled>Bestellen tijdelijk niet beschikbaar</button>'
         : '<button class="button primary cart-symbol-button" type="button" data-add-to-cart="' + product.id + '" aria-label="Toevoegen aan winkelwagen">' + cartIcon() + '</button>';
 
-      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p class="price">50 ml ' + money(discountedPriceFor(product, product.prijs)) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="catalogus.html">Bekijk collectie</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
+      return '<div class="geurwijzer-card"><img src="' + (product.premiumImage || product.image) + '" alt="' + product.naam + '"><div><p class="eyebrow">Geurprofiel</p><h3>GLANTIER ' + (product.glantierNummer || product.id) + '</h3><p>' + scentGroup + ' &bull; ' + product.doelgroep + '</p><p class="price">50 ml ' + money(discountedPriceFor(product, product.prijs)) + '</p><div class="hero-actions">' + action + '<a class="button ghost" href="' + productDetailUrl(product) + '">Bekijk product</a></div>' + (productPaused ? '<p class="notice">' + SALES_PAUSED_MESSAGE + '</p>' : '') + '</div></div>';
     }).join("");
   }
 
@@ -1844,6 +1852,15 @@
   }
 
   document.addEventListener("click", (event) => {
+    const detailVariant = event.target.closest("[data-detail-variant]");
+    if (detailVariant) {
+      $$("[data-detail-variant]").forEach((button) => button.classList.toggle("selected", button === detailVariant));
+      const detailAdd = $(".detail-add[data-add-to-cart]");
+      if (detailAdd) detailAdd.dataset.variant = detailVariant.dataset.detailVariant;
+    }
+    const productInfoOpen = event.target.closest("[data-product-info-open]");
+    if (productInfoOpen) $("[data-product-info-dialog]")?.showModal();
+    if (event.target.closest("[data-product-info-close]")) $("[data-product-info-dialog]")?.close();
     const variantChoice = event.target.closest("[data-card-variant]");
     if (variantChoice) {
       const card = variantChoice.closest("[data-product-card]");

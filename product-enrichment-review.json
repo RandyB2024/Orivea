@@ -1,0 +1,238 @@
+[
+  {
+    "id": "glantier-top-10-samples",
+    "reference": null,
+    "model": "qwen2.5:7b",
+    "facts": {
+      "id": "glantier-top-10-samples",
+      "reference": null,
+      "name": "Glantier — Top 10 Samples",
+      "category": "Samples",
+      "audience": "Dames en Heren",
+      "type": "Parfum sample set",
+      "scent_profile": "Discovery Set - Cadeauset",
+      "moment": "Ontdekken en cadeau geven",
+      "size": "10 parfum samples van 1,2 ml",
+      "price_eur": 7.95,
+      "premium_available": false,
+      "premium_price_eur": null
+    },
+    "content": {
+      "short_intro": {
+        "nl": "Ontdek de top 10 parfum samples van Glantier in een elegante set."
+      },
+      "long_description": {
+        "nl": "Ontdek de rijkdom van Glantier met onze Discovery Set - Cadeauset. Dit set bevat 10 parfum samples van 1,2 ml elke, perfect voor het ontdekken van nieuwe geuren of cadeau geven. De set is ideaal om je geurkeuze te verrijken of om een verrassende cadeau te maken voor een geliefde."
+      },
+      "profile_explanation": {
+        "nl": "De Glantier Discovery Set - Cadeauset is een uitgebreide samengestelde set van 10 parfum samples. Elke sample heeft een unieke geur die je kunt ontdekken en waarderen. De set is perfect voor degene die op zoek is naar nieuwe geuren of een uitgebreide cadeau."
+      },
+      "choice_help": {
+        "nl": "Kies uit de 10 parfum samples om je geurkeuze te verrijken of een unieke cadeau te maken. Elke sample is een unieke geur die je kunt ontdekken en waarderen."
+      },
+      "meta_description": {
+        "nl": "Ontdek de top 10 parfum samples van Glantier in een elegante Discovery Set - Cadeauset. Perfect voor het ontdekken van nieuwe geuren of cadeau geven."
+      },
+      "faq": [
+        {
+          "question": "Hoeveel parfum samples bevat de set?",
+          "answer": "De set bevat 10 parfum samples van 1,2 ml elke."
+        },
+        {
+          "question": "Wat is de geurprofiel van de Discovery Set?",
+          "answer": "De Discovery Set heeft een geurprofiel van Cadeauset, wat betekent dat de geuren variëren en je de mogelijkheid bieden om nieuwe geuren te ontdekken."
+        },
+        {
+          "question": "Is de set geschikt voor cadeau geven?",
+          "answer": "Ja, de Discovery Set is ideaal voor cadeau geven en biedt een uitgebreide keuze aan geuren."
+        },
+        {
+          "question": "Hoe groot is de set?",
+          "answer": "De set bevat 10 parfum samples van 1,2 ml elke."
+        },
+        {
+          "question": "Is de set geschikt voor dames en heren?",
+          "answer": "Ja, de set is geschikt voor alle leeftijden en geslachten."
+        }
+      ]
+    },
+    "validation_errors": [],
+    "quality_status": "review_required",
+    "publish_automatically": false,
+    "generated_at": "2026-09-08T06:57:20.485Z"
+  },
+  {
+    "id": "401",
+    "reference": "401",
+    "model": "qwen2.5:7b",
+    "facts": {
+      "id": "401",
+      "reference": "401",
+      "name": "Glantier No. 401",
+      "category": "Dames",
+      "audience": "Dames",
+      "type": "Signature EDP",
+      "scent_profile": "Floraal - Houtachtig - Muskus",
+      "moment": "Dagelijks gebruik",
+      "size": "50 ml",
+      "price_eur": 12.95,
+      "premium_available": true,
+      "premium_price_eur": 16.95
+    },
+    "content": {
+      "short_intro": {
+        "text": "Ontdek Glantier No. 401, een unieke signature parfum voor dames."
+      },
+      "long_description": {
+        "text": "Glantier No. 401 is een elegante en unieke parfum voor dames, die perfect past in dagelijkse situaties. Met een floraal-houtachtige muziek en een muskusachtige finish, creëert deze parfum een unieke en aantrekkelijke aura."
+      },
+      "profile_explanation": {
+        "text": "Glantier No. 401 is een parfum met een floraal-houtachtige muziek, geïnspireerd door de schoonheid van bloemen en de warmte van hout. De muskusnoten voegen een extra aantrekkelijke dimensie toe, maakend dit parfum perfect voor dagelijkse gebruik."
+      },
+      "choice_help": {
+        "text": "Kies Glantier No. 401 voor een parfum die past in dagelijkse situaties en een unieke, aantrekkelijke aura creëert."
+      },
+      "meta_description": {
+        "text": "Glantier No. 401, een elegante signature parfum voor dames met een floraal-houtachtige muziek en een muskusachtige finish, perfect voor dagelijkse gebruik."
+      },
+      "faq": [
+        {
+          "question": "Wat is de geurprofiel van Glantier No. 401?",
+          "answer": "Glantier No. 401 heeft een geurprofiel dat floraal, houtachtig en muskusachtig is."
+        },
+        {
+          "question": "Wanneer is Glantier No. 401 geschikt om te dragen?",
+          "answer": "Glantier No. 401 is geschikt voor dagelijkse gebruik."
+        },
+        {
+          "question": "Hoeveel milliliter parfum is er in de fles?",
+          "answer": "De fles bevat 50 ml parfum."
+        },
+        {
+          "question": "Hoeveel kost Glantier No. 401?",
+          "answer": "Glantier No. 401 kost €12,95. Er is ook een premium versie beschikbaar voor €16,95."
+        }
+      ]
+    },
+    "validation_errors": [],
+    "quality_status": "review_required",
+    "publish_automatically": false,
+    "generated_at": "2026-09-08T06:59:07.403Z"
+  },
+  {
+    "id": "701",
+    "reference": "701",
+    "model": "qwen2.5:7b",
+    "facts": {
+      "id": "701",
+      "reference": "701",
+      "name": "Glantier No. 701",
+      "category": "Heren",
+      "audience": "Heren",
+      "type": "Signature EDP",
+      "scent_profile": "Aromatisch - Aquatisch",
+      "moment": "Dagelijks gebruik",
+      "size": "50 ml",
+      "price_eur": 12.95,
+      "premium_available": false,
+      "premium_price_eur": null
+    },
+    "content": {
+      "short_intro": {
+        "text": "Glantier No. 701 is een herenparfum met een unieke aromatische en aquatische geurprofiel."
+      },
+      "long_description": {
+        "text": "Glantier No. 701 is een herenparfum ontworpen om dagelijks gebruik te bieden. Met zijn aromatische en aquatische geurprofiel, biedt het een unieke en aantrekkelijke uitstraling. Het is perfect voor een formele of informele dagelijkse omgeving."
+      },
+      "profile_explanation": {
+        "text": "De geurprofiel van Glantier No. 701 is een perfecte balans van aromatische noten en een subtiele aquatische element. Dit creëert een unieke en aantrekkelijke geur die perfect past in een dagelijkse situatie."
+      },
+      "choice_help": {
+        "text": "Glantier No. 701 is ideaal voor heren die een unieke en aantrekkelijke geur willen dragen in hun dagelijkse leven. Het is geschikt voor gebruik in de kantooromgeving of tijdens een ontspannen avond uit."
+      },
+      "meta_description": {
+        "text": "Glantier No. 701, een herenparfum met een aromatische en aquatische geurprofiel, perfect voor dagelijks gebruik."
+      },
+      "faq": [
+        {
+          "question": "Wat is de geurprofiel van Glantier No. 701?",
+          "answer": "Glantier No. 701 heeft een geurprofiel dat een perfecte balans biedt van aromatische noten en een subtiele aquatische element."
+        },
+        {
+          "question": "Is Glantier No. 701 geschikt voor dagelijks gebruik?",
+          "answer": "Ja, Glantier No. 701 is ontworpen voor dagelijks gebruik en past perfect in een formele of informele dagelijkse situatie."
+        },
+        {
+          "question": "Hoe groot is de fles?",
+          "answer": "Glantier No. 701 is verkrijgbaar in een fles van 50 ml."
+        },
+        {
+          "question": "Heeft Glantier No. 701 een premium-versie?",
+          "answer": "Nee, Glantier No. 701 heeft geen premium-versie beschikbaar."
+        }
+      ]
+    },
+    "validation_errors": [],
+    "quality_status": "review_required",
+    "publish_automatically": false,
+    "generated_at": "2026-09-08T07:00:50.576Z"
+  },
+  {
+    "id": "706",
+    "reference": "706",
+    "model": "qwen2.5:7b",
+    "facts": {
+      "id": "706",
+      "reference": "706",
+      "name": "Glantier No. 706",
+      "category": "Heren",
+      "audience": "Heren",
+      "type": "Signature EDP",
+      "scent_profile": "Houtachtig - Floraal - Muskus",
+      "moment": "Dagelijks gebruik",
+      "size": "50 ml",
+      "price_eur": 12.95,
+      "premium_available": true,
+      "premium_price_eur": 16.95
+    },
+    "content": {
+      "short_intro": {
+        "nl": "Glantier No. 706 is een herenparfum dat perfect voor dagelijkse gebruik is."
+      },
+      "long_description": {
+        "nl": "Glantier No. 706 is een unieke herenparfum die een perfecte balans biedt tussen houtachtige, floraale en muskusnoten. Het is ontworpen voor heren die een elegante en volwassen geurprofiel zoeken, geschikt voor dagelijkse gebruik."
+      },
+      "profile_explanation": {
+        "nl": "Het geurprofiel van Glantier No. 706 combineert houtachtige, floraale en muskusnoten om een unieke en aantrekkelijke geur te creëren. Deze combinatie maakt het parfum geschikt voor dagelijkse gebruik en past goed bij een professioneel of ontspannen dagelijkse routine."
+      },
+      "choice_help": {
+        "nl": "Glantier No. 706 is ideaal voor heren die een eenvoudig, maar elegante geurprofiel zoeken. Het is perfect voor dagelijkse gebruik en past goed bij een professioneel of ontspannen dagelijkse routine."
+      },
+      "meta_description": {
+        "nl": "Glantier No. 706, een herenparfum met een houtachtig, floraal en muskus geurprofiel, geschikt voor dagelijkse gebruik."
+      },
+      "faq": [
+        {
+          "question": "Welk type parfum is Glantier No. 706?",
+          "answer": "Glantier No. 706 is een Signature EDP (Eau de Parfum)."
+        },
+        {
+          "question": "Wanneer is Glantier No. 706 geschikt voor gebruik?",
+          "answer": "Glantier No. 706 is geschikt voor dagelijkse gebruik."
+        },
+        {
+          "question": "Hoeveel milliliter parfum is er in de fles?",
+          "answer": "De fles bevat 50 ml parfum."
+        },
+        {
+          "question": "Hoeveel kost Glantier No. 706?",
+          "answer": "Glantier No. 706 kost €12,95. Er is ook een premium versie beschikbaar voor €16,95."
+        }
+      ]
+    },
+    "validation_errors": [],
+    "quality_status": "review_required",
+    "publish_automatically": false,
+    "generated_at": "2026-09-08T07:02:22.202Z"
+  }
+]

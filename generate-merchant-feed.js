@@ -38,8 +38,9 @@ function absoluteUrl(relativePath) {
 }
 
 function productLink(product, variant) {
-  const params = new URLSearchParams({ product: product.id, variant });
-  return `${domain}/catalogus.html?${params.toString()}`;
+  const value = slug(product.glantierNummer || product.id);
+  const detail = product.detailUrl || `product/glantier-${value}.html`;
+  return `${absoluteUrl(detail)}?variant=${encodeURIComponent(variant)}`;
 }
 
 function productType(product) {
