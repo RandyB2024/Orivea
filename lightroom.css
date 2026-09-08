@@ -1007,6 +1007,96 @@ body[data-page="home"] .hero-note {
   color: #f0d99b !important;
 }
 
+/* Checkout order summary controls on the light editorial surface. */
+[data-checkout-items] .qty-control {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+[data-checkout-items] .qty-control [data-qty-minus],
+[data-checkout-items] .qty-control [data-qty-plus],
+[data-checkout-items] .qty-control .remove-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+[data-checkout-items] .qty-control [data-qty-minus],
+[data-checkout-items] .qty-control [data-qty-plus] {
+  min-width: 40px;
+  border-color: #3a3128;
+  background: #3a3128;
+  color: #fff;
+  font-weight: 700;
+}
+
+[data-checkout-items] .qty-control [data-qty-minus]:hover,
+[data-checkout-items] .qty-control [data-qty-plus]:hover {
+  border-color: #1f1a16;
+  background: #1f1a16;
+}
+
+[data-checkout-items] .qty-control [data-qty-minus]:disabled,
+[data-checkout-items] .qty-control [data-qty-plus]:disabled {
+  border-color: #d8d2c8;
+  background: #d8d2c8;
+  color: #746d63;
+  cursor: not-allowed;
+}
+
+[data-checkout-items] .qty-control > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid rgba(185, 148, 79, .24);
+  border-radius: 6px;
+  background: #f7f3ec;
+  color: #2a251f;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+[data-checkout-items] .qty-control .remove-line {
+  padding: 0 13px;
+  border-color: rgba(75, 64, 53, .3);
+  background: transparent;
+  color: #4b4035;
+  font-weight: 600;
+}
+
+[data-checkout-items] .qty-control .remove-line:hover {
+  background: #f3ede4;
+  color: #2a211b;
+}
+
+[data-checkout-items] .qty-control button:focus-visible {
+  outline: 2px solid rgba(156, 123, 63, .72);
+  outline-offset: 2px;
+}
+
+@media (max-width: 680px) {
+  [data-checkout-items] .qty-control [data-qty-minus],
+  [data-checkout-items] .qty-control [data-qty-plus],
+  [data-checkout-items] .qty-control .remove-line,
+  [data-checkout-items] .qty-control > span {
+    min-height: 44px;
+  }
+
+  [data-checkout-items] .qty-control [data-qty-minus],
+  [data-checkout-items] .qty-control [data-qty-plus] {
+    min-width: 44px;
+  }
+}
+
 .product-reference,
 .product-card .product-reference,
 .product-card-refined .product-reference,
