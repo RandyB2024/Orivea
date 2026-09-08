@@ -87,11 +87,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.666Z"
+    "imported_at": "2026-09-08T10:05:50.525Z"
   },
   {
     "catalog_id": "verzorging-2212",
@@ -185,11 +183,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1017",
@@ -274,11 +270,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-2213",
@@ -365,11 +359,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1429",
@@ -460,11 +452,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1427",
@@ -554,11 +544,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-2214",
@@ -647,11 +635,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1016",
@@ -742,11 +728,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1428",
@@ -837,11 +821,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-4579",
@@ -937,11 +919,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-4581",
@@ -1033,11 +1013,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-4580",
@@ -1129,11 +1107,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1433",
@@ -1227,11 +1203,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-2215",
@@ -1325,11 +1299,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1434",
@@ -1427,11 +1399,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-2216",
@@ -1518,11 +1488,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1430",
@@ -1613,11 +1581,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1431",
@@ -1707,11 +1673,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-2217",
@@ -1800,11 +1764,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1435",
@@ -1895,11 +1857,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-1432",
@@ -1990,11 +1950,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-4582",
@@ -2090,11 +2048,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-4584",
@@ -2188,11 +2144,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "verzorging-4583",
@@ -2286,11 +2240,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "baardverzorging-777",
@@ -2353,11 +2305,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "baardverzorging-907",
@@ -2417,11 +2367,9 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   },
   {
     "catalog_id": "baardverzorging-778",
@@ -2484,10 +2432,8 @@
     "price": null,
     "price_status": "missing",
     "sale_enabled": false,
-    "add_to_cart_enabled": false,
     "merchant_enabled": false,
-    "active": false,
     "status": "needs_price",
-    "discovered_at": "2026-09-08T10:05:35.668Z"
+    "imported_at": "2026-09-08T10:05:50.527Z"
   }
 ]

@@ -1,0 +1,18 @@
+const assert = require("node:assert/strict");
+const { classify, stagingRecord, activate, assertGlantier } = require("./glantier-catalog-core");
+const official = { catalog_id: "parfum-999", brand: "Glantier", source: "official_glantier", reference_number: "999" };
+assert.equal(classify({ official }), "new_glantier_product");
+assert.equal(classify({ official: { ...official, brand: "Dior" } }), "rejected_brand");
+assert.equal(classify({ official, local: { id: "999" } }), "existing_match");
+assert.equal(classify({ official, discontinued: true }), "found_but_locally_discontinued");
+const staged = stagingRecord(official);
+assert.equal(staged.status, "needs_price");
+assert.equal(staged.sale_enabled, false);
+assert.equal(staged.merchant_enabled, false);
+assert.throws(() => activate(staged, 0));
+const active = activate(staged, 12.95);
+assert.equal(active.status, "active");
+assert.equal(active.sale_enabled, true);
+assert.equal(active.merchant_enabled, true);
+assert.throws(() => assertGlantier({ ...official, brand: "Gucci" }));
+console.log("Glantier catalog import tests passed.");

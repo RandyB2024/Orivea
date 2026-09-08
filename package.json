@@ -6,10 +6,13 @@
     "import:glantier:refresh": "node import-glantier-products.js --refresh",
     "import:glantier:catalog": "node import-glantier-products.js --catalog",
     "import:glantier:apply-safe": "node apply-safe-glantier-import.js --all-safe",
+    "import:glantier:new": "node manage-glantier-catalog.js --import-all",
+    "import:glantier:prices": "node manage-glantier-catalog.js",
     "generate:products": "node generate-product-pages.js",
     "generate:feed": "node generate-merchant-feed.js",
     "generate:scent-club-catalog": "node generate-scent-club-catalog.js",
-    "test:scent-club": "node test-scent-club-self-service.mjs"
+    "test:scent-club": "node test-scent-club-self-service.mjs",
+    "test:glantier-catalog": "node test-glantier-catalog.js"
   },
   "dependencies": {
     "cheerio": "1.1.2"

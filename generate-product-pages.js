@@ -1,11 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const { activeProducts, assertGlantier } = require("./glantier-catalog-core");
 
 const root = __dirname;
 const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(root, "products.js"), "utf8"), context);
-const products = context.window.ORIVEA_PRODUCTS || [];
+const products = [...(context.window.ORIVEA_PRODUCTS || []), ...activeProducts(root)];
+for (const product of products) assertGlantier({ brand: product.merk || "Glantier", source: product.importedFromOfficialCatalog ? "official_glantier" : "official_glantier" });
 const config = context.window.ORIVEA_CONFIG || {};
 const outputDir = path.join(root, "product");
 const domain = String(config.domain || "https://orivea.nl").replace(/\/$/, "");
@@ -31,6 +33,14 @@ function productSlug(product) {
 
 function productUrl(product) {
   return product.detailUrl || `product/${productSlug(product)}.html`;
+}
+
+function absoluteAsset(value) {
+  return /^https?:\/\//i.test(String(value || "")) ? String(value) : `${domain}/${String(value || "").replace(/^\/+/, "")}`;
+}
+
+function pageAsset(value) {
+  return /^https?:\/\//i.test(String(value || "")) ? String(value) : `../${String(value || "").replace(/^\/+/, "")}`;
 }
 
 function displayProductType(value) {
@@ -88,7 +98,7 @@ function page(product) {
   const official = approvedData[String(product.glantierNummer || "")] || null;
   const ingredientText = official?.ingredients_source_text || approvedIngredients[String(product.glantierNummer || "")];
   const related = relatedProducts(product);
-  const schema = { "@context": "https://schema.org", "@type": "Product", name: product.naam, image: `${domain}/${product.image}`, brand: { "@type": "Brand", name: "Glantier" }, sku: String(product.glantierNummer || product.id), description: info.intro, offers: offerSchema(product) };
+  const schema = { "@context": "https://schema.org", "@type": "Product", name: product.naam, image: absoluteAsset(product.image), brand: { "@type": "Brand", name: "Glantier" }, sku: String(product.glantierNummer || product.id), description: info.intro, offers: offerSchema(product) };
   const variantHtml = variants(product).map((variant, index) => `<button class="detail-variant${index === 1 || variants(product).length === 1 ? " selected" : ""}" type="button" data-detail-variant="${variant.code}" data-detail-price="${variant.price}"><span>${escapeHtml(variant.label)}</span><strong>${money(variant.price)}</strong></button>`).join("");
   const notesHtml = official?.top_notes || official?.heart_notes || official?.base_notes ? `<section class="generated-product-section"><p class="eyebrow">Officiële geurdata</p><h2>Geurnoten</h2><div class="product-information-grid">${official.top_notes ? `<article><h3>Topnoten</h3><p>${escapeHtml(official.top_notes)}</p></article>` : ""}${official.heart_notes ? `<article><h3>Hartnoten</h3><p>${escapeHtml(official.heart_notes)}</p></article>` : ""}${official.base_notes ? `<article><h3>Basisnoten</h3><p>${escapeHtml(official.base_notes)}</p></article>` : ""}</div></section>` : "";
   const relatedHtml = related.map((item) => `<a class="related-product" href="../${productUrl(item)}"><img src="../${escapeHtml(item.image)}" alt="${escapeHtml(item.naam)}" loading="lazy"><span>${escapeHtml(item.glantierNummer ? `Glantier ${item.glantierNummer}` : item.cardTitle || item.naam)}</span><small>${escapeHtml(item.geurgroep || displayProductType(item.type))}</small></a>`).join("");

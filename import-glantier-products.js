@@ -2,12 +2,14 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 const cheerio = require("cheerio");
+const { isAllowedBrand, classify } = require("./glantier-catalog-core");
 
 const ROOT = __dirname;
 const sourceConfig = JSON.parse(fs.readFileSync(path.join(ROOT, "sources", "glantier.json"), "utf8"));
 const BASE_URL = sourceConfig.baseUrl;
 const ALLOWED_PREFIX = new URL(sourceConfig.allowedPathPrefix, BASE_URL).href;
 const CRAWLER_VERSION = sourceConfig.crawlerVersion;
+const CATEGORY_MAPPING = sourceConfig.categoryMapping || {};
 const CACHE_DIR = path.join(ROOT, "data", "crawler-cache");
 const PREVIEW_PATH = path.join(ROOT, "data", "glantier-import-preview.json");
 const NEW_PATH = path.join(ROOT, "data", "glantier-new-products.json");
@@ -88,7 +90,7 @@ async function isAllowedByRobots(url) {
 }
 
 function referenceFromText(value) {
-  const match = clean(value).match(/(?:Glantier|Premium|Referentie)\s+(?:Parfum\s+)?(\d{3})\b/i);
+  const match = clean(value).match(/(?:Glantier|Premium|Referentie|Doucheolie|Baardolie|Handcrème|Handcreme)\s+(?:Parfum\s+)?(\d{3})\b/i);
   return match?.[1] || null;
 }
 
@@ -99,11 +101,10 @@ function discoverLinks(html, source) {
     const anchor = $(element);
     const text = clean(anchor.text() || anchor.attr("title"));
     const href = absoluteUrl(anchor.attr("href"), source.url);
-    if (!href?.startsWith(`${BASE_URL}/nl/`)) return;
-    const reference = referenceFromText(text) || href.match(/glantier-(?:premium-)?(\d{3})(?:\D|$)/i)?.[1];
-    if (!reference || !/glantier/i.test(`${text} ${href}`)) return;
-    const key = `${reference}:${source.premium ? "premium" : "standard"}`;
-    if (!found.has(key)) found.set(key, { reference_number: reference, official_product_name: text || `Glantier ${reference}`, category: source.category, premium: source.premium, official_product_url: href, source: "official_glantier" });
+    if (!href?.startsWith(`${BASE_URL}/nl/`) || !/\/\d+-[^/]+\.html(?:$|[?#])/i.test(href)) return;
+    const reference = referenceFromText(text + " " + href.replace(/[-_/]/g, " "));
+    const key = href.split(/[?#]/)[0];
+    if (!found.has(key)) found.set(key, { reference_number: reference, official_product_name: text || null, category: CATEGORY_MAPPING[source.category] || source.category, source_category: source.category, premium: source.premium, official_product_url: href, source: "official_glantier" });
   });
   return [...found.values()];
 }
@@ -133,9 +134,16 @@ function parseProductPage(payload, hint) {
     try { return JSON.parse($(element).text()); } catch { return null; }
   }).get().flatMap((entry) => entry?.["@graph"] || entry || []).filter((entry) => entry?.["@type"] === "Product");
   const jsonLd = jsonLdProducts[0] || {};
+  const jsonBrand = typeof jsonLd.brand === "string" ? jsonLd.brand : jsonLd.brand?.name;
   $("script,style,noscript,svg,form,nav,footer,header").remove();
   const title = clean($(sourceConfig.titleSelector).first().text() || jsonLd.name || $("title").text());
   const body = clean($("body").text());
+  const officialBrandEvidence = clean(jsonBrand);
+  const explicitGlantierBrand = /^glantier(?:\s+parfum\s+sp\.\s*z\s*o\.?o\.?)?$/i.test(officialBrandEvidence);
+  const pageClearlyGlantier = /\bglantier\b/i.test(title + " " + body.slice(0, 1200));
+  const officialHost = new URL(payload.url).hostname === new URL(BASE_URL).hostname;
+  const brandVerified = officialHost && (explicitGlantierBrand || (!officialBrandEvidence && pageClearlyGlantier));
+  const brand = brandVerified ? "Glantier" : officialBrandEvidence || null;
   const notesMarker = body.lastIndexOf("Geurnoten:");
   const notesBody = notesMarker >= 0 ? body.slice(notesMarker) : body;
   const reference = referenceFromText(`${title} ${body}`) || hint.reference_number;
@@ -150,12 +158,18 @@ function parseProductPage(payload, hint) {
   const description = $(sourceConfig.descriptionSelector).attr("content") || jsonLd.description || sectionText($, /^Glantier Parfum \d+/i);
   const ingredientsSourceText = ingredientsMatch ? clean(ingredientsMatch[1]).slice(0, 4000) : null;
   return {
+    catalog_id: clean(hint.category).toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + (new URL(payload.url).pathname.match(/\/(\d+)-/)?.[1] || Buffer.from(payload.url).toString("base64url").slice(-12)),
+    brand: brandVerified ? "Glantier" : brand || null,
+    brand_normalized: brandVerified ? "glantier" : clean(brand).toLowerCase(),
+    brand_evidence: jsonBrand ? "structured_data" : brandVerified ? "official_domain_and_page_content" : "unverified",
     reference_number: reference,
     product_name: title,
     category: hint.category,
     gender: /heren|voor hem/i.test(`${hint.category} ${title}`) ? "Heren" : /dames|voor haar/i.test(`${hint.category} ${title}`) ? "Dames" : null,
-    product_type: concentrationMatch?.[2] || (/parfum/i.test(title) ? "Parfum" : null),
+    product_type: /doucheolie/i.test(title) ? "Doucheolie" : /baardolie|beard oil/i.test(title) ? "Baardolie" : /gift box|cadeau/i.test(title) ? "Cadeauset" : concentrationMatch?.[2] || (/parfum/i.test(title) ? "Parfum" : null),
+    volume: volumeMatch ? volumeMatch[1].replace(",", ".") + " ml" : null,
     volume_ml: volumeMatch ? Number(volumeMatch[1].replace(",", ".")) : null,
+    concentration: concentrationMatch ? concentrationMatch[1] + "% " + concentrationMatch[2] : null,
     fragrance_concentration: concentrationMatch ? `${concentrationMatch[1]}%` : null,
     fragrance_family: clean(familyFromTitle || familyMatch?.[1]) || null,
     fragrance_notes: [note(notesBody, "Topnoten"), note(notesBody, "Hartnoten"), note(notesBody, "Basisnoten")].filter(Boolean),
@@ -166,7 +180,7 @@ function parseProductPage(payload, hint) {
     description_source: description ? clean(description).slice(0, 1000) : null,
     ingredients_source_text: ingredientsSourceText,
     ingredients: ingredientsSourceText ? ingredientsSourceText.split(",").map(clean).filter(Boolean) : [],
-    ingredients_status: ingredientsMatch ? "found" : "not_found",
+    ingredients_status: ingredientsMatch ? "approved_official" : "not_found",
     premium: hint.premium,
     image_url: absoluteUrl(image, payload.url),
     official_product_url: payload.url,
@@ -174,7 +188,8 @@ function parseProductPage(payload, hint) {
     source_url: payload.url,
     source_retrieved_at: payload.retrieved_at,
     source_last_checked: payload.retrieved_at,
-    source_status: "matched",
+    source_status: brandVerified ? "verified_official" : "rejected_brand",
+    image_status: image ? "official_source" : "not_found",
     cache_status: payload.cache_status,
     http_status: payload.http_status || 200,
     crawler_version: CRAWLER_VERSION
@@ -206,29 +221,39 @@ function compare(local, official) {
     categoryPayloads.push({ source, payload });
     discovered.push(...discoverLinks(payload.html, source));
   }
-  const unique = [...new Map(discovered.map((item) => [`${item.reference_number}:${item.premium}`, item])).values()];
+  const unique = [...new Map(discovered.map((item) => [item.official_product_url, item])).values()];
   const selected = fullCatalog ? unique : unique.filter((item) => testReferences.includes(item.reference_number) && !item.premium);
   const preview = [];
   for (const hint of selected) {
-    const local = localProducts.find((product) => String(product.glantierNummer || product.id) === hint.reference_number);
-    if (!local && !fullCatalog) continue;
     try {
       const official = parseProductPage(await fetchOfficial(hint.official_product_url), hint);
-      preview.push({ reference_number: hint.reference_number, local_status: discontinued.has(hint.reference_number) ? "discontinued" : local ? "active" : "not_in_orivea", orivea: local || null, official, comparison: local ? compare(local, official) : null, publication_status: local ? "review_required" : "needs_price" });
+      const reference = official.reference_number;
+      const fragranceSource = ["Dames", "Heren", "Premium", "Premium Heren"].includes(hint.source_category);
+      const local = reference ? localProducts.find((product) => String(product.glantierNummer || product.id) === reference && (fragranceSource ? ["Dames", "Heren", "Unisex"].includes(product.categorie) : String(product.type || product.categorie).toLowerCase().includes(String(hint.category).toLowerCase()))) : null;
+      if (!local && !fullCatalog) continue;
+      const comparison = local ? compare(local, official) : null;
+      official.conflict = Boolean(comparison?.review_required);
+      const classification = classify({ official, local, discontinued: discontinued.has(reference) });
+      preview.push({ reference_number: reference, classification, local_status: discontinued.has(reference) ? "discontinued" : local ? "active" : "not_in_orivea", orivea: local || null, official, comparison, publication_status: classification === "new_glantier_product" ? "needs_price" : classification });
     } catch (error) {
-      preview.push({ reference_number: hint.reference_number, local_status: local ? "active" : "not_in_orivea", official: { ...hint, source_status: "fetch_failed", error: error.message }, comparison: null, publication_status: "review_required" });
+      preview.push({ reference_number: hint.reference_number, classification: "conflict", local_status: "unknown", official: { ...hint, source_status: "fetch_failed", error: error.message }, comparison: null, publication_status: "review_required" });
     }
   }
-  const existingRefs = new Set(localProducts.map((product) => String(product.glantierNummer || product.id)));
-  const newProducts = unique.filter((item) => !existingRefs.has(item.reference_number)).map((item) => ({ ...item, price: null, price_status: "missing", sale_enabled: false, add_to_cart_enabled: false, merchant_feed_enabled: false, active: false, status: discontinued.has(item.reference_number) ? "discontinued" : "needs_price", discovered_at: new Date().toISOString() }));
+  const newProducts = preview.filter((item) => item.classification === "new_glantier_product").map((item) => ({ ...item.official, price: null, price_status: "missing", sale_enabled: false, add_to_cart_enabled: false, merchant_enabled: false, active: false, status: "needs_price", discovered_at: new Date().toISOString() }));
   fs.writeFileSync(PREVIEW_PATH, `${JSON.stringify(preview, null, 2)}\n`, "utf8");
   fs.writeFileSync(NEW_PATH, `${JSON.stringify(newProducts, null, 2)}\n`, "utf8");
   const report = {
     generated_at: new Date().toISOString(), source: ALLOWED_PREFIX, mode: fullCatalog ? "catalog" : "test", request_delay_ms: DELAY_MS, cache_ttl_days: TTL_MS / 86400000, crawler_version: CRAWLER_VERSION, robots_txt_respected: true,
-    active_orivea_products: localProducts.length, official_products_discovered: unique.length, checked: preview.length, matched: preview.filter((item) => item.official.source_status === "matched").length,
-    ingredients_found: preview.filter((item) => item.official.ingredients_status === "found").length, review_required: preview.filter((item) => item.comparison?.review_required || item.official.source_status !== "matched").length,
+    active_orivea_products: localProducts.length, official_products_discovered: unique.length, glantier_products: preview.filter((item) => isAllowedBrand(item.official.brand)).length,
+    rejected_brand: preview.filter((item) => item.classification === "rejected_brand").length, existing_matches: preview.filter((item) => item.classification === "existing_match").length,
+    checked: preview.length, matched: preview.filter((item) => item.official.source_status === "verified_official").length,
+    ingredients_found: preview.filter((item) => item.official.ingredients_status === "approved_official").length, review_required: preview.filter((item) => ["conflict", "rejected_brand", "missing_reference"].includes(item.classification)).length,
     official_page_not_found: testReferences.filter((reference) => !preview.some((item) => item.reference_number === reference)), new_products_found: newProducts.length,
-    discontinued_conflicts: newProducts.filter((item) => item.status === "discontinued").map((item) => item.reference_number), official_urls_used: preview.map((item) => item.official.official_product_url).filter(Boolean),
+    locally_discontinued: preview.filter((item) => item.classification === "found_but_locally_discontinued").map((item) => item.reference_number),
+    missing_reference: preview.filter((item) => item.classification === "missing_reference").length,
+    conflicts_count: preview.filter((item) => item.classification === "conflict").length,
+    price_needed: newProducts.length,
+    discontinued_conflicts: preview.filter((item) => item.classification === "found_but_locally_discontinued").map((item) => item.reference_number), official_urls_used: preview.map((item) => item.official.official_product_url).filter(Boolean),
     fields_found: Object.fromEntries(["product_name", "image_url", "description_source", "fragrance_family", "ingredients_source_text"].map((field) => [field, preview.filter((item) => item.official?.[field]).length])),
     fields_missing: Object.fromEntries(["product_name", "image_url", "description_source", "fragrance_family", "ingredients_source_text"].map((field) => [field, preview.filter((item) => !item.official?.[field]).length])),
     conflicts: preview.flatMap((item) => (item.comparison?.differences || []).map((difference) => ({ reference_number: item.reference_number, ...difference }))),

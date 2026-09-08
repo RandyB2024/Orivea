@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const { activeProducts, assertGlantier } = require("./glantier-catalog-core");
 
 const root = __dirname;
 const sourcePath = path.join(root, "products.js");
@@ -10,7 +11,8 @@ const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(sourcePath, "utf8"), context, { filename: sourcePath });
 
 const config = context.window.ORIVEA_CONFIG || {};
-const products = context.window.ORIVEA_PRODUCTS || [];
+const products = [...(context.window.ORIVEA_PRODUCTS || []), ...activeProducts(root)];
+for (const product of products) assertGlantier({ brand: product.merk || "Glantier", source: "official_glantier" });
 const domain = String(config.domain || "https://orivea.nl").replace(/\/$/, "");
 const currency = config.currency || "EUR";
 const salesAvailable = config.paymentEnabled !== false && config.salesPaused === false;
@@ -34,6 +36,7 @@ function slug(value) {
 }
 
 function absoluteUrl(relativePath) {
+  if (/^https?:\/\//i.test(String(relativePath || ""))) return String(relativePath);
   return `${domain}/${String(relativePath || "").replace(/^\/+/, "")}`;
 }
 
@@ -105,7 +108,7 @@ function makeOffer(product, variant) {
 }
 
 const offers = products
-  .filter((product) => !product.pricePending && product.availableForSale !== false && Number.isFinite(Number(product.prijs)))
+  .filter((product) => (product.merk || "Glantier") === "Glantier" && !product.pricePending && product.availableForSale !== false && Number.isFinite(Number(product.prijs)) && Number(product.prijs) > 0)
   .flatMap((product) => {
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
     if (isFragrance) {

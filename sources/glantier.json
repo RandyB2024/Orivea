@@ -2,7 +2,17 @@
   "name": "Glantier Nederland",
   "baseUrl": "https://www.glantier.com",
   "allowedPathPrefix": "/nl/",
-  "crawlerVersion": "1.1.0",
+  "crawlerVersion": "2.0.0",
+  "allowedBrands": ["Glantier"],
+  "categoryMapping": {
+    "Dames": "Dames",
+    "Heren": "Heren",
+    "Premium": "Premium",
+    "Premium Heren": "Premium",
+    "Doucheolie": "Verzorging",
+    "Baardolie": "Baardverzorging",
+    "Gift Box": "Cadeausets"
+  },
   "productLinkSelector": "a[href]",
   "titleSelector": "h1",
   "referenceSelector": "h1, [itemprop='sku'], body",
@@ -13,6 +23,9 @@
     { "path": "/nl/91-standaard-collectie-dames", "category": "Dames", "premium": false },
     { "path": "/nl/92-standaard-collectie-heren", "category": "Heren", "premium": false },
     { "path": "/nl/30-premium-parfums", "category": "Premium", "premium": true },
-    { "path": "/nl/170-premium-heren-parfums", "category": "Premium Heren", "premium": true }
+    { "path": "/nl/170-premium-heren-parfums", "category": "Premium Heren", "premium": true },
+    { "path": "/nl/100-verzorgende-doucheolie", "category": "Doucheolie", "premium": false },
+    { "path": "/nl/36-baardolie", "category": "Baardolie", "premium": false },
+    { "path": "/nl/506-relatiegeschenken", "category": "Gift Box", "premium": false }
   ]
 }
