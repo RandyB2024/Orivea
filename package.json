@@ -1,0 +1,14 @@
+{
+  "name": "orivea-webshop-tools",
+  "private": true,
+  "scripts": {
+    "import:glantier": "node import-glantier-products.js",
+    "import:glantier:catalog": "node import-glantier-products.js --catalog",
+    "import:glantier:apply-safe": "node apply-safe-glantier-import.js --all-safe",
+    "generate:products": "node generate-product-pages.js",
+    "generate:feed": "node generate-merchant-feed.js"
+  },
+  "dependencies": {
+    "cheerio": "1.1.2"
+  }
+}

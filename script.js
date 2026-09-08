@@ -98,7 +98,7 @@
       return { ...product, naam: `${product.naam} - ${choice.naam}`, type: product.type, inhoud: `${product.inhoud} - ${choice.geurgroep}`, prijs: discountedPriceFor(product, product.prijs) };
     }
     const isFragrance = ["Dames", "Heren", "Unisex"].includes(product.categorie) && product.glantierNummer;
-    return { ...product, type: isFragrance ? "Signature EDP" : product.type, inhoud: product.inhoud || (isFragrance ? "50 ml" : "Product"), prijs: discountedPriceFor(product, product.prijs) };
+    return { ...product, type: isFragrance ? "Eau de Parfum" : product.type, inhoud: product.inhoud || (isFragrance ? "50 ml" : "Product"), prijs: discountedPriceFor(product, product.prijs) };
   }
 
   function cart() {

@@ -1,0 +1,18 @@
+[
+  {
+    "reference_number": "600",
+    "official_product_name": "Glantier 600",
+    "category": "Dames",
+    "premium": false,
+    "official_product_url": "https://www.glantier.com/nl/glantier-damesparfums/2186-glantier-600-orientaal-speciaal-parfum-unisex.html",
+    "source": "official_glantier",
+    "price": null,
+    "price_status": "missing",
+    "sale_enabled": false,
+    "add_to_cart_enabled": false,
+    "merchant_feed_enabled": false,
+    "active": false,
+    "status": "discontinued",
+    "discovered_at": "2026-09-08T07:43:41.389Z"
+  }
+]

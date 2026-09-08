@@ -20,7 +20,7 @@ function sourceFacts(product) {
     name: product.naam,
     category: product.categorie,
     audience: product.doelgroep,
-    type: product.type,
+    type: String(product.type || "").replace(/\bsignature\s+edp\b/gi, "Eau de Parfum").replace(/\bedp\b/gi, "Eau de Parfum"),
     scent_profile: product.geurgroep || null,
     moment: product.moment || null,
     size: product.inhoud || null,

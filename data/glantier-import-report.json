@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-09-08T07:43:41.443Z",
+  "source": "https://www.glantier.com/nl/",
+  "mode": "test",
+  "request_delay_ms": 1200,
+  "cache_ttl_days": 14,
+  "active_orivea_products": 210,
+  "official_products_discovered": 226,
+  "checked": 9,
+  "matched": 9,
+  "ingredients_found": 9,
+  "review_required": 0,
+  "official_page_not_found": [],
+  "new_products_found": 1,
+  "discontinued_conflicts": [
+    "600"
+  ],
+  "official_urls_used": [
+    "https://www.glantier.com/nl/glantier-damesparfums/77-glantier-477-parfumen.html",
+    "https://www.glantier.com/nl/glantier-damesparfums/100-glantier-500-cypriotische-fruit-parfumen.html",
+    "https://www.glantier.com/nl/glantier-damesparfums/260-geur-glantier-548.html",
+    "https://www.glantier.com/nl/glantier-damesparfums/296-geur-glantier-553-oriental-flower.html",
+    "https://www.glantier.com/nl/glantier-damesparfums/963-glantier-585-bloemig-parfum.html",
+    "https://www.glantier.com/nl/herenparfums/152-geur-glantier-717.html",
+    "https://www.glantier.com/nl/herenparfums/159-geuren-glantier-724.html",
+    "https://www.glantier.com/nl/herenparfums/194-geur-glantier-759.html",
+    "https://www.glantier.com/nl/herenparfums/304-glantier-771-aromatisch-varenparfum.html"
+  ]
+}
