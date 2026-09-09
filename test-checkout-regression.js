@@ -20,6 +20,13 @@ assert.match(script, /context\.captureCompleted = true/, "Geslaagde capture moet
 assert.match(script, /Server-side orderregistratie niet beschikbaar; PayPal checkout gaat door zonder korting/);
 assert.match(script, /Nieuwsbrief-API niet beschikbaar; e-mailflow gaat door/);
 assert.match(scentClub, /Scent Club API niet beschikbaar; e-mailflow gaat door/);
+assert.match(script, /--- ORIVEA-DATA ---/, "Webshopmails missen het machineleesbare intakeblok");
+assert.match(script, /type:\"order\"/);
+assert.match(script, /type:\"contact\"/);
+assert.match(script, /type:\"b2b_request\"/);
+assert.match(script, /type:\"newsletter\"/);
+assert.match(scentClub, /type:\"scent_club_request\"/);
+assert.match(script, /external_id:intakeId/, "Nieuwsbrief-API en e-mail moeten hetzelfde request-ID gebruiken");
 
 const businessHandler = script.slice(script.indexOf("function initBusinessForm"), script.indexOf("function initNewsletterForm"));
 assert.doesNotMatch(businessHandler, /isUnsubscribe|\/api\/newsletter\/subscribe/, "Nieuwsbriefcode staat in het zakelijke formulier");

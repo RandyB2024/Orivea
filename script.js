@@ -41,6 +41,8 @@
   const paypalUnavailableMessage = () => paypalClientIdLooksIncomplete()
     ? "PayPal Client ID lijkt ongeldig of onvolledig. Controleer de live Client ID in PayPal Developer."
     : "PayPal is tijdelijk niet beschikbaar. Probeer het later opnieuw.";
+  const requestId = (prefix = "ORV") => `${prefix}-${Date.now().toString(36).toUpperCase()}-${crypto.getRandomValues(new Uint32Array(1))[0].toString(36).toUpperCase()}`;
+  const machineDataBlock = (data) => `--- ORIVEA-DATA ---\n${JSON.stringify(data)}\n--- END ORIVEA-DATA ---`;
 
   function ensureScentClubNavigation() {
     const pagePrefix = location.pathname.includes("/product/") ? "../" : "";
@@ -758,6 +760,7 @@
       shipping_incl_vat: money(data.shipping),
       total_incl_vat: money(data.total),
       paypal_transaction_id: paypal?.transactionId || "",
+      paypal_order_id: paypal?.orderId || "",
       payment_status: paypal?.paymentStatus || "",
       payment_method: paypal?.paymentMethod || "PayPal",
       terms_accepted: termsAccepted,
@@ -804,6 +807,7 @@
       return_policy_accepted_at: payload.return_policy_accepted_at || "",
       newsletter_opt_in: payload.newsletter_opt_in ? "Ja" : "Nee",
       newsletter_opt_in_at: payload.newsletter_opt_in_at || ""
+      ,orivea_data: machineDataBlock({type:"order",request_id:payload.order_number,order_number:payload.order_number,customer_name:payload.customer_name,customer_email:payload.customer_email,customer_phone:payload.customer_phone,customer_address:payload.customer_address,items:payload.order_items,subtotal:payload.subtotal,shipping:payload.shipping_cost,total:payload.total,paypal_order_id:payload.paypal_order_id || "",capture_id:payload.paypal_transaction_id,payment_status:payload.payment_status,newsletter:payload.newsletter_opt_in,created_at:new Date().toISOString()})
     };
   }
 
@@ -1224,6 +1228,7 @@
     console.log("PayPal payment method:", paymentMethod);
     const result = await finalizePaidOrder(context.source(), {
       transactionId,
+      orderId: data.orderID,
       paymentStatus: "COMPLETED",
       paymentMethod
     }, { ...(context.onSuccess || {}), status: context.status, serverOrder: context.serverOrder, orderNumber: context.serverOrder?.order_number });
@@ -1779,11 +1784,15 @@
       const status = $("[data-contact-status]");
       status.textContent = "Bericht wordt verzonden...";
       const raw = Object.fromEntries(new FormData(form).entries());
+      const intakeId = requestId("ORV-CONTACT");
+      const dataBlock = machineDataBlock({type:"contact",request_id:intakeId,name:raw.name || "",email:raw.email || "",phone:raw.phone || "",subject:"Contactaanvraag",message:raw.message || ""});
       const payload = {
         name: raw.name || "",
         email: raw.email || "",
         subject: "Contactaanvraag",
-        message: raw.message || "",
+        message: `${raw.message || ""}\n\n${dataBlock}`,
+        request_id: intakeId,
+        orivea_data: dataBlock,
         email_subject: "Bedankt voor je bericht | ORIVÈA",
         message_type: "Contactaanvraag ontvangen",
         message_body: "Bedankt voor je bericht. Ons team bekijkt je aanvraag zo snel mogelijk en neemt indien nodig contact met je op."
@@ -1806,6 +1815,8 @@
       const status = $("[data-b2b-status]");
       if (status) status.textContent = "Aanvraag wordt verzonden...";
       const raw = Object.fromEntries(new FormData(form).entries());
+      const intakeId = requestId("ORV-B2B");
+      const dataBlock = machineDataBlock({type:"b2b_request",request_id:intakeId,name:raw.name || "",company:raw.company || "",email:raw.email || "",phone:raw.phone || "",business_type:raw.business_type || "",message:raw.message || ""});
       const message = [
         "Zakelijke B2B aanvraag via orivea.nl",
         `Naam: ${raw.name || ""}`,
@@ -1815,13 +1826,17 @@
         `Type onderneming: ${raw.business_type || ""}`,
         "",
         "Gewenste aantallen en toepassing:",
-        raw.message || ""
+        raw.message || "",
+        "",
+        dataBlock
       ].join("\n");
       const payload = {
         name: raw.name || "",
         email: raw.email || "",
         subject: "Zakelijke B2B aanvraag",
         message,
+        request_id: intakeId,
+        orivea_data: dataBlock,
         email_subject: "Bedankt voor je zakelijke aanvraag | ORIV\u00C8A",
         message_type: "Zakelijke aanvraag ontvangen",
         message_body: "Bedankt voor je zakelijke aanvraag. ORIV\u00C8A bekijkt je wensen en neemt zo snel mogelijk contact met je op."
@@ -1846,18 +1861,22 @@
       const isUnsubscribe = action === "unsubscribe";
       status.textContent = isUnsubscribe ? "Afmelding wordt verzonden..." : "Aanmelding wordt verzonden...";
       const raw = Object.fromEntries(new FormData(form).entries());
+      const intakeId = requestId("ORV-NEWS");
+      const dataBlock = machineDataBlock({type:"newsletter",request_id:intakeId,name:raw.name || "",email:raw.email || "",action:isUnsubscribe ? "unsubscribe" : "subscribe"});
       const payload = {
         name: raw.name || "",
         email: raw.email || "",
         subject: isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding",
-        message: (isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding") + " via orivea.nl\nNaam: " + (raw.name || "") + "\nE-mail: " + (raw.email || ""),
+        message: (isUnsubscribe ? "Nieuwsbrief afmelding" : "Nieuwsbrief aanmelding") + " via orivea.nl\nNaam: " + (raw.name || "") + "\nE-mail: " + (raw.email || "") + "\n\n" + dataBlock,
+        request_id: intakeId,
+        orivea_data: dataBlock,
         email_subject: isUnsubscribe ? "Je nieuwsbriefvoorkeur is bijgewerkt | ORIVÈA" : "Welkom bij ORIVÈA",
         message_type: isUnsubscribe ? "Nieuwsbrief afmelding bevestigd" : "Nieuwsbrief aanmelding bevestigd",
         message_body: isUnsubscribe ? "Je bent succesvol afgemeld voor de ORIVÈA nieuwsbrief." : "Bedankt voor je aanmelding voor de ORIVÈA nieuwsbrief. Je ontvangt als eerste nieuws over nieuwe collecties, exclusieve acties en premium geuren."
       };
       try {
         try {
-          const stored = await fetch("/api/newsletter/subscribe", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email:raw.email,name:raw.name,optIn:!isUnsubscribe}) });
+          const stored = await fetch("/api/newsletter/subscribe", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({external_id:intakeId,email:raw.email,name:raw.name,optIn:!isUnsubscribe}) });
           if(!stored.ok) console.warn("Nieuwsbriefregistratie wordt later verwerkt, status:",stored.status);
         } catch(error) { console.warn("Nieuwsbrief-API niet beschikbaar; e-mailflow gaat door:",error); }
         await sendContactTemplate(payload);

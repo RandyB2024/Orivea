@@ -80,9 +80,12 @@
     const status = $("[data-scent-request-status]", requestModal);
     const submit = requestForm.querySelector('button[type="submit"]');
     const raw = Object.fromEntries(new FormData(requestForm).entries());
+    const externalId = createId();
     const plan = plans[raw.plan];
     const submittedAt = new Intl.DateTimeFormat("nl-NL", { dateStyle: "long", timeStyle: "short" }).format(new Date());
-    const message = `NIEUWE ORIVÈA SCENT CLUB AANVRAAG\n\nAbonnement:\n${plan.name}\n\nPrijs:\n${money(plan.price)} per maand\n\nKLANT\n\nNaam:\n${raw.first_name} ${raw.last_name}\n\nE-mail:\n${raw.email}\n\nTelefoon:\n${raw.phone || "Niet opgegeven"}\n\nGEURVOORKEUR\n\nVoor wie:\n${raw.gender_preference}\n\nGeurfamilie:\n${raw.fragrance_family}\n\nMaandkeuze:\n${raw.selection_mode}\n\nOPMERKINGEN\n\n${raw.notes || "Geen opmerkingen"}`;
+    const intakeData = {type:"scent_club_request",request_id:externalId,first_name:raw.first_name,last_name:raw.last_name,email:raw.email,phone:raw.phone || "",plan:raw.plan,preference_gender:raw.gender_preference,preference_family:raw.fragrance_family,selection_mode:raw.selection_mode,notes:raw.notes || ""};
+    const dataBlock = `--- ORIVEA-DATA ---\n${JSON.stringify(intakeData)}\n--- END ORIVEA-DATA ---`;
+    const message = `NIEUWE ORIVÈA SCENT CLUB AANVRAAG\n\nAbonnement:\n${plan.name}\n\nPrijs:\n${money(plan.price)} per maand\n\nKLANT\n\nNaam:\n${raw.first_name} ${raw.last_name}\n\nE-mail:\n${raw.email}\n\nTelefoon:\n${raw.phone || "Niet opgegeven"}\n\nGEURVOORKEUR\n\nVoor wie:\n${raw.gender_preference}\n\nGeurfamilie:\n${raw.fragrance_family}\n\nMaandkeuze:\n${raw.selection_mode}\n\nOPMERKINGEN\n\n${raw.notes || "Geen opmerkingen"}\n\n${dataBlock}`;
     const payload = {
       request_type: "ORIVÈA Scent Club aanvraag", plan_name: plan.name,
       plan_price: `${money(plan.price)} per maand`, first_name: raw.first_name,
@@ -92,12 +95,11 @@
       selection_mode: raw.selection_mode, notes: raw.notes || "Geen opmerkingen",
       submitted_at: submittedAt, subject: `Nieuwe ORIVÈA Scent Club aanvraag — ${plan.name}`,
       email_subject: `Nieuwe ORIVÈA Scent Club aanvraag — ${plan.name}`,
-      message_type: "ORIVÈA Scent Club aanvraag", message_body: message, message
+      message_type: "ORIVÈA Scent Club aanvraag", message_body: message, message, request_id:externalId, orivea_data:dataBlock
     };
     status.textContent = "Je aanvraag wordt verzonden...";
     submit.disabled = true;
     try {
-      const externalId = createId();
       try {
         const saved = await fetch("/api/scent-club/request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ external_id: externalId, first_name: raw.first_name, last_name: raw.last_name, email: raw.email, phone: raw.phone, plan: raw.plan, preference_gender: raw.gender_preference, preference_family: raw.fragrance_family, selection_mode: raw.selection_mode, notes: raw.notes }) });
         if (!saved.ok) console.warn("Scent Club registratie wordt later verwerkt, status:", saved.status);
