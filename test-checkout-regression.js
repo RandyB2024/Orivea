@@ -30,5 +30,20 @@ assert.match(script, /external_id:intakeId/, "Nieuwsbrief-API en e-mail moeten h
 
 const businessHandler = script.slice(script.indexOf("function initBusinessForm"), script.indexOf("function initNewsletterForm"));
 assert.doesNotMatch(businessHandler, /isUnsubscribe|\/api\/newsletter\/subscribe/, "Nieuwsbriefcode staat in het zakelijke formulier");
+assert.match(checkout, /name="payment_method" value="pay_later"/);
+assert.match(checkbox("age_confirmed"), /name=["']age_confirmed["']/i);
+assert.match(script, /ageConfirmed:source\.elements\.age_confirmed/);
+assert.match(script, /pay_later_idempotency/);
+assert.match(script, /payment_status:"unpaid"/);
+assert.match(script, /Achteraf-order EmailJS fallback mislukt/);
+const payLaterRoute = read("functions/api/pay-later/create-order.js");
+assert.match(payLaterRoute, /validateCheckout\(body\)/, "Backend moet prijzen opnieuw berekenen");
+assert.match(payLaterRoute, /order\.total > config\.maxOrderAmount/);
+assert.match(payLaterRoute, /pay_later_orders WHERE email_normalized=/);
+assert.match(payLaterRoute, /pay_later_order_created/);
+assert.doesNotMatch(payLaterRoute, /PAY_LATER_IBAN/, "IBAN mag niet naar publieke orderresponse lekken");
+const payLaterManage = read("functions/api/pay-later/manage.js");
+assert.match(payLaterManage, /CONTENT_STUDIO_SYNC_SECRET/);
+assert.match(payLaterManage, /new Date\(now\.getTime\(\)\+config\.days\*86400000\)/, "Vervaldatum moet vanaf verzending worden berekend");
 
 console.log("Checkout regressietests geslaagd: verplichte consent, PayPal fallback/capture en fail-open nevenservices.");

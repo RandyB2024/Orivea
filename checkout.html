@@ -98,7 +98,12 @@
     </section>
 
     <section class="checkout-step" data-step="4">
-      <h2>Veilige betaling</h2>
+      <h2>Betaalmethode</h2>
+      <fieldset class="payment-methods" data-payment-methods>
+        <legend>Kies hoe je wilt betalen</legend>
+        <label><input type="radio" name="payment_method" value="paypal" checked><span><strong>PayPal</strong><small>Direct veilig betalen via PayPal</small></span></label>
+        <label data-pay-later-option hidden><input type="radio" name="payment_method" value="pay_later"><span><strong>ORIVÈA Achteraf Betalen</strong><small>Ontvang je bestelling eerst en betaal daarna binnen <span data-pay-later-days>14</span> dagen.</small></span></label>
+      </fieldset>
       <div class="paypal-panel paypal-premium-panel">
         <p class="payment-kicker">ORIVÈA Veilig Afrekenen</p>
         <p class="paypal-brand" aria-label="PayPal">PayPal</p>
@@ -112,9 +117,14 @@
           <label class="checkout-consent"><input type="checkbox" name="terms_accepted" required><span>Ik ga akkoord met de <a href="algemene-voorwaarden.html" target="_blank" rel="noopener noreferrer">Algemene Voorwaarden</a>.</span></label>
           <label class="checkout-consent"><input type="checkbox" name="return_policy_accepted" required><span>Ik ga akkoord met het <a href="retourbeleid.html" target="_blank" rel="noopener noreferrer">Retourbeleid</a>.</span></label>
           <label class="checkout-consent"><input type="checkbox" name="newsletter_opt_in"><span>Ik meld me aan voor de ORIVÈA nieuwsbrief.</span></label>
+          <label class="checkout-consent" data-pay-later-age hidden><input type="checkbox" name="age_confirmed"><span>Ik bevestig dat ik 18 jaar of ouder ben.</span></label>
           <p class="checkout-consents__error" data-consent-error role="alert" aria-live="polite"></p>
         </section>
         <div data-paypal-buttons></div>
+        <div class="pay-later-action" data-pay-later-action hidden>
+          <p>Na verwerking van je bestelling ontvang je de betaalgegevens per e-mail. De betaaltermijn begint zodra je bestelling is verzonden.</p>
+          <button class="button primary full" type="button" data-pay-later-submit>Bestel en betaal later</button>
+        </div>
         <p class="form-status" data-paypal-status></p>
       </div>
       <div class="step-actions"><a class="button ghost continue-shopping-button" href="catalogus.html">Verder winkelen</a><button class="button ghost" type="button" data-prev-step>Terug</button></div>
@@ -124,7 +134,7 @@
       <h2>Bevestiging</h2>
       <div class="success-panel" data-order-success hidden>
         <p><strong>Bedankt voor je bestelling</strong></p>
-        <p>Je betaling via PayPal is ontvangen.</p>
+        <p data-success-payment-copy>Je betaling via PayPal is ontvangen.</p>
       </div>
       <p class="form-status" data-order-status></p>
       <div class="step-actions"><a class="button primary" href="index.html">Terug naar ORIVÈA</a></div>

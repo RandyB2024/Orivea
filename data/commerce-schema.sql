@@ -23,3 +23,22 @@ CREATE TABLE IF NOT EXISTS commerce_outbox (
 
 CREATE INDEX IF NOT EXISTS idx_commerce_outbox_pending ON commerce_outbox(synced_at, id);
 CREATE TABLE IF NOT EXISTS commerce_requests (external_id TEXT PRIMARY KEY,request_type TEXT NOT NULL,payload TEXT NOT NULL,created_at TEXT NOT NULL);
+
+CREATE TABLE IF NOT EXISTS pay_later_orders (
+  order_number TEXT PRIMARY KEY,
+  email_normalized TEXT NOT NULL,
+  customer_id TEXT,
+  payment_status TEXT NOT NULL DEFAULT 'unpaid',
+  order_status TEXT NOT NULL DEFAULT 'review_required',
+  pay_later_status TEXT NOT NULL DEFAULT 'review_required',
+  due_date TEXT,
+  approved_at TEXT,
+  shipped_at TEXT,
+  paid_at TEXT,
+  reminder_count INTEGER NOT NULL DEFAULT 0,
+  last_reminder_at TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  FOREIGN KEY(order_number) REFERENCES commerce_orders(order_number)
+);
+CREATE INDEX IF NOT EXISTS idx_pay_later_email_open ON pay_later_orders(email_normalized,payment_status,pay_later_status);

@@ -1086,6 +1086,46 @@
     return "PayPal";
   }
 
+  function payLaterApiBase() {
+    return (CONFIG.payLaterApiBase || "/api/pay-later").replace(/\/$/, "");
+  }
+
+  async function sendPayLaterOrder(source) {
+    const current = totals();
+    const formData = normalizeOrderFormData(source);
+    let idempotencyKey = sessionStorage.getItem("orivea_pay_later_idempotency");
+    if (!idempotencyKey) {
+      idempotencyKey = crypto.randomUUID();
+      sessionStorage.setItem("orivea_pay_later_idempotency", idempotencyKey);
+    }
+    const response = await fetch(`${payLaterApiBase()}/create-order`, {
+      method: "POST",
+      headers: { "Content-Type":"application/json", "Idempotency-Key":idempotencyKey },
+      body: JSON.stringify({ idempotencyKey, country:"NL", ageConfirmed:source.elements.age_confirmed?.checked===true, customer:{name:formData.customer_name,email:formData.customer_email,phone:formData.customer_phone,address:formData.customer_address}, items:current.lines.map((line)=>({id:line.product.id,variant:line.variant||line.product.variant||"signature",quantity:line.qty})), newsletterOptIn:formData.newsletter_opt_in==="on"||formData.newsletter_opt_in===true, termsAccepted:formData.terms_accepted==="on"||formData.terms_accepted===true, returnPolicyAccepted:formData.return_policy_accepted==="on"||formData.return_policy_accepted===true, memberCode:formData.scent_club_member_code||"", note:formData.note||"" })
+    });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Achteraf betalen is niet beschikbaar.");
+    return payload.order;
+  }
+
+  async function finalizePayLaterOrder(form, serverOrder, targets={}) {
+    const payload = buildOrderPayload(form,{paymentStatus:"unpaid",paymentMethod:"ORIVÈA Achteraf Betalen"});
+    Object.assign(payload,{order_number:serverOrder.order_number,subtotal:money(serverOrder.subtotal),shipping_cost:serverOrder.shipping_cost===0?"Gratis":money(serverOrder.shipping_cost),total:money(serverOrder.total),payment_status:"unpaid",payment_method:"pay_later",order_status:"review_required",pay_later_status:"review_required",pay_later_due_date:null,request_id:serverOrder.order_number,age_confirmed:true});
+    payload.order_items=(serverOrder.items||[]).map((item)=>`${item.quantity}x ${item.product_name} - ${item.variant_label} - ${money(item.line_total)}`).join("\n");
+    try {
+      await initEmailJs(ORDER_EMAILJS_PUBLIC_KEY);
+      const emailPayload=publicOrderPayload(payload);
+      emailPayload.orivea_data=machineDataBlock({type:"order",request_id:payload.order_number,order_number:payload.order_number,payment_method:"pay_later",payment_status:"unpaid",customer_name:payload.customer_name,customer_email:payload.customer_email,customer_phone:payload.customer_phone,customer_address:payload.customer_address,items:payload.order_items,subtotal:payload.subtotal,shipping:payload.shipping_cost,total:payload.total,created_at:new Date().toISOString()});
+      await window.emailjs.send(ORDER_EMAILJS_SERVICE_ID,ORDER_EMAILJS_TEMPLATE_ID,emailPayload,ORDER_EMAILJS_PUBLIC_KEY);
+      payload.email_status="SENT";
+    } catch(error) { payload.email_status="FAILED"; console.warn("Achteraf-order EmailJS fallback mislukt; serverorder blijft geregistreerd:",error); }
+    storeOrder(payload); await processOrderNewsletterOptIn(payload); localStorage.removeItem(CART_KEY); renderCartState(); sessionStorage.removeItem("orivea_pay_later_idempotency");
+    if(targets.successPanel) targets.successPanel.hidden=false;
+    const copy=$("[data-success-payment-copy]"); if(copy) copy.textContent="Je bestelling wordt eerst door ORIVÈA verwerkt. Na verzending ontvang je de betaalgegevens en de uiterste betaaldatum.";
+    if(targets.orderStatus) targets.orderStatus.textContent=`Order ${payload.order_number} is ontvangen. Totaal ${payload.total}. Betaling: achteraf betalen.`;
+    targets.showStep?.(5); return payload;
+  }
+
   function paypalFundingStyle(fundingSource) {
     const style = { layout: "vertical", color: "gold", shape: "rect" };
     if (!fundingSource || String(fundingSource).toLowerCase() === "paypal") style.label = "paypal";
@@ -1652,6 +1692,13 @@
     const consentSection = $("[data-checkout-consents]", form);
     const consentError = $("[data-consent-error]", form);
     const params = new URLSearchParams(window.location.search);
+    const payLaterOption = $("[data-pay-later-option]",form);
+    const payLaterAge = $("[data-pay-later-age]",form);
+    const payLaterAction = $("[data-pay-later-action]",form);
+    const paypalPanel = $("[data-paypal-buttons]",form);
+    const payLaterButton = $("[data-pay-later-submit]",form);
+    const paymentPanel = $(".paypal-premium-panel",form);
+    let payLaterConfig = null;
 
     const showStep = (next) => {
       step = Math.min(5, Math.max(1, next));
@@ -1659,6 +1706,7 @@
       $$('[data-step-tab]').forEach((el) => el.classList.toggle('active', Number(el.dataset.stepTab) === step));
       renderCartState();
       if (step === 4) {
+        if(payLaterConfig){payLaterOption.hidden=!(payLaterConfig.enabled&&totals().total<=payLaterConfig.maxOrderAmount);if(payLaterOption.hidden&&form.elements.payment_method?.value==="pay_later"){form.querySelector('input[name="payment_method"][value="paypal"]').checked=true;updatePaymentMethod();}}
         renderPayPalButtons();
       }
     };
@@ -1704,9 +1752,25 @@
         (!terms?.checked ? terms : returns)?.focus({ preventScroll: true });
         return false;
       }
+      if (form.elements.payment_method?.value === "pay_later" && !form.elements.age_confirmed?.checked) {
+        if (consentError) consentError.textContent = "Bevestig dat je 18 jaar of ouder bent om achteraf te betalen.";
+        form.elements.age_confirmed?.focus();
+        return false;
+      }
       if (!form.reportValidity()) return false;
       return true;
     };
+
+    const updatePaymentMethod = () => {
+      const isPayLater=form.elements.payment_method?.value==="pay_later";
+      if(payLaterAge){payLaterAge.hidden=!isPayLater;payLaterAge.querySelector("input").required=isPayLater;}
+      if(payLaterAction) payLaterAction.hidden=!isPayLater;
+      if(paypalPanel) paypalPanel.hidden=isPayLater;
+      paymentPanel?.classList.toggle("is-pay-later",isPayLater);
+    };
+    $("[data-payment-methods]",form)?.addEventListener("change",updatePaymentMethod);
+    fetch(`${payLaterApiBase()}/config`,{cache:"no-store"}).then((response)=>response.ok?response.json():null).then((config)=>{payLaterConfig=config;if(config?.enabled&&totals().total<=config.maxOrderAmount){payLaterOption.hidden=false;const days=$("[data-pay-later-days]",payLaterOption);if(days)days.textContent=config.days;}updatePaymentMethod();}).catch(()=>{payLaterOption.hidden=true;});
+    payLaterButton?.addEventListener("click",async()=>{if(!validateCheckout())return;payLaterButton.disabled=true;if(status)status.textContent="Bestelling wordt veilig geregistreerd...";try{const order=await sendPayLaterOrder(form);await finalizePayLaterOrder(form,order,{successPanel,orderStatus,showStep});if(status)status.textContent="";}catch(error){if(status)status.textContent=error.message;payLaterButton.disabled=false;}});
 
     consentSection?.addEventListener("change", () => {
       if (form.elements.terms_accepted?.checked && form.elements.return_policy_accepted?.checked) {
