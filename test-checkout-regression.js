@@ -6,6 +6,7 @@ const read = (file) => fs.readFileSync(path.join(__dirname, file), "utf8");
 const script = read("script.js");
 const checkout = read("checkout.html");
 const scentClub = read("scent-club.js");
+const style = read("style.css");
 
 const checkbox = (name) => checkout.match(new RegExp(`<input[^>]+name=["']${name}["'][^>]*>`, "i"))?.[0] || "";
 
@@ -31,6 +32,11 @@ assert.match(script, /external_id:intakeId/, "Nieuwsbrief-API en e-mail moeten h
 const businessHandler = script.slice(script.indexOf("function initBusinessForm"), script.indexOf("function initNewsletterForm"));
 assert.doesNotMatch(businessHandler, /isUnsubscribe|\/api\/newsletter\/subscribe/, "Nieuwsbriefcode staat in het zakelijke formulier");
 assert.match(checkout, /name="payment_method" value="pay_later"/);
+assert.match(checkout, /payment-method-card/);
+assert.match(checkout, /data-pay-later-age hidden/);
+assert.match(style, /\.checkout-consent\[hidden\].*display:none!important/, "Verborgen checkouttoestemmingen mogen niet door grid-styling zichtbaar worden");
+assert.match(read("index.html"), /ORIVÈA Achteraf Betalen/);
+assert.match(read("index.html"), /De betaaltermijn start zodra je bestelling is verzonden/);
 assert.match(checkbox("age_confirmed"), /name=["']age_confirmed["']/i);
 assert.match(script, /ageConfirmed:source\.elements\.age_confirmed/);
 assert.match(script, /pay_later_idempotency/);

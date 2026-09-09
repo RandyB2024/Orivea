@@ -101,28 +101,30 @@
       <h2>Betaalmethode</h2>
       <fieldset class="payment-methods" data-payment-methods>
         <legend>Kies hoe je wilt betalen</legend>
-        <label><input type="radio" name="payment_method" value="paypal" checked><span><strong>PayPal</strong><small>Direct veilig betalen via PayPal</small></span></label>
-        <label data-pay-later-option hidden><input type="radio" name="payment_method" value="pay_later"><span><strong>ORIVÈA Achteraf Betalen</strong><small>Ontvang je bestelling eerst en betaal daarna binnen <span data-pay-later-days>14</span> dagen.</small></span></label>
+        <label class="payment-method-card"><input type="radio" name="payment_method" value="paypal" checked><span class="payment-method-copy"><strong>PayPal</strong><small>Je rekent direct af via PayPal.</small></span><span class="payment-method-selected">Geselecteerd</span></label>
+        <label class="payment-method-card" data-pay-later-option hidden><input type="radio" name="payment_method" value="pay_later"><span class="payment-method-copy"><strong>ORIVÈA Achteraf Betalen</strong><small>Eerst ontvangen, daarna betalen binnen <span data-pay-later-days>14</span> dagen.</small></span><span class="payment-method-selected">Geselecteerd</span></label>
       </fieldset>
       <div class="paypal-panel paypal-premium-panel">
         <p class="payment-kicker">ORIVÈA Veilig Afrekenen</p>
         <p class="paypal-brand" aria-label="PayPal">PayPal</p>
         <h3>Veilig afrekenen met PayPal</h3>
-        <p>Bij ORIVÈA rekenen we bewust af via PayPal: snel en veilig, zonder dat je betaalgegevens met ons hoeft te delen.</p>
+        <p>Je rekent direct af via PayPal.</p>
         <ul class="payment-trust-list"><li>Veilig betalen</li><li>Snel afgerond</li><li>Je betaalgegevens blijven bij PayPal</li></ul>
         <p class="payment-route-copy">Je rondt je bestelling af in de beveiligde PayPal-omgeving. Na betaling keer je automatisch terug naar ORIVÈA.</p>
         <section class="checkout-consents" data-checkout-consents aria-labelledby="checkout-consents-title">
           <p class="checkout-consents__eyebrow">ORIVÈA Bevestiging</p>
           <h4 id="checkout-consents-title">Bevestig je bestelling</h4>
+          <p class="checkout-consent-group">Verplicht</p>
           <label class="checkout-consent"><input type="checkbox" name="terms_accepted" required><span>Ik ga akkoord met de <a href="algemene-voorwaarden.html" target="_blank" rel="noopener noreferrer">Algemene Voorwaarden</a>.</span></label>
           <label class="checkout-consent"><input type="checkbox" name="return_policy_accepted" required><span>Ik ga akkoord met het <a href="retourbeleid.html" target="_blank" rel="noopener noreferrer">Retourbeleid</a>.</span></label>
-          <label class="checkout-consent"><input type="checkbox" name="newsletter_opt_in"><span>Ik meld me aan voor de ORIVÈA nieuwsbrief.</span></label>
           <label class="checkout-consent" data-pay-later-age hidden><input type="checkbox" name="age_confirmed"><span>Ik bevestig dat ik 18 jaar of ouder ben.</span></label>
+          <p class="checkout-consent-group optional">Optioneel</p>
+          <label class="checkout-consent"><input type="checkbox" name="newsletter_opt_in"><span>Ik meld me aan voor de ORIVÈA nieuwsbrief.</span></label>
           <p class="checkout-consents__error" data-consent-error role="alert" aria-live="polite"></p>
         </section>
         <div data-paypal-buttons></div>
         <div class="pay-later-action" data-pay-later-action hidden>
-          <p>Na verwerking van je bestelling ontvang je de betaalgegevens per e-mail. De betaaltermijn begint zodra je bestelling is verzonden.</p>
+          <p><strong>ORIVÈA Achteraf Betalen</strong><br>Je ontvangt je bestelling eerst. Na verzending ontvang je per e-mail de betaalgegevens en betaal je binnen 14 dagen.</p>
           <button class="button primary full" type="button" data-pay-later-submit>Bestel en betaal later</button>
         </div>
         <p class="form-status" data-paypal-status></p>

@@ -1767,6 +1767,8 @@
       if(payLaterAction) payLaterAction.hidden=!isPayLater;
       if(paypalPanel) paypalPanel.hidden=isPayLater;
       paymentPanel?.classList.toggle("is-pay-later",isPayLater);
+      if(consentError) consentError.textContent="";
+      consentSection?.classList.remove("has-error");
     };
     $("[data-payment-methods]",form)?.addEventListener("change",updatePaymentMethod);
     fetch(`${payLaterApiBase()}/config`,{cache:"no-store"}).then((response)=>response.ok?response.json():null).then((config)=>{payLaterConfig=config;if(config?.enabled&&totals().total<=config.maxOrderAmount){payLaterOption.hidden=false;const days=$("[data-pay-later-days]",payLaterOption);if(days)days.textContent=config.days;}updatePaymentMethod();}).catch(()=>{payLaterOption.hidden=true;});
