@@ -2,7 +2,7 @@
   "name": "Glantier Nederland",
   "baseUrl": "https://www.glantier.com",
   "allowedPathPrefix": "/nl/",
-  "crawlerVersion": "2.0.0",
+  "crawlerVersion": "2.1.0",
   "allowedBrands": ["Glantier"],
   "categoryMapping": {
     "Dames": "Dames",
@@ -16,7 +16,7 @@
   "productLinkSelector": "a[href]",
   "titleSelector": "h1",
   "referenceSelector": "h1, [itemprop='sku'], body",
-  "ingredientsLabels": ["Ingrediënten", "Ingredients", "INCI", "Samenstelling", "Composition"],
+  "ingredientsLabels": ["Ingrediënten", "Ingredienten", "Ingredients", "Ingredients / INCI", "INCI", "Samenstelling", "Composition", "Składniki"],
   "descriptionSelector": "meta[name='description']",
   "imageSelector": "meta[property='og:image'], img[itemprop='image'], .product-cover img",
   "categoryPages": [

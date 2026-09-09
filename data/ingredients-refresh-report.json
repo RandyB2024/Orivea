@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-09-09T07:34:43.180Z",
+  "mode": "missing_only",
+  "inventoried": 210,
+  "official_targets": 14,
+  "found": 14,
+  "not_found": 0,
+  "parse_failed": 0,
+  "conflicts": [],
+  "products": [
+    {
+      "reference": "401",
+      "name": "Glantier Premium 401 - Floraal, Houtachtig en Muskus",
+      "url": "https://www.glantier.com/nl/premium-damesparfums/643-glantier-premium-401.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "458",
+      "name": "Glantier Parfum 458 - Floraal, Aldehyde en Citrus",
+      "url": "https://www.glantier.com/nl/glantier-damesparfums/58-glantier-458-flower-aldehyde-parfumen.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "490",
+      "name": "Glantier Parfum 490-Oriëntaals-kruidig parfum",
+      "url": "https://www.glantier.com/nl/glantier-damesparfums/90-glantier-490-orientaals-kruidig-parfum.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "501",
+      "name": "Glantier Premium 501 - Oriëntaals en Floraal",
+      "url": "https://www.glantier.com/nl/premium-damesparfums/600-glantier-premium-501-oosterse-bloemen.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "528",
+      "name": "Glantier Parfum 528-Bloemen Parfumen",
+      "url": "https://www.glantier.com/nl/glantier-damesparfums/128-glantier-parfum-528-bloemen-parfumen.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "530",
+      "name": "Glantier Parfum 530 - Floraal, Houtachtig en Muskus",
+      "url": "https://www.glantier.com/nl/glantier-damesparfums/130-glantier-parfum-530-floraal-houtachtig-en-muskus.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "542",
+      "name": "Glantier Parfum 542 - Floraal, Houtachtig en Muskus",
+      "url": "https://www.glantier.com/nl/glantier-damesparfums/255-geur-glantier-542-bloemen-en-plums.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "568",
+      "name": "Glantier Premium 568 - Chypre en Floraal",
+      "url": "https://www.glantier.com/nl/premium-damesparfums/674-glantier-premium-568-cyprus-flower.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "581",
+      "name": "Glantier Premium 581 - Oriëntaals en Varen",
+      "url": "https://www.glantier.com/nl/premium-damesparfums/998-glantier-premium-581.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "706",
+      "name": "Glantier Premium 706 - Houtachtig, Floraal en Muskus",
+      "url": "https://www.glantier.com/nl/premium-herenparfums/679-glantier-premium-706.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "729",
+      "name": "Glantier Parfum 729 - Houtachtig, Floraal en Muskus",
+      "url": "https://www.glantier.com/nl/herenparfums/164-glantier-729-perfumes.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "736",
+      "name": "Glantier Parfum 736 - Houtachtig, Floraal en Muskus",
+      "url": "https://www.glantier.com/nl/herenparfums/171-glantier-736-perfumes.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "768",
+      "name": "Glantier Parfum 768 - Houtachtig, Floraal en Muskus",
+      "url": "https://www.glantier.com/nl/herenparfums/209-glantier-768-perfumes.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    },
+    {
+      "reference": "803",
+      "name": "Glantier Premium 803 – Aromatisch en Fougère",
+      "url": "https://www.glantier.com/nl/premium-parfums/4284-glantier-premium-803-aromatisch-en-fougere.html",
+      "old_status": "approved_official",
+      "new_status": "approved_official",
+      "found": true
+    }
+  ]
+}

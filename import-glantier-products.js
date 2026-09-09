@@ -3,6 +3,7 @@ const path = require("path");
 const vm = require("vm");
 const cheerio = require("cheerio");
 const { isAllowedBrand, classify } = require("./glantier-catalog-core");
+const { extractIngredients } = require("./glantier-ingredients");
 
 const ROOT = __dirname;
 const sourceConfig = JSON.parse(fs.readFileSync(path.join(ROOT, "sources", "glantier.json"), "utf8"));
@@ -151,12 +152,11 @@ function parseProductPage(payload, hint) {
   const familyFromTitle = title.match(/\s[-–]\s(.+?)$/)?.[1];
   const familyMatch = body.match(/Geurgroep\s*:\s*([^.!?€]{2,80})/i);
   const volumeMatch = body.match(/\b(\d+(?:[.,]\d+)?)\s*ml\b/i);
-  const ingredientLabels = sourceConfig.ingredientsLabels.map((label) => label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
-  const ingredientsMatch = body.match(new RegExp(`(?:${ingredientLabels})\\s*:\\s*(.*?)(?=Referentie|ean13|Grade|Specifieke referenties|$)`, "i"));
+  const ingredientResult = extractIngredients(payload.html);
   const imageNode = $(sourceConfig.imageSelector).first();
   const image = jsonLd.image?.[0] || jsonLd.image || imageNode.attr("content") || imageNode.attr("src");
   const description = $(sourceConfig.descriptionSelector).attr("content") || jsonLd.description || sectionText($, /^Glantier Parfum \d+/i);
-  const ingredientsSourceText = ingredientsMatch ? clean(ingredientsMatch[1]).slice(0, 4000) : null;
+  const ingredientsSourceText = ingredientResult.ingredients_source_text;
   return {
     catalog_id: clean(hint.category).toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + (new URL(payload.url).pathname.match(/\/(\d+)-/)?.[1] || Buffer.from(payload.url).toString("base64url").slice(-12)),
     brand: brandVerified ? "Glantier" : brand || null,
@@ -179,8 +179,9 @@ function parseProductPage(payload, hint) {
     short_description_source: description ? clean(description).slice(0, 1000) : null,
     description_source: description ? clean(description).slice(0, 1000) : null,
     ingredients_source_text: ingredientsSourceText,
-    ingredients: ingredientsSourceText ? ingredientsSourceText.split(",").map(clean).filter(Boolean) : [],
-    ingredients_status: ingredientsMatch ? "approved_official" : "not_found",
+    ingredients: ingredientResult.ingredients,
+    ingredients_status: ingredientResult.ingredients_status,
+    ingredients_extraction_source: ingredientResult.extraction_source,
     premium: hint.premium,
     image_url: absoluteUrl(image, payload.url),
     official_product_url: payload.url,
