@@ -29,7 +29,8 @@ export async function onRequestPost({ request, env }) {
         order.member_reference = memberCode;
       }
     }
-    if (order.total <= 0 || order.total > config.maxOrderAmount) return json({ error: "Achteraf betalen is voor deze bestelling niet beschikbaar. Kies een andere betaalmethode." }, 409);
+    const finalTotalCents = Math.round(order.total * 100);
+    if (finalTotalCents <= 0 || finalTotalCents > config.maxOrderCents) return json({ error: "Achteraf betalen is alleen beschikbaar voor bestellingen tot €74,99. Kies PayPal om verder te gaan." }, 409);
     const open = await db.prepare("SELECT order_number FROM pay_later_orders WHERE email_normalized=? AND payment_status='unpaid' AND pay_later_status NOT IN ('rejected','cancelled','paid') LIMIT 1").bind(order.customer.email).first();
     if (open) return json({ error: "Achteraf betalen is voor deze bestelling niet beschikbaar. Kies een andere betaalmethode." }, 409);
     const orderNumber = newOrderNumber();

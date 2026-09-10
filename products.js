@@ -7,6 +7,12 @@ window.ORIVEA_CONFIG = {
   "paypalCurrency": "EUR",
   "paypalEnabledFunding": [],
   "currency": "EUR",
+  "checkout": {
+    "payLaterEnabled": true,
+    "payLaterMaxCents": 7499,
+    "payLaterDays": 14,
+    "payLaterCountry": "NL"
+  },
   "emailJs": {
     "serviceId": "service_r55nwxz",
     "publicKey": "w3x9SY9OqatVgYJOw",

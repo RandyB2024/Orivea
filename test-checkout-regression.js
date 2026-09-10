@@ -9,6 +9,12 @@ const scentClub = read("scent-club.js");
 const style = read("style.css");
 
 const checkbox = (name) => checkout.match(new RegExp(`<input[^>]+name=["']${name}["'][^>]*>`, "i"))?.[0] || "";
+const payLaterEligible = (totalCents) => totalCents <= 7499;
+
+assert.equal(payLaterEligible(7498), true);
+assert.equal(payLaterEligible(7499), true);
+assert.equal(payLaterEligible(7500), false);
+assert.equal(payLaterEligible(7501), false);
 
 assert.match(checkbox("terms_accepted"), /\brequired\b/i, "Voorwaarden moeten verplicht blijven");
 assert.match(checkbox("return_policy_accepted"), /\brequired\b/i, "Retourbeleid moet verplicht blijven");
@@ -33,6 +39,7 @@ const businessHandler = script.slice(script.indexOf("function initBusinessForm")
 assert.doesNotMatch(businessHandler, /isUnsubscribe|\/api\/newsletter\/subscribe/, "Nieuwsbriefcode staat in het zakelijke formulier");
 assert.match(checkout, /name="payment_method" value="pay_later"/);
 assert.match(checkout, /payment-method-card/);
+assert.doesNotMatch(checkout, /data-pay-later-option hidden/, "Achteraf betalen moet zonder API-response renderen");
 assert.match(checkout, /data-pay-later-age hidden/);
 assert.match(style, /\.checkout-consent\[hidden\].*display:none!important/, "Verborgen checkouttoestemmingen mogen niet door grid-styling zichtbaar worden");
 assert.doesNotMatch(read("index.html"), /home-payment-trust/, "Homepage mag geen dominant betaalmogelijkhedenblok bevatten");
@@ -43,7 +50,10 @@ assert.match(script, /payment_status:"unpaid"/);
 assert.match(script, /Achteraf-order EmailJS fallback mislukt/);
 const payLaterRoute = read("functions/api/pay-later/create-order.js");
 assert.match(payLaterRoute, /validateCheckout\(body\)/, "Backend moet prijzen opnieuw berekenen");
-assert.match(payLaterRoute, /order\.total > config\.maxOrderAmount/);
+assert.match(payLaterRoute, /finalTotalCents > config\.maxOrderCents/, "Backend moet de grens veilig in centen controleren");
+assert.match(read("products.js"), /"payLaterMaxCents": 7499/, "Publieke checkoutconfig mist de grens van €74,99");
+assert.match(script, /Math\.round\(totals\(\)\.total \* 100\)/, "Frontend moet het definitieve totaal in centen controleren");
+assert.match(script, /checkoutLink\.textContent = "Naar de kassa"/, "Winkelwagen-CTA moet naar de kassa verwijzen");
 assert.match(payLaterRoute, /pay_later_orders WHERE email_normalized=/);
 assert.match(payLaterRoute, /pay_later_order_created/);
 assert.doesNotMatch(payLaterRoute, /PAY_LATER_IBAN/, "IBAN mag niet naar publieke orderresponse lekken");

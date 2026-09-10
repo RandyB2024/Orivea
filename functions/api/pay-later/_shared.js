@@ -10,7 +10,8 @@ export function payLaterConfig(env) {
   return {
     enabled: enabled(env.PAY_LATER_ENABLED),
     days: Math.max(1, numberEnv(env, "PAY_LATER_DAYS", 14)),
-    maxOrderAmount: Math.max(0, numberEnv(env, "PAY_LATER_MAX_ORDER_AMOUNT", 100)),
+    maxOrderAmount: Math.min(74.99, Math.max(0, numberEnv(env, "PAY_LATER_MAX_ORDER_AMOUNT", 74.99))),
+    maxOrderCents: 7499,
     country: String(env.PAY_LATER_COUNTRY || "NL").toUpperCase(),
     minAge: Math.max(18, numberEnv(env, "PAY_LATER_MIN_AGE", 18)),
     manualApproval: enabled(env.PAY_LATER_MANUAL_APPROVAL, true),
@@ -29,6 +30,7 @@ export const publicPayLaterConfig = (config) => ({
   enabled: config.enabled && config.registrationReady,
   days: config.days,
   maxOrderAmount: config.maxOrderAmount,
+  maxOrderCents: config.maxOrderCents,
   country: config.country,
   minAge: config.minAge,
   manualApproval: config.manualApproval

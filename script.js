@@ -12,6 +12,12 @@
     currency: CONFIG.paypalCurrency || CONFIG.currency || "EUR",
     intent: "capture"
   };
+  const CHECKOUT_CONFIG = {
+    payLaterEnabled: CONFIG.checkout?.payLaterEnabled !== false,
+    payLaterMaxCents: Number(CONFIG.checkout?.payLaterMaxCents || 7499),
+    payLaterDays: Number(CONFIG.checkout?.payLaterDays || 14),
+    payLaterCountry: String(CONFIG.checkout?.payLaterCountry || "NL").toUpperCase()
+  };
   const ORDER_EMAILJS_SERVICE_ID = "service_r55nwxz";
   const ORDER_EMAILJS_TEMPLATE_ID = "template_ehokbkn";
   const ORDER_EMAILJS_PUBLIC_KEY = "w3x9SY9OqatVgYJOw";
@@ -204,6 +210,7 @@
     if (checkoutItems) checkoutItems.innerHTML = data.lines.length ? data.lines.map(cartLineHtml).join("") : '<p class="empty">Je winkelwagen is nog leeg.</p>';
     const checkoutTotals = $("[data-checkout-totals]");
     if (checkoutTotals) checkoutTotals.innerHTML = totalsHtml(data);
+    document.dispatchEvent(new CustomEvent("orivea:cart-updated", { detail: data }));
   }
 
   function openCart() {
@@ -1590,81 +1597,21 @@
   function initQuickCheckout() {
     const drawerPanel = $(".drawer-panel");
     if (!drawerPanel || drawerPanel.querySelector("[data-quick-checkout-open]")) return;
-    const checkoutLink = drawerPanel.querySelector('a[href="checkout.html"]');
+    const checkoutLink = drawerPanel.querySelector('a[href$="checkout.html"]');
     if (!checkoutLink) return;
     if (!drawerPanel.querySelector("[data-continue-shopping]")) {
       const continueLink = document.createElement("a");
       continueLink.className = "button ghost full continue-shopping-button";
-      continueLink.href = "catalogus.html";
+      continueLink.href = location.pathname.includes("/product/") ? "../catalogus.html" : "catalogus.html";
       continueLink.dataset.continueShopping = "true";
       continueLink.textContent = "Verder winkelen";
       checkoutLink.insertAdjacentElement("beforebegin", continueLink);
     }
     const quickBlock = document.createElement("section");
-    quickBlock.className = "quick-cart-pay";
-    checkoutLink.textContent = "Veilig afrekenen";
-    quickBlock.innerHTML = `<h3>ORIVÈA Veilig Afrekenen</h3><p>Voor jouw veiligheid verwerken wij betalingen via PayPal.</p><button class="button ghost full" type="button" data-quick-checkout-open>Naar veilige betaling</button>`;
+    quickBlock.className = "quick-cart-pay cart-payment-info";
+    checkoutLink.textContent = "Naar de kassa";
+    quickBlock.innerHTML = `<h3>Betaalmogelijkheden</h3><p>Betaal direct via PayPal of kies, bij bestellingen tot €74,99, voor ORIVÈA Achteraf Betalen.</p>`;
     checkoutLink.insertAdjacentElement("afterend", quickBlock);
-
-    quickBlock.querySelector("[data-quick-checkout-open]").addEventListener("click", () => {
-      const data = totals();
-      if (!checkoutAllowedDuringPause(data)) {
-        const message = quickBlock.querySelector("p");
-        if (message) message.textContent = SALES_PAUSED_MESSAGE;
-        return;
-      }
-      const message = quickBlock.querySelector("p");
-      if (!data.lines.length) {
-        if (message) message.textContent = "Je winkelwagen is nog leeg.";
-        return;
-      }
-      if (message) message.textContent = "Veilig, snel en vertrouwd.";
-      closeCart();
-      const modal = quickCheckoutModal();
-      const form = $("[data-quick-form]", modal);
-      const paypalTarget = $("[data-quick-paypal]", modal);
-      const status = $("[data-quick-status]", modal);
-      const totalsTarget = $("[data-quick-totals]", modal);
-      let quickFormData = null;
-      let paypalRendered = false;
-
-      setupAddressAutocomplete(form);
-      totalsTarget.innerHTML = totalsHtml(data);
-      modal.addEventListener("click", (event) => {
-        if (event.target === modal || event.target.closest("[data-quick-close]")) modal.remove();
-      });
-
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const hiddenAddress = form.querySelector("[data-address-result][hidden]");
-        if (hiddenAddress) {
-          hiddenAddress.hidden = false;
-          $$("input", hiddenAddress).forEach((field) => { field.disabled = false; });
-          const addressStatus = $("[data-address-status]", form);
-          if (addressStatus) addressStatus.textContent = "Controleer je adres of vul het handmatig aan.";
-        }
-        if (!form.reportValidity()) return;
-        quickFormData = checkoutFormData(form);
-        paypalTarget.hidden = false;
-        if (paypalRendered) return;
-        try {
-          const paypal = await loadPayPalSdk();
-          paypalRendered = true;
-          status.textContent = "";
-          await renderPayPalFundingButtons({
-            paypal,
-            target: paypalTarget,
-            source: () => quickFormData,
-            status,
-            validate: () => Boolean(quickFormData) && form.reportValidity(),
-            onSuccess: { redirect: "bedankt.html" }
-          });
-      } catch (error) {
-        console.warn("Snelle PayPal checkout kon niet laden", error);
-        status.textContent = paypalUnavailableMessage();
-      }
-      });
-    });
   }
 
   function openPremiumModal(product) {
@@ -1693,12 +1640,35 @@
     const consentError = $("[data-consent-error]", form);
     const params = new URLSearchParams(window.location.search);
     const payLaterOption = $("[data-pay-later-option]",form);
+    const payLaterCopy = $("[data-pay-later-copy]",form);
+    const payLaterUnavailable = $("[data-pay-later-unavailable]",form);
     const payLaterAge = $("[data-pay-later-age]",form);
     const payLaterAction = $("[data-pay-later-action]",form);
     const paypalPanel = $("[data-paypal-buttons]",form);
     const payLaterButton = $("[data-pay-later-submit]",form);
     const paymentPanel = $(".paypal-premium-panel",form);
-    let payLaterConfig = null;
+    let payLaterConfig = { enabled: CHECKOUT_CONFIG.payLaterEnabled, days: CHECKOUT_CONFIG.payLaterDays, maxOrderCents: CHECKOUT_CONFIG.payLaterMaxCents, country: CHECKOUT_CONFIG.payLaterCountry };
+
+    const refreshPaymentAvailability = () => {
+      const finalTotalCents = Math.round(totals().total * 100);
+      const eligibleByAmount = finalTotalCents <= payLaterConfig.maxOrderCents;
+      const payLaterVisible = payLaterConfig.enabled;
+      const input = payLaterOption?.querySelector('input[value="pay_later"]');
+      if (!payLaterOption || !input) return;
+      payLaterOption.hidden = !payLaterVisible;
+      input.disabled = !eligibleByAmount;
+      payLaterOption.classList.toggle("is-unavailable", !eligibleByAmount);
+      payLaterOption.setAttribute("aria-disabled", String(!eligibleByAmount));
+      if (payLaterCopy) payLaterCopy.textContent = eligibleByAmount
+        ? `Eerst ontvangen, daarna binnen ${payLaterConfig.days} dagen betalen.`
+        : "Beschikbaar voor bestellingen tot €74,99.";
+      if (payLaterUnavailable) payLaterUnavailable.hidden = eligibleByAmount;
+      if (!eligibleByAmount && form.elements.payment_method?.value === "pay_later") {
+        form.querySelector('input[name="payment_method"][value="paypal"]').checked = true;
+        if (status) status.textContent = "Je bestelling is nu €75,00 of hoger. Achteraf betalen is daarom niet meer beschikbaar. Kies PayPal om verder te gaan.";
+      }
+      updatePaymentMethod();
+    };
 
     const showStep = (next) => {
       step = Math.min(5, Math.max(1, next));
@@ -1706,7 +1676,7 @@
       $$('[data-step-tab]').forEach((el) => el.classList.toggle('active', Number(el.dataset.stepTab) === step));
       renderCartState();
       if (step === 4) {
-        if(payLaterConfig){payLaterOption.hidden=!(payLaterConfig.enabled&&totals().total<=payLaterConfig.maxOrderAmount);if(payLaterOption.hidden&&form.elements.payment_method?.value==="pay_later"){form.querySelector('input[name="payment_method"][value="paypal"]').checked=true;updatePaymentMethod();}}
+        refreshPaymentAvailability();
         renderPayPalButtons();
       }
     };
@@ -1771,7 +1741,12 @@
       consentSection?.classList.remove("has-error");
     };
     $("[data-payment-methods]",form)?.addEventListener("change",updatePaymentMethod);
-    fetch(`${payLaterApiBase()}/config`,{cache:"no-store"}).then((response)=>response.ok?response.json():null).then((config)=>{payLaterConfig=config;if(config?.enabled&&totals().total<=config.maxOrderAmount){payLaterOption.hidden=false;const days=$("[data-pay-later-days]",payLaterOption);if(days)days.textContent=config.days;}updatePaymentMethod();}).catch(()=>{payLaterOption.hidden=true;});
+    document.addEventListener("orivea:cart-updated", refreshPaymentAvailability);
+    refreshPaymentAvailability();
+    fetch(`${payLaterApiBase()}/config`,{cache:"no-store"}).then((response)=>response.ok?response.json():null).then((config)=>{
+      if (Number.isFinite(Number(config?.days))) payLaterConfig.days = Number(config.days);
+      refreshPaymentAvailability();
+    }).catch(()=>refreshPaymentAvailability());
     payLaterButton?.addEventListener("click",async()=>{if(!validateCheckout())return;payLaterButton.disabled=true;if(status)status.textContent="Bestelling wordt veilig geregistreerd...";try{const order=await sendPayLaterOrder(form);await finalizePayLaterOrder(form,order,{successPanel,orderStatus,showStep});if(status)status.textContent="";}catch(error){if(status)status.textContent=error.message;payLaterButton.disabled=false;}});
 
     consentSection?.addEventListener("change", () => {
