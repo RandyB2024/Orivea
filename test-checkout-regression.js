@@ -46,6 +46,10 @@ assert.doesNotMatch(read("index.html"), /home-payment-trust/, "Homepage mag geen
 assert.match(checkbox("age_confirmed"), /name=["']age_confirmed["']/i);
 assert.match(script, /ageConfirmed:source\.elements\.age_confirmed/);
 assert.match(script, /pay_later_idempotency/);
+assert.match(checkout, /data-paypal-detail/);
+assert.match(script, /paypalDetail\.hidden=isPayLater/);
+assert.match(script, /registration_source: "email_fallback"/);
+assert.match(script, /Je bestelling kon niet worden verwerkt\. Probeer het opnieuw\./);
 assert.match(script, /payment_status:"unpaid"/);
 assert.match(script, /Achteraf-order EmailJS fallback mislukt/);
 const payLaterRoute = read("functions/api/pay-later/create-order.js");

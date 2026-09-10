@@ -1094,25 +1094,67 @@
   }
 
   function payLaterApiBase() {
-    return (CONFIG.payLaterApiBase || "/api/pay-later").replace(/\/$/, "");
+    const configured = String(CONFIG.payLaterApiBase || "/api/pay-later").trim();
+    try {
+      return new URL(configured || "/api/pay-later", window.location.origin).href.replace(/\/$/, "");
+    } catch (error) {
+      console.error("Ongeldige achteraf-betaalendpoint; standaardroute wordt gebruikt:", configured, error);
+      return `${window.location.origin}/api/pay-later`;
+    }
+  }
+
+  function clientPayLaterOrder(source) {
+    const current = totals();
+    const suffix = typeof window.crypto?.randomUUID === "function"
+      ? window.crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase()
+      : `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`.toUpperCase();
+    return {
+      order_number: `ORV-${new Date().getUTCFullYear()}-${suffix}`,
+      subtotal: current.subtotal,
+      shipping_cost: current.shipping,
+      total: current.total,
+      items: current.lines.map((line) => ({
+        product_name: line.product.naam,
+        variant_label: [line.product.type, line.product.inhoud].filter(Boolean).join(" - ") || line.variant || "Signature",
+        quantity: line.qty,
+        line_total: money(line.product.prijs * line.qty)
+      })),
+      registration_source: "email_fallback"
+    };
+  }
+
+  function payLaterRequestId() {
+    let stored = "";
+    try { stored = sessionStorage.getItem("orivea_pay_later_idempotency") || ""; } catch (error) { console.warn("Achteraf-betaalsessie kon niet worden gelezen:", error); }
+    if (stored) return stored;
+    const generated = typeof window.crypto?.randomUUID === "function"
+      ? window.crypto.randomUUID()
+      : `pay-later-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    try { sessionStorage.setItem("orivea_pay_later_idempotency", generated); } catch (error) { console.warn("Achteraf-betaalsessie kon niet worden opgeslagen:", error); }
+    return generated;
   }
 
   async function sendPayLaterOrder(source) {
     const current = totals();
     const formData = normalizeOrderFormData(source);
-    let idempotencyKey = sessionStorage.getItem("orivea_pay_later_idempotency");
-    if (!idempotencyKey) {
-      idempotencyKey = crypto.randomUUID();
-      sessionStorage.setItem("orivea_pay_later_idempotency", idempotencyKey);
+    const idempotencyKey = payLaterRequestId();
+    try {
+      const response = await fetch(`${payLaterApiBase()}/create-order`, {
+        method: "POST",
+        headers: { "Content-Type":"application/json", "Idempotency-Key":idempotencyKey },
+        body: JSON.stringify({ idempotencyKey, country:"NL", ageConfirmed:source.elements.age_confirmed?.checked===true, customer:{name:formData.customer_name,email:formData.customer_email,phone:formData.customer_phone,address:formData.customer_address}, items:current.lines.map((line)=>({id:line.product.id,variant:line.variant||line.product.variant||"signature",quantity:line.qty})), newsletterOptIn:formData.newsletter_opt_in==="on"||formData.newsletter_opt_in===true, termsAccepted:formData.terms_accepted==="on"||formData.terms_accepted===true, returnPolicyAccepted:formData.return_policy_accepted==="on"||formData.return_policy_accepted===true, memberCode:formData.scent_club_member_code||"", note:formData.note||"" })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (response.status < 500 && response.status !== 404) throw new Error(payload.error || "Achteraf betalen is niet beschikbaar.");
+        throw new TypeError(payload.error || `Orderregistratie niet bereikbaar (${response.status}).`);
+      }
+      return { ...payload.order, registration_source: "api" };
+    } catch (error) {
+      if (!(error instanceof TypeError) && !(error instanceof DOMException)) throw error;
+      console.warn("Achteraf-order API niet bereikbaar; EmailJS-fallback wordt gebruikt:", error);
+      return clientPayLaterOrder(source);
     }
-    const response = await fetch(`${payLaterApiBase()}/create-order`, {
-      method: "POST",
-      headers: { "Content-Type":"application/json", "Idempotency-Key":idempotencyKey },
-      body: JSON.stringify({ idempotencyKey, country:"NL", ageConfirmed:source.elements.age_confirmed?.checked===true, customer:{name:formData.customer_name,email:formData.customer_email,phone:formData.customer_phone,address:formData.customer_address}, items:current.lines.map((line)=>({id:line.product.id,variant:line.variant||line.product.variant||"signature",quantity:line.qty})), newsletterOptIn:formData.newsletter_opt_in==="on"||formData.newsletter_opt_in===true, termsAccepted:formData.terms_accepted==="on"||formData.terms_accepted===true, returnPolicyAccepted:formData.return_policy_accepted==="on"||formData.return_policy_accepted===true, memberCode:formData.scent_club_member_code||"", note:formData.note||"" })
-    });
-    const payload = await response.json();
-    if (!response.ok) throw new Error(payload.error || "Achteraf betalen is niet beschikbaar.");
-    return payload.order;
   }
 
   async function finalizePayLaterOrder(form, serverOrder, targets={}) {
@@ -1125,7 +1167,11 @@
       emailPayload.orivea_data=machineDataBlock({type:"order",request_id:payload.order_number,order_number:payload.order_number,payment_method:"pay_later",payment_status:"unpaid",customer_name:payload.customer_name,customer_email:payload.customer_email,customer_phone:payload.customer_phone,customer_address:payload.customer_address,items:payload.order_items,subtotal:payload.subtotal,shipping:payload.shipping_cost,total:payload.total,created_at:new Date().toISOString()});
       await window.emailjs.send(ORDER_EMAILJS_SERVICE_ID,ORDER_EMAILJS_TEMPLATE_ID,emailPayload,ORDER_EMAILJS_PUBLIC_KEY);
       payload.email_status="SENT";
-    } catch(error) { payload.email_status="FAILED"; console.warn("Achteraf-order EmailJS fallback mislukt; serverorder blijft geregistreerd:",error); }
+    } catch(error) {
+      payload.email_status="FAILED";
+      console.warn("Achteraf-order EmailJS fallback mislukt:",error);
+      if (serverOrder.registration_source === "email_fallback") throw new Error("De bestelling kon niet via de reserveverbinding worden geregistreerd.");
+    }
     storeOrder(payload); await processOrderNewsletterOptIn(payload); localStorage.removeItem(CART_KEY); renderCartState(); sessionStorage.removeItem("orivea_pay_later_idempotency");
     if(targets.successPanel) targets.successPanel.hidden=false;
     const copy=$("[data-success-payment-copy]"); if(copy) copy.textContent="Je bestelling wordt eerst door ORIVÈA verwerkt. Na verzending ontvang je de betaalgegevens en de uiterste betaaldatum.";
@@ -1645,6 +1691,7 @@
     const payLaterAge = $("[data-pay-later-age]",form);
     const payLaterAction = $("[data-pay-later-action]",form);
     const paypalPanel = $("[data-paypal-buttons]",form);
+    const paypalDetail = $("[data-paypal-detail]",form);
     const payLaterButton = $("[data-pay-later-submit]",form);
     const paymentPanel = $(".paypal-premium-panel",form);
     let payLaterConfig = { enabled: CHECKOUT_CONFIG.payLaterEnabled, days: CHECKOUT_CONFIG.payLaterDays, maxOrderCents: CHECKOUT_CONFIG.payLaterMaxCents, country: CHECKOUT_CONFIG.payLaterCountry };
@@ -1733,9 +1780,10 @@
 
     const updatePaymentMethod = () => {
       const isPayLater=form.elements.payment_method?.value==="pay_later";
-      if(payLaterAge){payLaterAge.hidden=!isPayLater;payLaterAge.querySelector("input").required=isPayLater;}
+      if(payLaterAge){const ageInput=payLaterAge.querySelector("input");payLaterAge.hidden=!isPayLater;ageInput.required=isPayLater;if(!isPayLater){ageInput.checked=false;ageInput.setCustomValidity("");}}
       if(payLaterAction) payLaterAction.hidden=!isPayLater;
       if(paypalPanel) paypalPanel.hidden=isPayLater;
+      if(paypalDetail) paypalDetail.hidden=isPayLater;
       paymentPanel?.classList.toggle("is-pay-later",isPayLater);
       if(consentError) consentError.textContent="";
       consentSection?.classList.remove("has-error");
@@ -1747,7 +1795,7 @@
       if (Number.isFinite(Number(config?.days))) payLaterConfig.days = Number(config.days);
       refreshPaymentAvailability();
     }).catch(()=>refreshPaymentAvailability());
-    payLaterButton?.addEventListener("click",async()=>{if(!validateCheckout())return;payLaterButton.disabled=true;if(status)status.textContent="Bestelling wordt veilig geregistreerd...";try{const order=await sendPayLaterOrder(form);await finalizePayLaterOrder(form,order,{successPanel,orderStatus,showStep});if(status)status.textContent="";}catch(error){if(status)status.textContent=error.message;payLaterButton.disabled=false;}});
+    payLaterButton?.addEventListener("click",async()=>{if(!validateCheckout())return;payLaterButton.disabled=true;if(status)status.textContent="Bestelling wordt veilig geregistreerd...";try{const order=await sendPayLaterOrder(form);await finalizePayLaterOrder(form,order,{successPanel,orderStatus,showStep});if(status)status.textContent="";}catch(error){console.error("Achteraf bestellen mislukt:",error,error?.stack);if(status)status.textContent="Je bestelling kon niet worden verwerkt. Probeer het opnieuw.";payLaterButton.disabled=false;}});
 
     consentSection?.addEventListener("change", () => {
       if (form.elements.terms_accepted?.checked && form.elements.return_policy_accepted?.checked) {

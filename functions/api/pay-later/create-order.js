@@ -35,7 +35,7 @@ export async function onRequestPost({ request, env }) {
     if (open) return json({ error: "Achteraf betalen is voor deze bestelling niet beschikbaar. Kies een andere betaalmethode." }, 409);
     const orderNumber = newOrderNumber();
     const now = new Date().toISOString();
-    const orderPayload = { ...order, order_number:orderNumber, created_at:now, payment_method:"pay_later", payment_status:"unpaid", order_status:config.manualApproval?"review_required":"approved", pay_later_status:config.manualApproval?"review_required":"approved", pay_later_due_date:null, age_confirmed:true, pay_later_days:config.days };
+    const orderPayload = { ...order, order_number:orderNumber, customer_name:order.customer.name, customer_email:order.customer.email, customer_phone:order.customer.phone, shipping_address:order.customer.address, created_at:now, payment_method:"pay_later", payment_status:"unpaid", order_status:config.manualApproval?"review_required":"approved", pay_later_status:config.manualApproval?"review_required":"approved", pay_later_due_date:null, age_confirmed:true, pay_later_days:config.days };
     await db.batch([
       db.prepare("INSERT INTO commerce_orders (order_number,idempotency_key,payload,payment_status,order_status,created_at,updated_at) VALUES (?,?,?,?,?,?,?)").bind(orderNumber,idempotencyKey,JSON.stringify(orderPayload),"unpaid",orderPayload.order_status,now,now),
       db.prepare("INSERT INTO pay_later_orders (order_number,email_normalized,customer_id,payment_status,order_status,pay_later_status,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)").bind(orderNumber,order.customer.email,order.scent_club_member_id||null,"unpaid",orderPayload.order_status,orderPayload.pay_later_status,now,now)
