@@ -14,6 +14,7 @@
   };
   const CHECKOUT_CONFIG = {
     payLaterEnabled: CONFIG.checkout?.payLaterEnabled !== false,
+    payLaterApiEnabled: CONFIG.checkout?.payLaterApiEnabled === true,
     payLaterMaxCents: Number(CONFIG.checkout?.payLaterMaxCents || 7499),
     payLaterDays: Number(CONFIG.checkout?.payLaterDays || 14),
     payLaterCountry: String(CONFIG.checkout?.payLaterCountry || "NL").toUpperCase()
@@ -1138,12 +1139,19 @@
     const current = totals();
     const formData = normalizeOrderFormData(source);
     const idempotencyKey = payLaterRequestId();
+    console.log("[PAY_LATER] payload built", { request_id: idempotencyKey, item_count: current.lines.length, total_cents: Math.round(current.total * 100) });
+    if (!CHECKOUT_CONFIG.payLaterApiEnabled) {
+      console.log("[PAY_LATER] fallback started", { reason: "static_hosting" });
+      return clientPayLaterOrder(source);
+    }
     try {
+      console.log("[PAY_LATER] api request started", { endpoint: `${payLaterApiBase()}/create-order` });
       const response = await fetch(`${payLaterApiBase()}/create-order`, {
         method: "POST",
         headers: { "Content-Type":"application/json", "Idempotency-Key":idempotencyKey },
         body: JSON.stringify({ idempotencyKey, country:"NL", ageConfirmed:source.elements.age_confirmed?.checked===true, customer:{name:formData.customer_name,email:formData.customer_email,phone:formData.customer_phone,address:formData.customer_address}, items:current.lines.map((line)=>({id:line.product.id,variant:line.variant||line.product.variant||"signature",quantity:line.qty})), newsletterOptIn:formData.newsletter_opt_in==="on"||formData.newsletter_opt_in===true, termsAccepted:formData.terms_accepted==="on"||formData.terms_accepted===true, returnPolicyAccepted:formData.return_policy_accepted==="on"||formData.return_policy_accepted===true, memberCode:formData.scent_club_member_code||"", note:formData.note||"" })
       });
+      console.log("[PAY_LATER] api response status", response.status);
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
         if (response.status < 500 && response.status !== 404) throw new Error(payload.error || "Achteraf betalen is niet beschikbaar.");
@@ -1153,7 +1161,30 @@
     } catch (error) {
       if (!(error instanceof TypeError) && !(error instanceof DOMException)) throw error;
       console.warn("Achteraf-order API niet bereikbaar; EmailJS-fallback wordt gebruikt:", error);
+      console.log("[PAY_LATER] fallback started", { reason: "api_unavailable" });
       return clientPayLaterOrder(source);
+    }
+  }
+
+  async function sendPayLaterEmail(templateParams) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    try {
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: ORDER_EMAILJS_SERVICE_ID,
+          template_id: ORDER_EMAILJS_TEMPLATE_ID,
+          user_id: ORDER_EMAILJS_PUBLIC_KEY,
+          template_params: templateParams
+        }),
+        signal: controller.signal
+      });
+      if (!response.ok) throw new Error(`EmailJS orderregistratie gaf HTTP ${response.status}.`);
+      return { status: response.status, text: await response.text() };
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
@@ -1162,11 +1193,11 @@
     Object.assign(payload,{order_number:serverOrder.order_number,subtotal:money(serverOrder.subtotal),shipping_cost:serverOrder.shipping_cost===0?"Gratis":money(serverOrder.shipping_cost),total:money(serverOrder.total),payment_status:"unpaid",payment_method:"pay_later",order_status:"review_required",pay_later_status:"review_required",pay_later_due_date:null,request_id:serverOrder.order_number,age_confirmed:true});
     payload.order_items=(serverOrder.items||[]).map((item)=>`${item.quantity}x ${item.product_name} - ${item.variant_label} - ${money(item.line_total)}`).join("\n");
     try {
-      await initEmailJs(ORDER_EMAILJS_PUBLIC_KEY);
       const emailPayload=publicOrderPayload(payload);
-      emailPayload.orivea_data=machineDataBlock({type:"order",request_id:payload.order_number,order_number:payload.order_number,payment_method:"pay_later",payment_status:"unpaid",customer_name:payload.customer_name,customer_email:payload.customer_email,customer_phone:payload.customer_phone,customer_address:payload.customer_address,items:payload.order_items,subtotal:payload.subtotal,shipping:payload.shipping_cost,total:payload.total,created_at:new Date().toISOString()});
-      await window.emailjs.send(ORDER_EMAILJS_SERVICE_ID,ORDER_EMAILJS_TEMPLATE_ID,emailPayload,ORDER_EMAILJS_PUBLIC_KEY);
+      emailPayload.orivea_data=machineDataBlock({type:"pay_later_order",request_id:payload.order_number,order_number:payload.order_number,payment_method:"pay_later",payment_status:"unpaid",order_status:"review_required",customer_name:payload.customer_name,customer_email:payload.customer_email,customer_phone:payload.customer_phone,customer_address:payload.customer_address,items:payload.order_items,subtotal:payload.subtotal,discount:payload.discount_amount||0,shipping:payload.shipping_cost,total:payload.total,terms_accepted:payload.terms_accepted===true,return_policy_accepted:payload.return_policy_accepted===true,age_confirmed:true,newsletter_opt_in:payload.newsletter_opt_in===true,created_at:new Date().toISOString()});
+      await sendPayLaterEmail(emailPayload);
       payload.email_status="SENT";
+      console.log("[PAY_LATER] order registered", { order_number: payload.order_number, via: serverOrder.registration_source });
     } catch(error) {
       payload.email_status="FAILED";
       console.warn("Achteraf-order EmailJS fallback mislukt:",error);
@@ -1176,7 +1207,7 @@
     if(targets.successPanel) targets.successPanel.hidden=false;
     const copy=$("[data-success-payment-copy]"); if(copy) copy.textContent="Je bestelling wordt eerst door ORIVÈA verwerkt. Na verzending ontvang je de betaalgegevens en de uiterste betaaldatum.";
     if(targets.orderStatus) targets.orderStatus.textContent=`Order ${payload.order_number} is ontvangen. Totaal ${payload.total}. Betaling: achteraf betalen.`;
-    targets.showStep?.(5); return payload;
+    targets.showStep?.(5); console.log("[PAY_LATER] success", { order_number: payload.order_number }); return payload;
   }
 
   function paypalFundingStyle(fundingSource) {
@@ -1795,7 +1826,7 @@
       if (Number.isFinite(Number(config?.days))) payLaterConfig.days = Number(config.days);
       refreshPaymentAvailability();
     }).catch(()=>refreshPaymentAvailability());
-    payLaterButton?.addEventListener("click",async()=>{if(!validateCheckout())return;payLaterButton.disabled=true;if(status)status.textContent="Bestelling wordt veilig geregistreerd...";try{const order=await sendPayLaterOrder(form);await finalizePayLaterOrder(form,order,{successPanel,orderStatus,showStep});if(status)status.textContent="";}catch(error){console.error("Achteraf bestellen mislukt:",error,error?.stack);if(status)status.textContent="Je bestelling kon niet worden verwerkt. Probeer het opnieuw.";payLaterButton.disabled=false;}});
+    payLaterButton?.addEventListener("click",async()=>{if(!validateCheckout())return;console.log("[PAY_LATER] validation ok");const originalLabel=payLaterButton.textContent;payLaterButton.disabled=true;payLaterButton.textContent="Bestelling verwerken...";if(status)status.textContent="Bestelling wordt veilig geregistreerd...";try{const order=await sendPayLaterOrder(form);await finalizePayLaterOrder(form,order,{successPanel,orderStatus,showStep});if(status)status.textContent="";}catch(error){console.error("Achteraf bestellen mislukt:",error,error?.stack);if(status)status.textContent="Je bestelling kon niet worden verwerkt. Probeer het opnieuw.";payLaterButton.disabled=false;payLaterButton.textContent=originalLabel;}});
 
     consentSection?.addEventListener("change", () => {
       if (form.elements.terms_accepted?.checked && form.elements.return_policy_accepted?.checked) {

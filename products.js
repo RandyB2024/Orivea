@@ -9,6 +9,7 @@ window.ORIVEA_CONFIG = {
   "currency": "EUR",
   "checkout": {
     "payLaterEnabled": true,
+    "payLaterApiEnabled": false,
     "payLaterMaxCents": 7499,
     "payLaterDays": 14,
     "payLaterCountry": "NL"
