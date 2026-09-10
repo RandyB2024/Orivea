@@ -4,6 +4,7 @@ const vm = require("vm");
 const cheerio = require("cheerio");
 const { isAllowedBrand, classify } = require("./glantier-catalog-core");
 const { extractIngredients } = require("./glantier-ingredients");
+const { inspectNote } = require("./glantier-notes");
 
 const ROOT = __dirname;
 const sourceConfig = JSON.parse(fs.readFileSync(path.join(ROOT, "sources", "glantier.json"), "utf8"));
@@ -124,9 +125,9 @@ function sectionText($, headingPattern) {
 }
 
 function note(text, label) {
-  const nextLabels = label === "Topnoten" ? "Hartnoten|Basisnoten|Ingrediënten" : label === "Hartnoten" ? "Basisnoten|Ingrediënten" : "Past deze parfum|Ingrediënten|Referentie";
+  const nextLabels = label === "Topnoten" ? "Hartnoten|Basisnoten|Ingrediënten" : label === "Hartnoten" ? "Basisnoten|Ingrediënten" : "Geurfamilie|Voor wie|Waarom kiezen voor|Past deze parfum|Past perfect bij|Ingrediënten|Referentie";
   const match = text.match(new RegExp(`${label}\\s*:?\\s*(.*?)(?=${nextLabels}\\s*:|$)`, "i"));
-  return match ? clean(match[1]) : null;
+  return match ? inspectNote(match[1]).value : null;
 }
 
 function parseProductPage(payload, hint) {

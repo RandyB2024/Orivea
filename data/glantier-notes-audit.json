@@ -1,0 +1,108 @@
+{
+  "generated_at": "2026-09-10T08:26:08.065Z",
+  "suspicious_products": 9,
+  "suspicious_fields": 9,
+  "automatically_restored": 9,
+  "review_required": 0,
+  "products": [
+    {
+      "reference_number": "402",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1497
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "412",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1405
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "466",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1454
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "480",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1511
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "497",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1473
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "601",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1404
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "604",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 1433
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "607",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 486
+        }
+      ],
+      "review_required": false
+    },
+    {
+      "reference_number": "613",
+      "fields": [
+        {
+          "field": "base_notes",
+          "status": "sanitized",
+          "original_length": 417
+        }
+      ],
+      "review_required": false
+    }
+  ]
+}

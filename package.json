@@ -5,6 +5,7 @@
     "import:glantier": "node import-glantier-products.js",
     "import:glantier:refresh": "node import-glantier-products.js --refresh",
     "import:glantier:ingredients:refresh": "node refresh-glantier-ingredients.js",
+    "fix:glantier:notes": "node fix-glantier-notes.js",
     "import:glantier:catalog": "node import-glantier-products.js --catalog",
     "import:glantier:apply-safe": "node apply-safe-glantier-import.js --all-safe",
     "import:glantier:new": "node manage-glantier-catalog.js --import-all",

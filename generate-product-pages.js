@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 const { activeProducts, assertGlantier } = require("./glantier-catalog-core");
+const { sanitizeProductNotes } = require("./glantier-notes");
 
 const root = __dirname;
 const context = { window: {} };
@@ -95,7 +96,8 @@ function page(product) {
   const number = product.glantierNummer || product.cardTitle || product.naam;
   const title = product.glantierNummer ? `Glantier ${product.glantierNummer} ${String(product.doelgroep || product.categorie).toLowerCase()} parfum | ORIVÈA` : `${product.naam} | ORIVÈA`;
   const meta = `${info.intro} Bekijk formaten en prijzen bij ORIVÈA.`.slice(0, 158);
-  const official = approvedData[String(product.glantierNummer || "")] || null;
+  const approved = approvedData[String(product.glantierNummer || "")] || null;
+  const official = approved ? sanitizeProductNotes(approved).product : null;
   const ingredientText = official?.ingredients_source_text || approvedIngredients[String(product.glantierNummer || "")];
   const related = relatedProducts(product);
   const schema = { "@context": "https://schema.org", "@type": "Product", name: product.naam, image: absoluteAsset(product.image), brand: { "@type": "Brand", name: "Glantier" }, sku: String(product.glantierNummer || product.id), description: info.intro, offers: offerSchema(product) };

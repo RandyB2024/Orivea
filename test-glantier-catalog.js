@@ -1,6 +1,8 @@
 const assert = require("node:assert/strict");
+const approvedProducts = require("./data/glantier-approved-data.json");
 const { classify, stagingRecord, activate, assertGlantier } = require("./glantier-catalog-core");
 const { extractIngredients } = require("./glantier-ingredients");
+const { inspectNote, sanitizeProductNotes } = require("./glantier-notes");
 const official = { catalog_id: "parfum-999", brand: "Glantier", source: "official_glantier", reference_number: "999" };
 assert.equal(classify({ official }), "new_glantier_product");
 assert.equal(classify({ official: { ...official, brand: "Dior" } }), "rejected_brand");
@@ -30,4 +32,17 @@ assert.equal(extractIngredients("<h3>Ingrediënten</h3><p>Een heerlijke luxe geu
 assert.equal(extractIngredients("<p>Geen productsamenstelling aanwezig.</p>").ingredients_status, "not_found");
 assert.equal(extractIngredients(`<h3>Ingrediënten</h3><p>${inci} Referentie 999 Specifieke referenties ean13 123</p>`).ingredients_source_text, inci);
 assert.equal(extractIngredients(`<section><h3>Ingrediënten</h3><p>Geproduceerd met parfumolie, alcohol en water. INCI: ${inci}</p></section>`).ingredients_source_text, inci);
+assert.deepEqual(inspectNote("Amber, Tonkaboon, Vanille"), { value: "Amber, Tonkaboon, Vanille", status: "valid", suspicious: false });
+assert.equal(inspectNote("Amber, Tonkaboon, Vanille Geurfamilie Glantier Parfum 402 behoort tot een geurfamilie.").value, "Amber, Tonkaboon, Vanille");
+assert.equal(inspectNote("Deze parfum is ontwikkeld voor dagelijks gebruik en bijzondere gelegenheden.").status, "review_required");
+assert.equal(sanitizeProductNotes({ top_notes: "Bergamot", heart_notes: "Jasmijn", base_notes: "Musk Voor wie? Voor iedereen." }).product.base_notes, "Musk");
+const approvedProductList = Object.values(approvedProducts);
+const product402 = approvedProducts["402"];
+assert.ok(product402, "Glantier 402 ontbreekt in de goedgekeurde productdata");
+assert.equal(product402.top_notes, "Zwarte bes, Sinaasappel, Mandarijn, Blad van zwarte bes, Grapefruit, Bergamot");
+assert.equal(product402.heart_notes, "Abrikoos, Lelie, Jasmijn, Lelietje-van-dalen, Roos");
+assert.equal(product402.base_notes, "Amber, Tonkaboon, Vanille, Virginia cederhout, Musk");
+for (const product of approvedProductList) {
+  assert.equal(sanitizeProductNotes(product).audit.length, 0, `Onveilige geurnoten bij ${product.reference_number || product.ref}`);
+}
 console.log("Glantier catalog import tests passed.");
